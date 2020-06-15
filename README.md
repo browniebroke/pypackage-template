@@ -1,5 +1,7 @@
 # Cookiecutter PyPackage
 
+[![Test](https://github.com/browniebroke/cookiecutter-pypackage/workflows/Test/badge.svg)](https://github.com/browniebroke/cookiecutter-pypackage/actions?query=workflow%3ATest)
+
 Cookiecutter template for a Python Package.
 
 ## Features
