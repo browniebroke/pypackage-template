@@ -1,0 +1,12 @@
+black
+bump2version
+codecov
+coverage
+flake8
+flake8-isort
+pre-commit
+pytest-cov
+pytest
+pyupgrade
+twine
+wheel
