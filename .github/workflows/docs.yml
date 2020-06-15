@@ -1,0 +1,31 @@
+name: Build docs
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: Install template dependecies
+      run: |
+        python -m pip install -U pip
+        pip install -r requirements.txt
+    - name: Build project docs
+      run: |
+        mkdir -p .cache/
+        cd .cache/
+        cookiecutter ../ --no-input --overwrite-if-exists project_name="My Package"
+    - name: Generate project docs
+      run: |
+        cd .cache/my-package/docs
+        pip install -r requirements.txt
+        make html
