@@ -2,19 +2,26 @@
 
 <p align="center">
   <a href="https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/actions?query=workflow%3ATest">
-    <img src="https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/workflows/Test/badge.svg" alt="Build status">
+    <img src="https://img.shields.io/github/workflow/status/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/Test?label=Test&logo=github&style=flat-square" alt="GitHub Workflow Status" >
+  </a>
+  <a href="https://{{ cookiecutter.project_slug }}.readthedocs.io">
+    <img src="https://img.shields.io/readthedocs/{{ cookiecutter.project_slug }}.svg?logo=read-the-docs&logoColor=fff&style=flat-square" alt="Documentation Status">
   </a>
   <a href="https://codecov.io/gh/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}">
-    <img src="https://codecov.io/gh/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/branch/master/graph/badge.svg" alt="Test coverage percentage">
-  </a>
-  <a href="https://{{ cookiecutter.project_slug }}.readthedocs.io/en/latest/?badge=latest">
-    <img src="https://readthedocs.org/projects/{{ cookiecutter.project_slug }}/badge/?version=latest" alt="black">
-  </a>
-  <a href="https://pypi.python.org/pypi/{{ cookiecutter.project_slug }}">
-    <img src="https://img.shields.io/pypi/v/{{ cookiecutter.project_slug }}.svg" alt="black">
+    <img src="https://img.shields.io/codecov/c/github/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}.svg?logo=codecov&logoColor=fff&style=flat-square" alt="Test coverage percentage">
   </a>
   <a href="https://github.com/ambv/black">
-    <img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="black">
+    <img src="https://img.shields.io/badge/code%20style-black-000000.svg?amp;style=flat-square" alt="Code formatted with Black">
+  </a>
+</p>
+<p align="center">
+  <a href="https://pypi.org/project/{{ cookiecutter.project_slug }}/">
+    <img src="https://img.shields.io/pypi/v/{{ cookiecutter.project_slug }}.svg?logo=python&logoColor=fff&style=flat-square" alt="PyPI Version">
+  </a>
+  <img src="https://img.shields.io/pypi/pyversions/{{ cookiecutter.project_slug }}.svg?style=flat-square&logo=python&amp;logoColor=fff" alt="Supported Python versions">
+  <img src="https://img.shields.io/pypi/l/{{ cookiecutter.project_slug }}.svg?style=flat-square" alt="License">
+  <a href="https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}">
+    <img src="https://tokei.rs/b1/github/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/" alt="Number of lines of codes">
   </a>
 </p>
 
@@ -23,7 +30,7 @@
 
 ## Installation
 
-Install this via pip (or your favourite installer):
+Install this via pip (or your favourite package manager):
 
 `pip install {{ cookiecutter.project_slug }}`
 
