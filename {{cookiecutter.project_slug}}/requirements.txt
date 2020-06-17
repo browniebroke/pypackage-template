@@ -15,7 +15,7 @@ cfgv==3.1.0               # via pre-commit
 chardet==3.0.4            # via requests
 click==7.1.2              # via black
 codecov==2.1.7            # via -r requirements.in
-coverage==4.5.4           # via -r requirements.in, codecov, pytest-cov
+coverage==5.1             # via -r requirements.in, codecov, pytest-cov
 cryptography==2.9.2       # via secretstorage
 distlib==0.3.0            # via virtualenv
 docutils==0.16            # via readme-renderer
