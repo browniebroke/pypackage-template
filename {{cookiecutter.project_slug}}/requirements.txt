@@ -15,6 +15,7 @@ cfgv==3.1.0               # via pre-commit
 chardet==3.0.4            # via requests
 click==7.1.2              # via black
 codecov==2.1.7            # via -r requirements.in
+colorama==0.4.3           # via twine
 coverage==5.1             # via -r requirements.in, codecov, pytest-cov
 cryptography==2.9.2       # via secretstorage
 distlib==0.3.0            # via virtualenv
@@ -49,13 +50,14 @@ readme-renderer==26.0     # via twine
 regex==2020.6.8           # via black
 requests-toolbelt==0.9.1  # via twine
 requests==2.23.0          # via codecov, requests-toolbelt, twine
+rfc3986==1.4.0            # via twine
 secretstorage==3.1.2      # via keyring
 six==1.15.0               # via bleach, cryptography, packaging, readme-renderer, virtualenv
 testfixtures==6.14.1      # via flake8-isort
 tokenize-rt==4.0.0        # via pyupgrade
 toml==0.10.1              # via black, isort, pre-commit
 tqdm==4.46.1              # via twine
-twine==3.1.1              # via -r requirements.in
+twine==3.2.0              # via -r requirements.in
 typed-ast==1.4.1          # via black
 urllib3==1.25.9           # via requests
 virtualenv==20.0.23       # via pre-commit
