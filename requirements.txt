@@ -16,7 +16,6 @@ cookiecutter==1.7.2       # via -r requirements.in, pytest-cookies
 flake8-isort==3.0.0       # via -r requirements.in
 flake8==3.8.3             # via -r requirements.in, flake8-isort
 idna==2.9                 # via requests
-importlib-metadata==1.6.1  # via flake8, pluggy, pytest
 isort[pyproject]==4.3.21  # via flake8-isort
 jinja2-time==0.2.0        # via cookiecutter
 jinja2==2.11.2            # via cookiecutter, jinja2-time
@@ -35,7 +34,7 @@ pytest-cookies==0.5.1     # via -r requirements.in
 pytest==5.4.3             # via -r requirements.in, pytest-cookies
 python-dateutil==2.8.1    # via arrow
 python-slugify==4.0.0     # via cookiecutter
-pyupgrade==2.6.1          # via -r requirements.in
+pyupgrade==2.6.2          # via -r requirements.in
 regex==2020.6.8           # via black
 requests==2.23.0          # via cookiecutter
 six==1.15.0               # via cookiecutter, packaging, python-dateutil
@@ -46,4 +45,3 @@ toml==0.10.1              # via black, isort
 typed-ast==1.4.1          # via black
 urllib3==1.25.9           # via requests
 wcwidth==0.2.4            # via pytest
-zipp==3.1.0               # via importlib-metadata
