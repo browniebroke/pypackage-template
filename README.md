@@ -45,7 +45,7 @@ When you first push to Github, it'll start a few Github workflows that you can s
 
 The workflows need [2 secrets](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) to be setup in your Github repository:
 
-- `CODECOV_TOKEN` to upload coverage data to [codecov.io](https://codecov.io/) in the Test workflow.
+- `CODECOV_TOKEN` to upload coverage data to [codecov.io](https://codecov.io/) in the Test workflow (optional for public repos).
 - `PYPI_TOKEN` to publish a release to [PyPI](https://pypi.org/) in the Publish to PyPI workflow.
 
 ### Changelog generation
