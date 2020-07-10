@@ -43,7 +43,7 @@ pygments==2.6.1           # via readme-renderer
 pyparsing==2.4.7          # via packaging
 pytest-cov==2.10.0        # via -r {{cookiecutter.project_slug}}/requirements.in
 pytest==5.4.3             # via -r {{cookiecutter.project_slug}}/requirements.in, pytest-cov
-pyupgrade==2.6.2          # via -r {{cookiecutter.project_slug}}/requirements.in
+pyupgrade==2.7.0          # via -r {{cookiecutter.project_slug}}/requirements.in
 pyyaml==5.3.1             # via pre-commit
 readme-renderer==26.0     # via twine
 regex==2020.6.8           # via black
