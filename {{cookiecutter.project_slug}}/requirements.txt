@@ -6,22 +6,22 @@
 #
 appdirs==1.4.4            # via black, virtualenv
 attrs==19.3.0             # via black, pytest
-black==19.10b0            # via -r requirements.in
+black==19.10b0            # via -r {{cookiecutter.project_slug}}/requirements.in
 bleach==3.1.5             # via readme-renderer
-bump2version==1.0.0       # via -r requirements.in
+bump2version==1.0.0       # via -r {{cookiecutter.project_slug}}/requirements.in
 certifi==2020.4.5.2       # via requests
 cffi==1.14.0              # via cryptography
 cfgv==3.1.0               # via pre-commit
 chardet==3.0.4            # via requests
 click==7.1.2              # via black
 colorama==0.4.3           # via twine
-coverage==5.2.1           # via -r requirements.in, pytest-cov
+coverage==5.2.1           # via -r {{cookiecutter.project_slug}}/requirements.in, pytest-cov
 cryptography==2.9.2       # via secretstorage
 distlib==0.3.0            # via virtualenv
 docutils==0.16            # via readme-renderer
 filelock==3.0.12          # via virtualenv
-flake8-isort==4.0.0       # via -r requirements.in
-flake8==3.8.3             # via -r requirements.in, flake8-isort
+flake8-isort==4.0.0       # via -r {{cookiecutter.project_slug}}/requirements.in
+flake8==3.8.3             # via -r {{cookiecutter.project_slug}}/requirements.in, flake8-isort
 identify==1.4.19          # via pre-commit
 idna==2.9                 # via requests
 iniconfig==1.0.0          # via pytest
@@ -35,16 +35,16 @@ packaging==20.4           # via bleach, pytest
 pathspec==0.8.0           # via black
 pkginfo==1.5.0.1          # via twine
 pluggy==0.13.1            # via pytest
-pre-commit==2.6.0         # via -r requirements.in
+pre-commit==2.7.1         # via -r {{cookiecutter.project_slug}}/requirements.in
 py==1.9.0                 # via pytest
 pycodestyle==2.6.0        # via flake8
 pycparser==2.20           # via cffi
 pyflakes==2.2.0           # via flake8
 pygments==2.6.1           # via readme-renderer
 pyparsing==2.4.7          # via packaging
-pytest-cov==2.10.1        # via -r requirements.in
-pytest==6.0.1             # via -r requirements.in, pytest-cov
-pyupgrade==2.7.2          # via -r requirements.in
+pytest-cov==2.10.1        # via -r {{cookiecutter.project_slug}}/requirements.in
+pytest==6.0.1             # via -r {{cookiecutter.project_slug}}/requirements.in, pytest-cov
+pyupgrade==2.7.2          # via -r {{cookiecutter.project_slug}}/requirements.in
 pyyaml==5.3.1             # via pre-commit
 readme-renderer==26.0     # via twine
 regex==2020.6.8           # via black
@@ -57,12 +57,12 @@ testfixtures==6.14.1      # via flake8-isort
 tokenize-rt==4.0.0        # via pyupgrade
 toml==0.10.1              # via black, pre-commit, pytest
 tqdm==4.46.1              # via twine
-twine==3.2.0              # via -r requirements.in
+twine==3.2.0              # via -r {{cookiecutter.project_slug}}/requirements.in
 typed-ast==1.4.1          # via black
 urllib3==1.25.9           # via requests
 virtualenv==20.0.23       # via pre-commit
 webencodings==0.5.1       # via bleach
-wheel==0.35.1             # via -r requirements.in
+wheel==0.35.1             # via -r {{cookiecutter.project_slug}}/requirements.in
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
