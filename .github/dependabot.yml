@@ -13,10 +13,6 @@ updates:
     directory: "/{{cookiecutter.project_slug}}"
     schedule:
       interval: "daily"
-  - package-ecosystem: "pip"
-    directory: "/{{cookiecutter.project_slug}}/docs"
-    schedule:
-      interval: "daily"
   - package-ecosystem: "github-actions"
     directory: "/.github"
     schedule:
