@@ -2,7 +2,7 @@ black
 bump2version
 coverage
 flake8
-flake8-isort
+isort
 pre-commit
 pytest-cov
 pytest

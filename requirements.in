@@ -1,7 +1,7 @@
 black
 cookiecutter
 flake8
-flake8-isort
+isort
 pytest
 pytest-cookies
 pyupgrade
