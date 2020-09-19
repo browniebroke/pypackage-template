@@ -1,4 +1,3 @@
-{% raw %}
 # Automatically close issues that have a keyword mark (an HTML comment)
 # in the last comment in the issue, by a group of predefined users, after a custom delay.
 # https://github.com/tiangolo/issue-manager
@@ -19,6 +18,5 @@ jobs:
     steps:
     - uses: tiangolo/issue-manager@0.3.0
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        config: '{"answered": {}}'
-{% endraw %}
+        token: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
+        config: {% raw %}'{"answered": {}}'{% endraw %}

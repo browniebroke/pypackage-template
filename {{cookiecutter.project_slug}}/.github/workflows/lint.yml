@@ -1,4 +1,3 @@
-{% raw %}
 name: Lint
 
 on:
@@ -30,6 +29,5 @@ jobs:
         python -m pip install -U pip
         pip install -r requirements.txt
         pip install .
-    - name: ${{ matrix.linter.name }}
-      run: ${{ matrix.linter.run }}
-{% endraw %}
+    - name: {% raw %}${{ matrix.linter.name }}{% endraw %}
+      run: {% raw %}${{ matrix.linter.run }}{% endraw %}

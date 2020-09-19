@@ -1,4 +1,3 @@
-{% raw %}
 # This workflow will draft Github release from pull requests
 # See more at: https://github.com/release-drafter/release-drafter
 
@@ -15,5 +14,4 @@ jobs:
     steps:
     - uses: release-drafter/release-drafter@v5.11.0
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-{% endraw %}
+        GITHUB_TOKEN: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}

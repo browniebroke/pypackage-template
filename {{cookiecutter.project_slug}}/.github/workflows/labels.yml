@@ -1,4 +1,3 @@
-{% raw %}
 name: Sync Github labels
 
 on:
@@ -20,5 +19,4 @@ jobs:
     - name: Install labels
       run: pip install labels
     - name: Sync config with Github
-      run: labels -u ${{ github.repository_owner }} -t ${{ secrets.GITHUB_TOKEN }} sync -f .github/labels.toml
-{% endraw %}
+      run: labels -u {% raw %}${{ github.repository_owner }}{% endraw %} -t {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %} sync -f .github/labels.toml
