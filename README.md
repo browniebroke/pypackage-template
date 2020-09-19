@@ -10,10 +10,10 @@ Cookiecutter template for a Python Package.
 
 - Project for Python 3.6+
 - Testing with Pytest using Github actions
-- Follows the [Black](https://github.com/psf/black) style guide with [flake8](https://pypi.org/project/flake8/) and [isort](https://pypi.org/project/isort/)
-- Comes with [pre-commit](https://pre-commit.com/) hook config for Black, isort, Flake8 and [Pyupgrade](https://github.com/asottile/pyupgrade)
+- Follows the [black](https://github.com/psf/black) style guide with [flake8](https://pypi.org/project/flake8/) and [isort](https://pypi.org/project/isort/)
+- Comes with [pre-commit](https://pre-commit.com/) hook config for black, isort, flake8 and [pyupgrade](https://github.com/asottile/pyupgrade)
 - Style guide enforced on CI
-- Dependencies pinned with pip-compile and updated by [Dependabot](https://dependabot.com/)
+- Dependencies pinned with pip-compile and updated by [dependabot](https://dependabot.com/)
 - Follow the [all-contributors](https://github.com/all-contributors/all-contributors) specification
 - Automated release notes and changelog generation based on Pull requests
 - Automated PyPI releases using Github actions
@@ -36,9 +36,10 @@ When you first push to Github, it'll start a few Github workflows that you can s
 
 - The test suite will run your tests with Pytest in the Test workflow
 - A few things will run in the Lint workflow:
-   - Black in check mode
-   - Flake8 with isort
-   - Pyupgrade, this will make sure you sure modern Python
+   - black in check mode
+   - isort in check mode
+   - flake8 with isort
+   - pyupgrade, this will make sure you sure modern Python
 - The labels workflow will synchronise Github labels based on the `.github/labels.toml` file.
 
 ### Secrets
@@ -61,7 +62,7 @@ You may exclude some pull requests by giving them the label `nochangelog`.
 
 ### Pre-commit
 
-The project comes with the config for [Pre-Commit](https://pre-commit.com/). If you're not familiar with it, follow their documentation on how to install it and set it up.
+The project comes with the config for [pre-commit](https://pre-commit.com/). If you're not familiar with it, follow their documentation on how to install it and set it up.
 
 ### Documentation
 
