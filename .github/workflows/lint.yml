@@ -17,6 +17,8 @@ jobs:
             run: black --check tests
           - name: PyUpgrade
             run: pyupgrade --py36-plus `find tests -name "*.py"`
+          - name: isort
+            run: isort -c -v tests
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2

@@ -10,8 +10,8 @@ Cookiecutter template for a Python Package.
 
 - Project for Python 3.6+
 - Testing with Pytest using Github actions
-- Follows the [Black](https://github.com/psf/black) style guide with [flake8](https://pypi.org/project/flake8/) and [iSort](https://pypi.org/project/isort/)
-- Comes with [pre-commit](https://pre-commit.com/) hook config for Black, Flake8 and [Pyupgrade](https://github.com/asottile/pyupgrade)
+- Follows the [Black](https://github.com/psf/black) style guide with [flake8](https://pypi.org/project/flake8/) and [isort](https://pypi.org/project/isort/)
+- Comes with [pre-commit](https://pre-commit.com/) hook config for Black, isort, Flake8 and [Pyupgrade](https://github.com/asottile/pyupgrade)
 - Style guide enforced on CI
 - Dependencies pinned with pip-compile and updated by [Dependabot](https://dependabot.com/)
 - Follow the [all-contributors](https://github.com/all-contributors/all-contributors) specification
