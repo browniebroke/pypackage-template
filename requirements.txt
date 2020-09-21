@@ -15,8 +15,7 @@ click==7.1.2              # via black, cookiecutter
 cookiecutter==1.7.2       # via -r requirements.in, pytest-cookies
 flake8==3.8.3             # via -r requirements.in
 idna==2.9                 # via requests
-importlib-metadata==1.7.0  # via flake8, pluggy, pytest
-isort==5.5.2              # via -r requirements.in
+isort==5.5.3              # via -r requirements.in
 jinja2-time==0.2.0        # via cookiecutter
 jinja2==2.11.2            # via cookiecutter, jinja2-time
 markupsafe==1.1.1         # via cookiecutter, jinja2
@@ -46,4 +45,3 @@ typed-ast==1.4.1          # via black
 typing-extensions==3.7.4.3  # via black
 urllib3==1.25.9           # via requests
 wcwidth==0.2.4            # via pytest
-zipp==3.1.0               # via importlib-metadata
