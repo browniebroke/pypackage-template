@@ -13,6 +13,11 @@ color = "0366d6"
 name = "dependencies"
 description = "Pull requests that update a dependency file"
 
+[github_actions]
+color = "000000"
+name = "github_actions"
+description = "Update of github actions"
+
 [documentation]
 color = "1bc4a5"
 name = "documentation"
@@ -72,3 +77,8 @@ description = "This will not be worked on"
 color = "c2e0c6"
 name = "discussion"
 description = "Some discussion around the project"
+
+[hacktoberfest]
+color = "ffa663"
+name = "hacktoberfest"
+description = "Good issues for Hacktoberfest"
