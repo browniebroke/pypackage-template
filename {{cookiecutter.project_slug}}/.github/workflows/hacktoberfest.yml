@@ -17,5 +17,5 @@ jobs:
     steps:
       - uses: browniebroke/hacktoberfest-labeler-action@v1.1.0
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          revert: ${{ github.event.inputs.revert }}
+          github_token: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
+          revert: {% raw %}${{ github.event.inputs.revert }}{% endraw %}
