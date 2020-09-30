@@ -24,7 +24,7 @@ flake8==3.8.3             # via -r requirements.in
 identify==1.4.19          # via pre-commit
 idna==2.9                 # via requests
 iniconfig==1.0.0          # via pytest
-isort==5.5.3              # via -r requirements.in
+isort==5.5.4              # via -r requirements.in
 jeepney==0.4.3            # via keyring, secretstorage
 keyring==21.2.1           # via twine
 mccabe==0.6.1             # via flake8
