@@ -1,0 +1,93 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  lint:
+    strategy:
+      matrix:
+        linter:
+          - name: Flake8
+            run: flake8 --config=setup.cfg
+          - name: Black
+            run: black --check .
+          - name: PyUpgrade
+            run: pyupgrade --py36-plus `find . -name "*.py"`
+          - name: isort
+            run: isort -c -v .
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2.3.2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: Install Dependencies
+      run: |
+        python -m pip install -U pip
+        pip install -r requirements.txt
+        pip install .
+    - name: {% raw %}${{ matrix.linter.name }}{% endraw %}
+      run: {% raw %}${{ matrix.linter.run }}{% endraw %}
+
+  # Make sure commit messages follow the conventional commits convention:
+  # https://www.conventionalcommits.org
+  commitlint:
+    name: Lint Commit Messages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.3.3
+        with:
+          fetch-depth: 0
+      - uses: wagoid/commitlint-github-action@v2.1.0
+
+  test:
+    strategy:
+      matrix:
+        python-version:
+          - 3.6
+          - 3.7
+          - 3.8
+        os:
+          - ubuntu-latest
+          - windows-latest
+          - macOS-latest
+    runs-on: {% raw %}${{ matrix.os }}{% endraw %}
+    steps:
+    - uses: actions/checkout@v2.3.2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: {% raw %}${{ matrix.python-version }}{% endraw %}
+    - name: Install Dependencies
+      run: |
+        python -m pip install -U pip
+        pip install -r requirements.txt
+        pip install .
+    - name: Test with Pytest
+      run: pytest
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        token: {% raw %}${{ secrets.CODECOV_TOKEN }}{% endraw %}
+
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2.3.2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: Install Dependencies
+      run: |
+        python -m pip install -U pip
+        pip install -r docs/requirements.txt
+    - name: Build docs
+      run: |
+        cd docs
+        make html
