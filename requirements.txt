@@ -15,7 +15,7 @@ click==7.1.2              # via black, cookiecutter
 cookiecutter==1.7.2       # via -r requirements.in, pytest-cookies
 flake8==3.8.4             # via -r requirements.in
 idna==2.9                 # via requests
-isort==5.5.4              # via -r requirements.in
+isort==5.5.5              # via -r requirements.in
 jinja2-time==0.2.0        # via cookiecutter
 jinja2==2.11.2            # via cookiecutter, jinja2-time
 markupsafe==1.1.1         # via cookiecutter, jinja2
