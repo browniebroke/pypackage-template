@@ -1,5 +1,4 @@
 black
-bump2version
 coverage
 flake8
 isort
@@ -7,5 +6,4 @@ pre-commit
 pytest-cov
 pytest
 pyupgrade
-twine
 wheel

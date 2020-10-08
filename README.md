@@ -1,24 +1,24 @@
 # Cookiecutter PyPackage
 
-<a href="https://github.com/browniebroke/cookiecutter-pypackage/actions?query=workflow%3ATest">
-  <img src="https://img.shields.io/github/workflow/status/browniebroke/cookiecutter-pypackage/Test?label=Test&logo=github&style=flat-square" alt="GitHub Workflow Status" >
+<a href="https://github.com/browniebroke/cookiecutter-pypackage/actions?query=workflow%3ACI">
+  <img src="https://img.shields.io/github/workflow/status/browniebroke/cookiecutter-pypackage/CI?label=Test&logo=github&style=flat-square" alt="CI Status" >
 </a>
 
 Cookiecutter template for a Python Package.
 
 ## Features
 
-- Project for Python 3.6+
-- Testing with Pytest using Github actions
-- Follows the [black](https://github.com/psf/black) style guide with [flake8](https://pypi.org/project/flake8/) and [isort](https://pypi.org/project/isort/)
-- Comes with [pre-commit](https://pre-commit.com/) hook config for black, isort, flake8 and [pyupgrade](https://github.com/asottile/pyupgrade)
-- Style guide enforced on CI
-- Dependencies pinned with pip-compile and updated by [dependabot](https://dependabot.com/)
-- Follow the [all-contributors](https://github.com/all-contributors/all-contributors) specification
-- Automated release notes and changelog generation based on Pull requests
-- Automated PyPI releases using Github actions
-- Documentation configured with Sphinx and [MyST Parser](https://myst-parser.readthedocs.io)
-- Standardised list of Github labels synchronised on push to master using [the labels CLI](https://github.com/hackebrot/labels).
+- Project for Python 3.6+.
+- Testing with Pytest using Github actions.
+- Follows the [black] style guide with [flake8] and [isort].
+- Comes with [pre-commit] hook config for black, isort, flake8 and [pyupgrade](https://github.com/asottile/pyupgrade).
+- Style guide enforced on CI.
+- Dependencies pinned with pip-compile and updated by [dependabot].
+- Follow the [all-contributors] specification.
+- Follow to [the conventional commits][conventional-commits] specification.
+- Automated releasing using [python-semantic-release][python-semantic-release].
+- Documentation configured with Sphinx and [MyST Parser][myst].
+- Standardised list of Github labels synchronised on push to master using [the labels CLI][pylabels].
 
 ## Usage
 
@@ -44,44 +44,58 @@ When you first push to Github, it'll start a few Github workflows that you can s
 
 ### Secrets
 
-The workflows need [2 secrets](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) to be setup in your Github repository:
+The workflows need [2 secrets][gh-secrets] to be setup in your Github repository:
 
-- `CODECOV_TOKEN` to upload coverage data to [codecov.io](https://codecov.io/) in the Test workflow (optional for public repos).
-- `PYPI_TOKEN` to publish a release to [PyPI](https://pypi.org/) in the Publish to PyPI workflow.
+- `CODECOV_TOKEN` to upload coverage data to [codecov.io][codecov] in the Test workflow (optional for public repos).
+- `PYPI_TOKEN` to publish a release to [PyPI][pypi] in the Publish to PyPI workflow.
 
-### Changelog generation
+### Automated release
 
-2 workflows are configured to:
- 
-- Generate the `CHANGELOG.md` file
-- Create and update the next release in Github
+By following the conventional commits specification, we're able to completely automate versioning and releasing to PyPI. This is handled by the `semantic-release.yml` workflow. It is triggered manually by default, but can be configured to run on every push to your main branch.
 
-They are both configured to mention merged pull requests. Pull requests are grouped in sections based on the label added to the pull requests. You can see the mapping of label/sections in `.github/release-drafter.yml` and `.github/workflows/changelog-generator.yml`.
+Here is an overview of its features:
 
-You may exclude some pull requests by giving them the label `nochangelog`.
+- Check the commit log since the last release, and determine the next version to be released.
+- If no significant change detected, stop here (e.g. just dependencies update).
+- Otherwise, bump the version in code locations specified in `setup.cfg`.
+- Update the `CHANGELOG.md` file.
+- Commit changes.
+- Create a git tag.
+- Push to Github.
+- Create a release in Github with the changes as release notes.
+- Build the source and binary distribution (wheel).
+- Upload the sources to PyPI and attach them to the Github release.
+
+For more details, check out the [conventional commits website][conventional-commits] and [Python semantic release][python-semantic-release] Github action.
 
 ### Pre-commit
 
-The project comes with the config for [pre-commit](https://pre-commit.com/). If you're not familiar with it, follow their documentation on how to install it and set it up.
+The project comes with the config for [pre-commit]. If you're not familiar with it, follow their documentation on how to install it and set it up.
 
 ### Documentation
 
-The project assumes that the documentation will be hosted on Read the Docs and written in Markdown with the [MyST parser for Sphinx](https://myst-parser.readthedocs.io/en/latest/). 
+The project assumes that the documentation will be hosted on Read the Docs and written in Markdown with the [MyST parser for Sphinx][myst]. 
 
-To enable it, you might need to go [into your dashboard](https://readthedocs.org/dashboard/) and import the project from Github. Everything else should work out of the box.
-
-### Releasing to PyPI
-
-To make a release to PyPI, you need to follow the following steps
-
-- Update the package version with [`bump2version`](https://pypi.org/project/bump2version/). If you're not familiar with the tool, best to check their documentation
-- Push the changes with the tags to Github and wait for the build to complete.
-- Go to the release tab, edit the latest draft release to point to the git tag you pushed earlier and then publish the release. 
-
-  This will trigger a workflow to create the package and upload it to PyPI (you'd need to have set the `PYPI_TOKEN` secret).
+To enable it, you might need to go [into your dashboard][rtd-dashboard] and import the project from Github. Everything else should work out of the box.
 
 ### All contributors
 
 This is a specification that help you highlight all of the open source contributions on your README. This is easy to maintain as it comes with a Github bot to do the updates for you, so more manual updates on the contributors file.
 
-If you never used it before, you will have to [install the Github app](https://allcontributors.org/docs/en/bot/installation) and give it access to your repo.
+If you never used it before, you will have to [install the Github app][all-contribs-install] and give it access to your repo.
+
+[black]: https://github.com/psf/black
+[flake8]: https://pypi.org/project/flake8/
+[isort]: https://pypi.org/project/isort/
+[pre-commit]: https://pre-commit.com/
+[dependabot]: https://dependabot.com/
+[all-contributors]: https://github.com/all-contributors/all-contributors
+[conventional-commits]: https://www.conventionalcommits.org
+[python-semantic-release]: https://github.com/relekang/python-semantic-release
+[myst]: https://myst-parser.readthedocs.io
+[pylabels]: https://github.com/hackebrot/labels
+[gh-secrets]: https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets
+[codecov]: https://codecov.io/
+[pypi]: https://pypi.org/
+[rtd-dashboard]: https://readthedocs.org/dashboard/
+[all-contribs-install]: https://allcontributors.org/docs/en/bot/installation

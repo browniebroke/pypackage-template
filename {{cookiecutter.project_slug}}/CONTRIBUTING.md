@@ -102,14 +102,6 @@ To run a subset of tests:
 $ pytest tests
 ```
 
-## Publish to PyPI
+## Making a new release
 
-A reminder for the maintainers on how to publish to PyPI. Make sure all your changes are committed, then run:
-
-```shell
-$ bump2version patch # possible: major / minor / patch
-$ git push
-$ git push --tags
-```
-
-This will create a tag, update changelog and draft Github release for you. Once all the tests have passed, publish the release on Github by pointing at the tag you just pushed. This will trigger the upload of the release to PyPI.
+The deployment should be automated and can be triggered from the Semantic Release workflow in Github. The next version will be based on [the commit logs](https://python-semantic-release.readthedocs.io/en/latest/commit-log-parsing.html#commit-log-parsing). This is done by [python-semantic-release](https://python-semantic-release.readthedocs.io/en/latest/index.html) via a Github action.
