@@ -17,7 +17,7 @@ identify==1.4.19          # via pre-commit
 iniconfig==1.0.1          # via pytest
 isort==5.6.1              # via -r {{cookiecutter.project_slug}}/requirements.in
 mccabe==0.6.1             # via flake8
-more-itertools==8.4.0     # via pytest
+more-itertools==8.5.0     # via pytest
 mypy-extensions==0.4.3    # via black
 nodeenv==1.4.0            # via pre-commit
 packaging==20.4           # via pytest
