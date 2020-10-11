@@ -33,7 +33,7 @@ pyparsing==2.4.7          # via packaging
 pytest-cookies==0.5.1     # via -r requirements.in
 pytest==5.4.3             # via -r requirements.in, pytest-cookies
 python-dateutil==2.8.1    # via arrow
-python-slugify==4.0.0     # via cookiecutter
+python-slugify==4.0.1     # via cookiecutter
 pyupgrade==2.7.2          # via -r requirements.in
 regex==2020.6.8           # via black
 requests==2.23.0          # via cookiecutter
