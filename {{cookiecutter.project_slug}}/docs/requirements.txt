@@ -13,7 +13,7 @@ docutils==0.16            # via myst-parser, sphinx
 idna==2.9                 # via requests
 imagesize==1.2.0          # via sphinx
 jinja2==2.11.2            # via sphinx
-markdown-it-py==0.5.4     # via myst-parser
+markdown-it-py==0.5.5     # via myst-parser
 markupsafe==1.1.1         # via jinja2
 myst-parser==0.12.10      # via -r docs/requirements.in
 packaging==20.4           # via sphinx
