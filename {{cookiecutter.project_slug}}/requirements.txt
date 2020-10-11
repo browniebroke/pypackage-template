@@ -10,7 +10,7 @@ black==20.8b1             # via -r {{cookiecutter.project_slug}}/requirements.in
 cfgv==3.2.0               # via pre-commit
 click==7.1.2              # via black
 coverage==5.3             # via -r {{cookiecutter.project_slug}}/requirements.in, pytest-cov
-distlib==0.3.0            # via virtualenv
+distlib==0.3.1            # via virtualenv
 filelock==3.0.12          # via virtualenv
 flake8==3.8.4             # via -r {{cookiecutter.project_slug}}/requirements.in
 identify==1.4.19          # via pre-commit
