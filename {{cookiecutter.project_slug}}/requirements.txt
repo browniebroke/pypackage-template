@@ -29,7 +29,7 @@ pycodestyle==2.6.0        # via flake8
 pyflakes==2.2.0           # via flake8
 pyparsing==2.4.7          # via packaging
 pytest-cov==2.10.1        # via -r {{cookiecutter.project_slug}}/requirements.in
-pytest==6.0.2             # via -r {{cookiecutter.project_slug}}/requirements.in, pytest-cov
+pytest==6.1.1             # via -r {{cookiecutter.project_slug}}/requirements.in, pytest-cov
 pyupgrade==2.7.2          # via -r {{cookiecutter.project_slug}}/requirements.in
 pyyaml==5.3.1             # via pre-commit
 regex==2020.10.11           # via black
