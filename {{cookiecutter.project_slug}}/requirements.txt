@@ -32,7 +32,7 @@ pytest-cov==2.10.1        # via -r {{cookiecutter.project_slug}}/requirements.in
 pytest==6.1.1             # via -r {{cookiecutter.project_slug}}/requirements.in, pytest-cov
 pyupgrade==2.7.2          # via -r {{cookiecutter.project_slug}}/requirements.in
 pyyaml==5.3.1             # via pre-commit
-regex==2020.10.11           # via black
+regex==2020.10.15           # via black
 six==1.15.0               # via packaging, virtualenv
 tokenize-rt==4.0.0        # via pyupgrade
 toml==0.10.1              # via black, pre-commit, pytest
