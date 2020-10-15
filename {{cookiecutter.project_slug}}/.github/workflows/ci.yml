@@ -21,7 +21,7 @@ jobs:
             run: isort -c -v .
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2.3.2
+    - uses: actions/checkout@v2
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
@@ -40,7 +40,7 @@ jobs:
     name: Lint Commit Messages
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2.3.3
+      - uses: actions/checkout@v2
         with:
           fetch-depth: 0
       - uses: wagoid/commitlint-github-action@v2.1.0
@@ -58,7 +58,7 @@ jobs:
           - macOS-latest
     runs-on: {% raw %}${{ matrix.os }}{% endraw %}
     steps:
-    - uses: actions/checkout@v2.3.2
+    - uses: actions/checkout@v2
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
@@ -78,7 +78,7 @@ jobs:
   docs:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2.3.2
+    - uses: actions/checkout@v2
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
