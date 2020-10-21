@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/actions?query=workflow%3ACI">
-    <img src="https://img.shields.io/github/workflow/status/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/CI?label=CI&logo=github&style=flat-square" alt="CI Status" >
+    <img src="https://img.shields.io/github/workflow/status/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/CI/main?label=CI&logo=github&style=flat-square" alt="CI Status" >
   </a>
   <a href="https://{{ cookiecutter.project_slug }}.readthedocs.io">
     <img src="https://img.shields.io/readthedocs/{{ cookiecutter.project_slug }}.svg?logo=read-the-docs&logoColor=fff&style=flat-square" alt="Documentation Status">

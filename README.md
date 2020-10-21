@@ -1,7 +1,7 @@
 # Cookiecutter PyPackage
 
 <a href="https://github.com/browniebroke/cookiecutter-pypackage/actions?query=workflow%3ACI">
-  <img src="https://img.shields.io/github/workflow/status/browniebroke/cookiecutter-pypackage/CI?label=Test&logo=github&style=flat-square" alt="CI Status" >
+  <img src="https://img.shields.io/github/workflow/status/browniebroke/cookiecutter-pypackage/CI/main?label=Test&logo=github&style=flat-square" alt="CI Status" >
 </a>
 
 Cookiecutter template for a Python Package.
