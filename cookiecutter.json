@@ -3,8 +3,8 @@
   "email": "bruno.alla@example.com",
   "github_username": "browniebroke",
   "project_name": "Python Package",
-  "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '-').replace('_', '-') }}",
-  "package_name": "{{ cookiecutter.project_slug.lower().replace('-', '_') }}",
+  "project_slug": "{{ cookiecutter.project_name | slugify }}",
+  "package_name": "{{ cookiecutter.project_slug.replace('-', '_') }}",
   "project_short_description": "My Python package to help you get up to speed.",
   "version": "0.1.0",
   "open_source_license": [
@@ -12,5 +12,6 @@
     "Apache Software License 2.0",
     "GNU General Public License v3",
     "Not open source"
-  ]
+  ],
+  "_extensions": ["cookiecutter.extensions.SlugifyExtension"]
 }
