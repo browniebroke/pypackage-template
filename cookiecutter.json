@@ -13,6 +13,7 @@
     "GNU General Public License v3",
     "Not open source"
   ],
-  "run_poetry_install": "y",
+  "run_poetry_install": "n",
+  "setup_github": "n",
   "_extensions": ["cookiecutter.extensions.SlugifyExtension"]
 }
