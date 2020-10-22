@@ -37,7 +37,7 @@ jobs:
       matrix:
         linter:
           - name: Flake8
-            run: flake8 --config=setup.cfg tests
+            run: flake8 tests
           - name: Black
             run: black --check tests
           - name: PyUpgrade
