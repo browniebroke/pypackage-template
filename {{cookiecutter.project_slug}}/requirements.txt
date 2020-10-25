@@ -38,5 +38,5 @@ tokenize-rt==4.0.0        # via pyupgrade
 toml==0.10.1              # via black, pre-commit, pytest
 typed-ast==1.4.1          # via black
 typing-extensions==3.7.4.3  # via black
-virtualenv==20.0.35       # via pre-commit
+virtualenv==20.1.0       # via pre-commit
 wheel==0.35.1             # via -r {{cookiecutter.project_slug}}/requirements.in
