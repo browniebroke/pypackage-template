@@ -31,7 +31,7 @@ pycodestyle==2.6.0        # via flake8
 pyflakes==2.2.0           # via flake8
 pyparsing==2.4.7          # via packaging
 pytest-cookies==0.5.1     # via -r requirements.in
-pytest==6.1.1             # via -r requirements.in, pytest-cookies
+pytest==6.1.2             # via -r requirements.in, pytest-cookies
 python-dateutil==2.8.1    # via arrow
 python-slugify==4.0.1     # via cookiecutter
 pyupgrade==2.7.3          # via -r requirements.in
