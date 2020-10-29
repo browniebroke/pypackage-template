@@ -13,17 +13,16 @@ coverage==5.3             # via -r {{cookiecutter.project_slug}}/requirements.in
 distlib==0.3.1            # via virtualenv
 filelock==3.0.12          # via virtualenv
 flake8==3.8.4             # via -r {{cookiecutter.project_slug}}/requirements.in
-identify==1.5.6          # via pre-commit
+identify==1.5.6           # via pre-commit
 iniconfig==1.1.1          # via pytest
 isort==5.6.4              # via -r {{cookiecutter.project_slug}}/requirements.in
 mccabe==0.6.1             # via flake8
-more-itertools==8.5.0     # via pytest
 mypy-extensions==0.4.3    # via black
 nodeenv==1.5.0            # via pre-commit
 packaging==20.4           # via pytest
 pathspec==0.8.0           # via black
 pluggy==0.13.1            # via pytest
-pre-commit==2.7.1         # via -r {{cookiecutter.project_slug}}/requirements.in
+pre-commit==2.8.0         # via -r {{cookiecutter.project_slug}}/requirements.in
 py==1.9.0                 # via pytest
 pycodestyle==2.6.0        # via flake8
 pyflakes==2.2.0           # via flake8
@@ -32,11 +31,11 @@ pytest-cov==2.10.1        # via -r {{cookiecutter.project_slug}}/requirements.in
 pytest==6.1.2             # via -r {{cookiecutter.project_slug}}/requirements.in, pytest-cov
 pyupgrade==2.7.3          # via -r {{cookiecutter.project_slug}}/requirements.in
 pyyaml==5.3.1             # via pre-commit
-regex==2020.10.28           # via black
+regex==2020.10.28         # via black
 six==1.15.0               # via packaging, virtualenv
 tokenize-rt==4.0.0        # via pyupgrade
 toml==0.10.1              # via black, pre-commit, pytest
 typed-ast==1.4.1          # via black
 typing-extensions==3.7.4.3  # via black
-virtualenv==20.1.0       # via pre-commit
+virtualenv==20.1.0        # via pre-commit
 wheel==0.35.1             # via -r {{cookiecutter.project_slug}}/requirements.in
