@@ -40,7 +40,7 @@ requests==2.24.0          # via cookiecutter
 six==1.15.0               # via cookiecutter, packaging, python-dateutil
 text-unidecode==1.3       # via python-slugify
 tokenize-rt==4.0.0        # via pyupgrade
-toml==0.10.1              # via black
+toml==0.10.2              # via black
 typed-ast==1.4.1          # via black
 typing-extensions==3.7.4.3  # via black
 urllib3==1.25.11           # via requests
