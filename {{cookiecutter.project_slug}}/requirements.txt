@@ -13,7 +13,7 @@ coverage==5.3             # via -r {{cookiecutter.project_slug}}/requirements.in
 distlib==0.3.1            # via virtualenv
 filelock==3.0.12          # via virtualenv
 flake8==3.8.4             # via -r {{cookiecutter.project_slug}}/requirements.in
-identify==1.5.6          # via pre-commit
+identify==1.5.7          # via pre-commit
 iniconfig==1.1.1          # via pytest
 isort==5.6.4              # via -r {{cookiecutter.project_slug}}/requirements.in
 mccabe==0.6.1             # via flake8
