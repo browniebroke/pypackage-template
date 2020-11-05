@@ -5,7 +5,7 @@
 #    pip-compile
 #
 alabaster==0.7.12         # via sphinx
-attrs==20.2.0             # via markdown-it-py
+attrs==20.3.0             # via markdown-it-py
 babel==2.8.0              # via sphinx
 certifi==2020.6.20       # via requests
 chardet==3.0.4            # via requests
