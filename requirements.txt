@@ -23,7 +23,7 @@ mccabe==0.6.1             # via flake8
 more-itertools==8.6.0     # via pytest
 mypy-extensions==0.4.3    # via black
 packaging==20.4           # via pytest
-pathspec==0.8.0           # via black
+pathspec==0.8.1           # via black
 pluggy==0.13.1            # via pytest
 poyo==0.5.0               # via cookiecutter
 py==1.9.0                 # via pytest
