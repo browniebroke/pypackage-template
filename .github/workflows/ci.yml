@@ -9,15 +9,15 @@ on:
 jobs:
   test:
     strategy:
+      fail-fast: false
       matrix:
         python-version:
-          - 3.6
           - 3.7
           - 3.8
           - 3.9
         os:
           - ubuntu-latest
-          # - windows-latest
+          - windows-latest
           - macOS-latest
     runs-on: ${{ matrix.os }}
     steps:
@@ -38,13 +38,13 @@ jobs:
       matrix:
         linter:
           - name: Flake8
-            run: flake8 tests
+            run: flake8 hooks tests
           - name: Black
-            run: black --check tests
+            run: black --check hooks tests
           - name: PyUpgrade
-            run: pyupgrade --py36-plus `find tests -name "*.py"`
+            run: pyupgrade --py36-plus `find hooks tests -name "*.py"`
           - name: isort
-            run: isort -c -v tests
+            run: isort -c -v hooks tests
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
