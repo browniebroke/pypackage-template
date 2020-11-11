@@ -14,7 +14,7 @@ Cookiecutter template for a Python Package.
 - Follows the [black] style guide with [flake8] and [isort].
 - Comes with [pre-commit] hook config for black, isort, flake8 and [pyupgrade](https://github.com/asottile/pyupgrade).
 - Style guide enforced on CI.
-- Dependencies pinned with pip-compile and updated by [dependabot].
+- Dependencies kept up to date by [Renovate].
 - Follow the [all-contributors] specification.
 - Follow to [the conventional commits][conventional-commits] specification.
 - Automated releasing using [python-semantic-release][python-semantic-release].
@@ -107,7 +107,7 @@ If you never used it before, you will have to [install the Github app][all-contr
 [flake8]: https://pypi.org/project/flake8/
 [isort]: https://pypi.org/project/isort/
 [pre-commit]: https://pre-commit.com/
-[dependabot]: https://dependabot.com/
+[Renovate]: https://docs.renovatebot.com/
 [all-contributors]: https://github.com/all-contributors/all-contributors
 [conventional-commits]: https://www.conventionalcommits.org
 [python-semantic-release]: https://github.com/relekang/python-semantic-release
