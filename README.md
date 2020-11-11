@@ -96,6 +96,12 @@ The project assumes that the documentation will be hosted on Read the Docs and w
 
 To enable it, you might need to go [into your dashboard][rtd-dashboard] and import the project from Github. Everything else should work out of the box.
 
+### Dependencies update
+
+The project dependencies are kept up to date with [Renovate] which requires [the Github app][renovate-gh-app] to be installed.
+
+The main advantage of Renovate over Dependabot is the automerge option, which is configured to automatically merge minor/patch updates with all the CI checks passing. It supports a variety of package managers, including Poetry and Github actions which are used by default.
+
 ### All contributors
 
 This is a specification that help you highlight all of the open source contributions on your README. This is easy to maintain as it comes with a Github bot to do the updates for you, so more manual updates on the contributors file.
@@ -108,6 +114,7 @@ If you never used it before, you will have to [install the Github app][all-contr
 [isort]: https://pypi.org/project/isort/
 [pre-commit]: https://pre-commit.com/
 [Renovate]: https://docs.renovatebot.com/
+[renovate-gh-app]: https://github.com/apps/renovate
 [all-contributors]: https://github.com/all-contributors/all-contributors
 [conventional-commits]: https://www.conventionalcommits.org
 [python-semantic-release]: https://github.com/relekang/python-semantic-release
