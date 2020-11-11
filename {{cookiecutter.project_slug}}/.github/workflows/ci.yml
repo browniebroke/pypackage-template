@@ -12,7 +12,7 @@ jobs:
       matrix:
         linter:
           - name: Flake8
-            run: flake8 --config=setup.cfg
+            run: flake8
           - name: Black
             run: black --check .
           - name: PyUpgrade
@@ -26,13 +26,11 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.8
+    - uses: abatilo/actions-poetry@v2.1.0
     - name: Install Dependencies
-      run: |
-        python -m pip install -U pip
-        pip install -r requirements.txt
-        pip install .
+      run: poetry install
     - name: {% raw %}${{ matrix.linter.name }}{% endraw %}
-      run: {% raw %}${{ matrix.linter.run }}{% endraw %}
+      run: poetry run {% raw %}${{ matrix.linter.run }}{% endraw %}
 
   # Make sure commit messages follow the conventional commits convention:
   # https://www.conventionalcommits.org
@@ -52,6 +50,7 @@ jobs:
           - 3.6
           - 3.7
           - 3.8
+          - 3.9
         os:
           - ubuntu-latest
           - windows-latest
@@ -63,13 +62,11 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: {% raw %}${{ matrix.python-version }}{% endraw %}
+    - uses: abatilo/actions-poetry@v2.1.0
     - name: Install Dependencies
-      run: |
-        python -m pip install -U pip
-        pip install -r requirements.txt
-        pip install .
+      run: poetry install
     - name: Test with Pytest
-      run: pytest
+      run: poetry run pytest --cov-report=xml
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
       with:
@@ -83,11 +80,9 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.8
+    - uses: abatilo/actions-poetry@v2.1.0
     - name: Install Dependencies
-      run: |
-        python -m pip install -U pip
-        pip install -r docs/requirements.txt
+      run: poetry install -E docs
     - name: Build docs
-      run: |
-        cd docs
-        make html
+      working-directory: docs
+      run: poetry run make html

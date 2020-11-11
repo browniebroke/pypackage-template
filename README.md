@@ -10,6 +10,7 @@ Cookiecutter template for a Python Package.
 
 - Project for Python 3.6+.
 - Testing with Pytest using Github actions.
+- Packaging powered by [poetry]
 - Follows the [black] style guide with [flake8] and [isort].
 - Comes with [pre-commit] hook config for black, isort, flake8 and [pyupgrade](https://github.com/asottile/pyupgrade).
 - Style guide enforced on CI.
@@ -30,24 +31,41 @@ cookiecutter https://github.com/browniebroke/cookiecutter-pypackage
 
 This will prompt you for a few questions and create new directory with the name you used as project slug.
 
-### Next steps
+### Start developing
 
-When you first push to Github, it'll start a few Github workflows that you can see in the "Actions" tab of your repository:
+The project uses [Poetry] for dependencies management and packaging. Make sure you have it installed in your development machine. To install the development dependencies in a virtual environment, type:
 
-- The test suite will run your tests with Pytest in the Test workflow
-- A few things will run in the Lint workflow:
+```shell
+poetry install
+```
+
+This will also generate a `poetry.lock` file, you should track this file in version control. To execute the test suite, call pytest inside Poetry's virtual environment via `poetry run`:
+
+```shell
+poetry run pytest
+```
+
+Check out the [Poetry] documentation for more information on the available commands.
+
+### Github Actions
+
+When you first push to Github, it'll start a `ci` Github workflow that you can see in the "Actions" tab of your repository. This workflow runs a couple of jobs:
+
+- The `test` job will run your test suite with Pytest against all Python version from 3.6 to 3.9
+- A few things will run in the lint job:
    - black in check mode
    - isort in check mode
-   - flake8 with isort
-   - pyupgrade, this will make sure you sure modern Python
-- The labels workflow will synchronise Github labels based on the `.github/labels.toml` file.
+   - flake8
+   - pyupgrade for Python 3.6+
+
+A `labels` workflow will also run and synchronise the Github labels based on the `.github/labels.toml` file.
 
 ### Secrets
 
 The workflows need [2 secrets][gh-secrets] to be setup in your Github repository:
 
-- `CODECOV_TOKEN` to upload coverage data to [codecov.io][codecov] in the Test workflow (optional for public repos).
 - `PYPI_TOKEN` to publish a release to [PyPI][pypi] in the Publish to PyPI workflow.
+- `CODECOV_TOKEN` to upload coverage data to [codecov.io][codecov] in the Test workflow (optional for public repos).
 
 ### Automated release
 
@@ -84,6 +102,7 @@ This is a specification that help you highlight all of the open source contribut
 
 If you never used it before, you will have to [install the Github app][all-contribs-install] and give it access to your repo.
 
+[poetry]: https://python-poetry.org/
 [black]: https://github.com/psf/black
 [flake8]: https://pypi.org/project/flake8/
 [isort]: https://pypi.org/project/isort/
