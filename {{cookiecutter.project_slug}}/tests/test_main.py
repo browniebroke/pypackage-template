@@ -1,4 +1,4 @@
-from {{ cookiecutter.package_name }} import add
+from {{ cookiecutter.package_name }}.main import add
 
 
 def test_add():
