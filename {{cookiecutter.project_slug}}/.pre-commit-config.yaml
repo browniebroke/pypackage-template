@@ -17,8 +17,7 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.3.0
     hooks:
-      # disabled due to bump2commit compatibility
-      # - id: trailing-whitespace
+      - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-yaml
       - id: check-json
@@ -27,4 +26,3 @@ repos:
     rev: 3.8.4
     hooks:
       - id: flake8
-        args: [--config=setup.cfg]

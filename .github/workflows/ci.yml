@@ -14,6 +14,7 @@ jobs:
           - 3.6
           - 3.7
           - 3.8
+          - 3.9
         os:
           - ubuntu-latest
           # - windows-latest
@@ -70,13 +71,17 @@ jobs:
       run: |
         python -m pip install -U pip
         pip install -r requirements.txt
-    - name: Build project docs
-      run: |
-        mkdir -p .cache/
-        cd .cache/
-        cookiecutter ../ --no-input --overwrite-if-exists project_name="My Package"
-    - name: Generate project docs
-      run: |
-        cd .cache/my-package/docs
-        pip install -r requirements.txt
-        make html
+
+    - run: mkdir -p .cache/
+    - name: Generate a project
+      working-directory: .cache
+      run: cookiecutter ../ --no-input --overwrite-if-exists project_name="My Package"
+
+    - uses: abatilo/actions-poetry@v2.1.0
+    - name: Install generated project deps
+      working-directory: .cache/my-package
+      run: poetry install -E docs
+
+    - name: Build docs for generated project deps
+      working-directory: .cache/my-package/docs
+      run: poetry run make html

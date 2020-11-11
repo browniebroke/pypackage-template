@@ -1,9 +1,0 @@
-black
-coverage
-flake8
-isort
-pre-commit
-pytest-cov
-pytest
-pyupgrade
-wheel
