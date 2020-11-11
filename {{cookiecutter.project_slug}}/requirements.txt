@@ -30,7 +30,7 @@ pyflakes==2.2.0           # via flake8
 pyparsing==2.4.7          # via packaging
 pytest-cov==2.10.1        # via -r {{cookiecutter.project_slug}}/requirements.in
 pytest==6.1.2             # via -r {{cookiecutter.project_slug}}/requirements.in, pytest-cov
-pyupgrade==2.7.3          # via -r {{cookiecutter.project_slug}}/requirements.in
+pyupgrade==2.7.4          # via -r {{cookiecutter.project_slug}}/requirements.in
 pyyaml==5.3.1             # via pre-commit
 regex==2020.10.28           # via black
 six==1.15.0               # via packaging, virtualenv

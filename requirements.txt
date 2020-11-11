@@ -34,7 +34,7 @@ pytest-cookies==0.5.1     # via -r requirements.in
 pytest==6.1.2             # via -r requirements.in, pytest-cookies
 python-dateutil==2.8.1    # via arrow
 python-slugify==4.0.1     # via cookiecutter
-pyupgrade==2.7.3          # via -r requirements.in
+pyupgrade==2.7.4          # via -r requirements.in
 regex==2020.10.28           # via black
 requests==2.24.0          # via cookiecutter
 six==1.15.0               # via cookiecutter, packaging, python-dateutil
