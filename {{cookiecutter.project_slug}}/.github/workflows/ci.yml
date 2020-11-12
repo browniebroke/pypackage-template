@@ -9,6 +9,7 @@ on:
 jobs:
   lint:
     strategy:
+      fail-fast: false
       matrix:
         linter:
           - name: Flake8
@@ -45,6 +46,7 @@ jobs:
 
   test:
     strategy:
+      fail-fast: false
       matrix:
         python-version:
           - 3.6

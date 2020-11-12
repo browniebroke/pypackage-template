@@ -35,6 +35,7 @@ jobs:
 
   lint:
     strategy:
+      fail-fast: false
       matrix:
         linter:
           - name: Flake8
