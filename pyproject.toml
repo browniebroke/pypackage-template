@@ -23,6 +23,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
 addopts = "-v -Wdefault"
+testpaths = "tests"
 
 [tool.isort]
 profile = "black"
