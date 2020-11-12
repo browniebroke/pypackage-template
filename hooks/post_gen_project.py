@@ -16,7 +16,8 @@ def run_poetry_install():
 
 
 def main():
-    run_poetry_install()
+    if "{{ cookiecutter.run_poetry_install }}" == "y":
+        run_poetry_install()
 
 
 if __name__ == "__main__":
