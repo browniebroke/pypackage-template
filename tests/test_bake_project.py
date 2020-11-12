@@ -14,6 +14,7 @@ def base_context():
         "github_username": "jdeau",
         "project_name": "Snake Farm",
         "project_short_description": "A sample farming project",
+        "run_poetry_install": "n",
     }
 
 
