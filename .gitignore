@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# File normally ignored that we want to commit
+!{{cookiecutter.project_slug}}/.idea/
