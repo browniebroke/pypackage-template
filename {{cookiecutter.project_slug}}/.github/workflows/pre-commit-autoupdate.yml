@@ -1,7 +1,5 @@
 # Run pre-commit autoupdate every day at midnight
 # and create a pull request if any changes
-
-
 name: Pre-commit auto-update
 
 on:
@@ -27,14 +25,12 @@ jobs:
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v3.4.1
       with:
-        # CI won't be running on pull requests by default
-        token: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
-        # Change to a personal access token with the 'repo' scope
-        # and save it as CPR_GITHUB_TOKEN to get it to work
+        # CI won't be running on pull requests if using GITHUB_TOKEN
+        # We instead use a personal access token (PAT) with the 'repo' scope
         # https://github.com/settings/tokens/new?scopes=repo
-        # token: {% raw %}${{ secrets.CPR_GITHUB_TOKEN }}{% endraw %}
+        token: {% raw %}${{ secrets.GH_PAT }}{% endraw %}
         branch: update/pre-commit-autoupdate
-        title: Auto-update pre-commit hooks
-        commit-message: Auto-update pre-commit hooks
-        body: Update versions of tools in pre-commit configs to latest version
+        title: Update pre-commit hooks
+        commit-message: 'chore: update pre-commit hooks'
+        body: Update versions of tools in pre-commit configs to latest version.
         labels: dependencies

@@ -62,9 +62,10 @@ A `labels` workflow will also run and synchronise the Github labels based on the
 
 ### Secrets
 
-The workflows need [2 secrets][gh-secrets] to be setup in your Github repository:
+The workflows need [a few secrets][gh-secrets] to be setup in your Github repository:
 
 - `PYPI_TOKEN` to publish a release to [PyPI][pypi] in the Publish to PyPI workflow.
+- `GH_PAT` a [personal access token (PAT) with the `repo` scope][create-pat] for opening pull requests and updating the repository topics. This is used by the `hacktoberfest` and `pre-commit-autoupdate` workflows. 
 - `CODECOV_TOKEN` to upload coverage data to [codecov.io][codecov] in the Test workflow (optional for public repos).
 
 ### Automated release
@@ -123,5 +124,6 @@ If you never used it before, you will have to [install the Github app][all-contr
 [gh-secrets]: https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets
 [codecov]: https://codecov.io/
 [pypi]: https://pypi.org/
+[create-pat]: https://github.com/settings/tokens/new?scopes=repo
 [rtd-dashboard]: https://readthedocs.org/dashboard/
 [all-contribs-install]: https://allcontributors.org/docs/en/bot/installation
