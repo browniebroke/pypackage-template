@@ -101,6 +101,7 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.8
+
     - uses: abatilo/actions-poetry@v2.1.0
     - name: Install Template Dependencies
       run: poetry install
@@ -108,7 +109,7 @@ jobs:
     - run: mkdir -p .cache/
     - name: Generate a project
       working-directory: .cache
-      run: poetry run cookiecutter ../ --no-input --overwrite-if-exists
+      run: poetry run cookiecutter ../ --no-input --overwrite-if-exists project_name="My Package"
     - name: Install generated project deps
       working-directory: .cache/my-package
       run: poetry install
