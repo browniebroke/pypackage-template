@@ -342,6 +342,20 @@ cookiecutter = ">=1.4.0,<1.8.0"
 pytest = ">=3.3.0,<6.0.0"
 
 [[package]]
+name = "pytest-mock"
+version = "3.3.1"
+description = "Thin-wrapper around the mock package for easier use with pytest"
+category = "dev"
+optional = false
+python-versions = ">=3.5"
+
+[package.dependencies]
+pytest = ">=5.0"
+
+[package.extras]
+dev = ["pre-commit", "tox", "pytest-asyncio"]
+
+[[package]]
 name = "python-dateutil"
 version = "2.8.1"
 description = "Extensions to the standard Python datetime module"
@@ -487,7 +501,7 @@ testing = ["pytest (>=3.5,<3.7.3 || >3.7.3)", "pytest-checkdocs (>=1.2.3)", "pyt
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "0f89de9563b11ecff5e2d1c98bd591f384d7939b03ed607ffbd04f4f17ac1919"
+content-hash = "5f52d92f46fc38dbe4e4f82e10ed0e46f7cf7e0e748eee046657110688a5c19b"
 
 [metadata.files]
 appdirs = [
@@ -642,6 +656,10 @@ pytest = [
 pytest-cookies = [
     {file = "pytest-cookies-0.5.1.tar.gz", hash = "sha256:b33f7f51772444b9b25991c4eeaea74a69dc9a6e08b09596b9574548a8812f34"},
     {file = "pytest_cookies-0.5.1-py2.py3-none-any.whl", hash = "sha256:9dc21d7ae56ef38a5fddb0e11eb5cb4c993907a6cafb6dd11d62c41e47af391b"},
+]
+pytest-mock = [
+    {file = "pytest-mock-3.3.1.tar.gz", hash = "sha256:a4d6d37329e4a893e77d9ffa89e838dd2b45d5dc099984cf03c703ac8411bb82"},
+    {file = "pytest_mock-3.3.1-py3-none-any.whl", hash = "sha256:024e405ad382646318c4281948aadf6fe1135632bea9cc67366ea0c4098ef5f2"},
 ]
 python-dateutil = [
     {file = "python-dateutil-2.8.1.tar.gz", hash = "sha256:73ebfe9dbf22e832286dafa60473e4cd239f8592f699aa5adaf10050e6e1823c"},
