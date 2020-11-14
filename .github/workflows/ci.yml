@@ -66,12 +66,12 @@ jobs:
       fail-fast: false
       matrix:
         script:
-          - {dir: .cache/my-package, run: pytest}
-          - {dir: .cache/my-package, run: flake8}
-          - {dir: .cache/my-package, run: black --check .}
-          - {dir: .cache/my-package, run: pyupgrade --py36-plus `find . -name "*.py"`}
-          - {dir: .cache/my-package, run: isort -c -v .}
-          - {dir: .cache/my-package/docs, run: make html}
+          - {run: pytest, dir: ''}
+          - {run: flake8, dir: ''}
+          - {run: black --check ., dir: ''}
+          - {run: pyupgrade --py36-plus `find . -name "*.py"`, dir: ''}
+          - {run: isort -c -v ., dir: ''}
+          - {run: make html, dir: 'docs'}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -91,6 +91,6 @@ jobs:
     - name: Install generated project deps
       working-directory: .cache/my-package
       run: poetry install -E docs
-    - name: Run ${{ matrix.script }}
-      working-directory: ${{ matrix.script.dir }}
+    - name: Run ${{ matrix.script.run }}
+      working-directory: .cache/my-package/${{ matrix.script.dir }}
       run: poetry run ${{ matrix.script.run }}
