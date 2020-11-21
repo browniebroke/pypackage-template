@@ -22,16 +22,16 @@ jobs:
             run: isort -c -v .
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8
-    - uses: abatilo/actions-poetry@v2.1.0
-    - name: Install Dependencies
-      run: poetry install
-    - name: {% raw %}${{ matrix.linter.name }}{% endraw %}
-      run: poetry run {% raw %}${{ matrix.linter.run }}{% endraw %}
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - uses: abatilo/actions-poetry@v2.1.0
+      - name: Install Dependencies
+        run: poetry install
+      - name: {% raw %}${{ matrix.linter.name }}{% endraw %}
+        run: poetry run {% raw %}${{ matrix.linter.run }}{% endraw %}
 
   # Make sure commit messages follow the conventional commits convention:
   # https://www.conventionalcommits.org
@@ -59,32 +59,32 @@ jobs:
           - macOS-latest
     runs-on: {% raw %}${{ matrix.os }}{% endraw %}
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: {% raw %}${{ matrix.python-version }}{% endraw %}
-    - uses: abatilo/actions-poetry@v2.1.0
-    - name: Install Dependencies
-      run: poetry install
-    - name: Test with Pytest
-      run: poetry run pytest --cov-report=xml
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v1
-      with:
-        token: {% raw %}${{ secrets.CODECOV_TOKEN }}{% endraw %}
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: {% raw %}${{ matrix.python-version }}{% endraw %}
+      - uses: abatilo/actions-poetry@v2.1.0
+      - name: Install Dependencies
+        run: poetry install
+      - name: Test with Pytest
+        run: poetry run pytest --cov-report=xml
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: {% raw %}${{ secrets.CODECOV_TOKEN }}{% endraw %}
 
   docs:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8
-    - uses: abatilo/actions-poetry@v2.1.0
-    - name: Install Dependencies
-      run: poetry install -E docs
-    - name: Build docs
-      working-directory: docs
-      run: poetry run make html
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - uses: abatilo/actions-poetry@v2.1.0
+      - name: Install Dependencies
+        run: poetry install -E docs
+      - name: Build docs
+        working-directory: docs
+        run: poetry run make html

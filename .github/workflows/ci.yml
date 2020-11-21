@@ -22,16 +22,16 @@ jobs:
           - macOS-latest
     runs-on: ${{ matrix.os }}
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-    - uses: abatilo/actions-poetry@v2.1.0
-    - name: Install Dependencies
-      run: poetry install
-    - name: Test with Pytest
-      run: poetry run pytest
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - uses: abatilo/actions-poetry@v2.1.0
+      - name: Install Dependencies
+        run: poetry install
+      - name: Test with Pytest
+        run: poetry run pytest
 
   # Lint tests and template hooks
   lint:
@@ -49,16 +49,16 @@ jobs:
             run: isort -c -v hooks tests
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8
-    - uses: abatilo/actions-poetry@v2.1.0
-    - name: Install Dependencies
-      run: poetry install
-    - name: ${{ matrix.linter.name }}
-      run: poetry run ${{ matrix.linter.run }}
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - uses: abatilo/actions-poetry@v2.1.0
+      - name: Install Dependencies
+        run: poetry install
+      - name: ${{ matrix.linter.name }}
+        run: poetry run ${{ matrix.linter.run }}
 
   # Generate project, run CI & build docs
   cookie:
@@ -66,31 +66,31 @@ jobs:
       fail-fast: false
       matrix:
         script:
-          - {run: pytest, dir: ''}
-          - {run: flake8, dir: ''}
-          - {run: black --check ., dir: ''}
-          - {run: pyupgrade --py36-plus `find . -name "*.py"`, dir: ''}
-          - {run: isort -c -v ., dir: ''}
-          - {run: make html, dir: 'docs'}
+          - { run: pytest, dir: "" }
+          - { run: flake8, dir: "" }
+          - { run: black --check ., dir: "" }
+          - { run: pyupgrade --py36-plus `find . -name "*.py"`, dir: "" }
+          - { run: isort -c -v ., dir: "" }
+          - { run: make html, dir: "docs" }
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
 
-    - uses: abatilo/actions-poetry@v2.1.0
-    - name: Install Template Dependencies
-      run: poetry install
+      - uses: abatilo/actions-poetry@v2.1.0
+      - name: Install Template Dependencies
+        run: poetry install
 
-    - run: mkdir -p .cache/
-    - name: Generate a project
-      working-directory: .cache
-      run: poetry run cookiecutter ../ --no-input --overwrite-if-exists project_name="My Package"
-    - name: Install generated project deps
-      working-directory: .cache/my-package
-      run: poetry install -E docs
-    - name: Run ${{ matrix.script.run }}
-      working-directory: .cache/my-package/${{ matrix.script.dir }}
-      run: poetry run ${{ matrix.script.run }}
+      - run: mkdir -p .cache/
+      - name: Generate a project
+        working-directory: .cache
+        run: poetry run cookiecutter ../ --no-input --overwrite-if-exists project_name="My Package"
+      - name: Install generated project deps
+        working-directory: .cache/my-package
+        run: poetry install -E docs
+      - name: Run ${{ matrix.script.run }}
+        working-directory: .cache/my-package/${{ matrix.script.dir }}
+        run: poetry run ${{ matrix.script.run }}
