@@ -14,6 +14,9 @@
     "Not open source"
   ],
   "run_poetry_install": "n",
+  "initial_commit": "n",
   "setup_github": "n",
+  "setup_pre_commit": "n",
+  "add_me_as_contributor": "n",
   "_extensions": ["cookiecutter.extensions.SlugifyExtension"]
 }
