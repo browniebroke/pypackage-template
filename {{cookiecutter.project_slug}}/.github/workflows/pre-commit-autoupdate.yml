@@ -1,26 +1,24 @@
-# Run pre-commit autoupdate every day at midnight
-# and create a pull request if any changes
+# Run pre-commit autoupdate and create a pull request
 name: Pre-commit auto-update
 
 on:
+  # every day at midnight
   schedule:
     - cron: "0 0 * * *"
+  # on demand
+  workflow_dispatch:
 
 jobs:
   auto-update:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
+
       - uses: actions/setup-python@v2
         with:
           python-version: 3.8
 
-      - name: Install pre-commit
-        run: pip install pre-commit
-
-      - name: Run pre-commit autoupdate
-        run: pre-commit autoupdate
+      - uses: browniebroke/pre-commit-autoupdate-action@v1.0.0
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3.4.1
@@ -32,5 +30,5 @@ jobs:
           branch: update/pre-commit-autoupdate
           title: Update pre-commit hooks
           commit-message: "chore: update pre-commit hooks"
-          body: Update versions of tools in pre-commit configs to latest version.
+          body: Update of pre-commit hooks to latest versions.
           labels: dependencies
