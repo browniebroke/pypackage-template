@@ -56,10 +56,10 @@ When you first push to Github, it'll start a `ci` Github workflow that you can s
 
 - The `test` job will run your test suite with Pytest against all Python version from 3.6 to 3.9
 - A few things will run in the lint job:
-   - black in check mode
-   - isort in check mode
-   - flake8
-   - pyupgrade for Python 3.6+
+  - black in check mode
+  - isort in check mode
+  - flake8
+  - pyupgrade for Python 3.6+
 
 A `labels` workflow will also run and synchronise the Github labels based on the `.github/labels.toml` file.
 
@@ -68,7 +68,7 @@ A `labels` workflow will also run and synchronise the Github labels based on the
 The workflows need [a few secrets][gh-secrets] to be setup in your Github repository:
 
 - `PYPI_TOKEN` to publish a release to [PyPI][pypi] in the Publish to PyPI workflow.
-- `GH_PAT` a [personal access token (PAT) with the `repo` scope][create-pat] for opening pull requests and updating the repository topics. This is used by the `hacktoberfest` and `pre-commit-autoupdate` workflows. 
+- `GH_PAT` a [personal access token (PAT) with the `repo` scope][create-pat] for opening pull requests and updating the repository topics. This is used by the `hacktoberfest` and `pre-commit-autoupdate` workflows.
 - `CODECOV_TOKEN` to upload coverage data to [codecov.io][codecov] in the Test workflow (optional for public repos).
 
 ### Automated release
@@ -96,7 +96,7 @@ The project comes with the config for [pre-commit]. If you're not familiar with 
 
 ### Documentation
 
-The project assumes that the documentation will be hosted on Read the Docs and written in Markdown with the [MyST parser for Sphinx][myst]. 
+The project assumes that the documentation will be hosted on Read the Docs and written in Markdown with the [MyST parser for Sphinx][myst].
 
 To enable it, you might need to go [into your dashboard][rtd-dashboard] and import the project from Github. Everything else should work out of the box.
 
@@ -112,12 +112,26 @@ This is a specification that help you highlight all of the open source contribut
 
 If you never used it before, you will have to [install the Github app][all-contribs-install] and give it access to your repo.
 
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
 [poetry]: https://python-poetry.org/
 [black]: https://github.com/psf/black
 [flake8]: https://pypi.org/project/flake8/
 [isort]: https://pypi.org/project/isort/
 [pre-commit]: https://pre-commit.com/
-[Renovate]: https://docs.renovatebot.com/
+[renovate]: https://docs.renovatebot.com/
 [renovate-gh-app]: https://github.com/apps/renovate
 [all-contributors]: https://github.com/all-contributors/all-contributors
 [conventional-commits]: https://www.conventionalcommits.org

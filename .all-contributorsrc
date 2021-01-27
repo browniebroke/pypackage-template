@@ -1,0 +1,14 @@
+{
+  "projectName": "cookiecutter-pypackage",
+  "projectOwner": "browniebroke",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 80,
+  "commit": true,
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "contributors": []
+}
