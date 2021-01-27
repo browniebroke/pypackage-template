@@ -13,6 +13,6 @@ python:
   version: 3.8
   install:
     - method: pip
-      path: .git@github.com:browniebroke/cookiecutter-pypackage.git
+      path: .
       extra_requirements:
         - docs
