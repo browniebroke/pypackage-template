@@ -52,10 +52,8 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.semantic_release]
 branch = "main"
-version_variable = [
-    "{{ cookiecutter.package_name }}/__init__.py:__version__",
-    "pyproject.toml:version",
-]
+version_toml = "pyproject.toml:tool.poetry.version"
+version_variable = "{{ cookiecutter.package_name }}/__init__.py:__version__"
 build_command = "pip install poetry && poetry build"
 
 [tool.pytest.ini_options]
