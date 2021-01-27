@@ -10,5 +10,18 @@
   "commit": true,
   "contributorsPerLine": 7,
   "skipCi": true,
-  "contributors": []
+  "contributors": [
+    {
+      "login": "browniebroke",
+      "name": "Bruno Alla",
+      "avatar_url": "https://avatars.githubusercontent.com/u/861044?v=4",
+      "profile": "https://browniebroke.com/",
+      "contributions": [
+        "code",
+        "ideas",
+        "doc"
+      ]
+    }
+  ],
+  "commitConvention": "none"
 }
