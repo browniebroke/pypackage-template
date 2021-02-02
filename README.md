@@ -68,7 +68,7 @@ A `labels` workflow will also run and synchronise the Github labels based on the
 The workflows need [a few secrets][gh-secrets] to be setup in your Github repository:
 
 - `PYPI_TOKEN` to publish a release to [PyPI][pypi] in the Publish to PyPI workflow.
-- `GH_PAT` a [personal access token (PAT) with the `repo` scope][create-pat] for opening pull requests and updating the repository topics. This is used by the `hacktoberfest` and `pre-commit-autoupdate` workflows.
+- `GH_PAT` a [personal access token (PAT) with the `repo` scope][create-pat] for opening pull requests and updating the repository topics. This is used by the `hacktoberfest` workflow.
 - `CODECOV_TOKEN` to upload coverage data to [codecov.io][codecov] in the Test workflow (optional for public repos).
 
 ### Automated release
@@ -104,7 +104,7 @@ To enable it, you might need to go [into your dashboard][rtd-dashboard] and impo
 
 The project dependencies are kept up to date with [Renovate] which requires [the Github app][renovate-gh-app] to be installed.
 
-The main advantage of Renovate over Dependabot is the automerge option, which is configured to automatically merge minor/patch updates with all the CI checks passing. It supports a variety of package managers, including Poetry and Github actions which are used by default.
+The main advantage of Renovate over Dependabot is the automerge option, which is configured to automatically merge minor/patch updates with all the CI checks passing. It supports a variety of package managers, including Poetry, Github actions and pre-commit hooks which are used by default.
 
 ### All contributors
 
