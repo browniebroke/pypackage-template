@@ -67,7 +67,7 @@ A `labels` workflow will also run and synchronise the Github labels based on the
 
 The workflows need [a few secrets][gh-secrets] to be setup in your Github repository:
 
-- `PYPI_TOKEN` to publish a release to [PyPI][pypi] in the Publish to PyPI workflow.
+- `PYPI_TOKEN` to publish releases to [PyPI][pypi]. This one should be created as `release` environment secret.
 - `GH_PAT` a [personal access token (PAT) with the `repo` scope][create-pat] for opening pull requests and updating the repository topics. This is used by the `hacktoberfest` workflow.
 - `CODECOV_TOKEN` to upload coverage data to [codecov.io][codecov] in the Test workflow (optional for public repos).
 
