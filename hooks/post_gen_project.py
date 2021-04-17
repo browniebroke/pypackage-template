@@ -49,6 +49,24 @@ def setup_github():
             "--enable-wiki=false",
         ]
     )
+    run_cmd(
+        [
+            "gh",
+            "secret",
+            "set",
+            "PYPI_TOKEN",
+            "-b'changeme'",
+        ]
+    )
+    run_cmd(
+        [
+            "gh",
+            "secret",
+            "set",
+            "GH_PAT",
+            "-b'changeme'",
+        ]
+    )
 
 
 def setup_pre_commit():

@@ -56,7 +56,7 @@ def test_setup_github(mocker):
 
     setup_github()
 
-    assert subprocess_run.call_count == 2
+    assert subprocess_run.call_count == 4
     subprocess_run.assert_any_call(["gh", "-h"], check=True, capture_output=True)
     subprocess_run.assert_any_call(
         [
@@ -69,6 +69,26 @@ def test_setup_github(mocker):
             "{{ cookiecutter.project_short_description }}",
             "--public",
             "--enable-wiki=false",
+        ],
+        check=True,
+    )
+    subprocess_run.assert_any_call(
+        [
+            "gh",
+            "secret",
+            "set",
+            "PYPI_TOKEN",
+            "-b'changeme'",
+        ],
+        check=True,
+    )
+    subprocess_run.assert_any_call(
+        [
+            "gh",
+            "secret",
+            "set",
+            "GH_PAT",
+            "-b'changeme'",
         ],
         check=True,
     )

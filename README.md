@@ -22,7 +22,7 @@ Cookiecutter template for a Python Package.
 - Follow to [the conventional commits][conventional-commits] specification.
 - Automated releasing using [python-semantic-release][python-semantic-release].
 - Documentation configured with Sphinx and [MyST Parser][myst].
-- Standardised list of Github labels synchronised on push to master using [the labels CLI][pylabels].
+- Standardised list of GitHub labels synchronised on push to master using [the labels CLI][pylabels].
 
 ## Usage
 
@@ -50,9 +50,9 @@ poetry run pytest
 
 Check out the [Poetry] documentation for more information on the available commands.
 
-### Github Actions
+### GitHub Actions
 
-When you first push to Github, it'll start a `ci` Github workflow that you can see in the "Actions" tab of your repository. This workflow runs a couple of jobs:
+When you first push to GitHub, it'll start a `ci` GitHub workflow that you can see in the "Actions" tab of your repository. This workflow runs a couple of jobs:
 
 - The `test` job will run your test suite with Pytest against all Python version from 3.6 to 3.9
 - A few things will run in the lint job:
@@ -61,15 +61,17 @@ When you first push to Github, it'll start a `ci` Github workflow that you can s
   - flake8
   - pyupgrade for Python 3.6+
 
-A `labels` workflow will also run and synchronise the Github labels based on the `.github/labels.toml` file.
+A `labels` workflow will also run and synchronise the GitHub labels based on the `.github/labels.toml` file.
 
 ### Secrets
 
-The workflows need [a few secrets][gh-secrets] to be setup in your Github repository:
+The workflows need [a few secrets][gh-secrets] to be setup in your GitHub repository:
 
 - `PYPI_TOKEN` to publish releases to [PyPI][pypi]. This one should be created as `release` environment secret.
 - `GH_PAT` a [personal access token (PAT) with the `repo` scope][create-pat] for opening pull requests and updating the repository topics. This is used by the `hacktoberfest` workflow.
 - `CODECOV_TOKEN` to upload coverage data to [codecov.io][codecov] in the Test workflow (optional for public repos).
+
+If you have the GitHub CLI installed and chose to set up GitHub, they will be created with a dummy value.
 
 ### Automated release
 
@@ -83,8 +85,8 @@ Here is an overview of its features:
 - Update the `CHANGELOG.md` file.
 - Commit changes.
 - Create a git tag.
-- Push to Github.
-- Create a release in Github with the changes as release notes.
+- Push to GitHub.
+- Create a release in GitHub with the changes as release notes.
 - Build the source and binary distribution (wheel).
 - Upload the sources to PyPI and attach them to the Github release.
 
@@ -104,11 +106,11 @@ To enable it, you might need to go [into your dashboard][rtd-dashboard] and impo
 
 The project dependencies are kept up to date with [Renovate] which requires [the Github app][renovate-gh-app] to be installed.
 
-The main advantage of Renovate over Dependabot is the automerge option, which is configured to automatically merge minor/patch updates with all the CI checks passing. It supports a variety of package managers, including Poetry, Github actions and pre-commit hooks which are used by default.
+The main advantage of Renovate over Dependabot is the auto-merge option, which is configured to automatically merge minor/patch updates with all the CI checks passing. It supports a variety of package managers, including Poetry, GitHub actions and pre-commit hooks which are used by default.
 
 ### All contributors
 
-This is a specification that help you highlight all of the open source contributions on your README. This is easy to maintain as it comes with a Github bot to do the updates for you, so more manual updates on the contributors file.
+This is a specification that help you highlight every open source contribution in your README. This is easy to maintain as it comes with a GitHub bot to do the updates for you, so more manual updates on the contributors file.
 
 If you never used it before, you will have to [install the Github app][all-contribs-install] and give it access to your repo.
 
