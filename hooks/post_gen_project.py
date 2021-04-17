@@ -46,6 +46,7 @@ def setup_github():
             "-d",
             "{{ cookiecutter.project_short_description }}",
             "--public",
+            "--enable-wiki=false",
         ]
     )
 
