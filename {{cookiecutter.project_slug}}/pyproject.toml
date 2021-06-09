@@ -46,10 +46,6 @@ pytest-cov = "^2.10.1"
 pyupgrade = {version = "^2.7.4", python = "^3.6.1"}
 tox = "^3.20.1"
 
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
-
 [tool.semantic_release]
 branch = "main"
 version_toml = "pyproject.toml:tool.poetry.version"
@@ -62,3 +58,7 @@ addopts = "-v -Wdefault --cov={{ cookiecutter.package_name }}"
 [tool.isort]
 profile = "black"
 known_first_party = ["{{ cookiecutter.package_name }}", "tests"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
