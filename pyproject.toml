@@ -18,10 +18,6 @@ pyupgrade = "^2.7.4"
 pytest-mock = "^3.3.1"
 pytest-cookies = "^0.6.0"
 
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
-
 [tool.isort]
 profile = "black"
 known_first_party = ["{{ cookiecutter.package_name }}", "hooks", "tests"]
@@ -29,3 +25,7 @@ known_first_party = ["{{ cookiecutter.package_name }}", "hooks", "tests"]
 [tool.pytest.ini_options]
 addopts = "-v -Wdefault"
 testpaths = "tests/"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
