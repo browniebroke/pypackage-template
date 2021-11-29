@@ -11,7 +11,7 @@ Cookiecutter template for a Python Package.
 
 ## Features
 
-- Project for Python 3.6+.
+- Project for Python 3.7+.
 - Testing with Pytest using Github actions.
 - Packaging powered by [poetry]
 - Follows the [black] style guide with [flake8] and [isort].
@@ -54,12 +54,12 @@ Check out the [Poetry] documentation for more information on the available comma
 
 When you first push to GitHub, it'll start a `ci` GitHub workflow that you can see in the "Actions" tab of your repository. This workflow runs a couple of jobs:
 
-- The `test` job will run your test suite with Pytest against all Python version from 3.6 to 3.9
+- The `test` job will run your test suite with Pytest against all Python version from 3.7 to 3.9
 - A few things will run in the lint job:
   - black in check mode
   - isort in check mode
   - flake8
-  - pyupgrade for Python 3.6+
+  - pyupgrade for Python 3.7+
 
 A `labels` workflow will also run and synchronise the GitHub labels based on the `.github/labels.toml` file.
 
