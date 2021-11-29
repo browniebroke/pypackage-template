@@ -27,7 +27,7 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.8
-      - uses: abatilo/actions-poetry@v2.1.0
+      - uses: snok/install-poetry@v1
       - name: Install Dependencies
         run: poetry install
       - name: {% raw %}${{ matrix.linter.name }}{% endraw %}
@@ -64,7 +64,7 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: {% raw %}${{ matrix.python-version }}{% endraw %}
-      - uses: abatilo/actions-poetry@v2.1.0
+      - uses: snok/install-poetry@v1
       - name: Install Dependencies
         run: poetry install
       - name: Test with Pytest
@@ -82,7 +82,7 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.8
-      - uses: abatilo/actions-poetry@v2.1.0
+      - uses: snok/install-poetry@v1
       - name: Install Dependencies
         run: poetry install -E docs
       - name: Build docs
