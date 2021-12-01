@@ -8,30 +8,13 @@ on:
 
 jobs:
   lint:
-    strategy:
-      fail-fast: false
-      matrix:
-        linter:
-          - name: Flake8
-            run: flake8
-          - name: Black
-            run: black --check .
-          - name: PyUpgrade
-            run: pyupgrade --py37-plus `find . -name "*.py"`
-          - name: isort
-            run: isort -c -v .
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Python
-        uses: actions/setup-python@v2
+      - uses: actions/setup-python@v2
         with:
           python-version: "3.9"
-      - uses: snok/install-poetry@v1
-      - name: Install Dependencies
-        run: poetry install
-      - name: {% raw %}${{ matrix.linter.name }}{% endraw %}
-        run: poetry run {% raw %}${{ matrix.linter.run }}{% endraw %}
+      - uses: pre-commit/action@v2.0.3
 
   # Make sure commit messages follow the conventional commits convention:
   # https://www.conventionalcommits.org
