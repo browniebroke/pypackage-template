@@ -29,11 +29,11 @@ def initial_commit():
 
 
 def setup_github():
-    """Create Github repo and set it up as remote."""
+    """Create GitHUb repo and set it up as remote."""
     if not check_command_exists("gh"):
         return
 
-    # Create it on Github
+    # Create it on GitHUb
     github_username = "{{ cookiecutter.github_username }}"
     project_slug = "{{ cookiecutter.project_slug }}"
     run_cmd(
@@ -42,11 +42,13 @@ def setup_github():
             "repo",
             "create",
             f"{github_username}/{project_slug}",
-            "-y",
             "-d",
             "{{ cookiecutter.project_short_description }}",
             "--public",
-            "--enable-wiki=false",
+            "--disable-wiki=true",
+            "--remote=origin",
+            "--source=.",
+            "--push",
         ]
     )
     run_cmd(
