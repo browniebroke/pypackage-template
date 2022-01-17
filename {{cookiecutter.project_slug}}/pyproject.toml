@@ -53,7 +53,10 @@ version_variable = "{{ cookiecutter.package_name }}/__init__.py:__version__"
 build_command = "pip install poetry && poetry build"
 
 [tool.pytest.ini_options]
-addopts = "-v -Wdefault --cov={{ cookiecutter.package_name }}"
+addopts = "-v -Wdefault --cov={{ cookiecutter.package_name }} --cov-report=term-missing:skip-covered"
+
+[tool.coverage.run]
+branch = true
 
 [tool.isort]
 profile = "black"
