@@ -6,7 +6,7 @@
   "project_slug": "{{ cookiecutter.project_name | slugify }}",
   "package_name": "{{ cookiecutter.project_slug.replace('-', '_') }}",
   "project_short_description": "My Python package to help you get up to speed.",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "open_source_license": [
     "MIT",
     "Apache Software License 2.0",
