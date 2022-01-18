@@ -25,7 +25,7 @@ def initial_commit():
     # Init local repo
     run_cmd(["git", "init"])
     run_cmd(["git", "add", "."])
-    run_cmd(["git", "commit", "-m", "feat: initial commit"])
+    run_cmd(["git", "commit", "-m", "chore: initial commit"])
 
 
 def setup_github():

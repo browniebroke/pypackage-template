@@ -47,7 +47,7 @@ def test_initial_commit(mocker):
     subprocess_run.assert_any_call(["git", "init"], check=True)
     subprocess_run.assert_any_call(["git", "add", "."], check=True)
     subprocess_run.assert_any_call(
-        ["git", "commit", "-m", "feat: initial commit"],
+        ["git", "commit", "-m", "chore: initial commit"],
         check=True,
     )
 
