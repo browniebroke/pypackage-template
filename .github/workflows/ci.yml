@@ -44,6 +44,7 @@ jobs:
           - { run: black --check ., dir: "" }
           - { run: pyupgrade --py36-plus `find . -name "*.py"`, dir: "" }
           - { run: isort -c -v ., dir: "" }
+          - { run: mypy ., dir: "" }
           - { run: make html, dir: "docs" }
     runs-on: ubuntu-latest
     steps:
