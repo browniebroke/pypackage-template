@@ -75,10 +75,17 @@ no_implicit_optional = true
 show_error_codes = true
 warn_unreachable = true
 warn_unused_ignores = true
+exclude = [
+    'docs/.*',
+]
 
 [[tool.mypy.overrides]]
 module = "tests.*"
 allow_untyped_defs = true
+
+[[tool.mypy.overrides]]
+module = "docs.*"
+ignore_errors = true
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
