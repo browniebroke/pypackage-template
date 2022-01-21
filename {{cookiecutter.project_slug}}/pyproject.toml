@@ -41,6 +41,7 @@ docs = [
 black = "^21.11b1"
 flake8 = "^4.0"
 isort = "^5.10"
+mypy = "^0.931"
 pytest = "^6.1"
 pytest-cov = "^3.0"
 pytest-srcpaths = "^1.2"  # No longer needed with pytest 7
@@ -63,6 +64,21 @@ branch = true
 [tool.isort]
 profile = "black"
 known_first_party = ["{{ cookiecutter.package_name }}", "tests"]
+
+[tool.mypy]
+check_untyped_defs = true
+disallow_any_generics = true
+disallow_incomplete_defs = true
+disallow_untyped_defs = true
+mypy_path = "src/"
+no_implicit_optional = true
+show_error_codes = true
+warn_unreachable = true
+warn_unused_ignores = true
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+allow_untyped_defs = true
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
