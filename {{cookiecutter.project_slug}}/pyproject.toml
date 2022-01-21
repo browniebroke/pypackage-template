@@ -15,7 +15,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries",
 ]
 packages = [
-    { include = "{{ cookiecutter.package_name }}" },
+    { include = "{{ cookiecutter.package_name }}", from = "src" },
 ]
 
 [tool.poetry.urls]
@@ -43,17 +43,19 @@ flake8 = "^4.0"
 isort = "^5.10"
 pytest = "^6.1"
 pytest-cov = "^3.0"
+pytest-srcpaths = "^1.2"  # No longer needed with pytest 7
 pyupgrade = "^2.29"
 tox = "^3.20"
 
 [tool.semantic_release]
 branch = "main"
 version_toml = "pyproject.toml:tool.poetry.version"
-version_variable = "{{ cookiecutter.package_name }}/__init__.py:__version__"
+version_variable = "src/{{ cookiecutter.package_name }}/__init__.py:__version__"
 build_command = "pip install poetry && poetry build"
 
 [tool.pytest.ini_options]
 addopts = "-v -Wdefault --cov={{ cookiecutter.package_name }} --cov-report=term-missing:skip-covered"
+pythonpath = ["src"]
 
 [tool.coverage.run]
 branch = true
