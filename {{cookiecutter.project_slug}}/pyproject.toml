@@ -61,6 +61,13 @@ pythonpath = ["src"]
 [tool.coverage.run]
 branch = true
 
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "@overload",
+    "if TYPE_CHECKING",
+]
+
 [tool.isort]
 profile = "black"
 known_first_party = ["{{ cookiecutter.package_name }}", "tests"]
