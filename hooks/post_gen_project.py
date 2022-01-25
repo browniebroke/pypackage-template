@@ -1,3 +1,5 @@
+import os
+import shutil
 import subprocess
 
 
@@ -12,6 +14,11 @@ def check_command_exists(cmd):
         print(f"{cmd} command is not installed")
         return False
     return True
+
+
+def remove_documentation():
+    shutil.rmtree("docs")
+    os.remove(".readthedocs.yml")
 
 
 def run_poetry_install():
@@ -96,6 +103,9 @@ def add_me_as_contributor():
 
 
 def main():
+    if "{{ cookiecutter.documentation }}" == "n":
+        remove_documentation()
+
     if "{{ cookiecutter.run_poetry_install }}" == "y":
         run_poetry_install()
 
