@@ -96,11 +96,11 @@ Ready to contribute? Here's how to set yourself up for local development.
 
 ## Pull Request Guidelines
 
-Before you submit a pull request, check that it meets these guidelines:
+We like to have the pull request open as soon as possible, that's a great place to discuss any piece of work, even unfinished. You can use draft pull request if it's still a work in progress. Here are a few guidelines to follow:
 
-1. Should include tests.
-2. If adding new functionality, the documentation should be updated. Put your new functionality into a function with a docstring, and add the feature to the appropriate section under the `docs/`.
-3. Should work for all supported Python versions. Check the CI and make sure that the tests pass everywhere.
+1. Include tests for feature or bug fixes.
+2. Update the documentation for significant features.
+3. Ensure tests are passing on CI.
 
 ## Tips
 
