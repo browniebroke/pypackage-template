@@ -50,3 +50,28 @@ def test_generate_project(cookies, base_context):
     ]
     assert paths
     check_paths(paths)
+
+
+@pytest.mark.parametrize(
+    ("docs_opt", "expect_present"),
+    [
+        ("y", True),
+        ("n", False),
+    ],
+)
+def test_generate_documentation_option(cookies, base_context, docs_opt, expect_present):
+    result = cookies.bake(
+        extra_context={
+            **base_context,
+            "documentation": docs_opt,
+        }
+    )
+
+    assert result.exit_code == 0, result.exception
+    root = result.project_path
+    assert (root / "docs").exists() is expect_present
+    assert (root / ".readthedocs.yml").exists() is expect_present
+    assert (
+        "img.shields.io/readthedocs" in (root / "README.md").read_text()
+    ) is expect_present
+    assert ("Sphinx" in (root / "pyproject.toml").read_text()) is expect_present
