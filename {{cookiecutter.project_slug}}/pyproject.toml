@@ -44,9 +44,8 @@ black = "^21.11b1"
 flake8 = "^4.0"
 isort = "^5.10"
 mypy = "^0.931"
-pytest = "^6.1"
+pytest = "^7.0"
 pytest-cov = "^3.0"
-pytest-srcpaths = "^1.2"  # No longer needed with pytest 7
 pyupgrade = "^2.29"
 tox = "^3.20"
 
