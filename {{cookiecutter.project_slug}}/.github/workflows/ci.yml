@@ -6,6 +6,10 @@ on:
       - main
   pull_request:
 
+concurrency:
+  group: {% raw %}${{ github.head_ref || github.run_id }}{% endraw %}
+  cancel-in-progress: true
+
 jobs:
   lint:
     runs-on: ubuntu-latest
