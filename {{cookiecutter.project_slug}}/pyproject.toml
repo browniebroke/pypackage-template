@@ -40,6 +40,7 @@ docs = [
 
 {%- endif %}
 [tool.poetry.dev-dependencies]
+bandit = "^1.7"
 black = "^22.1"
 flake8 = "^4.0"
 isort = "^5.10"
