@@ -1,10 +1,10 @@
 import os
 import shutil
-import subprocess
+import subprocess  # nosec
 
 
 def run_cmd(args, **kwargs):
-    return subprocess.run(args, check=True, **kwargs)
+    return subprocess.run(args, check=True, **kwargs)  # nosec
 
 
 def check_command_exists(cmd):
