@@ -50,6 +50,7 @@ jobs:
           - { run: pyupgrade --py37-plus `find . -name "*.py"`, dir: "" }
           - { run: isort -c -v ., dir: "" }
           - { run: mypy ., dir: "" }
+          - { run: bandit ., dir: "" }
           - { run: make html, dir: "docs" }
     runs-on: ubuntu-latest
     steps:
