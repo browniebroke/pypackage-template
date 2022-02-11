@@ -26,8 +26,8 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.7"
-
 {%- if cookiecutter.documentation == 'y' %}
+
 # Documentation Dependencies
 Sphinx = {version = "^4.0", optional = true}
 sphinx-rtd-theme = {version = "^1.0", optional = true}
@@ -39,8 +39,8 @@ docs = [
     "sphinx",
     "sphinx-rtd-theme",
 ]
-
 {%- endif %}
+
 [tool.poetry.dev-dependencies]
 bandit = "^1.7"
 black = "^22.1"
@@ -96,13 +96,13 @@ exclude = [
 [[tool.mypy.overrides]]
 module = "tests.*"
 allow_untyped_defs = true
-
 {%- if cookiecutter.documentation == 'y' %}
+
 [[tool.mypy.overrides]]
 module = "docs.*"
 ignore_errors = true
-
 {%- endif %}
+
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
