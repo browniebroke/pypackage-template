@@ -6,7 +6,9 @@ authors = ["{{ cookiecutter.full_name }} <{{ cookiecutter.email }}>"]
 license = "{{ cookiecutter.open_source_license }}"
 readme = "README.md"
 repository = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}"
+{%- if cookiecutter.documentation == 'y' %}
 documentation = "https://{{ cookiecutter.project_slug }}.readthedocs.io"
+{%- endif %}
 classifiers = [
     "Development Status :: 2 - Pre-Alpha",
     "Intended Audience :: Developers",
@@ -20,16 +22,16 @@ packages = [
 
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/issues"
-"Changelog" = "https://{{ cookiecutter.project_slug }}.readthedocs.io/changelog.html"
+"Changelog" = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/blob/main/CHANGELOG.md"
 
 [tool.poetry.dependencies]
 python = "^3.7"
-
 {%- if cookiecutter.documentation == 'y' %}
+
 # Documentation Dependencies
 Sphinx = {version = "^4.0", optional = true}
 sphinx-rtd-theme = {version = "^1.0", optional = true}
-myst-parser = {version = "^0.16", optional = true}
+myst-parser = {version = "^0.17", optional = true}
 
 [tool.poetry.extras]
 docs = [
@@ -37,8 +39,8 @@ docs = [
     "sphinx",
     "sphinx-rtd-theme",
 ]
-
 {%- endif %}
+
 [tool.poetry.dev-dependencies]
 bandit = "^1.7"
 black = "^22.1"
@@ -94,13 +96,13 @@ exclude = [
 [[tool.mypy.overrides]]
 module = "tests.*"
 allow_untyped_defs = true
-
 {%- if cookiecutter.documentation == 'y' %}
+
 [[tool.mypy.overrides]]
 module = "docs.*"
 ignore_errors = true
-
 {%- endif %}
+
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
