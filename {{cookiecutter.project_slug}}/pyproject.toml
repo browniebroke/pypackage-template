@@ -6,7 +6,9 @@ authors = ["{{ cookiecutter.full_name }} <{{ cookiecutter.email }}>"]
 license = "{{ cookiecutter.open_source_license }}"
 readme = "README.md"
 repository = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}"
+{%- if cookiecutter.documentation == 'y' %}
 documentation = "https://{{ cookiecutter.project_slug }}.readthedocs.io"
+{%- endif %}
 classifiers = [
     "Development Status :: 2 - Pre-Alpha",
     "Intended Audience :: Developers",
@@ -20,7 +22,7 @@ packages = [
 
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/issues"
-"Changelog" = "https://{{ cookiecutter.project_slug }}.readthedocs.io/changelog.html"
+"Changelog" = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/blob/main/CHANGELOG.md"
 
 [tool.poetry.dependencies]
 python = "^3.7"
