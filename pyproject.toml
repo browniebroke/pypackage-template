@@ -10,12 +10,8 @@ python = "^3.7"
 
 [tool.poetry.dev-dependencies]
 bandit = "^1.7"
-black = "^22.1"
 cookiecutter = "^1.7"
-flake8 = "^4.0"
-isort = "^5.10"
 pytest = "^7.0"
-pyupgrade = "^2.31"
 pytest-mock = "^3.3"
 pytest-cookies = "^0.6"
 
