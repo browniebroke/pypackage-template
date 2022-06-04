@@ -26,6 +26,7 @@ jobs:
           - windows-latest
           - macOS-latest
     runs-on: ${{ matrix.os }}
+    name: "Template: ${{ matrix.python-version }} - ${{ matrix.os }}"
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python
@@ -38,21 +39,23 @@ jobs:
       - name: Test with Pytest
         run: poetry run pytest
 
-  # Generate project, run CI & build docs
+  # Generate project, run test, run linting and build docs
   cookie:
     strategy:
       fail-fast: false
       matrix:
         script:
-          - { run: pytest, dir: "" }
-          - { run: flake8, dir: "" }
-          - { run: black --check ., dir: "" }
-          - { run: pyupgrade --py37-plus `find . -name "*.py"`, dir: "" }
-          - { run: isort -c -v ., dir: "" }
-          - { run: mypy ., dir: "" }
-          - { run: bandit ., dir: "" }
-          - { run: make html, dir: "docs" }
+          - run: "poetry run pytest"
+            dir: ""
+            name: "pytest"
+          - run: "git init . && pipx run pre-commit run -a"
+            dir: ""
+            name: "pre-commit"
+          - run: "poetry run make html"
+            dir: "docs"
+            name: "docs"
     runs-on: ubuntu-latest
+    name: "Generated: ${{ matrix.script.name }}"
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v3
