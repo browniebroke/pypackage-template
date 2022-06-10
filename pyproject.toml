@@ -9,7 +9,7 @@ license = "MIT"
 python = "^3.7"
 
 [tool.poetry.dev-dependencies]
-cookiecutter = "^1.7"
+cookiecutter = "^2.1"
 pytest = "^7.0"
 pytest-mock = "^3.3"
 pytest-cookies = "^0.6"
