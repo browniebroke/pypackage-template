@@ -40,12 +40,12 @@ def test_generate_project(cookies, base_context):
 
     assert result.exit_code == 0, result.exception
     assert result.exception is None
-    assert result.project.basename == "snake-farm"
-    assert result.project.isdir()
+    assert result.project_path.name == "snake-farm"
+    assert result.project_path.is_dir()
 
     paths = [
         Path(dirpath) / file_path
-        for dirpath, subdirs, files in os.walk(result.project)
+        for dirpath, subdirs, files in os.walk(result.project_path)
         for file_path in files
     ]
     assert paths
