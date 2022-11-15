@@ -57,12 +57,12 @@ documentation:
 
 run_poetry_install:
   type: bool
-  help: "Run poetry install after {{package_name}} generation?"
+  help: "Run poetry install after {{ package_name }} generation?"
   default: no
 
 initial_commit:
   type: bool
-  help: "Create an initial commit with the generated {{package_name}}?"
+  help: "Create an initial commit with the generated {{ package_name }}?"
   default: no
 
 setup_github:
