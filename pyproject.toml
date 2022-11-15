@@ -15,7 +15,7 @@ pytest-mock = "^3.3"
 
 [tool.isort]
 profile = "black"
-known_first_party = ["{{ cookiecutter.package_name }}", "hooks", "tests"]
+known_first_party = ["{{package_name}}", "hooks", "tests"]
 
 [tool.pytest.ini_options]
 addopts = "-v -Wdefault"
