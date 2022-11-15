@@ -39,7 +39,7 @@ jobs:
       - name: Test with Pytest
         run: poetry run pytest
 
-  # Generate project, run test, run linting and build docs
+  # Generate {{package_name}}, run test, run linting and build docs
   cookie:
     strategy:
       fail-fast: false

@@ -110,11 +110,11 @@ ENV/
 env.bak/
 venv.bak/
 
-# Spyder project settings
+# Spyder {{package_name}} settings
 .spyderproject
 .spyproject
 
-# Rope project settings
+# Rope {{package_name}} settings
 .ropeproject
 
 # mkdocs documentation
@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 
 # File normally ignored that we want to commit
-!{{cookiecutter.project_slug}}/.idea/
+!{{project_slug}}/.idea/

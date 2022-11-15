@@ -1,5 +1,0 @@
-from {{ cookiecutter.package_name }}.main import add
-
-
-def test_add():
-    assert add(1, 1) == 2

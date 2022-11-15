@@ -13,7 +13,7 @@ def base_context():
         "email": "jeanne.deau@example.fr",
         "github_username": "jdeau",
         "project_name": "Snake Farm",
-        "project_short_description": "A sample farming project",
+        "project_short_description": "A sample farming {{ package_name }}",
         "run_poetry_install": "n",
         "setup_github": "n",
     }

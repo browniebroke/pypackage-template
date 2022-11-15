@@ -1,16 +1,16 @@
-# {{ cookiecutter.project_name }}
+# {{ project_name }}
 
 <p align="center">
-  <a href="https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/actions?query=workflow%3ACI">
-    <img src="https://img.shields.io/github/workflow/status/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/CI/main?label=CI&logo=github&style=flat-square" alt="CI Status" >
+  <a href="https://github.com/{{ github_username }}/{{ project_slug }}/actions?query=workflow%3ACI">
+    <img src="https://img.shields.io/github/workflow/status/{{ github_username }}/{{ project_slug }}/CI/main?label=CI&logo=github&style=flat-square" alt="CI Status" >
   </a>
-  {%- if cookiecutter.documentation == 'y' %}
-  <a href="https://{{ cookiecutter.project_slug }}.readthedocs.io">
-    <img src="https://img.shields.io/readthedocs/{{ cookiecutter.project_slug }}.svg?logo=read-the-docs&logoColor=fff&style=flat-square" alt="Documentation Status">
+  {%- if documentation == 'y' %}
+  <a href="https://{{ project_slug }}.readthedocs.io">
+    <img src="https://img.shields.io/readthedocs/{{ project_slug }}.svg?logo=read-the-docs&logoColor=fff&style=flat-square" alt="Documentation Status">
   </a>
   {%- endif %}
-  <a href="https://codecov.io/gh/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}">
-    <img src="https://img.shields.io/codecov/c/github/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}.svg?logo=codecov&logoColor=fff&style=flat-square" alt="Test coverage percentage">
+  <a href="https://codecov.io/gh/{{ github_username }}/{{ project_slug }}">
+    <img src="https://img.shields.io/codecov/c/github/{{ github_username }}/{{ project_slug }}.svg?logo=codecov&logoColor=fff&style=flat-square" alt="Test coverage percentage">
   </a>
 </p>
 <p align="center">
@@ -25,20 +25,20 @@
   </a>
 </p>
 <p align="center">
-  <a href="https://pypi.org/project/{{ cookiecutter.project_slug }}/">
-    <img src="https://img.shields.io/pypi/v/{{ cookiecutter.project_slug }}.svg?logo=python&logoColor=fff&style=flat-square" alt="PyPI Version">
+  <a href="https://pypi.org/project/{{ project_slug }}/">
+    <img src="https://img.shields.io/pypi/v/{{ project_slug }}.svg?logo=python&logoColor=fff&style=flat-square" alt="PyPI Version">
   </a>
-  <img src="https://img.shields.io/pypi/pyversions/{{ cookiecutter.project_slug }}.svg?style=flat-square&logo=python&amp;logoColor=fff" alt="Supported Python versions">
-  <img src="https://img.shields.io/pypi/l/{{ cookiecutter.project_slug }}.svg?style=flat-square" alt="License">
+  <img src="https://img.shields.io/pypi/pyversions/{{ project_slug }}.svg?style=flat-square&logo=python&amp;logoColor=fff" alt="Supported Python versions">
+  <img src="https://img.shields.io/pypi/l/{{ project_slug }}.svg?style=flat-square" alt="License">
 </p>
 
-{{ cookiecutter.project_short_description }}
+{{ project_short_description }}
 
 ## Installation
 
 Install this via pip (or your favourite package manager):
 
-`pip install {{ cookiecutter.project_slug }}`
+`pip install {{ project_slug }}`
 
 ## Contributors ✨
 
@@ -56,6 +56,6 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 ## Credits
 
 This package was created with
-[Cookiecutter](https://github.com/audreyr/cookiecutter) and the
-[browniebroke/cookiecutter-pypackage](https://github.com/browniebroke/cookiecutter-pypackage)
+[Copier](https://copier.readthedocs.io/) and the
+[browniebroke/pypackage-template](https://github.com/browniebroke/pypackage-template)
 project template.

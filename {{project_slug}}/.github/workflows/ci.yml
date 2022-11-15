@@ -7,7 +7,7 @@ on:
   pull_request:
 
 concurrency:
-  group: {% raw %}${{ github.head_ref || github.run_id }}{% endraw %}
+  group: ${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
 
 jobs:
@@ -44,13 +44,13 @@ jobs:
           - ubuntu-latest
           - windows-latest
           - macOS-latest
-    runs-on: {% raw %}${{ matrix.os }}{% endraw %}
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python
         uses: actions/setup-python@v3
         with:
-          python-version: {% raw %}${{ matrix.python-version }}{% endraw %}
+          python-version: ${{ matrix.python-version }}
       - uses: snok/install-poetry@v1.3.1
       - name: Install Dependencies
         run: poetry install
@@ -59,7 +59,7 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
-          token: {% raw %}${{ secrets.CODECOV_TOKEN }}{% endraw %}
+          token: ${{ secrets.CODECOV_TOKEN }}
 
   release:
     runs-on: ubuntu-latest
@@ -84,5 +84,5 @@ jobs:
       - name: Python Semantic Release
         uses: relekang/python-semantic-release@v7.27.1
         with:
-          github_token: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
-          pypi_token: {% raw %}${{ secrets.PYPI_TOKEN }}{% endraw %}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pypi_token: ${{ secrets.PYPI_TOKEN }}

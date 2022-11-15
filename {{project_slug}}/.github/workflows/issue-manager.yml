@@ -20,8 +20,8 @@ jobs:
     steps:
       - uses: tiangolo/issue-manager@0.4.0
         with:
-          token: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
-          config: {% raw %}>
+          token: ${{ secrets.GITHUB_TOKEN }}
+          config: >
             {
               "answered": {
                 "message": "Assuming the original issue was solved, it will be automatically closed now."
@@ -29,4 +29,4 @@ jobs:
               "waiting": {
                 "message": "Automatically closing. To re-open, please provide the additional information requested."
               }
-            }{% endraw %}
+            }
