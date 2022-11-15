@@ -2,7 +2,7 @@
 <project version="4">
   <component name="RunManager">
     <configuration name="pytest" type="tests" factoryName="py.test">
-      <module name="{{ cookiecutter.project_slug }}" />
+      <module name="{{ project_slug }}" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
