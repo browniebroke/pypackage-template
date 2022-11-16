@@ -28,13 +28,14 @@ def base_answers():
 
 
 def test_generate_project(tmp_path, base_answers):
+    dst_path = tmp_path / "snake-farm"
     worker = copier.run_auto(
-        str(PROJECT_ROOT),
-        tmp_path,
+        src_path=str(PROJECT_ROOT),
+        dst_path=dst_path,
         data=base_answers,
     )
     assert worker is not None
     assert tmp_path.exists()
-    readme = tmp_path / "snake-farm" / "README.md"
+    readme = dst_path / "README.md"
     assert readme.exists()
     assert "# Snake Farm" in readme.read_text()

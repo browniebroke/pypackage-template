@@ -1,5 +1,3 @@
-_min_copier_version: "7.0.1"
-
 # questions
 full_name:
   type: str
@@ -80,6 +78,9 @@ add_me_as_contributor:
   help: "Add me as a contributor?"
   default: no
 
+# Copier metadata
+_min_copier_version: "6.0.0"
+_subdirectory: "project"
 _tasks:
   # Cleanup docs
   - "{% if documentation %}rm -rf docs .readthedocs.yml{% endif %}"

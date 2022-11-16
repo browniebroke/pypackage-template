@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 
 # File normally ignored that we want to commit
-!{{project_slug}}/.idea/
+!project/.idea/
