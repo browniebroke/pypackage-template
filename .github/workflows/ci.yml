@@ -39,7 +39,7 @@ jobs:
       - name: Test with Pytest
         run: poetry run pytest
 
-  # Generate {{package_name}}, run test, run linting and build docs
+  # Generate package, run test, run linting and build docs
   cookie:
     strategy:
       fail-fast: false
@@ -61,9 +61,13 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: "3.9"
-
-      - uses: browniebroke/github-actions/cookie-taster@v1
-        with:
-          cc-options: "project_name='My Package'"
-          command-dir: ${{ matrix.script.dir }}
-          command: ${{ matrix.script.run }}
+      - uses: snok/install-poetry@v1
+      - run: poetry install
+      - run: poetry run copier . my-project --defaults
+        shell: bash
+      - run: poetry install -E docs
+        working-directory: my-project
+        shell: bash
+      - run: ${{ matrix.script.run }}
+        working-directory: my-project/${{ matrix.script.dir }}
+        shell: bash
