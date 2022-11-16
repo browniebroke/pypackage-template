@@ -65,6 +65,9 @@ jobs:
       - run: poetry install
       - run: poetry run copier . my-project --defaults
         shell: bash
+      - run: cat pyproject.toml
+        working-directory: my-project
+        shell: bash
       - run: poetry install -E docs
         working-directory: my-project
         shell: bash
