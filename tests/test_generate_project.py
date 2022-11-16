@@ -39,7 +39,10 @@ def _check_file_contains(
         assert content not in file_content
 
 
-def test_generate_project(tmp_path, base_answers):
+def test_defaults_values(
+    tmp_path: Path,
+    base_answers: dict[str, str | bool],
+):
     dst_path = tmp_path / "snake-farm"
     worker = copier.run_auto(
         src_path=str(PROJECT_ROOT),
@@ -61,11 +64,60 @@ def test_generate_project(tmp_path, base_answers):
             'license = "MIT"',
         ],
     )
-    _check_file_contains(
-        dst_path / "LICENSE",
-        ["MIT License"],
-        unexpect_strs=[
-            "Apache License",
-            "GNU GENERAL PUBLIC LICENSE",
-        ],
+
+
+@pytest.mark.parametrize(
+    ("license", "expect_exists", "expected_strs", "unexpected_strs"),
+    [
+        (
+            "MIT",
+            True,
+            ["MIT License"],
+            ["Apache License", "GNU GENERAL PUBLIC LICENSE"],
+        ),
+        (
+            "Apache Software License 2.0",
+            True,
+            ["Apache License"],
+            ["MIT License", "GNU GENERAL PUBLIC LICENSE"],
+        ),
+        (
+            "GNU General Public License v3",
+            True,
+            ["GNU GENERAL PUBLIC LICENSE"],
+            ["MIT License", "Apache License"],
+        ),
+        (
+            "Not open source",
+            False,
+            [],
+            [],
+        ),
+    ],
+)
+def test_licenses(
+    tmp_path: Path,
+    base_answers: dict[str, str | bool],
+    license: str,
+    expect_exists: bool,
+    expected_strs: list[str],
+    unexpected_strs: list[str],
+):
+    dst_path = tmp_path / "snake-farm"
+    copier.run_auto(
+        src_path=str(PROJECT_ROOT),
+        dst_path=dst_path,
+        data={**base_answers, "open_source_license": license},
+        defaults=True,
     )
+
+    assert tmp_path.exists()
+    license_file = dst_path / "LICENSE"
+    if expect_exists:
+        _check_file_contains(
+            license_file,
+            expected_strs=expected_strs,
+            unexpect_strs=unexpected_strs,
+        )
+    else:
+        assert not license_file.exists()
