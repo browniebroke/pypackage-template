@@ -4,7 +4,7 @@
   <a href="https://github.com/{{ github_username }}/{{ project_slug }}/actions?query=workflow%3ACI">
     <img src="https://img.shields.io/github/workflow/status/{{ github_username }}/{{ project_slug }}/CI/main?label=CI&logo=github&style=flat-square" alt="CI Status" >
   </a>
-  {%- if documentation == 'y' %}
+  {%- if documentation %}
   <a href="https://{{ project_slug }}.readthedocs.io">
     <img src="https://img.shields.io/readthedocs/{{ project_slug }}.svg?logo=read-the-docs&logoColor=fff&style=flat-square" alt="Documentation Status">
   </a>

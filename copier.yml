@@ -82,6 +82,8 @@ add_me_as_contributor:
 _min_copier_version: "6.0.0"
 _subdirectory: "project"
 _tasks:
+  # Remove license file if no license
+  - "{% if open_source_license == 'Not open source' %}rm LICENSE{% endif %}"
   # Cleanup docs
   - "{% if documentation %}rm -rf docs .readthedocs.yml{% endif %}"
   # Run poetry install
