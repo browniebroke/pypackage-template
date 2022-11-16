@@ -40,7 +40,7 @@ jobs:
         run: poetry run pytest
 
   # Generate package, run test, run linting and build docs
-  cookie:
+  copier:
     strategy:
       fail-fast: false
       matrix:
