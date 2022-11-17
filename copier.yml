@@ -48,6 +48,11 @@ open_source_license:
     - "GNU General Public License v3"
     - "Not open source"
 
+copyright_year:
+  type: str
+  help: "Copyright year(s)"
+  default: "2022"
+
 documentation:
   type: bool
   help: "Generate documentation?"
