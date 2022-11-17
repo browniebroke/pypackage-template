@@ -28,9 +28,9 @@ def base_answers():
     }
 
 
-def _check_file_contains(
+def _check_file_contents(
     file_path: Path,
-    expected_strs: Sequence[str],
+    expected_strs: Sequence[str] = (),
     unexpect_strs: Sequence[str] = (),
 ):
     assert file_path.exists()
@@ -54,11 +54,11 @@ def test_defaults_values(
     )
     assert worker is not None
     assert tmp_path.exists()
-    _check_file_contains(
+    _check_file_contents(
         dst_path / "README.md",
         ["# Snake Farm"],
     )
-    _check_file_contains(
+    _check_file_contents(
         dst_path / "pyproject.toml",
         [
             'name = "snake-farm"',
@@ -116,10 +116,47 @@ def test_licenses(
     assert tmp_path.exists()
     license_file = dst_path / "LICENSE"
     if expect_exists:
-        _check_file_contains(
+        _check_file_contents(
             license_file,
             expected_strs=expected_strs,
             unexpect_strs=unexpected_strs,
         )
     else:
         assert not license_file.exists()
+
+
+@pytest.mark.parametrize("generate_doc", [True, False])
+def test_documentation(
+    tmp_path: Path,
+    base_answers: dict[str, str | bool],
+    generate_doc: bool,
+):
+    dst_path = tmp_path / "snake-farm"
+    copier.run_auto(
+        src_path=str(PROJECT_ROOT),
+        dst_path=dst_path,
+        data={**base_answers, "documentation": generate_doc},
+        defaults=True,
+    )
+
+    assert tmp_path.exists()
+    if generate_doc:
+        _check_file_contents(
+            dst_path / "docs" / "source" / "index.md",
+            expected_strs=["# Welcome to Snake Farm documentation!"],
+        )
+        _check_file_contents(
+            dst_path / ".readthedocs.yml",
+            expected_strs=["configuration: docs/source/conf.py"],
+        )
+        _check_file_contents(
+            dst_path / "pyproject.toml",
+            expected_strs=["[tool.poetry.extras]\ndocs = ["],
+        )
+    else:
+        assert not (dst_path / "docs").exists()
+        assert not (dst_path / ".readthedocs.yml").exists()
+        _check_file_contents(
+            dst_path / "pyproject.toml",
+            unexpect_strs=["[tool.poetry.extras]\ndocs = ["],
+        )

@@ -85,7 +85,7 @@ _tasks:
   # Remove license file if no license
   - "{% if open_source_license == 'Not open source' %}rm LICENSE{% endif %}"
   # Cleanup docs
-  - "{% if documentation %}rm -rf docs .readthedocs.yml{% endif %}"
+  - "{% if not documentation %}rm -rf docs .readthedocs.yml{% endif %}"
   # Run poetry install
   - "{% if run_poetry_install %}poetry install{% endif %}"
   # Initial commit
