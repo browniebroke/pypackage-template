@@ -2,22 +2,20 @@
 full_name:
   type: str
   help: "What's your name?"
-  default: "Bruno Alla"
 
 email:
   type: str
   help: "Email address"
-  default: "bruno.alla@example.com"
+  placeholder: "first.last@example.com"
 
 github_username:
   type: str
   help: "GitHub Username"
-  default: "browniebroke"
 
 project_name:
   type: str
   help: "Project Name (human readable version)"
-  default: "Python Package"
+  placeholder: "Python Package"
 
 project_slug:
   type: str
@@ -26,13 +24,13 @@ project_slug:
 
 package_name:
   type: str
-  help: "The name of the main Python package (should eb a valid Python identifier)"
+  help: "The name of the main Python package (should be a valid Python identifier)"
   default: "{{ project_slug.replace('-', '_') }}"
 
 project_short_description:
   type: str
-  help: "A short description of the {{package_name}}"
-  default: "A super helpful small Python package."
+  help: "A short description of the project"
+  placeholder: "A super helpful small Python package."
 
 version:
   type: str

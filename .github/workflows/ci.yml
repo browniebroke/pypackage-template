@@ -63,7 +63,7 @@ jobs:
           python-version: "3.9"
       - uses: snok/install-poetry@v1
       - run: poetry install
-      - run: poetry run copier . my-project --defaults
+      - run: poetry run copier . my-project --data 'full_name=Bruno Alla' --data 'email=test@example.com' --data 'github_username=dummy' --data 'project_name=My Amazing Project' --data 'project_short_description=Just a great project' --defaults
         shell: bash
       - run: cat pyproject.toml
         working-directory: my-project
