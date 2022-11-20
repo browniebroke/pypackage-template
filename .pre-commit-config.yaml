@@ -1,6 +1,6 @@
 # See https://pre-commit.com for more information
 # See https://pre-commit.com/hooks.html for more hooks
-exclude: "{{cookiecutter.project_slug}}"
+exclude: "{{package_name}}"
 default_stages: [commit]
 
 repos:
@@ -28,7 +28,7 @@ repos:
     rev: v3.2.2
     hooks:
       - id: pyupgrade
-        args: [--py3-plus]
+        args: [--py37-plus]
   - repo: https://github.com/PyCQA/isort
     rev: 5.10.1
     hooks:

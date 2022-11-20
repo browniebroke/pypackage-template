@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "cookiecutter-pypackage"
+name = "pypackage-template"
 version = "0.1.0"
-description = "A cookiecutter template for a Python package"
+description = "A template for generating a Python package"
 authors = ["Bruno Alla <alla.brunoo@gmail.com>"]
 license = "MIT"
 
@@ -9,14 +9,13 @@ license = "MIT"
 python = "^3.7"
 
 [tool.poetry.dev-dependencies]
-cookiecutter = "^1.7"
+copier = "^7.0"
 pytest = "^7.0"
 pytest-mock = "^3.3"
-pytest-cookies = "^0.6"
 
 [tool.isort]
 profile = "black"
-known_first_party = ["{{ cookiecutter.package_name }}", "hooks", "tests"]
+known_first_party = ["{{package_name}}", "hooks", "tests"]
 
 [tool.pytest.ini_options]
 addopts = "-v -Wdefault"

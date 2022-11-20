@@ -1,13 +1,10 @@
-# Cookiecutter PyPackage
+# Python Package Template
 
-<a href="https://github.com/browniebroke/cookiecutter-pypackage/actions?query=workflow%3ACI">
-  <img src="https://img.shields.io/github/workflow/status/browniebroke/cookiecutter-pypackage/CI/main?label=Test&logo=github&style=flat-square" alt="CI Status" >
-</a>
-<a href="https://github.com/cookiecutter/cookiecutter">
-  <img src="https://img.shields.io/badge/cookiecutter-template-D4AA00.svg?style=flat-square&logo=cookiecutter" alt="Cookiecutter template badge">
+<a href="https://github.com/browniebroke/pypackage-template/actions?query=workflow%3ACI">
+  <img src="https://img.shields.io/github/workflow/status/browniebroke/pypackage-template/CI/main?label=Test&logo=github&style=flat-square" alt="CI Status" >
 </a>
 
-Cookiecutter template for a Python Package.
+Project template for a Python Package using Copier.
 
 ## Features
 
@@ -29,7 +26,7 @@ Cookiecutter template for a Python Package.
 Generate a new project with:
 
 ```shell
-cookiecutter https://github.com/browniebroke/cookiecutter-pypackage
+copier "gh:browniebroke/pypackage-template" path-to-project
 ```
 
 This will prompt you for a few questions and create new directory with the name you used as project slug.
@@ -123,8 +120,8 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://browniebroke.com/"><img src="https://avatars.githubusercontent.com/u/861044?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Bruno Alla</b></sub></a><br /><a href="https://github.com/browniebroke/cookiecutter-pypackage/commits?author=browniebroke" title="Code">💻</a> <a href="#ideas-browniebroke" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/browniebroke/cookiecutter-pypackage/commits?author=browniebroke" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://cloudreactor.io/"><img src="https://avatars.githubusercontent.com/u/1079646?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Jeff Tsay</b></sub></a><br /><a href="https://github.com/browniebroke/cookiecutter-pypackage/commits?author=jtsay362" title="Code">💻</a></td>
+    <td align="center"><a href="https://browniebroke.com/"><img src="https://avatars.githubusercontent.com/u/861044?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Bruno Alla</b></sub></a><br /><a href="https://github.com/browniebroke/pypackage-template/commits?author=browniebroke" title="Code">💻</a> <a href="#ideas-browniebroke" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/browniebroke/pypackage-template/commits?author=browniebroke" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://cloudreactor.io/"><img src="https://avatars.githubusercontent.com/u/1079646?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Jeff Tsay</b></sub></a><br /><a href="https://github.com/browniebroke/pypackage-template/commits?author=jtsay362" title="Code">💻</a></td>
   </tr>
 </table>
 

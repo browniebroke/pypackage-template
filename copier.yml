@@ -1,0 +1,105 @@
+# questions
+full_name:
+  type: str
+  help: "What's your name?"
+
+email:
+  type: str
+  help: "Email address"
+  placeholder: "first.last@example.com"
+
+github_username:
+  type: str
+  help: "GitHub Username"
+
+project_name:
+  type: str
+  help: "Project Name (human readable version)"
+  placeholder: "Python Package"
+
+project_slug:
+  type: str
+  help: "Project slug (used for GitHub, PyPI, etc.)"
+  default: "{{ project_name.lower().replace(' ', '-') }}"
+
+package_name:
+  type: str
+  help: "The name of the main Python package (should be a valid Python identifier)"
+  default: "{{ project_slug.replace('-', '_') }}"
+
+project_short_description:
+  type: str
+  help: "A short description of the project"
+  placeholder: "A super helpful small Python package."
+
+version:
+  type: str
+  help: "Initial version."
+  default: "0.0.1"
+
+open_source_license:
+  type: str
+  help: "The open source license to use"
+  choices:
+    - "MIT"
+    - "Apache Software License 2.0"
+    - "GNU General Public License v3"
+    - "Not open source"
+
+copyright_year:
+  type: str
+  help: "Copyright year(s)"
+  default: "2022"
+
+documentation:
+  type: bool
+  help: "Generate documentation?"
+  default: yes
+
+run_poetry_install:
+  type: bool
+  help: "Run poetry install after {{ package_name }} generation?"
+  default: no
+
+initial_commit:
+  type: bool
+  help: "Create an initial commit with the generated {{ package_name }}?"
+  default: no
+
+setup_github:
+  type: bool
+  help: "Setup GitHub repository (requires gh CLI)?"
+  default: no
+
+setup_pre_commit:
+  type: bool
+  help: "Setup pre-commit hooks (requires pre-commit)?"
+  default: no
+
+add_me_as_contributor:
+  type: bool
+  help: "Add me as a contributor?"
+  default: no
+
+# Copier metadata
+_min_copier_version: "6.0.0"
+_subdirectory: "project"
+_tasks:
+  # Remove license file if no license
+  - "{% if open_source_license == 'Not open source' %}rm LICENSE{% endif %}"
+  # Cleanup docs
+  - "{% if not documentation %}rm -rf docs .readthedocs.yml{% endif %}"
+  # Run poetry install
+  - "{% if run_poetry_install %}poetry install{% endif %}"
+  # Initial commit
+  - "{% if initial_commit %}git init{% endif %}"
+  - "{% if initial_commit %}git add .{% endif %}"
+  - "{% if initial_commit %}git commit -m 'chore: initial commit'{% endif %}"
+  # Setup GitHub
+  - "{% if setup_github %}gh repo create {{ github_username }}/{{ project_slug }} -d {{ project_short_description }} --public --disable-wiki=true --remote=origin --source=. --push{% endif %}"
+  - "{% if setup_github %}gh secret set PYPI_TOKEN -b'changeme'{% endif %}"
+  - "{% if setup_github %}gh secret set GH_PAT -b'changeme'{% endif %}"
+  # Setup pre-commit
+  - "{% if setup_pre_commit %}pre-commit install{% endif %}"
+  # Add me as a contributor
+  - "{% if add_me_as_contributor %}npx all-contributors-cli add {{ github_username }} code,ideas,doc{% endif %}"

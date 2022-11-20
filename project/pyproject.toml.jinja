@@ -1,0 +1,102 @@
+[tool.poetry]
+name = "{{ project_slug }}"
+version = "{{ version }}"
+description = "{{ project_short_description }}"
+authors = ["{{ full_name }} <{{ email }}>"]
+license = "{{ open_source_license }}"
+readme = "README.md"
+repository = "https://github.com/{{ github_username }}/{{ project_slug }}"
+{%- if documentation %}
+documentation = "https://{{ project_slug }}.readthedocs.io"
+{%- endif %}
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Developers",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries",
+]
+packages = [
+    { include = "{{ package_name }}", from = "src" },
+]
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/{{ github_username }}/{{ project_slug }}/issues"
+"Changelog" = "https://github.com/{{ github_username }}/{{ project_slug }}/blob/main/CHANGELOG.md"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+{%- if documentation %}
+
+# Documentation Dependencies
+Sphinx = {version = "^5.0", optional = true}
+sphinx-rtd-theme = {version = "^1.0", optional = true}
+myst-parser = {version = "^0.18", optional = true}
+
+[tool.poetry.extras]
+docs = [
+    "myst-parser",
+    "sphinx",
+    "sphinx-rtd-theme",
+]
+{%- endif %}
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.0"
+pytest-cov = "^3.0"
+
+[tool.semantic_release]
+branch = "main"
+version_toml = "pyproject.toml:tool.poetry.version"
+version_variable = "src/{{ package_name }}/__init__.py:__version__"
+build_command = "pip install poetry && poetry build"
+
+[tool.pytest.ini_options]
+addopts = "-v -Wdefault --cov={{ package_name }} --cov-report=term-missing:skip-covered"
+pythonpath = ["src"]
+
+[tool.coverage.run]
+branch = true
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "@overload",
+    "if TYPE_CHECKING",
+    "raise NotImplementedError",
+]
+
+[tool.isort]
+profile = "black"
+known_first_party = ["{{ package_name }}", "tests"]
+
+[tool.mypy]
+check_untyped_defs = true
+disallow_any_generics = true
+disallow_incomplete_defs = true
+disallow_untyped_defs = true
+mypy_path = "src/"
+no_implicit_optional = true
+show_error_codes = true
+warn_unreachable = true
+warn_unused_ignores = true
+exclude = [
+{%- if documentation %}
+    'docs/.*',
+{%- endif %}
+    'setup.py',
+]
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+allow_untyped_defs = true
+{%- if documentation %}
+
+[[tool.mypy.overrides]]
+module = "docs.*"
+ignore_errors = true
+{%- endif %}
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
