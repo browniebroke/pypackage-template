@@ -151,12 +151,12 @@ def test_documentation(
         )
         _check_file_contents(
             dst_path / "pyproject.toml",
-            expected_strs=["[tool.poetry.extras]\ndocs = ["],
+            expected_strs=["[tool.poetry.group.docs]"],
         )
     else:
         assert not (dst_path / "docs").exists()
         assert not (dst_path / ".readthedocs.yml").exists()
         _check_file_contents(
             dst_path / "pyproject.toml",
-            unexpect_strs=["[tool.poetry.extras]\ndocs = ["],
+            unexpect_strs=["[tool.poetry.group.docs]"],
         )
