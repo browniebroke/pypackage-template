@@ -62,7 +62,7 @@ def test_defaults_values(
         dst_path / "pyproject.toml",
         [
             'name = "snake-farm"',
-            'version = "0.0.1"',
+            'version = "0.0.0"',
             'license = "MIT"',
         ],
     )

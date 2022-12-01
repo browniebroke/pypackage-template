@@ -32,11 +32,6 @@ project_short_description:
   help: "A short description of the project"
   placeholder: "A super helpful small Python package."
 
-version:
-  type: str
-  help: "Initial version."
-  default: "0.0.1"
-
 open_source_license:
   type: str
   help: "The open source license to use"
