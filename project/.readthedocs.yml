@@ -19,6 +19,6 @@ build:
       # Install dependencies
       - poetry install --with docs
 
-# Build documentation in the docs/source directory with Sphinx
+# Build documentation in the docs directory with Sphinx
 sphinx:
-  configuration: docs/source/conf.py
+  configuration: docs/conf.py
