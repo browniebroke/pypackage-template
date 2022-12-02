@@ -142,12 +142,12 @@ def test_documentation(
     assert tmp_path.exists()
     if generate_doc:
         _check_file_contents(
-            dst_path / "docs" / "source" / "index.md",
+            dst_path / "docs" / "index.md",
             expected_strs=["# Welcome to Snake Farm documentation!"],
         )
         _check_file_contents(
             dst_path / ".readthedocs.yml",
-            expected_strs=["configuration: docs/source/conf.py"],
+            expected_strs=["configuration: docs/conf.py"],
         )
         _check_file_contents(
             dst_path / "pyproject.toml",
