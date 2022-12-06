@@ -1,3 +1,8 @@
 {
-  "extends": ["github>browniebroke/renovate-configs:python"]
+  "extends": ["github>browniebroke/renovate-configs:python"],
+  "pre-commit": {
+    "fileMatch": [
+      "^project/\\.pre-commit-config\\.yaml$"
+    ]
+  }
 }
