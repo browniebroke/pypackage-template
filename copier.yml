@@ -91,7 +91,8 @@ _tasks:
   - "{% if initial_commit %}git add .{% endif %}"
   - "{% if initial_commit %}git commit -m 'chore: initial commit'{% endif %}"
   # Setup GitHub
-  - "{% if setup_github %}gh repo create {{ github_username }}/{{ project_slug }} -d '{{ project_short_description }}' --public --disable-wiki=true --remote=origin --source=. --push{% endif %}"
+  - "{% if setup_github %}gh repo create {{ github_username }}/{{ project_slug }} -d '{{ project_short_description }}' --public --remote=origin --source=. --push{% endif %}"
+  - "{% if setup_github %}gh repo edit --delete-branch-on-merge --enable-projects=false --enable-wiki=false{% endif %}"
   - "{% if setup_github %}gh secret set PYPI_TOKEN -b'changeme'{% endif %}"
   - "{% if setup_github %}gh secret set GH_PAT -b'changeme'{% endif %}"
   # Setup pre-commit
