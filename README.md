@@ -1,7 +1,7 @@
 # Python Package Template
 
 <a href="https://github.com/browniebroke/pypackage-template/actions?query=workflow%3ACI">
-  <img src="https://img.shields.io/github/workflow/status/browniebroke/pypackage-template/CI/main?label=Test&logo=github&style=flat-square" alt="CI Status" >
+  <img src="https://img.shields.io/github/actions/workflow/status/browniebroke/pypackage-template/ci.yml?branch=main&label=Test&logo=github&style=flat-square" alt="CI Status" >
 </a>
 
 Project template for a Python Package using Copier.
