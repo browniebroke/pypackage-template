@@ -1,6 +1,6 @@
 # Python Package Template
 
-<a href="https://github.com/browniebroke/pypackage-template/actions?query=workflow%3ACI">
+<a href="https://github.com/browniebroke/pypackage-template/actions/workflows/ci.yml?query=branch%3Amain">
   <img src="https://img.shields.io/github/actions/workflow/status/browniebroke/pypackage-template/ci.yml?branch=main&label=Test&logo=github&style=flat-square" alt="CI Status" >
 </a>
 
