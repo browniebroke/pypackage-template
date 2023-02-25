@@ -51,7 +51,7 @@ Check out the [Poetry] documentation for more information on the available comma
 
 When you first push to GitHub, it'll start a `ci` GitHub workflow that you can see in the "Actions" tab of your repository. This workflow runs a couple of jobs:
 
-- The `test` job will run your test suite with Pytest against all Python version from 3.7 to 3.9
+- The `test` job will run your test suite with Pytest against all Python version from 3.7 to 3.11
 - A few things will run in the lint job:
   - black in check mode
   - isort in check mode
