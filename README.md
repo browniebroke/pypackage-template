@@ -1,7 +1,7 @@
 # Python Package Template
 
-<a href="https://github.com/browniebroke/pypackage-template/actions?query=workflow%3ACI">
-  <img src="https://img.shields.io/github/workflow/status/browniebroke/pypackage-template/CI/main?label=Test&logo=github&style=flat-square" alt="CI Status" >
+<a href="https://github.com/browniebroke/pypackage-template/actions/workflows/ci.yml?query=branch%3Amain">
+  <img src="https://img.shields.io/github/actions/workflow/status/browniebroke/pypackage-template/ci.yml?branch=main&label=Test&logo=github&style=flat-square" alt="CI Status" >
 </a>
 
 Project template for a Python Package using Copier.
@@ -51,7 +51,7 @@ Check out the [Poetry] documentation for more information on the available comma
 
 When you first push to GitHub, it'll start a `ci` GitHub workflow that you can see in the "Actions" tab of your repository. This workflow runs a couple of jobs:
 
-- The `test` job will run your test suite with Pytest against all Python version from 3.7 to 3.9
+- The `test` job will run your test suite with Pytest against all Python version from 3.7 to 3.11
 - A few things will run in the lint job:
   - black in check mode
   - isort in check mode
@@ -121,9 +121,10 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tbody>
     <tr>
-      <td align="center"><a href="https://browniebroke.com/"><img src="https://avatars.githubusercontent.com/u/861044?v=4?s=80" width="80px;" alt="Bruno Alla"/><br /><sub><b>Bruno Alla</b></sub></a><br /><a href="https://github.com/browniebroke/pypackage-template/commits?author=browniebroke" title="Code">💻</a> <a href="#ideas-browniebroke" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/browniebroke/pypackage-template/commits?author=browniebroke" title="Documentation">📖</a></td>
-      <td align="center"><a href="https://cloudreactor.io/"><img src="https://avatars.githubusercontent.com/u/1079646?v=4?s=80" width="80px;" alt="Jeff Tsay"/><br /><sub><b>Jeff Tsay</b></sub></a><br /><a href="https://github.com/browniebroke/pypackage-template/commits?author=jtsay362" title="Code">💻</a></td>
-      <td align="center"><a href="https://github.com/34j"><img src="https://avatars.githubusercontent.com/u/55338215?v=4?s=80" width="80px;" alt="34j"/><br /><sub><b>34j</b></sub></a><br /><a href="https://github.com/browniebroke/pypackage-template/commits?author=34j" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://browniebroke.com/"><img src="https://avatars.githubusercontent.com/u/861044?v=4?s=80" width="80px;" alt="Bruno Alla"/><br /><sub><b>Bruno Alla</b></sub></a><br /><a href="https://github.com/browniebroke/pypackage-template/commits?author=browniebroke" title="Code">💻</a> <a href="#ideas-browniebroke" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/browniebroke/pypackage-template/commits?author=browniebroke" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://cloudreactor.io/"><img src="https://avatars.githubusercontent.com/u/1079646?v=4?s=80" width="80px;" alt="Jeff Tsay"/><br /><sub><b>Jeff Tsay</b></sub></a><br /><a href="https://github.com/browniebroke/pypackage-template/commits?author=jtsay362" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/34j"><img src="https://avatars.githubusercontent.com/u/55338215?v=4?s=80" width="80px;" alt="34j"/><br /><sub><b>34j</b></sub></a><br /><a href="https://github.com/browniebroke/pypackage-template/commits?author=34j" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/kroimon"><img src="https://avatars.githubusercontent.com/u/628587?v=4?s=80" width="80px;" alt="Stefan Rado"/><br /><sub><b>Stefan Rado</b></sub></a><br /><a href="https://github.com/browniebroke/pypackage-template/commits?author=kroimon" title="Documentation">📖</a></td>
     </tr>
   </tbody>
 </table>
