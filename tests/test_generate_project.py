@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from pathlib import Path
 from typing import Sequence
 
@@ -66,6 +67,16 @@ def test_defaults_values(
             'license = "MIT"',
         ],
     )
+    upgrade_path = dst_path / ".github" / "workflows" / "poetry-upgrade.yml"
+    assert upgrade_path.exists()
+    content = upgrade_path.read_text()
+    found = False
+    for line in content.split("\n"):
+        if "cron:" in line:
+            found = True
+            cron_expression = re.search(r"\d+ \d+ \d+ \* \*", line)
+            assert cron_expression, f"Invalid cron expression: {line}"
+    assert found, f"No cron expression in {content}"
 
 
 @pytest.mark.parametrize(
