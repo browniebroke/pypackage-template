@@ -1,0 +1,12 @@
+name: Upgrader
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "{{ range(0, 60) | random }} {{ range(0, 24) | random }} {{ range(1, 28) | random }} * *"
+
+jobs:
+  upgrade:
+    uses: browniebroke/github-actions/.github/workflows/poetry-upgrade.yml@v1
+    secrets:
+      gh_pat: {% raw %}${{ secrets.GH_PAT }}{% endraw %}
