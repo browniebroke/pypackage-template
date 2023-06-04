@@ -26,19 +26,20 @@ files = [
 
 [[package]]
 name = "copier"
-version = "7.2.0"
+version = "8.0.0"
 description = "A library for rendering project templates."
 category = "dev"
 optional = false
 python-versions = ">=3.7,<4.0"
 files = [
-    {file = "copier-7.2.0-py3-none-any.whl", hash = "sha256:9f2546c085dd2ac0850467aa437f0c345d1ac056cade7358edffb642a3106052"},
-    {file = "copier-7.2.0.tar.gz", hash = "sha256:b6b3933efc6325da184d3940dd57e9869641798cad95f52d5cc193c9b443b313"},
+    {file = "copier-8.0.0-py3-none-any.whl", hash = "sha256:adad3b4c8101584ea2c2e2580e34f37e791940ae103e2480ae9f509d32e6cb0b"},
+    {file = "copier-8.0.0.tar.gz", hash = "sha256:a204c3aba22fd97ce69220ea378b924e30d516eca0e7885ab1857fde8b8dc5c5"},
 ]
 
 [package.dependencies]
 "backports.cached-property" = {version = ">=1.0.0", markers = "python_version < \"3.8\""}
 colorama = ">=0.4.3"
+decorator = ">=5.1.1"
 dunamai = ">=1.7.0"
 funcy = ">=1.17"
 importlib-metadata = {version = ">=3.4,<7.0", markers = "python_version < \"3.8\""}
@@ -53,6 +54,18 @@ pyyaml = ">=5.3.1"
 pyyaml-include = ">=1.2"
 questionary = ">=1.8.1"
 typing-extensions = {version = ">=3.7.4,<5.0.0", markers = "python_version < \"3.8\""}
+
+[[package]]
+name = "decorator"
+version = "5.1.1"
+description = "Decorators for Humans"
+category = "dev"
+optional = false
+python-versions = ">=3.5"
+files = [
+    {file = "decorator-5.1.1-py3-none-any.whl", hash = "sha256:b8c3f85900b9dc423225913c5aace94729fe1fa9763b38939a95226f02d37186"},
+    {file = "decorator-5.1.1.tar.gz", hash = "sha256:637996211036b6385ef91435e4fae22989472f9d571faba8927ba8253acbc330"},
+]
 
 [[package]]
 name = "dunamai"
@@ -581,4 +594,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.7"
-content-hash = "7a074b1012eaa9e57709989c9235a105296f1073cf7ca4dda3060ac136762011"
+content-hash = "20194dd6da65ddf7067993ca87db402ff6f808810a71bc626a22f0ba835620f2"

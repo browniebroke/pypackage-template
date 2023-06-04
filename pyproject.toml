@@ -9,7 +9,7 @@ license = "MIT"
 python = "^3.7"
 
 [tool.poetry.group.dev.dependencies]
-copier = "^7.0"
+copier = "^8.0.0"
 pytest = "^7.0"
 pytest-mock = "^3.3"
 
