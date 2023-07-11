@@ -68,7 +68,9 @@ jobs:
       - uses: snok/install-poetry@v1
       - run: poetry install
       - run: |
-          poetry run copier . my-project \
+          poetry run copier copy \
+          . \
+          my-project \
           --data 'full_name=Bruno Alla' \
           --data 'email=test@example.com' \
           --data 'github_username=dummy' \
