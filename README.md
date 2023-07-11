@@ -31,6 +31,9 @@ copier copy --trust "gh:browniebroke/pypackage-template" path-to-project
 
 This will prompt you for a few questions and create new directory with the name you used as project slug.
 
+> _Note:_
+> the `--trust` option is required because this template may execute some tasks after generating the project, like initialising the git repo, installing dependencies and so forth. These are all listed in the `copier.yml` of this repo, under the `_tasks` key. They are all optional and safe to run. You can take my word for it, or better, check the code yourself!
+
 ### Start developing
 
 The project uses [Poetry] for dependencies management and packaging. Make sure you have it installed in your development machine. To install the development dependencies in a virtual environment, type:
