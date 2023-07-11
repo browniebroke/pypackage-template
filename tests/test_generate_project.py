@@ -47,11 +47,12 @@ def test_defaults_values(
     base_answers: dict[str, str | bool],
 ):
     dst_path = tmp_path / "snake-farm"
-    worker = copier.run_auto(
+    worker = copier.run_copy(
         src_path=str(PROJECT_ROOT),
         dst_path=dst_path,
         data=base_answers,
         defaults=True,
+        unsafe=True,
     )
     assert worker is not None
     assert tmp_path.exists()
@@ -117,11 +118,12 @@ def test_licenses(
     unexpected_strs: list[str],
 ):
     dst_path = tmp_path / "snake-farm"
-    copier.run_auto(
+    copier.run_copy(
         src_path=str(PROJECT_ROOT),
         dst_path=dst_path,
         data={**base_answers, "open_source_license": license},
         defaults=True,
+        unsafe=True,
     )
 
     assert tmp_path.exists()
@@ -143,11 +145,12 @@ def test_documentation(
     generate_doc: bool,
 ):
     dst_path = tmp_path / "snake-farm"
-    copier.run_auto(
+    copier.run_copy(
         src_path=str(PROJECT_ROOT),
         dst_path=dst_path,
         data={**base_answers, "documentation": generate_doc},
         defaults=True,
+        unsafe=True,
     )
 
     assert tmp_path.exists()
