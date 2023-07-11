@@ -71,6 +71,7 @@ jobs:
           poetry run copier copy \
           . \
           my-project \
+          --trust \
           --data 'full_name=Bruno Alla' \
           --data 'email=test@example.com' \
           --data 'github_username=dummy' \

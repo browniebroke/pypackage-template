@@ -52,6 +52,7 @@ def test_defaults_values(
         dst_path=dst_path,
         data=base_answers,
         defaults=True,
+        unsafe=True,
     )
     assert worker is not None
     assert tmp_path.exists()
@@ -122,6 +123,7 @@ def test_licenses(
         dst_path=dst_path,
         data={**base_answers, "open_source_license": license},
         defaults=True,
+        unsafe=True,
     )
 
     assert tmp_path.exists()
@@ -148,6 +150,7 @@ def test_documentation(
         dst_path=dst_path,
         data={**base_answers, "documentation": generate_doc},
         defaults=True,
+        unsafe=True,
     )
 
     assert tmp_path.exists()
