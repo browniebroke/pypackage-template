@@ -1,3 +1,1 @@
 # Changelog
-
-<!--next-version-placeholder-->
