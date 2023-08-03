@@ -3,9 +3,7 @@
   "projectOwner": "browniebroke",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "files": [
-    "README.md"
-  ],
+  "files": ["README.md"],
   "imageSize": 80,
   "commit": true,
   "contributorsPerLine": 7,
@@ -16,38 +14,28 @@
       "name": "Bruno Alla",
       "avatar_url": "https://avatars.githubusercontent.com/u/861044?v=4",
       "profile": "https://browniebroke.com/",
-      "contributions": [
-        "code",
-        "ideas",
-        "doc"
-      ]
+      "contributions": ["code", "ideas", "doc"]
     },
     {
       "login": "jtsay362",
       "name": "Jeff Tsay",
       "avatar_url": "https://avatars.githubusercontent.com/u/1079646?v=4",
       "profile": "https://cloudreactor.io/",
-      "contributions": [
-        "code"
-      ]
+      "contributions": ["code"]
     },
     {
       "login": "34j",
       "name": "34j",
       "avatar_url": "https://avatars.githubusercontent.com/u/55338215?v=4",
       "profile": "https://github.com/34j",
-      "contributions": [
-        "code"
-      ]
+      "contributions": ["code"]
     },
     {
       "login": "kroimon",
       "name": "Stefan Rado",
       "avatar_url": "https://avatars.githubusercontent.com/u/628587?v=4",
       "profile": "https://github.com/kroimon",
-      "contributions": [
-        "doc"
-      ]
+      "contributions": ["doc"]
     }
   ],
   "commitConvention": "none"
