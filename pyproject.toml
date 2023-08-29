@@ -46,9 +46,6 @@ select = [
     "D104",
     "S101",
 ]
-"setup.py" = ["D100"]
-"conftest.py" = ["D100"]
-"docs/conf.py" = ["D100"]
 
 [tool.pytest.ini_options]
 addopts = "-v -Wdefault"
