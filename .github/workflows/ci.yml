@@ -51,7 +51,7 @@ jobs:
           - run: "poetry run pytest"
             dir: ""
             name: "pytest"
-          - run: "git init . && pipx run pre-commit run -a"
+          - run: "git init && git add . && pipx run pre-commit run -a"
             dir: ""
             name: "pre-commit"
           - run: "poetry run make html"
