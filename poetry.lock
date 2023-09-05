@@ -19,7 +19,7 @@ python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7
 
 [[package]]
 name = "copier"
-version = "8.2.0"
+version = "8.3.0"
 description = "A library for rendering project templates."
 category = "dev"
 optional = false
@@ -331,8 +331,8 @@ colorama = [
     {file = "colorama-0.4.6.tar.gz", hash = "sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44"},
 ]
 copier = [
-    {file = "copier-8.2.0-py3-none-any.whl", hash = "sha256:578fa73dcfe0aa5b99c79a618e377e2a6243fcc85982205d59c92d0074d7cd01"},
-    {file = "copier-8.2.0.tar.gz", hash = "sha256:9f68afbe3ae2776e61ec8b1cf35743376abd47630e3a81f21e2ffb6dd537a66f"},
+    {file = "copier-8.3.0-py3-none-any.whl", hash = "sha256:a708e9b7c0eb7363ee5935f7a96a63a6f39b6da1d36f1c931d1ebd7711bb2ecf"},
+    {file = "copier-8.3.0.tar.gz", hash = "sha256:051149721c811bfa84023fca5c23827917ac5f42ab6c2696dcb522b17aee7cae"},
 ]
 decorator = [
     {file = "decorator-5.1.1-py3-none-any.whl", hash = "sha256:b8c3f85900b9dc423225913c5aace94729fe1fa9763b38939a95226f02d37186"},
