@@ -45,7 +45,12 @@ sphinx-autobuild = ">=2021.3.14"
 [tool.semantic_release]
 branch = "main"
 version_toml = ["pyproject.toml:tool.poetry.version"]
-version_variable = "src/{{ package_name }}/__init__.py:__version__"
+version_variables = [
+    "src/{{ package_name }}/__init__.py:__version__",
+    {%- if documentation %}
+    "docs/conf.py:release",
+    {%- endif %}
+]
 build_command = "pip install poetry && poetry build"
 
 [tool.semantic_release.changelog]
