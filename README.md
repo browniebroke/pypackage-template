@@ -66,7 +66,6 @@ A `labels` workflow will also run and synchronise the GitHub labels based on the
 
 The workflows need [a few secrets][gh-secrets] to be setup in your GitHub repository:
 
-- `PYPI_TOKEN` to publish releases to [PyPI][pypi]. This one should be created as `release` environment secret.
 - `GH_PAT` a [personal access token (PAT) with the `repo` scope][create-pat] for opening pull requests and updating the repository topics. This is used by the `hacktoberfest` workflow.
 - `CODECOV_TOKEN` to upload coverage data to [codecov.io][codecov] in the Test workflow (optional for public repos).
 
@@ -74,7 +73,8 @@ If you have the GitHub CLI installed and chose to set up GitHub, they will be cr
 
 ### Automated release
 
-By following the conventional commits specification, we're able to completely automate versioning and releasing to PyPI. This is handled by the `semantic-release.yml` workflow. It is triggered manually by default, but can be configured to run on every push to your main branch.
+By following the conventional commits specification, we're able to completely automate versioning and releasing to PyPI. It runs on every push to your main branch, as part of the `release` job of the `ci.yml` workflow.
+You'll need to create the first version manually in PyPI and then setup [trusted publisher](https://docs.pypi.org/trusted-publishers/using-a-publisher/) for the project.
 
 Here is an overview of its features:
 
@@ -87,7 +87,7 @@ Here is an overview of its features:
 - Push to GitHub.
 - Create a release in GitHub with the changes as release notes.
 - Build the source and binary distribution (wheel).
-- Upload the sources to PyPI and attach them to the Github release.
+- Upload the sources to PyPI and attach them to the Github release, using trusted publisher.
 
 For more details, check out the [conventional commits website][conventional-commits] and [Python semantic release][python-semantic-release] Github action.
 

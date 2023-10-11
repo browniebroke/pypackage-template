@@ -93,7 +93,6 @@ _tasks:
   # Setup GitHub
   - "{% if setup_github %}gh repo create {{ github_username }}/{{ project_slug }} -d '{{ project_short_description }}' --public --remote=origin --source=. --push{% endif %}"
   - "{% if setup_github %}gh repo edit --delete-branch-on-merge --enable-projects=false --enable-wiki=false{% endif %}"
-  - "{% if setup_github %}gh secret set PYPI_TOKEN -b 'changeme'{% endif %}"
   - "{% if setup_github %}gh secret set GH_PAT -b 'changeme'{% endif %}"
   # Setup pre-commit
   - "{% if setup_pre_commit %}pre-commit install{% endif %}"
