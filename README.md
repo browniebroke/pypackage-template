@@ -9,8 +9,9 @@ Project template for a Python Package using Copier.
 ## Features
 
 - Project for Python 3.8+.
-- Testing with Pytest using Github actions.
-- Packaging powered by [poetry]
+- Testing with Pytest using GitHub actions.
+- Packaging powered by [poetry].
+- Optionally generates a CLI entry point powered by [Typer] and [Rich].
 - Follows the [black] style guide.
 - Uses [Ruff] for linting.
 - Comes with [pre-commit] hook config for [black] and [Ruff].
@@ -138,7 +139,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
-[poetry]: https://python-poetry.org/
+[poetry]: https://python-poetry.org
+[Typer]: https://typer.tiangolo.com
+[Rich]: https://rich.readthedocs.io
 [black]: https://github.com/psf/black
 [Ruff]: https://pypi.org/project/ruff/
 [pre-commit]: https://pre-commit.com/

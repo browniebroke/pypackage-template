@@ -2,10 +2,21 @@
 
 # Usage
 
-Assuming that you've followed the {ref}`installations steps <installation>`, you're now ready to use this package. Start by importing it:
+Assuming that you've followed the {ref}`installations steps <installation>`, you're now ready to use this package.
+{%- if has_cli  %}
+
+Call the command line interface:
+
+```bash
+{{ cli_name }} --help
+```
+{%- else  %}
+
+Start by importing it:
 
 ```python
 import {{ package_name }}
 ```
+{%- endif %}
 
 TODO: Document usage

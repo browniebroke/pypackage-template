@@ -51,6 +51,17 @@ documentation:
   help: "Generate documentation?"
   default: yes
 
+has_cli:
+  type: bool
+  help: "Does the project have a CLI?"
+  default: no
+
+cli_name:
+  type: str
+  help: "The name of the CLI"
+  default: "{{ project_slug }}"
+  when: "{{ has_cli }}"
+
 run_poetry_install:
   type: bool
   help: "Run poetry install after {{ package_name }} generation?"

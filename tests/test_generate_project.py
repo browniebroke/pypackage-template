@@ -174,3 +174,48 @@ def test_documentation(
             dst_path / "pyproject.toml",
             unexpect_strs=["[tool.poetry.group.docs]"],
         )
+
+
+@pytest.mark.parametrize(
+    ("has_cli", "cli_name"),
+    [
+        (True, "mycli"),
+        (False, ""),
+    ],
+)
+def test_cli(
+    tmp_path: Path,
+    base_answers: dict[str, str | bool],
+    has_cli: bool,
+    cli_name: str,
+):
+    dst_path = tmp_path / "snake-farm"
+    copier.run_copy(
+        src_path=str(PROJECT_ROOT),
+        dst_path=dst_path,
+        data={**base_answers, "has_cli": has_cli, "cli_name": cli_name},
+        defaults=True,
+        unsafe=True,
+    )
+
+    assert tmp_path.exists()
+    if has_cli:
+        _check_file_contents(
+            dst_path / "src" / "snake_farm" / "__main__.py",
+            expected_strs=['app(prog_name="mycli")'],
+        )
+        _check_file_contents(
+            dst_path / "src" / "snake_farm" / "cli.py",
+            expected_strs=["app = typer.Typer()"],
+        )
+        _check_file_contents(
+            dst_path / "pyproject.toml",
+            expected_strs=["[tool.poetry.scripts]", 'mycli = "snake_farm.cli:app"'],
+        )
+    else:
+        assert not (dst_path / "src" / "snake_farm" / "__main__.py").exists()
+        assert not (dst_path / "src" / "snake_farm" / "cli.py").exists()
+        _check_file_contents(
+            dst_path / "pyproject.toml",
+            unexpect_strs=["[tool.poetry.scripts]", 'mycli = "snake_farm.cli:app"'],
+        )
