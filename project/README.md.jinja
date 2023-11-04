@@ -52,12 +52,21 @@ Install this via pip (or your favourite package manager):
 {%- if not documentation  %}
 
 ## Usage
+{%- if has_cli  %}
+
+Call the command line interface:
+
+```bash
+{{ cli_name }} --help
+```
+{%- else  %}
 
 Start by importing it:
 
 ```python
 import {{ package_name }}
 ```
+{%- endif %}
 {%- endif %}
 
 ## Contributors ✨
