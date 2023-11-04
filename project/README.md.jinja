@@ -49,6 +49,16 @@
 Install this via pip (or your favourite package manager):
 
 `pip install {{ project_slug }}`
+{%- if not documentation  %}
+
+## Usage
+
+Start by importing it:
+
+```python
+import {{ package_name }}
+```
+{%- endif %}
 
 ## Contributors ✨
 
