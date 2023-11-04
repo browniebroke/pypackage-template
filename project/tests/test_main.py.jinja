@@ -1,7 +1,7 @@
-{%- if has_cli %}
+{% if has_cli -%}
 from typer.testing import CliRunner
 
-{%- endif %}
+{% endif -%}
 from {{ package_name }}.main import add{% if has_cli %}, app{% endif %}
 
 
