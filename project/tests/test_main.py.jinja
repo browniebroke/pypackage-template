@@ -1,5 +1,22 @@
-from {{ package_name }}.main import add
+{%- if has_cli %}
+from typer.testing import CliRunner
+
+{%- endif %}
+from {{ package_name }}.main import add{% if has_cli %}, app{% endif %}
 
 
 def test_add():
+    """Adding two number works as expected."""
     assert add(1, 1) == 2
+{%- if has_cli %}
+
+
+runner = CliRunner()
+
+
+def test_help():
+    """The help message includes the CLI name."""
+    result = runner.invoke(app, ["--help"])
+    assert result.exit_code == 0
+    assert "{{ cli_name }}" in result.stdout
+{%- endif %}

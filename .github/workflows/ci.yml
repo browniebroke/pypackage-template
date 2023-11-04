@@ -57,8 +57,13 @@ jobs:
           - run: "poetry run make html"
             dir: "docs"
             name: "docs"
+        extra_options:
+          - label: "no extra options"
+            value: ""
+          - label: "with CLI"
+            value: "--data 'has_cli=yes' --data 'cli_name=mycli'"
     runs-on: ubuntu-latest
-    name: "Generated: ${{ matrix.script.name }}"
+    name: "Generated: ${{ matrix.script.name }} ${{ matrix.extra_options.label }}"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v4
@@ -77,6 +82,7 @@ jobs:
           --data 'project_name=My Amazing Project' \
           --data 'project_short_description=Just a great project' \
           --data 'open_source_license=MIT' \
+          {{ matrix.extra_options.value }} \
           --defaults
         shell: bash
       - run: cat pyproject.toml

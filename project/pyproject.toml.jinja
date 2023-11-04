@@ -23,9 +23,18 @@ packages = [
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/{{ github_username }}/{{ project_slug }}/issues"
 "Changelog" = "https://github.com/{{ github_username }}/{{ project_slug }}/blob/main/CHANGELOG.md"
+{%- if has_cli %}
+
+[tool.poetry.scripts]
+{{ cli_name }} = "{{ package_name }}.main:app"
+{%- endif  %}
 
 [tool.poetry.dependencies]
 python = "^3.8"
+{%- if has_cli  %}
+rich = ">=10"
+typer = {extras = ["all"], version = "^0.9.0"}
+{%- endif %}
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.0"

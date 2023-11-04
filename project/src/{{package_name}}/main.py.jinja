@@ -1,0 +1,19 @@
+from __future__ import annotations
+{%- if has_cli %}
+
+import typer
+from rich import print
+
+app = typer.Typer()
+
+
+@app.command()
+def main(n1: int, n2: int) -> None:
+    """Entry point for the CLI."""
+    print(add(n1, n2))
+{%- endif %}
+
+
+def add(n1: int, n2: int) -> int:
+    """Add the arguments."""
+    return n1 + n2
