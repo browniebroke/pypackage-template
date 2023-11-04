@@ -82,7 +82,7 @@ jobs:
           --data 'project_name=My Amazing Project' \
           --data 'project_short_description=Just a great project' \
           --data 'open_source_license=MIT' \
-          {{ matrix.extra_options.value }} \
+          ${{ matrix.extra_options.value }} \
           --defaults
         shell: bash
       - run: cat pyproject.toml
