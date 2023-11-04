@@ -1,8 +1,7 @@
-from __future__ import annotations
-{%- if has_cli %}
-
 import typer
 from rich import print
+
+from .main import add
 
 app = typer.Typer()
 
@@ -11,9 +10,3 @@ app = typer.Typer()
 def main(n1: int, n2: int) -> None:
     """Add the arguments and print the result."""
     print(add(n1, n2))
-{%- endif %}
-
-
-def add(n1: int, n2: int) -> int:
-    """Add the arguments."""
-    return n1 + n2
