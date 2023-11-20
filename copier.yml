@@ -88,7 +88,7 @@ add_me_as_contributor:
   default: no
 
 # Copier metadata
-_min_copier_version: "8.0.0"
+_min_copier_version: "9.0.0"
 _subdirectory: "project"
 _tasks:
   # Remove license file if no license
