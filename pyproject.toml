@@ -10,7 +10,7 @@ python = "^3.8"
 
 [tool.poetry.group.dev.dependencies]
 copier = "^9.0.0"
-pytest = "^7.0"
+pytest = "^8.0.0"
 pytest-mock = "^3.3"
 
 [tool.ruff]
