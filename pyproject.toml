@@ -7,6 +7,10 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.8"
+jinja2-time = "^0.2.0"
+jinja2-shell = "^0.1.3"
+jinja2-eval = "^0.1.1"
+jinja2-env = "^0.1.2"
 
 [tool.poetry.group.dev.dependencies]
 copier = "^9.0.0"
