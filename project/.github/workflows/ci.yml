@@ -52,7 +52,7 @@ jobs:
         run: pipx install poetry
       # https://github.com/actions/setup-python/blob/main/docs/advanced-usage.md#caching-packages
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         id: setup-python
         with:
           python-version: ${{ matrix.python-version }}
