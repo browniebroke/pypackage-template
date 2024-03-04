@@ -9,6 +9,17 @@ project_short_description:
   help: "A short description of the project"
   default: "Python package for "
 
+has_cli:
+  type: bool
+  help: "Does the project have a CLI?"
+  default: no
+
+cli_name:
+  type: str
+  help: "The name of the CLI"
+  default: "{{ project_slug }}"
+  when: "{{ has_cli }}"
+
 full_name:
   type: str
   help: "What's your name?"
@@ -99,7 +110,7 @@ open_with_vscode:
   default: yes
 
 # Copier metadata
-_min_copier_version: "8.0.0"
+_min_copier_version: "9.0.0"
 _subdirectory: "project"
 _tasks:
   # In Windows, command prompt
