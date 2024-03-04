@@ -135,7 +135,7 @@ _tasks:
   # Setup GitHub
   - '{% if setup_github %}bash .github/setup-github.bash {{ github_username }} {{ project_slug }} "{{ project_short_description }}"{% endif %}'
   # Open with vscode
-  - "{% if open_with_vscode %}code .{% endif %}"
+  - "{% if open_with_vscode %}code . || echo 'VSCode is not installed.'{% endif %}"
   # Replace true with false in .copier-answers.yml except "documentation: true" for faster copier update
   - "sed -i '/documentation: true/!s/true/false/g' .copier-answers.yml"
 _jinja_extensions:
