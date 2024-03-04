@@ -69,6 +69,7 @@ html_static_path = ["_static"]
 
 
 def run_apidoc(_: Any) -> None:
+    """Run sphinx-apidoc"""
     docs_path = Path(__file__).parent
     module_path = docs_path.parent / "src" / "{{ package_name }}"
 
@@ -84,4 +85,5 @@ def run_apidoc(_: Any) -> None:
 
 
 def setup(app: Sphinx) -> None:
+    """Setup sphinx"""
     app.connect("builder-inited", run_apidoc)
