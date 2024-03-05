@@ -4,8 +4,10 @@ repo=$2
 shortDescription=$3
 ownerRepo=$owner/$repo
 
+echo "Setting up GitHub repository $ownerRepo", description: "$shortDescription"
+
 # create repo
-gh repo create $ownerRepo -d $shortDescription --public --remote=origin --source=. --push
+gh repo create $repo -d "$shortDescription" --public --remote=origin --source=. --push
 
 # squash merge
 gh repo edit --delete-branch-on-merge --enable-projects=false --enable-wiki=false --enable-merge-commit=false --enable-squash-merge --enable-rebase-merge=false
