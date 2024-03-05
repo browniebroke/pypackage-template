@@ -19,13 +19,7 @@ gh api --method PUT -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Ve
 # set branch protection
 # https://docs.github.com/ja/rest/branches/branch-protection?apiVersion=2022-11-28#update-branch-protection
 echo "Setting branch protection rules for $ownerRepo"
-curl -L \
--X PUT \
--H "Accept: application/vnd.github+json" \
--H "Authorization: Bearer $GITHUB_TOKEN" \
--H "X-GitHub-Api-Version: 2022-11-28" \
-https://api.github.com/repos/$ownerRepo/branches/main/protection \
--d '{"required_status_checks":null,"enforce_admins":false,"required_pull_request_reviews":null,"restrictions":null,"required_linear_history":false,"allow_force_pushes":true,"allow_deletions":true,"block_creations":false,"required_conversation_resolution":false,"lock_branch":false,"allow_fork_syncing":true}'
+curl -L -X PUT -H "Accept: application/vnd.github+json" -H "Authorization: Bearer $GITHUB_TOKEN" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/$ownerRepo/branches/main/protection -d '{"required_status_checks":null,"enforce_admins":false,"required_pull_request_reviews":null,"restrictions":null,"required_linear_history":false,"allow_force_pushes":true,"allow_deletions":true,"block_creations":false,"required_conversation_resolution":false,"lock_branch":false,"allow_fork_syncing":true}'
 
 # install GitHub Apps
 # Raise if PYPACKAGE_TEMPLATE_INSTALLATION_IDS is not set
@@ -39,11 +33,7 @@ repositoryId=$(gh api "repos/$ownerRepo" --jq '.id')
 
 # https://docs.github.com/ja/rest/apps/installations?apiVersion=2022-11-28#add-a-repository-to-an-app-installation
 for installationId in $installationIds; do
-  gh api \
-  --method PUT \
-  -H "Accept: application/vnd.github+json" \
-  -H "X-GitHub-Api-Version: 2022-11-28" \
-  "user/installations/$installationId/repositories/$repositoryId"
+    gh api  --method PUT -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" "user/installations/$installationId/repositories/$repositoryId"
 done
 
 # to test this script, run
