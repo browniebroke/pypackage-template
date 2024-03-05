@@ -133,7 +133,7 @@ _tasks:
   # Add me as a contributor
   - "{% if add_me_as_contributor %}npx all-contributors-cli add {{ github_username }} code,ideas,doc{% endif %}"
   # Setup GitHub
-  - '{% if setup_github %}bash .github/setup-github.bash {{ github_username }} {{ project_slug }} "{{ project_short_description }}"{% endif %}'
+  - '{% if setup_github %}{% if ''Windows'' in ''''|env(''OS'') %}"C:/Program Files/Git/bin/bash"{% else %}bash{% endif %} .github/setup-github.bash {{ github_username }} {{ project_slug }} "{{ project_short_description }}"{% endif %}'
   # Open with vscode
   - "{% if open_with_vscode %}code . || echo 'VSCode is not installed.'{% endif %}"
   # Replace true with false in .copier-answers.yml except "documentation: true" for faster copier update
