@@ -138,7 +138,7 @@ _tasks:
   - "{% if open_with_vscode %}code . || echo 'VSCode is not installed.'{% endif %}"
   # Replace true with false in .copier-answers.yml except "documentation: true" for faster copier update
   # setup-..., initial_commit, add_me_as_contributor, open_with_vscode must be false
-  - 'python -c "from pathlib import Path; import re; p = Path(''.copier-answers.yml''); p.write_text(re.sub(r''(setup-venv|setup-github|setup-pre-commit|initial_commit|add_me_as_contributor|open_with_vscode): true'', r''\1: false'', p.read_text()))"'
+  - 'python -c "from pathlib import Path; import re; p = Path(''.copier-answers.yml''); p.write_text(re.sub(r''(setup_venv|setup_github|setup_pre_commit|run_poetry_install|initial_commit|add_me_as_contributor|open_with_vscode): true'', r''\1: false'', p.read_text()))"'
 _jinja_extensions:
   - jinja2_time.TimeExtension
   - jinja2_eval.EvalExtension
