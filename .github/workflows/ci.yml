@@ -66,6 +66,7 @@ jobs:
     name: "Generated: ${{ matrix.script.name }} ${{ matrix.extra_options.label }}"
     steps:
       - uses: actions/checkout@v4
+      - uses: fregante/setup-git-user@v2
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
