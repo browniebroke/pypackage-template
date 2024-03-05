@@ -197,20 +197,6 @@ files = [
 jinja2 = "*"
 
 [[package]]
-name = "jinja2-shell"
-version = "0.1.3"
-description = "Jinja2 Extension for running shell commands"
-optional = false
-python-versions = ">=3.8,<4.0"
-files = [
-    {file = "jinja2_shell-0.1.3-py3-none-any.whl", hash = "sha256:41536d3bc999e26b97d87bcc0db6f7bf1ec8eba46a61ca469f902db4515d9085"},
-    {file = "jinja2_shell-0.1.3.tar.gz", hash = "sha256:80a6dc030624e0a36339c99ac904590edfeee44c4daa22664e948c0d0e119a61"},
-]
-
-[package.dependencies]
-jinja2 = "*"
-
-[[package]]
 name = "jinja2-time"
 version = "0.2.0"
 description = "Jinja2 Extension for Dates and Times"
@@ -699,4 +685,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "0470e32841c26d19fe1d02489de58df2885978e30f60eaf99aab5e461135fac9"
+content-hash = "1962605a6c22671960ca04d2563c1ae547e8570656d7837d3c398e889abb72b1"
