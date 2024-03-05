@@ -11,7 +11,6 @@ gh repo create $ownerRepo -d $shortDescription --public --remote=origin --source
 gh repo edit --delete-branch-on-merge --enable-projects=false --enable-wiki=false --enable-merge-commit=false --enable-squash-merge --enable-rebase-merge=false
 
 # set secrets
-gh secret set PYPI_TOKEN -b $PYPI_TOKEN
 gh secret set GH_PAT -b $GITHUB_TOKEN
 
 # set workflow permissions
