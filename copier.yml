@@ -122,7 +122,7 @@ _tasks:
   - "{% if setup_venv %}{% if 'Windows' in ''|env('OS') %}py -{% else %}python{% endif %}{{ venv_version }} -m venv venv{% endif %}"
   # Run poetry install
   - "{% if 'Windows' in ''|env('OS') %}{% set venv_folder = 'venv\\\\scripts\\\\' %}{% else %}{% set venv_folder = 'venv/bin/' %}{% endif %}
-    {% if run_poetry_install %}{{ venv_folder }}python -m pip install -U pip setuptools wheel && {{ venv_folder }}pip install -U poetry pre-commit && {{ venv_folder }}python -m poetry install --with dev{% endif %}"
+    {% if run_poetry_install %}{{ venv_folder }}python -m pip install -U pip setuptools wheel && {{ venv_folder }}pip install -U poetry pre-commit && {{ venv_folder }}poetry install --with dev{% endif %}"
   # git init
   - "git init && git add ."
   # Setup pre-commit
