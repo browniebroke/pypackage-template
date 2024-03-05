@@ -129,7 +129,7 @@ _tasks:
   - "{% if 'Windows' in ''|env('OS') %}{% set venv_folder = 'venv\\\\scripts\\\\' %}{% else %}{% set venv_folder = 'venv/bin/' %}{% endif %}
     {% if setup_pre_commit %}{{ venv_folder }}pre-commit install && {{ venv_folder }}pre-commit run -a || git add .{% endif %}"
   # Initial commit
-  - '{% if initial_commit %}git commit -m "chore: initial commit"{% endif %}'
+  - '{% if initial_commit %}git add . && git commit -m "chore: initial commit"{% endif %}'
   # Add me as a contributor
   - "{% if add_me_as_contributor %}npx all-contributors-cli add {{ github_username }} code,ideas,doc{% endif %}"
   # Setup GitHub
