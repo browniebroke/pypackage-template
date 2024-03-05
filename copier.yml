@@ -1,18 +1,8 @@
 # questions
-project_slug:
-  type: str
-  help: "Project slug (used for GitHub, PyPI, etc.)"
-  default: '{{ "exec(''import sys'') or sys.argv[-1]" | eval }}'
-
-package_name:
-  type: str
-  help: "The name of the main Python package (should be a valid Python identifier)"
-  default: "{{ project_slug.replace('-', '_') }}"
-
 project_name:
   type: str
   help: "Project Name (human readable version)"
-  default: '{{ project_slug.capitalize().replace("-", " ") }}'
+  default: '{{ "exec(''import sys'') or sys.argv[-1]" | eval | capitalize | replace("-", " ") }}'
 
 project_short_description:
   type: str
@@ -44,6 +34,16 @@ github_username:
   type: str
   help: "GitHub Username"
   default: "{{ full_name | env('GITHUB_USER') }}"
+
+project_slug:
+  type: str
+  help: "Project slug (used for GitHub, PyPI, etc.)"
+  default: "{{ project_name.lower().replace(' ', '-') }}"
+
+package_name:
+  type: str
+  help: "The name of the main Python package (should be a valid Python identifier)"
+  default: "{{ project_slug.replace('-', '_') }}"
 
 open_source_license:
   type: str
