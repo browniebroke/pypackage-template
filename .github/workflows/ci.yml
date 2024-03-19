@@ -66,6 +66,7 @@ jobs:
     name: "Generated: ${{ matrix.script.name }} ${{ matrix.extra_options.label }}"
     steps:
       - uses: actions/checkout@v4
+      - uses: fregante/setup-git-user@v2
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -82,6 +83,7 @@ jobs:
           --data 'project_name=My Amazing Project' \
           --data 'project_short_description=Just a great project' \
           --data 'open_source_license=MIT' \
+          --data "venv_version=3.11" \
           ${{ matrix.extra_options.value }} \
           --defaults
         shell: bash
