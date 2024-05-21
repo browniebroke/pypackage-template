@@ -12,9 +12,8 @@ Project template for a Python Package using Copier.
 - Testing with Pytest using GitHub actions.
 - Packaging powered by [poetry].
 - Optionally generates a CLI entry point powered by [Typer] and [Rich].
-- Follows the [black] style guide.
-- Uses [Ruff] for linting.
-- Comes with [pre-commit] hook config for [black] and [Ruff].
+- Uses [Ruff] for formatting and linting.
+- Comes with [pre-commit] hook config for [Ruff].
 - Style guide enforced on CI.
 - Dependencies kept up to date by [Renovate].
 - Follow the [all-contributors] specification.
@@ -58,8 +57,8 @@ When you first push to GitHub, it'll start a `ci` GitHub workflow that you can s
 
 - The `test` job will run your test suite with Pytest against all Python version from 3.8 to 3.11
 - A few things will run in the lint job:
-  - black in check mode
-  - Ruff with several flake8 plugins, isort and pyupgrade plugins.
+  - Ruff format
+  - Ruff lint with several flake8, isort and pyupgrade plugins.
 
 A `labels` workflow will also run and synchronise the GitHub labels based on the `.github/labels.toml` file.
 
@@ -142,7 +141,6 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 [poetry]: https://python-poetry.org
 [Typer]: https://typer.tiangolo.com
 [Rich]: https://rich.readthedocs.io
-[black]: https://github.com/psf/black
 [Ruff]: https://pypi.org/project/ruff/
 [pre-commit]: https://pre-commit.com/
 [renovate]: https://docs.renovatebot.com/
