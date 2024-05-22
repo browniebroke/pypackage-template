@@ -50,7 +50,6 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install poetry
         run: pipx install poetry
-      # https://github.com/actions/setup-python/blob/main/docs/advanced-usage.md#caching-packages
       - name: Set up Python
         uses: actions/setup-python@v5
         id: setup-python
