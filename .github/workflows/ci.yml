@@ -30,11 +30,13 @@ jobs:
     name: "Template: ${{ matrix.python-version }} - ${{ matrix.os }}"
     steps:
       - uses: actions/checkout@v4
+      - name: Install poetry
+        run: pipx install poetry
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
+          cache: poetry
           python-version: ${{ matrix.python-version }}
-      - uses: snok/install-poetry@v1.3.4
       - name: Install Dependencies
         run: poetry install
         shell: bash
@@ -68,8 +70,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
+          cache: poetry
           python-version: "3.11"
-      - uses: snok/install-poetry@v1
       - run: poetry install
       - run: |
           poetry run copier copy \
