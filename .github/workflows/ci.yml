@@ -68,6 +68,8 @@ jobs:
     name: "Generated: ${{ matrix.script.name }} ${{ matrix.extra_options.label }}"
     steps:
       - uses: actions/checkout@v4
+      - name: Install poetry
+        run: pipx install poetry
       - uses: actions/setup-python@v5
         with:
           cache: poetry
