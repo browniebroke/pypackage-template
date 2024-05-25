@@ -71,9 +71,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: python --version
-      - run: which python
-      - run: which python3.11
+      - name: Get path of Python executable
+        id: get-python-path
+        run: |
+          echo "value=`which python3.11`" >> $GITHUB_OUTPUT
       - run: |
           pipx run copier copy \
           . \
@@ -87,9 +88,13 @@ jobs:
           --data 'open_source_license=MIT' \
           ${{ matrix.extra_options.value }} \
           --defaults
+        env:
+          PIPX_DEFAULT_PYTHON: ${{ steps.get-python-path.outputs.value }}
       - run: cat pyproject.toml
         working-directory: my-project
-      - run: pipx install poetry --python `which python3.11`
+      - run: pipx install poetry
+        env:
+          PIPX_DEFAULT_PYTHON: ${{ steps.get-python-path.outputs.value }}
       - run: poetry install --with docs
         working-directory: my-project
       - run: ${{ matrix.script.run }}
