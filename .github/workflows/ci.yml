@@ -89,7 +89,7 @@ jobs:
           --defaults
       - run: cat pyproject.toml
         working-directory: my-project
-      - run: pipx install poetry
+      - run: pipx install poetry --python `which python3.11`
       - run: poetry install --with docs
         working-directory: my-project
       - run: ${{ matrix.script.run }}
