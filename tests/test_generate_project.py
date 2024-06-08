@@ -290,6 +290,12 @@ def test_django_package_yes(
     _check_file_contents(
         dst_path / "tox.ini", expected_strs=["django32: Django>=3.2,<4.0"]
     )
+    _check_file_contents(
+        dst_path / ".github" / "workflows" / "ci.yml",
+        expected_strs=[
+            "run: tox -f py$(echo ${{ matrix.python-version }} | tr -d .)",
+        ],
+    )
 
 
 def test_django_package_no(
