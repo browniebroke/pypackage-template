@@ -1,0 +1,9 @@
+from django.apps import AppConfig
+from django.utils.translation import gettext_lazy as _
+
+
+class {{ django_app_shorthand.title().replace("_", "") }}AppConfig(AppConfig):
+    """App config for {{ project_name }}."""
+
+    name = "{{ package_name }}"
+    verbose_name = _("{{ project_name.lower().removeprefix("django ") }}")

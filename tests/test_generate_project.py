@@ -229,7 +229,12 @@ def test_django_package_yes(
     copier.run_copy(
         src_path=str(PROJECT_ROOT),
         dst_path=dst_path,
-        data={**base_answers, "is_django_package": True, "documentation": True},
+        data={
+            **base_answers,
+            "project_name": "Django Snake Farm",
+            "is_django_package": True,
+            "documentation": True,
+        },
         defaults=True,
         unsafe=True,
     )
@@ -247,19 +252,28 @@ def test_django_package_yes(
         ],
     )
     _check_file_contents(
-        dst_path / "src" / "snake_farm" / "conf.py",
+        dst_path / "src" / "django_snake_farm" / "conf.py",
         expected_strs=[
+            "All attributes prefixed ``SNAKE_FARM_*``",
             "class AppSettings:",
             "app_settings = AppSettings()",
         ],
     )
     _check_file_contents(
-        dst_path / "src" / "snake_farm" / "apps.py",
-        expected_strs=["class SnakeFarmAppConfig(AppConfig):"],
+        dst_path / "src" / "django_snake_farm" / "apps.py",
+        expected_strs=[
+            "class SnakeFarmAppConfig(AppConfig):",
+            '"""App config for Django Snake Farm."""',
+            'name = "django_snake_farm"',
+            'verbose_name = _("snake farm")',
+        ],
     )
     _check_file_contents(
         dst_path / "tests" / "settings.py",
-        expected_strs=['SECRET_KEY = "NOTASECRET"  # noqa S105'],
+        expected_strs=[
+            'SECRET_KEY = "NOTASECRET"  # noqa S105',
+            '    "django_snake_farm",',
+        ],
     )
     _check_file_contents(
         dst_path / "docs" / "index.md",
@@ -267,7 +281,7 @@ def test_django_package_yes(
     )
     _check_file_contents(
         dst_path / "docs" / "configuration.rst",
-        expected_strs=[".. automodule:: snake_farm.conf"],
+        expected_strs=[".. automodule:: django_snake_farm.conf"],
     )
     _check_file_contents(
         dst_path / "docs" / "installation.md",

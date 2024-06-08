@@ -67,6 +67,12 @@ is_django_package:
   help: "Is the project a Django package?"
   default: no
 
+django_app_shorthand:
+  type: str
+  help: "The Django app shorthand"
+  default: "{{ package_name.removeprefix('django_') }}"
+  when: "{{ is_django_package }}"
+
 run_poetry_install:
   type: bool
   help: "Run poetry install after {{ package_name }} generation?"
