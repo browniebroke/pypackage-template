@@ -219,3 +219,90 @@ def test_cli(
             dst_path / "pyproject.toml",
             unexpect_strs=["[tool.poetry.scripts]", 'mycli = "snake_farm.cli:app"'],
         )
+
+
+def test_django_package_yes(
+    tmp_path: Path,
+    base_answers: dict[str, str | bool],
+):
+    dst_path = tmp_path / "snake-farm"
+    copier.run_copy(
+        src_path=str(PROJECT_ROOT),
+        dst_path=dst_path,
+        data={**base_answers, "is_django_package": True, "documentation": True},
+        defaults=True,
+        unsafe=True,
+    )
+
+    assert tmp_path.exists()
+    _check_file_contents(
+        dst_path / "pyproject.toml",
+        expected_strs=[
+            '"Framework :: Django :: 3.2",',
+            '"Framework :: Django :: 5.0",',
+            'django = ">=3.2"',
+            'pytest-django = "^4.5"',
+            "--ds=tests.settings",
+            "django_find_project = false",
+        ],
+    )
+    _check_file_contents(
+        dst_path / "src" / "snake_farm" / "conf.py",
+        expected_strs=[
+            "class AppSettings:",
+            "app_settings = AppSettings()",
+        ],
+    )
+    _check_file_contents(
+        dst_path / "src" / "snake_farm" / "apps.py",
+        expected_strs=["class SnakeFarmAppConfig(AppConfig):"],
+    )
+    _check_file_contents(
+        dst_path / "tests" / "settings.py",
+        expected_strs=['SECRET_KEY = "NOTASECRET"  # noqa S105'],
+    )
+    _check_file_contents(
+        dst_path / "docs" / "index.md",
+        expected_strs=["configuration"],
+    )
+    _check_file_contents(
+        dst_path / "docs" / "configuration.rst",
+        expected_strs=[".. automodule:: snake_farm.conf"],
+    )
+    _check_file_contents(
+        dst_path / "docs" / "installation.md",
+        expected_strs=["Add the app to your `INSTALLED_APPS`:"],
+    )
+    _check_file_contents(
+        dst_path / "tox.ini", expected_strs=["django32: Django>=3.2,<4.0"]
+    )
+
+
+def test_django_package_no(
+    tmp_path: Path,
+    base_answers: dict[str, str | bool],
+):
+    dst_path = tmp_path / "snake-farm"
+    copier.run_copy(
+        src_path=str(PROJECT_ROOT),
+        dst_path=dst_path,
+        data={**base_answers, "is_django_package": False, "documentation": True},
+        defaults=True,
+        unsafe=True,
+    )
+
+    assert tmp_path.exists()
+    assert not (dst_path / "src" / "snake_farm" / "conf.py").exists()
+    assert not (dst_path / "src" / "snake_farm" / "apps.py").exists()
+    assert not (dst_path / "tests" / "settings.py").exists()
+    assert not (dst_path / "docs" / "configuration.rst").exists()
+    _check_file_contents(
+        dst_path / "pyproject.toml",
+        unexpect_strs=[
+            '"Framework :: Django :: 3.2",',
+            '"Framework :: Django :: 5.0",',
+            'django = ">=3.2"',
+            'pytest-django = "^4.5"',
+            "django_find_project = false",
+        ],
+    )

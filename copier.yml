@@ -62,6 +62,11 @@ cli_name:
   default: "{{ project_slug }}"
   when: "{{ has_cli }}"
 
+is_django_package:
+  type: bool
+  help: "Is the project a Django package?"
+  default: no
+
 run_poetry_install:
   type: bool
   help: "Run poetry install after {{ package_name }} generation?"
