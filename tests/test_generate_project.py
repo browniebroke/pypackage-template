@@ -291,10 +291,18 @@ def test_django_package_yes(
         dst_path / "tox.ini", expected_strs=["django32: Django>=3.2,<4.0"]
     )
     _check_file_contents(
+        dst_path / ".gitignore", expected_strs=["requirements-dev.txt"]
+    )
+    _check_file_contents(
         dst_path / ".github" / "workflows" / "ci.yml",
         expected_strs=[
+            (
+                "run: poetry export --without-hashes --only=dev "
+                "--format=requirements.txt --output=requirements-dev.txt"
+            ),
             "run: tox -f py$(echo ${{ matrix.python-version }} | tr -d .)",
         ],
+        unexpect_strs=["poetry run pytest --cov-report=xml"],
     )
 
 
@@ -324,5 +332,19 @@ def test_django_package_no(
             'django = ">=3.2"',
             'pytest-django = "^4.5"',
             "django_find_project = false",
+        ],
+    )
+    _check_file_contents(
+        dst_path / ".gitignore", unexpect_strs=["requirements-dev.txt"]
+    )
+    _check_file_contents(
+        dst_path / ".github" / "workflows" / "ci.yml",
+        expected_strs=["poetry run pytest --cov-report=xml"],
+        unexpect_strs=[
+            (
+                "run: poetry export --without-hashes --only=dev "
+                "--format=requirements.txt --output=requirements-dev.txt"
+            ),
+            "run: tox -f py$(echo ${{ matrix.python-version }} | tr -d .)",
         ],
     )
