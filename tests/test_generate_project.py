@@ -302,7 +302,7 @@ def test_django_package_yes(
             ),
             "run: tox -f py$(echo ${{ matrix.python-version }} | tr -d .)",
         ],
-        unexpect_strs=["poetry run pytest --cov-report=xml"],
+        unexpect_strs=["poetry run pytest"],
     )
 
 
@@ -339,7 +339,7 @@ def test_django_package_no(
     )
     _check_file_contents(
         dst_path / ".github" / "workflows" / "ci.yml",
-        expected_strs=["poetry run pytest --cov-report=xml"],
+        expected_strs=["poetry run pytest"],
         unexpect_strs=[
             (
                 "run: poetry export --without-hashes --only=dev "

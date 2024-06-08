@@ -97,6 +97,7 @@ addopts = """\
     -Wdefault
     --cov={{ package_name }}
     --cov-report=term-missing:skip-covered
+    --cov-report=xml
 {%- if is_django_package  %}
     --ds=tests.settings
 {%- endif  %}
