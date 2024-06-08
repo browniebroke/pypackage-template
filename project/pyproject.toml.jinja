@@ -96,11 +96,15 @@ addopts = """\
     -v
     -Wdefault
     --cov={{ package_name }}
-    --cov-report=term-missing:skip-covered"
+    --cov-report=term-missing:skip-covered
+{%- if is_django_package  %}
     --ds=tests.settings
+{%- endif  %}
     """
 pythonpath = ["src"]
+{%- if is_django_package  %}
 django_find_project = false
+{%- endif  %}
 
 [tool.coverage.run]
 branch = true
