@@ -59,14 +59,17 @@ jobs:
             dir: "docs"
             name: "docs"
         extra_options:
-          - label: "no extra options"
+          - project_name: "Simple Package"
+            project_slug: "simple-package"
             value: ""
-          - label: "with CLI"
+          - project_name: "Simple CLI"
+            project_slug: "simple-cli"
             value: "--data 'has_cli=yes' --data 'cli_name=mycli'"
-          - label: "Django package"
+          - project_name: "Django Package"
+            project_slug: "django-simple-package"
             value: "--data 'is_django_package=yes' --data 'documentation=yes'"
     runs-on: ubuntu-latest
-    name: "Generated: ${{ matrix.script.name }} ${{ matrix.extra_options.label }}"
+    name: "Generated: ${{ matrix.script.name }} ${{ matrix.extra_options.project_name }}"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -81,7 +84,8 @@ jobs:
           --data 'full_name=Bruno Alla' \
           --data 'email=test@example.com' \
           --data 'github_username=dummy' \
-          --data 'project_name=My Amazing Project' \
+          --data 'project_name=${{ matrix.extra_options.project_name }}' \
+          --data 'project_slug=${{ matrix.extra_options.project_slug }}' \
           --data 'project_short_description=Just a great project' \
           --data 'open_source_license=MIT' \
           ${{ matrix.extra_options.value }} \
