@@ -40,6 +40,16 @@ body:
       placeholder: "Example: Windows 11 / macOS 12.0.1 / Ubuntu 20.04"
     validations:
       required: true
+{%- if is_django_package  %}
+  - type: input
+    id: django_version
+    attributes:
+      label: Django version
+      description: Version of Django used.
+      placeholder: Version
+    validations:
+      required: true
+{%- endif  %}
   - type: checkboxes
     id: terms
     attributes:
