@@ -20,6 +20,7 @@ Project template for a Python Package using Copier.
 - Follow to [the conventional commits][conventional-commits] specification.
 - Automated releasing using [python-semantic-release][python-semantic-release].
 - Documentation configured with Sphinx and [MyST Parser][myst].
+- Follows the contributor covenant code of conduct.
 - Standardised list of GitHub labels synchronised on push to master using [the labels CLI][pylabels].
 
 ## Usage
