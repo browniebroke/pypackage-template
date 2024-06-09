@@ -49,6 +49,17 @@
 Install this via pip (or your favourite package manager):
 
 `pip install {{ project_slug }}`
+{%- if is_django_package %}
+
+Add the app to your `INSTALLED_APPS`:
+
+```python
+INSTALLED_APPS = [
+    # ...
+    "{{ package_name }}",
+]
+```
+{%- endif %}
 {%- if not documentation  %}
 
 ## Usage
