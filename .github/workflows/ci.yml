@@ -63,6 +63,8 @@ jobs:
             value: ""
           - label: "with CLI"
             value: "--data 'has_cli=yes' --data 'cli_name=mycli'"
+          - label: "Django package"
+            value: "--data 'is_django_package=yes' --data 'documentation=yes'"
     runs-on: ubuntu-latest
     name: "Generated: ${{ matrix.script.name }} ${{ matrix.extra_options.label }}"
     steps:
