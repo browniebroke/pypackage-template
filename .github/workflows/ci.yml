@@ -49,7 +49,7 @@ jobs:
       fail-fast: false
       matrix:
         script:
-          - run: "poetry run pytest"
+          - run: "poetry run python -m pytest tests"
             dir: ""
             name: "pytest"
           - run: "git init && git add . && pipx run pre-commit run -a"
