@@ -12,20 +12,31 @@ github_username:
   type: str
   help: "GitHub Username"
 
+is_django_package:
+  type: bool
+  help: "Is the project a Django package?"
+  default: no
+
 project_name:
   type: str
-  help: "Project Name (human readable version)"
+  help: "Project Name (human readable version){% if is_django_package %}, should start by 'Django'{% endif %}."
   placeholder: "Python Package"
 
 project_slug:
   type: str
-  help: "Project slug (used for GitHub, PyPI, etc.)"
+  help: "Project slug (used for GitHub, PyPI, etc.){% if is_django_package %}, should start by 'django-'{% endif %}."
   default: "{{ project_name.lower().replace(' ', '-') }}"
 
 package_name:
   type: str
-  help: "The name of the main Python package (should be a valid Python identifier)"
+  help: "The name of the main Python package (should be a valid Python identifier{% if is_django_package %} and start by 'django_'{% endif %})"
   default: "{{ project_slug.replace('-', '_') }}"
+
+django_app_shorthand:
+  type: str
+  help: "The Django app shorthand, typically the package name without the 'django_' prefix."
+  default: "{{ package_name.removeprefix('django_') }}"
+  when: "{{ is_django_package }}"
 
 project_short_description:
   type: str

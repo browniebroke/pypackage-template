@@ -14,6 +14,14 @@ classifiers = [
     "Intended Audience :: Developers",
     "Natural Language :: English",
     "Operating System :: OS Independent",
+    {%- if is_django_package %}
+    "Framework :: Django",
+    "Framework :: Django :: 3.2",
+    "Framework :: Django :: 4.0",
+    "Framework :: Django :: 4.1",
+    "Framework :: Django :: 4.2",
+    "Framework :: Django :: 5.0",
+    {%- endif  %}
     "Topic :: Software Development :: Libraries",
 ]
 packages = [
@@ -31,6 +39,9 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.8"
+{%- if is_django_package  %}
+django = ">=3.2"
+{%- endif %}
 {%- if has_cli  %}
 rich = ">=10"
 typer = {extras = ["all"], version = "^0.9.0"}
@@ -39,6 +50,9 @@ typer = {extras = ["all"], version = "^0.9.0"}
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.0"
 pytest-cov = "^3.0"
+{%- if is_django_package  %}
+pytest-django = "^4.5"
+{%- endif %}
 {%- if documentation %}
 
 [tool.poetry.group.docs]
@@ -78,8 +92,20 @@ match = "(?!main$)"
 prerelease = true
 
 [tool.pytest.ini_options]
-addopts = "-v -Wdefault --cov={{ package_name }} --cov-report=term-missing:skip-covered"
+addopts = """\
+    -v
+    -Wdefault
+    --cov={{ package_name }}
+    --cov-report=term
+    --cov-report=xml
+{%- if is_django_package  %}
+    --ds=tests.settings
+{%- endif  %}
+    """
 pythonpath = ["src"]
+{%- if is_django_package  %}
+django_find_project = false
+{%- endif  %}
 
 [tool.coverage.run]
 branch = true
@@ -134,7 +160,7 @@ select = [
 "docs/conf.py" = ["D100"]
 {%- endif %}
 
-[tool.ruff.isort]
+[tool.ruff.lint.isort]
 known-first-party = ["{{ package_name }}", "tests"]
 
 [tool.mypy]

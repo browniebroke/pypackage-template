@@ -12,6 +12,7 @@ Project template for a Python Package using Copier.
 - Testing with Pytest using GitHub actions.
 - Packaging powered by [poetry].
 - Optionally generates a CLI entry point powered by [Typer] and [Rich].
+- Optionally makes it a Django package.
 - Uses [Ruff] for formatting and linting.
 - Comes with [pre-commit] hook config for [Ruff].
 - Style guide enforced on CI.
