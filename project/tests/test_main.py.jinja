@@ -14,6 +14,6 @@ def test_is_enabled_with_default_value():
 
 def test_is_enabled_when_overridden(settings):
     """Enabled function works as expected when setting is changed."""
-    settings.ADMIN_HELPERS_ENABLED = False
+    settings.{{ django_app_shorthand.upper() }}_ENABLED = False
     assert is_enabled() is False
 {%- endif %}

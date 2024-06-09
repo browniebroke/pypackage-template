@@ -9,5 +9,5 @@
 
 def is_enabled() -> bool:
     """Example usage of app settings."""
-    return app_settings.ADMIN_HELPERS_ENABLED
+    return app_settings.{{ django_app_shorthand.upper() }}_ENABLED
 {%- endif  %}
