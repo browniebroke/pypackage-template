@@ -75,10 +75,23 @@ If you have the GitHub CLI installed and chose to set up GitHub, they will be cr
 
 ### Automated release
 
-By following the conventional commits specification, we're able to completely automate versioning and releasing to PyPI. It runs on every push to your main branch, as part of the `release` job of the `ci.yml` workflow.
-You'll need to create the first version manually in PyPI and then setup [trusted publisher](https://docs.pypi.org/trusted-publishers/using-a-publisher/) for the project.
+By following the conventional commits specification, we're able to completely automate versioning and releasing to PyPI. It runs on every push to your main branch, as part of the `release` job of the `ci.yml` workflow. You shouldn't need to create a token, but you'll need to setup [trusted publisher](https://docs.pypi.org/trusted-publishers/using-a-publisher/) for the project.
 
-Here is an overview of its features:
+#### Trusted publisher setup
+
+The first time you push, the workflow will try to create a release in PyPI, however the project doesn't exist there yet, which seems like a chicken and egg situation. Luckily, you can add a trusted publisher before creating the PyPI project here: https://pypi.org/manage/account/publishing/. Here are the infos that you should use:
+
+- PyPI project name: what you've entered as "project slug"
+- Owner: your GitHub username
+- Repository name: what you've entered as "project slug"
+- Workflow name: `ci.yml`
+- Environment name: `release`
+
+If the release phase failed the first time, you might have to remove the release and tag from GitHub, and perhaps tidy up the changelog.
+
+#### How it works
+
+Here is an overview of what it's doing:
 
 - Check the commit log since the last release, and determine the next version to be released.
 - If no significant change detected, stop here (e.g. just dependencies update).
