@@ -48,6 +48,14 @@ select = [
     "D104",
     "S101",
 ]
+"project/tests/**/*" = [
+    "D100",
+    "D101",
+    "D102",
+    "D103",
+    "D104",
+    "S101",
+]
 
 [tool.pytest.ini_options]
 addopts = "-v -Wdefault"
