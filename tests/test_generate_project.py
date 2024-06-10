@@ -276,6 +276,27 @@ def test_django_package_yes(
         ],
     )
     _check_file_contents(
+        dst_path / "tests" / "urls.py",
+        expected_strs=[
+            "urlpatterns = [",
+            '    path("admin/", admin.site.urls),',
+        ],
+    )
+    _check_file_contents(
+        dst_path / "tests" / "testapp" / "apps.py",
+        expected_strs=[
+            "class TestAppConfig(AppConfig):",
+            '    name = "tests.testapp"',
+            '    verbose_name = "Test App"',
+        ],
+    )
+    _check_file_contents(
+        dst_path / "tests" / "testapp" / "models.py",
+        expected_strs=[
+            "class Blog(models.Model):",
+        ],
+    )
+    _check_file_contents(
         dst_path / "docs" / "index.md",
         expected_strs=["configuration"],
     )
@@ -327,6 +348,8 @@ def test_django_package_no(
     assert not (dst_path / "src" / "snake_farm" / "conf.py").exists()
     assert not (dst_path / "src" / "snake_farm" / "apps.py").exists()
     assert not (dst_path / "tests" / "settings.py").exists()
+    assert not (dst_path / "tests" / "urls.py").exists()
+    assert not (dst_path / "tests" / "testapp").exists()
     assert not (dst_path / "docs" / "configuration.rst").exists()
     _check_file_contents(
         dst_path / "pyproject.toml",
