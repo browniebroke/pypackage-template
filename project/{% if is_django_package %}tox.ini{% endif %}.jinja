@@ -4,10 +4,10 @@ requires =
     tox>=4.2
 env_list =
     py312-django{50,42}
-    py311-django{50,42,41}
-    py310-django{50,42,41,40,32}
-    py39-django{42,41,40,32}
-    py38-django{42,41,40,32}
+    py311-django{50,42}
+    py310-django{50,42}
+    py39-django{42}
+    py38-django{42}
 
 [testenv]
 set_env =
@@ -19,9 +19,6 @@ deps =
     # All supported Django versions
     django50: Django>=5.0,<5.1
     django42: Django>=4.2,<5.0
-    django41: Django>=4.1,<4.2
-    django40: Django>=4.0,<4.1
-    django32: Django>=3.2,<4.0
 commands =
     python \
       -m pytest {posargs:tests}

@@ -16,9 +16,6 @@ classifiers = [
     "Operating System :: OS Independent",
     {%- if is_django_package %}
     "Framework :: Django",
-    "Framework :: Django :: 3.2",
-    "Framework :: Django :: 4.0",
-    "Framework :: Django :: 4.1",
     "Framework :: Django :: 4.2",
     "Framework :: Django :: 5.0",
     {%- endif  %}
@@ -40,7 +37,7 @@ packages = [
 [tool.poetry.dependencies]
 python = "^3.8"
 {%- if is_django_package  %}
-django = ">=3.2"
+django = ">=4.2"
 {%- endif %}
 {%- if has_cli  %}
 rich = ">=10"
