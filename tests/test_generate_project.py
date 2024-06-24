@@ -243,9 +243,9 @@ def test_django_package_yes(
     _check_file_contents(
         dst_path / "pyproject.toml",
         expected_strs=[
-            '"Framework :: Django :: 3.2",',
+            '"Framework :: Django :: 4.2",',
             '"Framework :: Django :: 5.0",',
-            'django = ">=3.2"',
+            'django = ">=4.2"',
             'pytest-django = "^4.5"',
             "--ds=tests.settings",
             "django_find_project = false",
@@ -309,7 +309,7 @@ def test_django_package_yes(
         expected_strs=["Add the app to your `INSTALLED_APPS`:"],
     )
     _check_file_contents(
-        dst_path / "tox.ini", expected_strs=["django32: Django>=3.2,<4.0"]
+        dst_path / "tox.ini", expected_strs=["django42: Django>=4.2,<5.0"]
     )
     _check_file_contents(
         dst_path / ".gitignore", expected_strs=["requirements-dev.txt"]
@@ -354,9 +354,9 @@ def test_django_package_no(
     _check_file_contents(
         dst_path / "pyproject.toml",
         unexpect_strs=[
-            '"Framework :: Django :: 3.2",',
+            '"Framework :: Django :: 4.2",',
             '"Framework :: Django :: 5.0",',
-            'django = ">=3.2"',
+            'django = ">=4.2"',
             'pytest-django = "^4.5"',
             "django_find_project = false",
         ],
