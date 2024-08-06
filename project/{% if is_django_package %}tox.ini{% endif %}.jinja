@@ -3,9 +3,9 @@ isolated_build = true
 requires =
     tox>=4.2
 env_list =
-    py312-django{50,42}
-    py311-django{50,42}
-    py310-django{50,42}
+    py312-django{51,50,42}
+    py311-django{51,50,42}
+    py310-django{51,50,42}
     py39-django{42}
     py38-django{42}
 
@@ -17,6 +17,7 @@ deps =
     # poetry export --without-hashes --only=dev --format=requirements.txt --output=requirements-dev.txt
     -r requirements-dev.txt
     # All supported Django versions
+    django51: Django>=5.1a1,<5.2
     django50: Django>=5.0,<5.1
     django42: Django>=4.2,<5.0
 commands =
