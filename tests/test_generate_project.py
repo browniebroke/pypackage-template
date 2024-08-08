@@ -313,7 +313,7 @@ def test_django_package_yes(
         expected_strs=[
             "django42: Django>=4.2,<5.0",
             "django50: Django>=5.0,<5.1",
-            "django51: Django>=5.1a1,<5.2",
+            "django51: Django>=5.1,<5.2",
         ],
     )
     _check_file_contents(
