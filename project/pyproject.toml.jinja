@@ -1,8 +1,12 @@
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = [ "poetry-core>=1.0.0" ]
+
 [tool.poetry]
 name = "{{ project_slug }}"
 version = "0.0.0"
 description = "{{ project_short_description }}"
-authors = ["{{ full_name }} <{{ email }}>"]
+authors = [ "{{ full_name }} <{{ email }}>" ]
 license = "{{ open_source_license }}"
 readme = "README.md"
 repository = "https://github.com/{{ github_username }}/{{ project_slug }}"
@@ -10,20 +14,20 @@ repository = "https://github.com/{{ github_username }}/{{ project_slug }}"
 documentation = "https://{{ project_slug }}.readthedocs.io"
 {%- endif %}
 classifiers = [
-    "Development Status :: 2 - Pre-Alpha",
-    "Intended Audience :: Developers",
-    "Natural Language :: English",
-    "Operating System :: OS Independent",
-    {%- if is_django_package %}
-    "Framework :: Django",
-    "Framework :: Django :: 4.2",
-    "Framework :: Django :: 5.0",
-    "Framework :: Django :: 5.1",
-    {%- endif  %}
-    "Topic :: Software Development :: Libraries",
+  "Development Status :: 2 - Pre-Alpha",
+  "Intended Audience :: Developers",
+  "Natural Language :: English",
+  "Operating System :: OS Independent",
+  {%- if is_django_package %}
+  "Framework :: Django",
+  "Framework :: Django :: 4.2",
+  "Framework :: Django :: 5.0",
+  "Framework :: Django :: 5.1",
+  {%- endif  %}
+  "Topic :: Software Development :: Libraries",
 ]
 packages = [
-    { include = "{{ package_name }}", from = "src" },
+  { include = "{{ package_name }}", from = "src" },
 ]
 
 [tool.poetry.urls]
@@ -42,7 +46,7 @@ django = ">=4.2"
 {%- endif %}
 {%- if has_cli  %}
 rich = ">=10"
-typer = {extras = ["all"], version = "^0.9.0"}
+typer = { extras = [ "all" ], version = "^0.9.0" }
 {%- endif %}
 
 [tool.poetry.group.dev.dependencies]
@@ -57,38 +61,49 @@ pytest-django = "^4.5"
 optional = true
 
 [tool.poetry.group.docs.dependencies]
-myst-parser = { version = ">=0.16", python = ">=3.11"}
-sphinx = { version = ">=4.0", python = ">=3.11"}
-furo = { version = ">=2023.5.20", python = ">=3.11"}
-sphinx-autobuild = { version = ">=2024.0.0", python = ">=3.11"}
+myst-parser = { version = ">=0.16", python = ">=3.11" }
+sphinx = { version = ">=4.0", python = ">=3.11" }
+furo = { version = ">=2023.5.20", python = ">=3.11" }
+sphinx-autobuild = { version = ">=2024.0.0", python = ">=3.11" }
 {%- endif %}
 
-[tool.semantic_release]
-version_toml = ["pyproject.toml:tool.poetry.version"]
-version_variables = [
-    "src/{{ package_name }}/__init__.py:__version__",
-    {%- if documentation %}
-    "docs/conf.py:release",
-    {%- endif %}
+[tool.ruff]
+target-version = "py38"
+line-length = 88
+lint.select = [
+  "B",   # flake8-bugbear
+  "D",   # flake8-docstrings
+  "C4",  # flake8-comprehensions
+  "S",   # flake8-bandit
+  "F",   # pyflake
+  "E",   # pycodestyle
+  "W",   # pycodestyle
+  "UP",  # pyupgrade
+  "I",   # isort
+  "RUF", # ruff specific
 ]
-build_command = "pip install poetry && poetry build"
-
-[tool.semantic_release.changelog]
-exclude_commit_patterns = [
-    "chore.*",
-    "ci.*",
-    "Merge pull request .*",
+lint.ignore = [
+  "D203", # 1 blank line required before class docstring
+  "D212", # Multi-line docstring summary should start at the first line
+  "D100", # Missing docstring in public module
+  "D104", # Missing docstring in public package
+  "D107", # Missing docstring in `__init__`
+  "D401", # First line of docstring should be in imperative mood
 ]
-
-[tool.semantic_release.changelog.environment]
-keep_trailing_newline = true
-
-[tool.semantic_release.branches.main]
-match = "main"
-
-[tool.semantic_release.branches.noop]
-match = "(?!main$)"
-prerelease = true
+lint.per-file-ignores."conftest.py" = [ "D100" ]
+{%- if documentation %}
+lint.per-file-ignores."docs/conf.py" = [ "D100" ]
+{%- endif %}
+lint.per-file-ignores."setup.py" = [ "D100" ]
+lint.per-file-ignores."tests/**/*" = [
+  "D100",
+  "D101",
+  "D102",
+  "D103",
+  "D104",
+  "S101",
+]
+lint.isort.known-first-party = [ "{{ package_name }}", "tests" ]
 
 [tool.pytest.ini_options]
 addopts = """\
@@ -101,7 +116,7 @@ addopts = """\
     --ds=tests.settings
 {%- endif  %}
     """
-pythonpath = ["src"]
+pythonpath = [ "src" ]
 {%- if is_django_package  %}
 django_find_project = false
 {%- endif  %}
@@ -111,56 +126,12 @@ branch = true
 
 [tool.coverage.report]
 exclude_lines = [
-    "pragma: no cover",
-    "@overload",
-    "if TYPE_CHECKING",
-    "raise NotImplementedError",
-    'if __name__ == "__main__":',
+  "pragma: no cover",
+  "@overload",
+  "if TYPE_CHECKING",
+  "raise NotImplementedError",
+  'if __name__ == "__main__":',
 ]
-
-[tool.ruff]
-target-version = "py38"
-line-length = 88
-
-[tool.ruff.lint]
-ignore = [
-    "D203", # 1 blank line required before class docstring
-    "D212", # Multi-line docstring summary should start at the first line
-    "D100", # Missing docstring in public module
-    "D104", # Missing docstring in public package
-    "D107", # Missing docstring in `__init__`
-    "D401", # First line of docstring should be in imperative mood
-]
-select = [
-    "B",   # flake8-bugbear
-    "D",   # flake8-docstrings
-    "C4",  # flake8-comprehensions
-    "S",   # flake8-bandit
-    "F",   # pyflake
-    "E",   # pycodestyle
-    "W",   # pycodestyle
-    "UP",  # pyupgrade
-    "I",   # isort
-    "RUF", # ruff specific
-]
-
-[tool.ruff.lint.per-file-ignores]
-"tests/**/*" = [
-    "D100",
-    "D101",
-    "D102",
-    "D103",
-    "D104",
-    "S101",
-]
-"setup.py" = ["D100"]
-"conftest.py" = ["D100"]
-{%- if documentation %}
-"docs/conf.py" = ["D100"]
-{%- endif %}
-
-[tool.ruff.lint.isort]
-known-first-party = ["{{ package_name }}", "tests"]
 
 [tool.mypy]
 check_untyped_defs = true
@@ -174,9 +145,9 @@ warn_unreachable = true
 warn_unused_ignores = true
 exclude = [
 {%- if documentation %}
-    'docs/.*',
+  'docs/.*',
 {%- endif %}
-    'setup.py',
+  'setup.py',
 ]
 
 [[tool.mypy.overrides]]
@@ -189,6 +160,29 @@ module = "docs.*"
 ignore_errors = true
 {%- endif %}
 
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+[tool.semantic_release]
+version_toml = [ "pyproject.toml:tool.poetry.version" ]
+version_variables = [
+  "src/{{ package_name }}/__init__.py:__version__",
+  {%- if documentation %}
+  "docs/conf.py:release",
+  {%- endif %}
+]
+build_command = "pip install poetry && poetry build"
+
+[tool.semantic_release.changelog]
+exclude_commit_patterns = [
+  "chore.*",
+  "ci.*",
+  "Merge pull request .*",
+]
+
+[tool.semantic_release.changelog.environment]
+keep_trailing_newline = true
+
+[tool.semantic_release.branches.main]
+match = "main"
+
+[tool.semantic_release.branches.noop]
+match = "(?!main$)"
+prerelease = true
