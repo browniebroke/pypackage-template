@@ -75,7 +75,7 @@ def test_defaults_values(
     for line in content.split("\n"):
         if "cron:" in line:
             found = True
-            cron_expression = re.search(r"\d+ \d+ \d+ \* \*", line)
+            cron_expression = re.search(r"\d+ \d+ \d+ 1\-9\,11\-12 \*", line)
             assert cron_expression, f"Invalid cron expression: {line}"
     assert found, f"No cron expression in {content}"
 
