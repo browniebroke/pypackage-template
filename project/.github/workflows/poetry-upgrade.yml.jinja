@@ -3,7 +3,7 @@ name: Upgrader
 on:
   workflow_dispatch:
   schedule:
-    - cron: "{{ range(0, 60) | random }} {{ range(0, 24) | random }} {{ range(1, 28) | random }} * *"
+    - cron: "{{ range(0, 60) | random }} {{ range(0, 24) | random }} {{ range(1, 28) | random }} 1-9,11-12 *"
 
 jobs:
   upgrade:
