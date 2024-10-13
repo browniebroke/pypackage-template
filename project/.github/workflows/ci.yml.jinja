@@ -108,7 +108,11 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          ref: ${{ github.head_ref || github.ref_name }}
+          ref: ${{ github.sha }}
+
+      - name: Setup | Force correct release branch on workflow sha
+        run: |
+          git checkout -B ${{ github.ref_name }} ${{ github.sha }}
 
       # Do a dry run of PSR
       - name: Test release
@@ -139,4 +143,5 @@ jobs:
         uses: python-semantic-release/publish-action@v9.8.1
         if: steps.release.outputs.released == 'true'
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}{% endraw %}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ steps.release.outputs.tag }}{% endraw %}
