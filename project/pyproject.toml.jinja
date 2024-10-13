@@ -171,6 +171,7 @@ version_variables = [
 build_command = "pip install poetry && poetry build"
 
 [tool.semantic_release.changelog]
+mode = "update"
 exclude_commit_patterns = [
   '''chore(?:\([^)]*?\))?: .+''',
   '''ci(?:\([^)]*?\))?: .+''',
