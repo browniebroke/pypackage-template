@@ -1,0 +1,106 @@
+{#
+  MACRO: format the breaking changes description by:
+  - Capitalizing the description
+  - Adding an optional scope prefix
+#}{%  macro format_breaking_changes_description(commit)
+%}{%    set description = commit.breaking_descriptions | join("\n\n") | indent(2) | capitalize | safe | trim
+%}{%    if commit.scope
+%}{%      set description = "**%s**: %s" | format(commit.scope, description)
+%}{%    endif
+%}{{    description
+}}{%  endmacro
+%}
+
+{#
+  MACRO: apply smart ordering of commits objects based on alphabetized breaking changes and then scopes
+  - Commits are sorted based on the commit type and the commit message
+  - Commits are grouped by the commit type
+#}{%  macro apply_alphabetical_ordering_by_brk_descriptions(commits)
+%}{%    set ordered_commits = []
+%}{#
+   #    # grab all commits with no scope and sort alphabetically by the first line of the commit message
+#}{%    for commit in commits | rejectattr("scope") | sort(attribute='breaking_descriptions.0')
+%}{{      ordered_commits.append(commit) | default("", true)
+}}{%     endfor
+%}{#
+   #    # grab all commits with a scope and sort alphabetically by the scope and then the first line of the commit message
+#}{%    for commit in commits | selectattr("scope") | sort(attribute='scope, breaking_descriptions.0')
+%}{{      ordered_commits.append(commit) | default("", true)
+}}{%    endfor
+%}{#
+   #    # Return the ordered commits
+#}{{    ordered_commits
+}}{%  endmacro
+%}
+
+{#
+  MACRO: commit message links or PR/MR links of commit
+#}{%  macro commit_msg_links(commit)
+%}{%    set commit_hash_link = "[`%s`](%s)" | format(
+          commit.short_hash, commit.hexsha | commit_hash_url
+        )
+%}{#
+#}{%    set summary_line = commit.descriptions[0] | capitalize | safe
+%}{#
+   #    # Determine the PR identifier based on the HVCS type
+#}{%    if ctx.hvcs_type in ["bitbucket", "gitea", "github"]
+%}{%      set pr_identifier = "#"
+%}{%    elif ctx.hvcs_type == "gitlab"
+%}{%      set pr_identifier = "!"
+%}{%    else
+%}{%      set pr_identifier = ""
+%}{%    endif
+%}{#
+#}{%    if pr_identifier != "" and summary_line.split("(" ~ pr_identifier) | length > 1
+%}{#      # Replace PR references with a link to the PR
+#}{%      set pr_num = summary_line.split("(" ~ pr_identifier, maxsplit=1)[1].split(")")[0]
+%}{%      set pr_link = "[%s](%s)" | format(pr_identifier ~ pr_num, pr_num | pull_request_url)
+%}{%      set replacement = "(%s, %s)" | format(pr_link, commit_hash_link)
+%}{%      set search_text = "(%s)" | format(pr_identifier ~ pr_num)
+%}{%      set summary_line = summary_line | replace(search_text, replacement)
+%}{#
+        # DEFAULT: No PR identifier found, so just append commit hash as url to the commit summary_line
+#}{%    else
+%}{%      set summary_line = "%s (%s)" | format(summary_line, commit_hash_link)
+%}{%    endif
+%}{#
+        # Return the modified summary_line
+#}{{    summary_line
+}}{%  endmacro
+%}
+
+{#
+  MACRO: format the first line of the commit message with optional scope
+  - PR/MR links are added if found in the first line description
+  - commit hash links are always added
+#}{%  macro format_commit_summary_line(commit)
+%}{%    set summary_line = commit_msg_links(commit)
+%}{%    if commit.scope
+%}{%      set summary_line = "**%s**: %s" | format(commit.scope, summary_line)
+%}{%    endif
+%}{{    summary_line
+}}{%  endmacro
+%}
+
+
+{#
+  MACRO: apply smart ordering of commits objects based on alphabetized summaries and then scopes
+  - Commits are sorted based on the commit type and the commit message
+  - Commits are grouped by the commit type
+#}{%  macro apply_alphabetical_ordering_by_descriptions(commits)
+%}{%    set ordered_commits = []
+%}{#
+   #    # grab all commits with no scope and sort alphabetically by the first line of the commit message
+#}{%    for commit in commits | rejectattr("scope") | sort(attribute='descriptions.0')
+%}{{      ordered_commits.append(commit) | default("", true)
+}}{%     endfor
+%}{#
+   #    # grab all commits with a scope and sort alphabetically by the scope and then the first line of the commit message
+#}{%    for commit in commits | selectattr("scope") | sort(attribute='scope, descriptions.0')
+%}{{      ordered_commits.append(commit) | default("", true)
+}}{%    endfor
+%}{#
+   #    # Return the ordered commits
+#}{{    ordered_commits
+}}{%  endmacro
+%}
