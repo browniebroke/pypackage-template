@@ -1,0 +1,5 @@
+{#  Insertion flag is the Changelog header so we keep this clear
+#}{%  if ctx.changelog_mode == "update"
+%}{{    insertion_flag ~ "\n"
+}}{%  endif
+%}
