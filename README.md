@@ -156,6 +156,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/34j"><img src="https://avatars.githubusercontent.com/u/55338215?v=4?s=80" width="80px;" alt="34j"/><br /><sub><b>34j</b></sub></a><br /><a href="https://github.com/browniebroke/pypackage-template/commits?author=34j" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/kroimon"><img src="https://avatars.githubusercontent.com/u/628587?v=4?s=80" width="80px;" alt="Stefan Rado"/><br /><sub><b>Stefan Rado</b></sub></a><br /><a href="https://github.com/browniebroke/pypackage-template/commits?author=kroimon" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/codejedi365"><img src="https://avatars.githubusercontent.com/u/17354856?v=4?s=80" width="80px;" alt="codejedi365"/><br /><sub><b>codejedi365</b></sub></a><br /><a href="https://github.com/browniebroke/pypackage-template/commits?author=codejedi365" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.habet.dev"><img src="https://avatars.githubusercontent.com/u/82916197?v=4?s=80" width="80px;" alt="Abe Hanoka"/><br /><sub><b>Abe Hanoka</b></sub></a><br /><a href="https://github.com/browniebroke/pypackage-template/issues?q=author%3Aabe-101" title="Bug reports">🐛</a></td>
     </tr>
   </tbody>
 </table>
