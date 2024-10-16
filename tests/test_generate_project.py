@@ -240,6 +240,9 @@ def test_django_package_yes(
     )
 
     assert tmp_path.exists()
+    assert (
+        dst_path / "src" / "django_snake_farm" / "migrations" / "__init__.py"
+    ).exists()
     _check_file_contents(
         dst_path / "pyproject.toml",
         expected_strs=[
@@ -249,6 +252,12 @@ def test_django_package_yes(
             'pytest-django = "^4.5"',
             "--ds=tests.settings",
             "django_find_project = false",
+        ],
+    )
+    _check_file_contents(
+        dst_path / "manage.py",
+        expected_strs=[
+            'os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tests.settings")',
         ],
     )
     _check_file_contents(
@@ -273,6 +282,9 @@ def test_django_package_yes(
         expected_strs=[
             'SECRET_KEY = "NOTASECRET"  # noqa S105',
             '    "django_snake_farm",',
+            "MIDDLEWARE = [",
+            "TEMPLATES = [",
+            'DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"',
         ],
     )
     _check_file_contents(
@@ -350,6 +362,8 @@ def test_django_package_no(
     )
 
     assert tmp_path.exists()
+    assert not (dst_path / "src" / "snake_farm" / "migrations" / "__init__.py").exists()
+    assert not (dst_path / "manage.py").exists()
     assert not (dst_path / "src" / "snake_farm" / "conf.py").exists()
     assert not (dst_path / "src" / "snake_farm" / "apps.py").exists()
     assert not (dst_path / "tests" / "settings.py").exists()
