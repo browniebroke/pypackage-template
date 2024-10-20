@@ -1,17 +1,32 @@
-# Changelog
+{#
+    This changelog template controls which changelog creation occurs
+    based on which mode is provided.
 
-{%- for version, release in context.history.released.items() %}
+    Modes:
+        - init: Initialize a full changelog from scratch
+        - update: Insert new version details where the placeholder exists in the current changelog
 
-## {{ version.as_tag() }} ({{ release.tagged_date.strftime("%Y-%m-%d") }})
-
-{%- for category, commits in release["elements"].items() %}{% if category != "unknown" %}
-{# Category title: Breaking, Fix, Documentation #}
-### {{ category | capitalize }}
-{# List actual changes in the category #}
-{%- for commit in commits %}
-- {{ commit.descriptions[0] | capitalize }} ([`{{ commit.short_hash }}`]({{ commit.hexsha | commit_hash_url }}))
-{%- endfor %}{# for commit #}
-
-{%- endif %}{% endfor %}{# for category, commits #}
-
-{%- endfor %}{# for version, release #}
+#}{%  set this_file = "CHANGELOG.md"
+%}{%  set insertion_flag = ctx.changelog_insertion_flag
+%}{%  set unreleased_commits = ctx.history.unreleased | dictsort
+%}{%  set releases = ctx.history.released.values() | list
+%}{%  set hvcs_type = ctx.hvcs_type
+%}{#
+#}{%  if ctx.changelog_mode == "update"
+%}{#    # this file's destination file will match the file we want
+   #    # to maintain and update in the future
+#}{%    set prev_changelog_file = this_file
+%}{#
+#}{%    set new_releases = []
+%}{%    if releases | length > 0
+%}{%      set new_releases = [releases | first]
+%}{%    endif
+%}{#
+#}{%    include ".components/changelog_update.md.j2"
+%}{#
+#}{%  elif ctx.changelog_mode == "init"
+%}{{    "# CHANGELOG\n"
+}}{%    include ".components/changelog_init.md.j2"
+%}{#
+#}{%  endif
+%}
