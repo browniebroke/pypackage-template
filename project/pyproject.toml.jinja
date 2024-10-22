@@ -171,10 +171,18 @@ version_variables = [
 build_command = "pip install poetry && poetry build"
 
 [tool.semantic_release.changelog]
+insertion_flag = "# CHANGELOG"
+mode = "update"
+template_dir = "templates"
 exclude_commit_patterns = [
-  "chore.*",
-  "ci.*",
-  "Merge pull request .*",
+  '''chore(?:\([^)]*?\))?: .+''',
+  '''ci(?:\([^)]*?\))?: .+''',
+  '''refactor(?:\([^)]*?\))?: .+''',
+  '''style(?:\([^)]*?\))?: .+''',
+  '''test(?:\([^)]*?\))?: .+''',
+  '''build\((?!deps\): .+)''',
+  '''Merged? .*''',
+  '''Initial [Cc]ommit.*''', # codespell:ignore
 ]
 
 [tool.semantic_release.changelog.environment]
