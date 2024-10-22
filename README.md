@@ -12,15 +12,16 @@ Project template for a Python Package using Copier.
 - Testing with Pytest using GitHub actions.
 - Packaging powered by [poetry].
 - Optionally generates a CLI entry point powered by [Typer] and [Rich].
-- Follows the [black] style guide.
-- Uses [Ruff] for linting.
-- Comes with [pre-commit] hook config for [black] and [Ruff].
+- Optionally makes it a Django package.
+- Uses [Ruff] for formatting and linting.
+- Comes with [pre-commit] hook config for [Ruff].
 - Style guide enforced on CI.
 - Dependencies kept up to date by [Renovate].
 - Follow the [all-contributors] specification.
 - Follow to [the conventional commits][conventional-commits] specification.
 - Automated releasing using [python-semantic-release][python-semantic-release].
 - Documentation configured with Sphinx and [MyST Parser][myst].
+- Follows the contributor covenant code of conduct.
 - Standardised list of GitHub labels synchronised on push to master using [the labels CLI][pylabels].
 
 ## Usage
@@ -58,8 +59,8 @@ When you first push to GitHub, it'll start a `ci` GitHub workflow that you can s
 
 - The `test` job will run your test suite with Pytest against all Python version from 3.8 to 3.11
 - A few things will run in the lint job:
-  - black in check mode
-  - Ruff with several flake8 plugins, isort and pyupgrade plugins.
+  - Ruff format
+  - Ruff lint with several flake8, isort and pyupgrade plugins.
 
 A `labels` workflow will also run and synchronise the GitHub labels based on the `.github/labels.toml` file.
 
@@ -74,10 +75,23 @@ If you have the GitHub CLI installed and chose to set up GitHub, they will be cr
 
 ### Automated release
 
-By following the conventional commits specification, we're able to completely automate versioning and releasing to PyPI. It runs on every push to your main branch, as part of the `release` job of the `ci.yml` workflow.
-You'll need to create the first version manually in PyPI and then setup [trusted publisher](https://docs.pypi.org/trusted-publishers/using-a-publisher/) for the project.
+By following the conventional commits specification, we're able to completely automate versioning and releasing to PyPI. It runs on every push to your main branch, as part of the `release` job of the `ci.yml` workflow. You shouldn't need to create a token, but you'll need to setup [trusted publisher](https://docs.pypi.org/trusted-publishers/using-a-publisher/) for the project.
 
-Here is an overview of its features:
+#### Trusted publisher setup
+
+The first time you push, the workflow will try to create a release in PyPI, however the project doesn't exist there yet, which seems like a chicken and egg situation. Luckily, you can add a trusted publisher before creating the PyPI project here: https://pypi.org/manage/account/publishing/. Here are the infos that you should use:
+
+- PyPI project name: what you've entered as "project slug"
+- Owner: your GitHub username
+- Repository name: what you've entered as "project slug"
+- Workflow name: `ci.yml`
+- Environment name: `release`
+
+If the release phase failed the first time, you might have to remove the release and tag from GitHub, and perhaps tidy up the changelog.
+
+#### How it works
+
+Here is an overview of what it's doing:
 
 - Check the commit log since the last release, and determine the next version to be released.
 - If no significant change detected, stop here (e.g. just dependencies update).
@@ -90,7 +104,20 @@ Here is an overview of its features:
 - Build the source and binary distribution (wheel).
 - Upload the sources to PyPI and attach them to the Github release, using trusted publisher.
 
-For more details, check out the [conventional commits website][conventional-commits] and [Python semantic release][python-semantic-release] Github action.
+For more details, check out the [conventional commits website][conventional-commits] and [Python semantic release][python-semantic-release] GitHub action.
+
+### Optional: Django package
+
+If your package is a reusable Django app, you should answer "yes" to the question "Is the project a Django package?". This will generate a bit more boilerplate for you to make it easier to develop and test:
+
+- At the root, you'll get a `manage.py` which is going to come handy if your package contain any models and you need to run migrations for it.
+- Testing will use tox as the Django-Python support matrix can be complicated.
+- Inside your package source, you'll get a `conf.py` to include your reusable app settings, for the users of your app to configure your app. This is following the pattern explained in [this blog post](https://overtag.dk/v2/blog/a-settings-pattern-for-reusable-django-apps/).
+- The tests will come in with settings and URLs files, along with an test app with basic models.
+
+#### Migrations
+
+You should be able to use the provided `manage.py` to create migrations for your reusable app. Create or change your models and run `poetry run python manage.py makemigrations`.
 
 ### Pre-commit
 
@@ -128,6 +155,8 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://cloudreactor.io/"><img src="https://avatars.githubusercontent.com/u/1079646?v=4?s=80" width="80px;" alt="Jeff Tsay"/><br /><sub><b>Jeff Tsay</b></sub></a><br /><a href="https://github.com/browniebroke/pypackage-template/commits?author=jtsay362" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/34j"><img src="https://avatars.githubusercontent.com/u/55338215?v=4?s=80" width="80px;" alt="34j"/><br /><sub><b>34j</b></sub></a><br /><a href="https://github.com/browniebroke/pypackage-template/commits?author=34j" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/kroimon"><img src="https://avatars.githubusercontent.com/u/628587?v=4?s=80" width="80px;" alt="Stefan Rado"/><br /><sub><b>Stefan Rado</b></sub></a><br /><a href="https://github.com/browniebroke/pypackage-template/commits?author=kroimon" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/codejedi365"><img src="https://avatars.githubusercontent.com/u/17354856?v=4?s=80" width="80px;" alt="codejedi365"/><br /><sub><b>codejedi365</b></sub></a><br /><a href="https://github.com/browniebroke/pypackage-template/commits?author=codejedi365" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.habet.dev"><img src="https://avatars.githubusercontent.com/u/82916197?v=4?s=80" width="80px;" alt="Abe Hanoka"/><br /><sub><b>Abe Hanoka</b></sub></a><br /><a href="https://github.com/browniebroke/pypackage-template/issues?q=author%3Aabe-101" title="Bug reports">🐛</a></td>
     </tr>
   </tbody>
 </table>
@@ -142,7 +171,6 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 [poetry]: https://python-poetry.org
 [Typer]: https://typer.tiangolo.com
 [Rich]: https://rich.readthedocs.io
-[black]: https://github.com/psf/black
 [Ruff]: https://pypi.org/project/ruff/
 [pre-commit]: https://pre-commit.com/
 [renovate]: https://docs.renovatebot.com/

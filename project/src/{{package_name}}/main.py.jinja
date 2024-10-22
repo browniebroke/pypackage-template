@@ -1,0 +1,13 @@
+{% if is_django_package  %}from .conf import app_settings
+
+
+{% endif %}def add(n1: int, n2: int) -> int:
+    """Add the arguments."""
+    return n1 + n2
+{%- if is_django_package  %}
+
+
+def is_enabled() -> bool:
+    """Example usage of app settings."""
+    return app_settings.{{ django_app_shorthand.upper() }}_ENABLED
+{%- endif  %}

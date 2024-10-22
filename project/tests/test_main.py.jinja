@@ -1,6 +1,19 @@
-from {{ package_name }}.main import add
+from {{ package_name }}.main import add{% if is_django_package  %}, is_enabled{% endif %}
 
 
 def test_add():
     """Adding two number works as expected."""
     assert add(1, 1) == 2
+{%- if is_django_package  %}
+
+
+def test_is_enabled_with_default_value():
+    """Enabled function works as expected when unset."""
+    assert is_enabled() is True
+
+
+def test_is_enabled_when_overridden(settings):
+    """Enabled function works as expected when setting is changed."""
+    settings.{{ django_app_shorthand.upper() }}_ENABLED = False
+    assert is_enabled() is False
+{%- endif %}

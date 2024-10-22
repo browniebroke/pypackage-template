@@ -1,7 +1,7 @@
 # questions
 project_name:
   type: str
-  help: "Project Name (human readable version)"
+  help: "Project Name (human readable version){% if is_django_package %}, should start by 'Django'{% endif %}."
   default: '{{ "exec(''import sys'') or sys.argv[-1]" | eval | capitalize | replace("-", " ") }}'
 
 project_short_description:
@@ -23,27 +23,38 @@ cli_name:
 full_name:
   type: str
   help: "What's your name?"
-  default: "{{ '' | env ('NAME')}}"
+  default: "{{ '' | env ('PYPACKAGE_TEMPLATE_NAME')}}"
 
 email:
   type: str
   help: "Email address"
-  default: "{{ '' | env('EMAIL') }}"
+  default: "{{ '' | env('PYPACKAGE_TEMPLATE_EMAIL') }}"
 
 github_username:
   type: str
   help: "GitHub Username"
-  default: "{{ full_name | env('GITHUB_USER') }}"
+  default: "{{ (\"exec('from subprocess import run; import json; j = json.loads(run([\"gh\",\"api\",\"user\"], capture_output=True).stdout)') or j['login']\" | exec) | env('PYPACKAGE_TEMPLATE_GITHUB_USER') }}" 
+
+is_django_package:
+  type: bool
+  help: "Is the project a Django package?"
+  default: no
 
 project_slug:
   type: str
-  help: "Project slug (used for GitHub, PyPI, etc.)"
+  help: "Project slug (used for GitHub, PyPI, etc.){% if is_django_package %}, should start by 'django-'{% endif %}."
   default: "{{ project_name.lower().replace(' ', '-') }}"
 
 package_name:
   type: str
-  help: "The name of the main Python package (should be a valid Python identifier)"
+  help: "The name of the main Python package (should be a valid Python identifier{% if is_django_package %} and start by 'django_'{% endif %})"
   default: "{{ project_slug.replace('-', '_') }}"
+
+django_app_shorthand:
+  type: str
+  help: "The Django app shorthand, typically the package name without the 'django_' prefix."
+  default: "{{ package_name.removeprefix('django_') }}"
+  when: "{{ is_django_package }}"
 
 open_source_license:
   type: str
@@ -122,24 +133,24 @@ _tasks:
   - "{% if setup_venv %}{% if 'Windows' in ''|env('OS') %}py -{% else %}python{% endif %}{{ venv_version }} -m venv venv{% endif %}"
   # Run poetry install
   - "{% if 'Windows' in ''|env('OS') %}{% set venv_folder = 'venv\\\\scripts\\\\' %}{% else %}{% set venv_folder = 'venv/bin/' %}{% endif %}
-    {% if run_poetry_install %}{{ venv_folder }}python -m pip install -U pip setuptools wheel && {{ venv_folder }}pip install -U poetry pre-commit && {% if 'Windows' in ''|env('OS') %}venv\\scripts\\activate && {% else %}{% endif %}{{ venv_folder }}poetry install --with dev{% endif %}"
+    {% if run_poetry_install %}{{ venv_folder }}python -m pip install -U pip setuptools wheel && {{ venv_folder }}pip install -U poetry pre-commit && {{ venv_folder }}python -m poetry install --with dev{% endif %}"
   # git init
   - "git init && git add ."
   # Setup pre-commit
   - "{% if 'Windows' in ''|env('OS') %}{% set venv_folder = 'venv\\\\scripts\\\\' %}{% else %}{% set venv_folder = 'venv/bin/' %}{% endif %}
-    {% if setup_pre_commit %}{{ venv_folder }}pre-commit install && {{ venv_folder }}pre-commit run -a || git add .{% endif %}"
+    {% if setup_pre_commit %}{{ venv_folder }}pre-commit autoupdate && {{ venv_folder }}pre-commit install && {{ venv_folder }}pre-commit run -a || git add .{% endif %}"
   # Initial commit
-  - '{% if initial_commit %}git add . && git commit -m "chore: initial commit"{% endif %}'
+  - '{% if initial_commit %}git commit -m "chore: initial commit"{% endif %}'
   # Add me as a contributor
   - "{% if add_me_as_contributor %}npx all-contributors-cli add {{ github_username }} code,ideas,doc{% endif %}"
   # Setup GitHub
-  - '{% if setup_github %}{% if ''Windows'' in ''''|env(''OS'') %}"C:/Program Files/Git/bin/bash"{% else %}bash{% endif %} .github/setup-github.bash {{ github_username }} {{ project_slug }} "{{ project_short_description }}"{% endif %}'
+  - '{% if setup_github %}bash .github/setup-github.bash {{ github_username }} {{ project_slug }} "{{ project_short_description }}"{% endif %}'
   # Open with vscode
-  - "{% if open_with_vscode %}code . || echo 'VSCode is not installed.'{% endif %}"
+  - "{% if open_with_vscode %}code .{% endif %}"
   # Replace true with false in .copier-answers.yml except "documentation: true" for faster copier update
-  # setup-..., initial_commit, add_me_as_contributor, open_with_vscode must be false
-  - 'python -c "from pathlib import Path; import re; p = Path(''.copier-answers.yml''); p.write_text(re.sub(r''(setup_venv|setup_github|setup_pre_commit|run_poetry_install|initial_commit|add_me_as_contributor|open_with_vscode): true'', r''\1: false'', p.read_text()))"'
+  - "sed -i '/documentation: true/!s/true/false/g' .copier-answers.yml"
 _jinja_extensions:
   - jinja2_time.TimeExtension
   - jinja2_eval.EvalExtension
+  - jinja2_shell.ShellExtension
   - jinja2_env.EnvExtension
