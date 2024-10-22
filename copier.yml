@@ -33,7 +33,7 @@ email:
 github_username:
   type: str
   help: "GitHub Username"
-  default: "{{ (\"exec('from subprocess import run; import json; j = json.loads(run([\"gh\",\"api\",\"user\"], capture_output=True).stdout)') or j['login']\" | exec) | env('PYPACKAGE_TEMPLATE_GITHUB_USER') }}" 
+  default: '{{ ("exec(''from subprocess import run; import json; j = json.loads(run(["gh","api","user"], capture_output=True).stdout)'') or j[''login'']" | exec) | env(''PYPACKAGE_TEMPLATE_GITHUB_USER'') }}'
 
 is_django_package:
   type: bool
