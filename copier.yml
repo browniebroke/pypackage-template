@@ -152,5 +152,4 @@ _tasks:
 _jinja_extensions:
   - jinja2_time.TimeExtension
   - jinja2_eval.EvalExtension
-  - jinja2_shell.ShellExtension
   - jinja2_env.EnvExtension
