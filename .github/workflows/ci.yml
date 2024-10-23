@@ -77,8 +77,10 @@ jobs:
         id: setup-python
         with:
           python-version: "3.11"
+      - run: pipx install copier
+      - run: pipx inject copier jinja2-eval jinja2-env jinja2-time arrow
       - run: |
-          pipx run copier copy \
+          copier copy \
           . \
           my-project \
           --UNSAFE \
