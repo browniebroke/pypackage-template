@@ -115,9 +115,9 @@ add_me_as_contributor:
   default: yes
   when: "{{ initial_commit }}"
 
-open_with_vscode:
+open_with_editor:
   type: bool
-  help: "Open with VSCode?"
+  help: "Open with $VISUAL?"
   default: no
 
 # Copier metadata
@@ -150,8 +150,8 @@ _tasks:
   - "{% if add_me_as_contributor %}npx all-contributors-cli add {{ github_username }} code,ideas,doc{% endif %}"
   # Setup GitHub
   - '{% if setup_github %}bash .github/setup-github.bash {{ github_username }} {{ project_slug }} "{{ project_short_description }}"{% endif %}'
-  # Open with vscode
-  - "{% if open_with_vscode %}code .{% endif %}"
+  # Open with editor
+  - "{% if open_with_editor %}$VISUAL .{% endif %}"
 _jinja_extensions:
   - jinja2_time.TimeExtension
   - jinja2_eval.EvalExtension
