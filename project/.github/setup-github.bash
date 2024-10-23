@@ -12,8 +12,13 @@ gh repo create $repo -d "$shortDescription" --public --remote=origin --source=. 
 # squash merge
 gh repo edit --delete-branch-on-merge --enable-projects=false --enable-wiki=false --enable-merge-commit=false --enable-squash-merge --enable-rebase-merge=false
 
-# set secrets
-gh secret set GH_PAT -b $PYPACKAGE_TEMPLATE_GITHUB_TOKEN
+# set secrets if not empty, if empty warn
+if [ -z "$PYPACKAGE_TEMPLATE_GITHUB_TOKEN" ]; then
+    echo "PYPACKAGE_TEMPLATE_GITHUB_TOKEN is not set. Set it to a GitHub token with repo and workflow permissions. See https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token for further details."
+else
+    echo "Setting GitHub secrets"
+    gh secret set PYPACKAGE_TEMPLATE_GITHUB_TOKEN -b $PYPACKAGE_TEMPLATE_GITHUB_TOKEN
+fi
 
 # set workflow permissions
 gh api --method PUT -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" "repos/$ownerRepo/actions/permissions/workflow" -f default_workflow_permissions="read" -F can_approve_pull_request_reviews=true
