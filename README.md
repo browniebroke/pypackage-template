@@ -49,7 +49,7 @@ This will prompt you for a few questions and create new directory with the name 
 >
 > go to [Applications Settings](https://github.com/settings/installations) and copy the id in the link (`https://github.com/organizations/<Organization-name>/settings/installations/<ID>`) for the `Configure` button for the GitHub Apps you want to have installed automatically, and set `PYPACKAGE_TEMPLATE_INSTALLATION_IDS` environment variable with the comma separated list of IDs. (You may want to install [Renovate](https://github.com/marketplace/renovate), [pre-commit ci](https://github.com/marketplace/pre-commit-ci), as AllContributors and Codecov can be installed globally.)
 >
-> Your local PAT should have the `repo` (for setting apps) and `user` (for getting username and email) scopes.
+> You need to set $GITHUB_TOKEN with a [local PAT][create-pat-local] should have the `repo` (for app installation) and `user` (for getting username and email) scopes. (If you login with `gh auth login`, app installation will fail.)
 
 ### Start developing
 
@@ -196,5 +196,6 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 [codecov]: https://codecov.io/
 [pypi]: https://pypi.org/
 [create-pat]: https://github.com/settings/tokens/new?description=pypackage-template&scopes=repo
+[create-pat-local]: https://github.com/settings/tokens/new?description=pypackage-template-local&scopes=repo,user
 [rtd-dashboard]: https://readthedocs.org/dashboard/
 [all-contribs-install]: https://allcontributors.org/docs/en/bot/installation
