@@ -23,7 +23,7 @@ jobs:
           - "3.12"
         os:
           - ubuntu-latest
-          # - windows-latest
+          - windows-latest
           - macOS-latest
     runs-on: ${{ matrix.os }}
     name: "Template: ${{ matrix.python-version }} - ${{ matrix.os }}"
@@ -72,7 +72,8 @@ jobs:
     name: "Generated: ${{ matrix.script.name }} ${{ matrix.extra_options.project_name }}"
     steps:
       - uses: actions/checkout@v4
-      - uses: fregante/setup-git-user@v2
+      - run: git config --global user.name github-actions[bot]
+      - run: git config --global user.email 41898282+github-actions[bot]@users.noreply.github.com
       - uses: actions/setup-python@v5
         id: setup-python
         with:
