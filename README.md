@@ -33,12 +33,6 @@ pipx install copier
 pipx inject copier jinja2-eval jinja2-env jinja2-time arrow
 ```
 
-Next install GitHub CLI and set up `PYPACKAGE_TEMPLATE_GITHUB_TOKEN` environment variable with a [personal access token (PAT)][create-pat] with the `repo` scope.
-
-```shell
-set -x GITHUB_TOKEN ghp_...
-```
-
 Next set up [trusted publisher](#trusted-publisher-setup) and then generate a new project with:
 
 ```shell
@@ -49,6 +43,7 @@ This will prompt you for a few questions and create new directory with the name 
 
 > _Note:_
 > the `--trust` option is required because this template may execute some tasks after generating the project, like initialising the git repo, installing dependencies and so forth. These are all listed in the `copier.yml` of this repo, under the `_tasks` key. They are all optional and safe to run. You can take my word for it, or better, check the code yourself!
+> set `PYPACKAGE_TEMPLATE_GITHUB_TOKEN` environment variable with a [personal access token (PAT)][create-pat] with the `repo` scope. `set -x PYPACKAGE_TEMPLATE_GITHUB_TOKEN ghp_...`
 > go to [Applications Settings](https://github.com/settings/installations) and copy the id in the link (`https://github.com/organizations/<Organization-name>/settings/installations/<ID>`) for the `Configure` button for the GitHub Apps you want to have installed automatically, and set `PYPACKAGE_TEMPLATE_INSTALLATION_IDS` environment variable with the comma separated list of IDs.
 > (You may want to install [Renovate](https://github.com/marketplace/renovate), [pre-commit ci](https://github.com/marketplace/pre-commit-ci), as AllContributors and Codecov can be installed globally.)
 
@@ -85,8 +80,6 @@ The workflows need [a few secrets][gh-secrets] to be setup in your GitHub reposi
 
 - `GH_PAT` a [personal access token (PAT) with the `repo` scope][create-pat] for opening pull requests and updating the repository topics. This is used by the `poetry-upgrade` and `labels` workflows.
 - `CODECOV_TOKEN` to upload coverage data to [codecov.io][codecov] in the Test workflow.
-
-If you have the GitHub CLI installed and chose to set up GitHub, they will be created with a dummy value (`changeme`).
 
 ### Automated release
 

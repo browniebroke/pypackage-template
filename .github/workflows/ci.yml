@@ -86,8 +86,8 @@ jobs:
           my-project \
           --UNSAFE \
           --data 'full_name=Bruno Alla' \
-          --data 'email=test@example.com' \
-          --data 'github_username=dummy' \
+          --data 'email=41898282+github-actions[bot]@users.noreply.github.com' \
+          --data 'github_username=github-actions[bot]' \
           --data 'project_name=${{ matrix.extra_options.project_name }}' \
           --data 'project_slug=${{ matrix.extra_options.project_slug }}' \
           --data 'project_short_description=Just a great project' \
