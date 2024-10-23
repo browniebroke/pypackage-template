@@ -25,10 +25,9 @@ gh api --method PUT -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Ve
 
 # set branch protection
 # https://docs.github.com/ja/rest/branches/branch-protection?apiVersion=2022-11-28#update-branch-protection
-echo "Setting branch protection rules for $ownerRepo"
-for branch in main master; do
-    gh api --method PUT -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/$ownerRepo/branches/$branch/protection -F "required_status_checks=null" -F "enforce_admins=false" -F "required_pull_request_reviews=null" -F "restrictions=null" -F "required_linear_history=false" -F "allow_force_pushes=true" -F "allow_deletions=true" -F "block_creations=false" -F "required_conversation_resolution=false" -F "lock_branch=false" -F "allow_fork_syncing=true" || true
-done
+branch=$(git branch --show-current)
+echo "Setting branch protection rules for $ownerRepo:$branch"
+gh api --method PUT -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/$ownerRepo/branches/$branch/protection -F "required_status_checks=null" -F "enforce_admins=false" -F "required_pull_request_reviews=null" -F "restrictions=null" -F "required_linear_history=false" -F "allow_force_pushes=true" -F "allow_deletions=true" -F "block_creations=false" -F "required_conversation_resolution=false" -F "lock_branch=false" -F "allow_fork_syncing=true" || true
 
 # install GitHub Apps
 # Raise if PYPACKAGE_TEMPLATE_INSTALLATION_IDS is not set
