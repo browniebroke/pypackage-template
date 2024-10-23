@@ -13,7 +13,7 @@ gh repo create $repo -d "$shortDescription" --public --remote=origin --source=. 
 gh repo edit --delete-branch-on-merge --enable-projects=false --enable-wiki=false --enable-merge-commit=false --enable-squash-merge --enable-rebase-merge=false
 
 # set secrets
-gh secret set GH_PAT -b $GITHUB_TOKEN
+gh secret set GH_PAT -b $PYPACKAGE_TEMPLATE_GITHUB_TOKEN
 
 # set workflow permissions
 gh api --method PUT -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" "repos/$ownerRepo/actions/permissions/workflow" -f default_workflow_permissions="read" -F can_approve_pull_request_reviews=true

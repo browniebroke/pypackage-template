@@ -33,7 +33,7 @@ pipx install copier
 pipx inject copier jinja2-eval jinja2-env jinja2-time arrow
 ```
 
-Next install GitHub CLI and set up `GITHUB_TOKEN` environment variable with a [personal access token (PAT)][create-pat] with the `repo` scope.
+Next install GitHub CLI and set up `PYPACKAGE_TEMPLATE_GITHUB_TOKEN` environment variable with a [personal access token (PAT)][create-pat] with the `repo` scope.
 
 ```shell
 set -x GITHUB_TOKEN ghp_...
