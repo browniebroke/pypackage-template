@@ -75,7 +75,7 @@ def test_defaults_values(
     for line in content.split("\n"):
         if "cron:" in line:
             found = True
-            cron_expression = re.search(r"\d+ \d+ \d+ \* \*", line)
+            cron_expression = re.search(r"\d+ \d+ \d+ 1\-9\,11\-12 \*", line)
             assert cron_expression, f"Invalid cron expression: {line}"
     assert found, f"No cron expression in {content}"
 
@@ -219,3 +219,183 @@ def test_cli(
             dst_path / "pyproject.toml",
             unexpect_strs=["[tool.poetry.scripts]", 'mycli = "snake_farm.cli:app"'],
         )
+
+
+def test_django_package_yes(
+    tmp_path: Path,
+    base_answers: dict[str, str | bool],
+):
+    dst_path = tmp_path / "snake-farm"
+    copier.run_copy(
+        src_path=str(PROJECT_ROOT),
+        dst_path=dst_path,
+        data={
+            **base_answers,
+            "project_name": "Django Snake Farm",
+            "is_django_package": True,
+            "documentation": True,
+        },
+        defaults=True,
+        unsafe=True,
+    )
+
+    assert tmp_path.exists()
+    assert (
+        dst_path / "src" / "django_snake_farm" / "migrations" / "__init__.py"
+    ).exists()
+    _check_file_contents(
+        dst_path / "pyproject.toml",
+        expected_strs=[
+            '"Framework :: Django :: 4.2",',
+            '"Framework :: Django :: 5.0",',
+            'django = ">=4.2"',
+            'pytest-django = "^4.5"',
+            "--ds=tests.settings",
+            "django_find_project = false",
+        ],
+    )
+    _check_file_contents(
+        dst_path / "manage.py",
+        expected_strs=[
+            'os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tests.settings")',
+        ],
+    )
+    _check_file_contents(
+        dst_path / "src" / "django_snake_farm" / "conf.py",
+        expected_strs=[
+            "All attributes prefixed ``SNAKE_FARM_*``",
+            "class AppSettings:",
+            "app_settings = AppSettings()",
+        ],
+    )
+    _check_file_contents(
+        dst_path / "src" / "django_snake_farm" / "apps.py",
+        expected_strs=[
+            "class SnakeFarmAppConfig(AppConfig):",
+            '"""App config for Django Snake Farm."""',
+            'name = "django_snake_farm"',
+            'verbose_name = _("snake farm")',
+        ],
+    )
+    _check_file_contents(
+        dst_path / "tests" / "settings.py",
+        expected_strs=[
+            'SECRET_KEY = "NOTASECRET"  # noqa S105',
+            '    "django_snake_farm",',
+            "MIDDLEWARE = [",
+            "TEMPLATES = [",
+            'DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"',
+        ],
+    )
+    _check_file_contents(
+        dst_path / "tests" / "urls.py",
+        expected_strs=[
+            "urlpatterns = [",
+            '    path("admin/", admin.site.urls),',
+        ],
+    )
+    _check_file_contents(
+        dst_path / "tests" / "testapp" / "apps.py",
+        expected_strs=[
+            "class TestAppConfig(AppConfig):",
+            '    name = "tests.testapp"',
+            '    verbose_name = "Test App"',
+        ],
+    )
+    _check_file_contents(
+        dst_path / "tests" / "testapp" / "models.py",
+        expected_strs=[
+            "class Blog(models.Model):",
+        ],
+    )
+    _check_file_contents(
+        dst_path / "docs" / "index.md",
+        expected_strs=["configuration"],
+    )
+    _check_file_contents(
+        dst_path / "docs" / "configuration.rst",
+        expected_strs=[".. automodule:: django_snake_farm.conf"],
+    )
+    _check_file_contents(
+        dst_path / "docs" / "installation.md",
+        expected_strs=["Add the app to your `INSTALLED_APPS`:"],
+    )
+    _check_file_contents(
+        dst_path / "tox.ini",
+        expected_strs=[
+            "django42: Django>=4.2,<5.0",
+            "django50: Django>=5.0,<5.1",
+            "django51: Django>=5.1,<5.2",
+        ],
+    )
+    _check_file_contents(
+        dst_path / ".gitignore", expected_strs=["requirements-dev.txt"]
+    )
+    _check_file_contents(
+        dst_path / ".github" / "ISSUE_TEMPLATE" / "1-bug-report.yml",
+        expected_strs=["id: django_version"],
+    )
+    _check_file_contents(
+        dst_path / ".github" / "workflows" / "ci.yml",
+        expected_strs=[
+            (
+                "run: poetry export --without-hashes --only=dev "
+                "--format=requirements.txt --output=requirements-dev.txt"
+            ),
+            "run: tox -f py$(echo ${{ matrix.python-version }} | tr -d .)",
+        ],
+        unexpect_strs=["poetry run pytest"],
+    )
+
+
+def test_django_package_no(
+    tmp_path: Path,
+    base_answers: dict[str, str | bool],
+):
+    dst_path = tmp_path / "snake-farm"
+    copier.run_copy(
+        src_path=str(PROJECT_ROOT),
+        dst_path=dst_path,
+        data={**base_answers, "is_django_package": False, "documentation": True},
+        defaults=True,
+        unsafe=True,
+    )
+
+    assert tmp_path.exists()
+    assert not (dst_path / "src" / "snake_farm" / "migrations" / "__init__.py").exists()
+    assert not (dst_path / "manage.py").exists()
+    assert not (dst_path / "src" / "snake_farm" / "conf.py").exists()
+    assert not (dst_path / "src" / "snake_farm" / "apps.py").exists()
+    assert not (dst_path / "tests" / "settings.py").exists()
+    assert not (dst_path / "tests" / "urls.py").exists()
+    assert not (dst_path / "tests" / "testapp").exists()
+    assert not (dst_path / "docs" / "configuration.rst").exists()
+    _check_file_contents(
+        dst_path / "pyproject.toml",
+        unexpect_strs=[
+            '"Framework :: Django :: 4.2",',
+            '"Framework :: Django :: 5.0",',
+            '"Framework :: Django :: 5.1",',
+            'django = ">=4.2"',
+            'pytest-django = "^4.5"',
+            "django_find_project = false",
+        ],
+    )
+    _check_file_contents(
+        dst_path / ".gitignore", unexpect_strs=["requirements-dev.txt"]
+    )
+    _check_file_contents(
+        dst_path / ".github" / "ISSUE_TEMPLATE" / "1-bug-report.yml",
+        unexpect_strs=["id: django_version"],
+    )
+    _check_file_contents(
+        dst_path / ".github" / "workflows" / "ci.yml",
+        expected_strs=["poetry run pytest"],
+        unexpect_strs=[
+            (
+                "run: poetry export --without-hashes --only=dev "
+                "--format=requirements.txt --output=requirements-dev.txt"
+            ),
+            "run: tox -f py$(echo ${{ matrix.python-version }} | tr -d .)",
+        ],
+    )

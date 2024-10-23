@@ -7,5 +7,16 @@ The package is published on [PyPI](https://pypi.org/project/{{ project_slug }}/)
 ```bash
 pip install {{ project_slug }}
 ```
+{%- if is_django_package %}
+
+Add the app to your `INSTALLED_APPS`:
+
+```python
+INSTALLED_APPS = [
+    # ...
+    "{{ package_name }}",
+]
+```
+{%- endif %}
 
 Next, see the {ref}`section about usage <usage>` to see how to use it.

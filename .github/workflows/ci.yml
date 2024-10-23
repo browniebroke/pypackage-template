@@ -17,7 +17,6 @@ jobs:
       fail-fast: false
       matrix:
         python-version:
-          - "3.8"
           - "3.9"
           - "3.10"
           - "3.11"
@@ -30,11 +29,13 @@ jobs:
     name: "Template: ${{ matrix.python-version }} - ${{ matrix.os }}"
     steps:
       - uses: actions/checkout@v4
+      - name: Install poetry
+        run: pipx install poetry
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
+          cache: poetry
           python-version: ${{ matrix.python-version }}
-      - uses: snok/install-poetry@v1.3.4
       - name: Install Dependencies
         run: poetry install
         shell: bash
@@ -48,7 +49,7 @@ jobs:
       fail-fast: false
       matrix:
         script:
-          - run: "poetry run pytest"
+          - run: "poetry run python -m pytest tests"
             dir: ""
             name: "pytest"
           - run: "git init && git add . && pipx run pre-commit run -a"
@@ -58,39 +59,45 @@ jobs:
             dir: "docs"
             name: "docs"
         extra_options:
-          - label: "no extra options"
+          - project_name: "Simple Package"
+            project_slug: "simple-package"
             value: ""
-          - label: "with CLI"
+          - project_name: "Simple CLI"
+            project_slug: "simple-cli"
             value: "--data 'has_cli=yes' --data 'cli_name=mycli'"
+          - project_name: "Django Package"
+            project_slug: "django-simple-package"
+            value: "--data 'is_django_package=yes' --data 'documentation=yes'"
     runs-on: ubuntu-latest
-    name: "Generated: ${{ matrix.script.name }} ${{ matrix.extra_options.label }}"
+    name: "Generated: ${{ matrix.script.name }} ${{ matrix.extra_options.project_name }}"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
+        id: setup-python
         with:
           python-version: "3.11"
-      - uses: snok/install-poetry@v1
-      - run: poetry install
       - run: |
-          poetry run copier copy \
+          pipx run copier copy \
           . \
           my-project \
           --UNSAFE \
           --data 'full_name=Bruno Alla' \
           --data 'email=test@example.com' \
           --data 'github_username=dummy' \
-          --data 'project_name=My Amazing Project' \
+          --data 'project_name=${{ matrix.extra_options.project_name }}' \
+          --data 'project_slug=${{ matrix.extra_options.project_slug }}' \
           --data 'project_short_description=Just a great project' \
           --data 'open_source_license=MIT' \
           ${{ matrix.extra_options.value }} \
           --defaults
-        shell: bash
+        env:
+          PIPX_DEFAULT_PYTHON: ${{ steps.setup-python.outputs.python-path }}
       - run: cat pyproject.toml
         working-directory: my-project
-        shell: bash
+      - run: pipx install poetry
+        env:
+          PIPX_DEFAULT_PYTHON: ${{ steps.setup-python.outputs.python-path }}
       - run: poetry install --with docs
         working-directory: my-project
-        shell: bash
       - run: ${{ matrix.script.run }}
         working-directory: my-project/${{ matrix.script.dir }}
-        shell: bash

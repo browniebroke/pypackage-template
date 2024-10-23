@@ -138,3 +138,8 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+{%- if is_django_package  %}
+# Generated file
+requirements-dev.txt
+{%- endif  %}
