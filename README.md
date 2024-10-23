@@ -26,7 +26,20 @@ Project template for a Python Package using Copier.
 
 ## Usage
 
-Generate a new project with:
+First, install Copier and inject some dependencies:
+
+```shell
+pipx install copier
+pipx inject copier jinja2-eval jinja2-env jinja2-time arrow
+```
+
+Next install GitHub CLI and set up `GITHUB_TOKEN` environment variable with a [personal access token (PAT)][create-pat] with the `repo` scope.
+
+```shell
+set -x GITHUB_TOKEN ghp_...
+```
+
+Next set up [trusted publisher](#trusted-publisher-setup) and then generate a new project with:
 
 ```shell
 copier copy --trust "gh:browniebroke/pypackage-template" path-to-project
@@ -36,6 +49,7 @@ This will prompt you for a few questions and create new directory with the name 
 
 > _Note:_
 > the `--trust` option is required because this template may execute some tasks after generating the project, like initialising the git repo, installing dependencies and so forth. These are all listed in the `copier.yml` of this repo, under the `_tasks` key. They are all optional and safe to run. You can take my word for it, or better, check the code yourself!
+> go to [Applications Settings](https://github.com/settings/installations) and copy the links for the `Configure` button for the GitHub Apps you want to have installed automatically. (You may want to install [Renovate](https://github.com/marketplace/renovate), [pre-commit ci](https://github.com/marketplace/pre-commit-ci), as AllContributors and Codecov can be installed globally)
 
 ### Start developing
 
@@ -183,6 +197,6 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 [gh-secrets]: https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets
 [codecov]: https://codecov.io/
 [pypi]: https://pypi.org/
-[create-pat]: https://github.com/settings/tokens/new?scopes=repo
+[create-pat]: https://github.com/settings/tokens/new?description=pypackage-template&scopes=repo
 [rtd-dashboard]: https://readthedocs.org/dashboard/
 [all-contribs-install]: https://allcontributors.org/docs/en/bot/installation
