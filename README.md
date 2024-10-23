@@ -49,7 +49,8 @@ This will prompt you for a few questions and create new directory with the name 
 
 > _Note:_
 > the `--trust` option is required because this template may execute some tasks after generating the project, like initialising the git repo, installing dependencies and so forth. These are all listed in the `copier.yml` of this repo, under the `_tasks` key. They are all optional and safe to run. You can take my word for it, or better, check the code yourself!
-> go to [Applications Settings](https://github.com/settings/installations) and copy the id in the link (`https://github.com/organizations/<Organization-name>/settings/installations/<ID>`) for the `Configure` button for the GitHub Apps you want to have installed automatically. (You may want to install [Renovate](https://github.com/marketplace/renovate), [pre-commit ci](https://github.com/marketplace/pre-commit-ci), as AllContributors and Codecov can be installed globally)
+> go to [Applications Settings](https://github.com/settings/installations) and copy the id in the link (`https://github.com/organizations/<Organization-name>/settings/installations/<ID>`) for the `Configure` button for the GitHub Apps you want to have installed automatically, and set `PYPACKAGE_TEMPLATE_INSTALLATION_IDS` environment variable with the comma separated list of IDs.
+> (You may want to install [Renovate](https://github.com/marketplace/renovate), [pre-commit ci](https://github.com/marketplace/pre-commit-ci), as AllContributors and Codecov can be installed globally.)
 
 ### Start developing
 

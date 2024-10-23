@@ -32,18 +32,21 @@ done
 
 # install GitHub Apps
 # Raise if PYPACKAGE_TEMPLATE_INSTALLATION_IDS is not set
-: ${PYPACKAGE_TEMPLATE_INSTALLATION_IDS:?"PYPACKAGE_TEMPLATE_INSTALLATION_IDS must be set. Set it to a comma separated list of installation ids, which could be found from the url of the 'Configure' page of the GitHub App. e.g. https://github.com/organizations/<Organization-name>/settings/installations/<ID>. See https://stackoverflow.com/questions/74462420/where-can-we-find-github-apps-installation-id for further details."}
-echo "Installing GitHub Apps $PYPACKAGE_TEMPLATE_INSTALLATION_IDS"
+if [ -z "$PYPACKAGE_TEMPLATE_INSTALLATION_IDS" ]; then
+    echo "PYPACKAGE_TEMPLATE_INSTALLATION_IDS must be set. Set it to a comma separated list of installation ids, which could be found from the url of the 'Configure' page of the GitHub App. e.g. https://github.com/organizations/<Organization-name>/settings/installations/<ID>. See https://stackoverflow.com/questions/74462420/where-can-we-find-github-apps-installation-id for further details."PYPACKAGE_TEMPLATE_INSTALLATION_IDSPYPACKAGE_TEMPLATE_INSTALLATION_IDS
+else
+    echo "Installing GitHub Apps $PYPACKAGE_TEMPLATE_INSTALLATION_IDS"
 
-# get installation ids for Renovate, pre-commit.ci and repository id
-# AllContributors and Codecov can be globally installed
-installationIds=$(echo $PYPACKAGE_TEMPLATE_INSTALLATION_IDS | tr "," "\n")
-repositoryId=$(gh api "repos/$ownerRepo" --jq '.id')
+    # get installation ids for Renovate, pre-commit.ci and repository id
+    # AllContributors and Codecov can be globally installed
+    installationIds=$(echo $PYPACKAGE_TEMPLATE_INSTALLATION_IDS | tr "," "\n")
+    repositoryId=$(gh api "repos/$ownerRepo" --jq '.id')
 
-# https://docs.github.com/ja/rest/apps/installations?apiVersion=2022-11-28#add-a-repository-to-an-app-installation
-for installationId in $installationIds; do
-    gh api  --method PUT -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" "user/installations/$installationId/repositories/$repositoryId"
-done
+    # https://docs.github.com/ja/rest/apps/installations?apiVersion=2022-11-28#add-a-repository-to-an-app-installation
+    for installationId in $installationIds; do
+        gh api  --method PUT -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" "user/installations/$installationId/repositories/$repositoryId"
+    done
+fi
 
 # to test this script, run
 # mkdir -p testRepository && cd testRepository
