@@ -32,7 +32,7 @@ github_username:
 project_name:
   type: str
   help: "Project Name (human readable version){% if is_django_package %}, should start by 'Django'{% endif %}."
-  default: '{{ "exec(''import sys; s = sys.argv[-1]; u = \" \".join([t.capitalize() for t in s.replace(\".\", \" \").replace(\"_\", \" \").replace(\"-\", \" \")].split()'') or u" | eval | capitalize | replace("-", " ") }}'
+  default: '{{ "exec(''import sys; s = sys.argv[-1]; u = \" \".join([t.capitalize() for t in s.replace(\".\", \" \").replace(\"_\", \" \").replace(\"-\", \" \")].split())'') or u" | eval | capitalize | replace("-", " ") }}'
 
 project_slug:
   type: str
