@@ -143,8 +143,7 @@ _tasks:
   - '{% if initial_commit %}git add --all && git commit -m "chore: initial commit"{% endif %}'
   # Replace true with false in .copier-answers.yml except "documentation: true" for faster copier update
   # - "sed -i '/documentation: true/!s/true/false/g' .copier-answers.yml"
-  - "{% if 'Windows' in ''|env('OS') %}{% set venv_folder = 'venv\\\\scripts\\\\' %}{% else %}{% set venv_folder = 'venv/bin/' %}{% endif %}
-    {{ venv_folder }}python -c \"from pathlib import Path; import re; p = Path('.copier-answers.yml'); p.write_text(re.sub(r'((?:setup_venv|run_poetry_install|initial_commit|setup_github|setup_pre_commit|add_me_as_contributor): )true', r'\\g<1>false', p.read_text()))\""
+  - "{% if 'Windows' in ''|env('OS') %}{% set venv_folder = 'venv\\\\scripts\\\\' %}{% else %}{% set venv_folder = 'venv/bin/' %}{% endif %}{{ venv_folder }}python -c \"from pathlib import Path; import re; p = Path('.copier-answers.yml'); p.write_text(re.sub(r'((?:setup_venv|run_poetry_install|initial_commit|setup_github|setup_pre_commit|add_me_as_contributor): )true', r'\\g<1>false', p.read_text()))\""
   - '{% if initial_commit %}git add --all && git commit -m "chore: update .copier-answers.yml to avoid running commands again"{% endif %}'
   # Add me as a contributor
   - "{% if add_me_as_contributor %}npx all-contributors-cli add {{ github_username }} code,ideas,doc{% endif %}"
