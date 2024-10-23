@@ -33,7 +33,7 @@ done
 # install GitHub Apps
 # Raise if PYPACKAGE_TEMPLATE_INSTALLATION_IDS is not set
 if [ -z "$PYPACKAGE_TEMPLATE_INSTALLATION_IDS" ]; then
-    echo "PYPACKAGE_TEMPLATE_INSTALLATION_IDS must be set. Set it to a comma separated list of installation ids, which could be found from the url of the 'Configure' page of the GitHub App. e.g. https://github.com/organizations/<Organization-name>/settings/installations/<ID>. See https://stackoverflow.com/questions/74462420/where-can-we-find-github-apps-installation-id for further details."PYPACKAGE_TEMPLATE_INSTALLATION_IDSPYPACKAGE_TEMPLATE_INSTALLATION_IDS
+    echo "You can set PYPACKAGE_TEMPLATE_INSTALLATION_IDS to a comma separated list of installation ids, which could be found from the url of the 'Configure' buttons in https://github.com/settings/installations. e.g. https://github.com/organizations/<Organization-name>/settings/installations/<ID>. See https://stackoverflow.com/questions/74462420/where-can-we-find-github-apps-installation-id for further details."
 else
     echo "Installing GitHub Apps $PYPACKAGE_TEMPLATE_INSTALLATION_IDS"
 
