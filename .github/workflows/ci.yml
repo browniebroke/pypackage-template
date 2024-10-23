@@ -93,6 +93,7 @@ jobs:
           --data 'project_short_description=Just a great project' \
           --data 'open_source_license=MIT' \
           --data "venv_version=3.11" \
+          --data "setup_github=no" \
           ${{ matrix.extra_options.value }} \
           --defaults
         env:
