@@ -138,7 +138,7 @@ _tasks:
   - "git init && git add --all"
   # Setup pre-commit
   - "{% if 'Windows' in ''|env('OS') %}{% set venv_folder = 'venv\\\\scripts\\\\' %}{% else %}{% set venv_folder = 'venv/bin/' %}{% endif %}
-    {% if setup_pre_commit %}{{ venv_folder }}pre-commit autoupdate && {{ venv_folder }}pre-commit install && {{ venv_folder }}pre-commit run -a{% endif %}"
+    {% if setup_pre_commit %}{{ venv_folder }}pre-commit autoupdate && {{ venv_folder }}pre-commit install && {{ venv_folder }}pre-commit run -a || true{% endif %}"
   # Initial commit
   - '{% if initial_commit %}git add --all && git commit -m "chore: initial commit"{% endif %}'
   # Add me as a contributor
