@@ -17,17 +17,17 @@ is_django_package:
 full_name:
   type: str
   help: "What's your name?"
-  default: '{{ ("exec(''from subprocess import run; import json; s = run([\"gh\",\"api\",\"user\"], capture_output=True, shell=True, text=True).stdout; s = (json.loads(s)[''''name''''] or json.loads(s)[''''name'''']) if s else s'') or s" | eval) | env("PYPACKAGE_TEMPLATE_NAME") }}'
+  default: '{{ ("exec(''from subprocess import run; import json; from collections import defaultdict; from contextlib import suppress; j = defaultdict(str); with suppress(FileNotFoundError): j = json.loads(run([\"gh\",\"api\",\"user\"], capture_output=True).stdout)'') or j[''name''] or j[''login'']" | eval) | env("PYPACKAGE_TEMPLATE_NAME") }}'
 
 email:
   type: str
   help: "Email address"
-  default: '{{ ("exec(''from subprocess import run; import json; s = run([\"gh\",\"api\",\"user/emails\"], capture_output=True, shell=True, text=True).stdout'') or ([k for k in json.loads(s) if k[''primary'']][0][''email''] if s else s)" | eval) | env("PYPACKAGE_TEMPLATE_EMAIL") }}'
+  default: '{{ ("exec(''from subprocess import run; import json; from contextlib import suppress; s = ''; with suppress(FileNotFoundError): s = run([\"gh\",\"api\",\"user/emails\"], capture_output=True).stdout'') or ([k for k in json.loads(s) if k[''primary'']][0][''email''] if s else s)" | eval) | env("PYPACKAGE_TEMPLATE_EMAIL") }}'
 
 github_username:
   type: str
   help: "GitHub Username"
-  default: '{{ ("exec(''from subprocess import run; import json; s = run([\"gh\",\"api\",\"user\"], capture_output=True, shell=True, text=True).stdout'') or (json.loads(s)[''login''] if s else s)" | eval) | env("PYPACKAGE_TEMPLATE_GITHUB_USER") }}'
+  default: '{{ ("exec(''from subprocess import run; import json; from contextlib import suppress; s = ''; with suppress(FileNotFoundError): s = run([\"gh\",\"api\",\"user\"], capture_output=True).stdout'') or (json.loads(s)[''login''] if s else s)" | eval) | env("PYPACKAGE_TEMPLATE_GITHUB_USER") }}'
 
 project_name:
   type: str
