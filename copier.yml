@@ -118,7 +118,7 @@ add_me_as_contributor:
 open_with_vscode:
   type: bool
   help: "Open with VSCode?"
-  default: yes
+  default: no
 
 # Copier metadata
 _min_copier_version: "9.0.0"
