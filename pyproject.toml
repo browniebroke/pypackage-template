@@ -10,7 +10,7 @@ authors = [ "Bruno Alla <alla.brunoo@gmail.com>" ]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 
 [tool.poetry.group.dev.dependencies]
 copier = "^9.0.0"
@@ -18,7 +18,7 @@ pytest = "^8.0.0"
 pytest-mock = "^3.3"
 
 [tool.ruff]
-target-version = "py38"
+target-version = "py39"
 line-length = 88
 
 lint.select = [
