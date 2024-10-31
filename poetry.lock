@@ -11,9 +11,6 @@ files = [
     {file = "annotated_types-0.7.0.tar.gz", hash = "sha256:aff07c09a53a08bc8cfccb9c85b05f1aa9a2a6f23728d790723543408344ce89"},
 ]
 
-[package.dependencies]
-typing-extensions = {version = ">=4.0.0", markers = "python_version < \"3.9\""}
-
 [[package]]
 name = "colorama"
 version = "0.4.6"
@@ -50,7 +47,6 @@ pydantic = ">=2.4.2"
 pygments = ">=2.7.1"
 pyyaml = ">=5.3.1"
 questionary = ">=1.8.1"
-typing-extensions = {version = ">=3.7.4,<5.0.0", markers = "python_version < \"3.9\""}
 
 [[package]]
 name = "dunamai"
@@ -601,5 +597,5 @@ files = [
 
 [metadata]
 lock-version = "2.0"
-python-versions = "^3.8"
-content-hash = "b54bf882247e433169aca39d371ad44d2af0fa53eb0893bfcfb35396c34ffa9b"
+python-versions = "^3.9"
+content-hash = "6c8e396a5c6795b073f61f3bfc15faa0dcf7b499646f61d22773336f1e5089df"

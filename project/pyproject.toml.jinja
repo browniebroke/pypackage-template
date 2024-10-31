@@ -40,7 +40,7 @@ packages = [
 {%- endif  %}
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 {%- if is_django_package  %}
 django = ">=4.2"
 {%- endif %}
@@ -68,7 +68,7 @@ sphinx-autobuild = { version = ">=2024.0.0", python = ">=3.11" }
 {%- endif %}
 
 [tool.ruff]
-target-version = "py38"
+target-version = "py39"
 line-length = 88
 lint.select = [
   "B",   # flake8-bugbear
