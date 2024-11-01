@@ -125,6 +125,8 @@ _min_copier_version: "9.0.0"
 _subdirectory: "project"
 _tasks:
   # In Windows, command prompt
+  # Move setup script .github/setup-github.bash to /tmp
+  - "mv ./.github/setup-github.bash /tmp"
   # Remove license file if no license
   - "{% if open_source_license == 'Not open source' %}rm LICENSE{% endif %}"
   # Cleanup docs
@@ -149,7 +151,7 @@ _tasks:
   # Add me as a contributor
   - "{% if add_me_as_contributor %}npx all-contributors-cli add {{ github_username }} code,ideas,doc{% endif %}"
   # Setup GitHub
-  - '{% if setup_github %}bash .github/setup-github.bash {{ github_username }} {{ project_slug }} "{{ project_short_description }}"{% endif %}'
+  - '{% if setup_github %}bash /tmp/setup-github.bash {{ github_username }} {{ project_slug }} "{{ project_short_description }}"{% endif %}'
   # Open with editor
   - "{% if open_with_editor %}$VISUAL .{% endif %}"
 _jinja_extensions:
