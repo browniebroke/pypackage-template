@@ -18,11 +18,11 @@ if [ -z "$PYPACKAGE_TEMPLATE_GITHUB_TOKEN" ]; then
         echo "Both GITHUB_TOKEN and PYPACKAGE_TEMPLATE_GITHUB_TOKEN is not set. Set it to a GitHub token with repo scope. See https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token for further details."
     else
         echo "Setting GitHub secrets (using GITHUB_TOKEN)"
-        gh secret set PYPACKAGE_TEMPLATE_GITHUB_TOKEN -b $GITHUB_TOKEN
+        gh secret set GH_PAT -b $GITHUB_TOKEN
     fi
 else
     echo "Setting GitHub secrets (using PYPACKAGE_TEMPLATE_GITHUB_TOKEN)"
-    gh secret set PYPACKAGE_TEMPLATE_GITHUB_TOKEN -b $PYPACKAGE_TEMPLATE_GITHUB_TOKEN
+    gh secret set GH_PAT -b $PYPACKAGE_TEMPLATE_GITHUB_TOKEN
 fi
 
 # set workflow permissions
