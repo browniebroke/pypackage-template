@@ -19,7 +19,7 @@ repos:
       - id: end-of-file-fixer
       - id: trailing-whitespace
   - repo: https://github.com/tox-dev/pyproject-fmt
-    rev: "2.4.3"
+    rev: "v2.5.0"
     hooks:
       - id: pyproject-fmt
   - repo: https://github.com/python-poetry/poetry
@@ -32,7 +32,7 @@ repos:
       - id: prettier
         args: ["--tab-width", "2"]
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.7.0
+    rev: v0.7.1
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]
