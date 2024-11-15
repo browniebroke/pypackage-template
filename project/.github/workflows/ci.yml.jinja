@@ -109,7 +109,7 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.sha }}
 
-      - name: Setup | Force correct release branch on workflow sha
+      - name: Checkout commit for release
         run: |
           git checkout -B ${{ github.ref_name }} ${{ github.sha }}
 
