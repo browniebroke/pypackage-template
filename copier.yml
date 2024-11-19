@@ -98,7 +98,7 @@ setup_pre_commit:
 
 add_me_as_contributor:
   type: bool
-  help: "Add me as a contributor?"
+  help: "Add me as a contributor (requires npx)?"
   default: yes
   when: "{{ initial_commit }}"
 
