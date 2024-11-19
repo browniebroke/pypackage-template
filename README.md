@@ -47,6 +47,7 @@ _Note_:
 - (Optional) To automatically set repo secrets , set `GITHUB_TOKEN` or `PYPACKAGE_TEMPLATE_GITHUB_TOKEN` environment variable with a [personal access token (PAT)][create-pat] with the `repo` scope. `gh` must be installed beforehand.
 - (Optional) To automatically install applications on the repo, go to [Applications Settings](https://github.com/settings/installations) and copy the id in the link (`https://github.com/organizations/<Organization-name>/settings/installations/<ID>`) for the `Configure` button for the GitHub Apps you want to have installed automatically, and set `PYPACKAGE_TEMPLATE_INSTALLATION_IDS` environment variable with the comma separated list of IDs. (you may want to install [Renovate](https://github.com/marketplace/renovate), [pre-commit ci](https://github.com/marketplace/pre-commit-ci), as AllContributors and Codecov can be installed globally.) You also need to set `GITHUB_TOKEN` environment variable with a [PAT][create-pat-local] with the `repo` (for app installation) `workflow` (for pushing refs) and `user` (for getting username and email) scopes. (If you login with `gh auth login --scopes repo,workflow,user`, app installation will fail.)
 - (Optional) To automatically add yourself to the all-contributors list, you need to install npm to run `npx all-contributors-cli`.
+- (Optional) To create virtual environment in the project directory, run `poetry config virtualenvs.in-project true` beforehand. In this case, the virtual environment will be created in `./.venv` directory.
 
 ### Start developing
 
