@@ -75,22 +75,10 @@ documentation:
   help: "Generate documentation?"
   default: yes
 
-setup_venv:
-  type: bool
-  help: "Setup a virtual environment?"
-  default: yes
-
-venv_version:
-  type: str
-  help: "Python version for the virtual environment"
-  default: "3.11"
-  when: "{{ setup_venv }}"
-
 run_poetry_install:
   type: bool
   help: "Run poetry install after {{ package_name }} generation?"
   default: yes
-  when: "{{ setup_venv }}"
 
 initial_commit:
   type: bool
@@ -107,7 +95,6 @@ setup_pre_commit:
   type: bool
   help: "Setup pre-commit hooks (requires pre-commit)?"
   default: yes
-  when: "{{ setup_venv }}"
 
 add_me_as_contributor:
   type: bool
@@ -131,21 +118,17 @@ _tasks:
   - "{% if open_source_license == 'Not open source' %}rm LICENSE{% endif %}"
   # Cleanup docs
   - "{% if not documentation %}rm -rf docs .readthedocs.yml{% endif %}"
-  # Setup venv
-  - "{% if setup_venv %}{% if 'Windows' in ''|env('OS') %}py -{% else %}python{% endif %}{{ venv_version }} -m venv venv{% endif %}"
   # Run poetry install
-  - "{% if 'Windows' in ''|env('OS') %}{% set venv_folder = 'venv\\\\scripts\\\\' %}{% else %}{% set venv_folder = 'venv/bin/' %}{% endif %}
-    {% if run_poetry_install %}{{ venv_folder }}python -m pip install -U pip setuptools wheel && {{ venv_folder }}pip install -U poetry pre-commit && {{ venv_folder }}python -m poetry install --with dev{% endif %}"
+  - "{% if run_poetry_install %}poetry install --with dev{% endif %}"
   # git init
   - "git init && git add --all"
   # Setup pre-commit
-  - "{% if 'Windows' in ''|env('OS') %}{% set venv_folder = 'venv\\\\scripts\\\\' %}{% else %}{% set venv_folder = 'venv/bin/' %}{% endif %}
-    {% if setup_pre_commit %}{{ venv_folder }}pre-commit autoupdate && {{ venv_folder }}pre-commit install && {{ venv_folder }}pre-commit run -a || true{% endif %}"
+  - "{% if setup_pre_commit %}pre-commit autoupdate && pre-commit install && pre-commit run -a || true{% endif %}"
   # Initial commit
   - '{% if initial_commit %}git add --all && git commit -m "chore: initial commit"{% endif %}'
   # Replace true with false in .copier-answers.yml except "documentation: true" for faster copier update
   # - "sed -i '/documentation: true/!s/true/false/g' .copier-answers.yml"
-  - "{% if 'Windows' in ''|env('OS') %}{% set venv_folder = 'venv\\\\scripts\\\\' %}{% else %}{% set venv_folder = 'venv/bin/' %}{% endif %}
+  - "{% if 'Windows' in ''|env('OS') %}{% set venv_folder = '.venv\\\\scripts\\\\' %}{% else %}{% set venv_folder = '.venv/bin/' %}{% endif %}
     {% if initial_commit %}{{ venv_folder }}python -c \"from pathlib import Path; import re; p = Path('.copier-answers.yml'); p.write_text(re.sub(r'((?:setup_venv|run_poetry_install|initial_commit|setup_github|setup_pre_commit|add_me_as_contributor): )true', r'\\g<1>false', p.read_text()))\"{% endif %}"
   - '{% if initial_commit %}git add --all && git commit -m "chore: update .copier-answers.yml to avoid running commands again"{% endif %}'
   # Add me as a contributor
