@@ -26,10 +26,10 @@ Project template for a Python Package using Copier.
 
 ## Usage
 
-First, install Copier and inject some dependencies:
+First, install Copier, Poetry, pre-commit and inject some dependencies:
 
 ```shell
-pipx install copier
+pipx install copier poetry pre-commit
 pipx inject copier jinja2-eval jinja2-env jinja2-time arrow
 ```
 
@@ -41,15 +41,12 @@ copier copy --trust "gh:browniebroke/pypackage-template" path-to-project
 
 This will prompt you for a few questions and create new directory with the name you used as project slug.
 
-> _Note:_
->
-> the `--trust` option is required because this template may execute some tasks after generating the project, like initialising the git repo, installing dependencies and so forth. These are all listed in the `copier.yml` of this repo, under the `_tasks` key. They are all optional and safe to run. You can take my word for it, or better, check the code yourself!
->
-> set `GITHUB_TOKEN` or `PYPACKAGE_TEMPLATE_GITHUB_TOKEN` environment variable with a [personal access token (PAT)][create-pat] with the `repo` scope.
->
-> go to [Applications Settings](https://github.com/settings/installations) and copy the id in the link (`https://github.com/organizations/<Organization-name>/settings/installations/<ID>`) for the `Configure` button for the GitHub Apps you want to have installed automatically, and set `PYPACKAGE_TEMPLATE_INSTALLATION_IDS` environment variable with the comma separated list of IDs. (you may want to install [Renovate](https://github.com/marketplace/renovate), [pre-commit ci](https://github.com/marketplace/pre-commit-ci), as AllContributors and Codecov can be installed globally.)
->
-> you need to set `GITHUB_TOKEN` environment variable with a [PAT][create-pat-local] with the `repo` (for app installation) `workflow` (for pushing refs) and `user` (for getting username and email) scopes. (If you login with `gh auth login --scopes repo,workflow,user`, app installation will fail.)
+_Note_:
+
+- the `--trust` option is required because this template may execute some tasks after generating the project, like initialising the git repo, installing dependencies and so forth. These are all listed in the `copier.yml` of this repo, under the `_tasks` key. They are all optional and safe to run. You can take my word for it, or better, check the code yourself!
+- (Optional) To automatically set repo secrets , set `GITHUB_TOKEN` or `PYPACKAGE_TEMPLATE_GITHUB_TOKEN` environment variable with a [personal access token (PAT)][create-pat] with the `repo` scope. `gh` must be installed beforehand.
+- (Optional) To automatically install applications on the repo, go to [Applications Settings](https://github.com/settings/installations) and copy the id in the link (`https://github.com/organizations/<Organization-name>/settings/installations/<ID>`) for the `Configure` button for the GitHub Apps you want to have installed automatically, and set `PYPACKAGE_TEMPLATE_INSTALLATION_IDS` environment variable with the comma separated list of IDs. (you may want to install [Renovate](https://github.com/marketplace/renovate), [pre-commit ci](https://github.com/marketplace/pre-commit-ci), as AllContributors and Codecov can be installed globally.) You also need to set `GITHUB_TOKEN` environment variable with a [PAT][create-pat-local] with the `repo` (for app installation) `workflow` (for pushing refs) and `user` (for getting username and email) scopes. (If you login with `gh auth login --scopes repo,workflow,user`, app installation will fail.)
+- (Optional) To automatically add yourself to the all-contributors list, you need to install npm to run `npx all-contributors-cli`.
 
 ### Start developing
 
