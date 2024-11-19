@@ -104,8 +104,8 @@ add_me_as_contributor:
 
 open_with_editor:
   type: bool
-  help: "Open with $VISUAL?"
-  default: no
+  help: 'Open with $VISUAL={{ "" | env("VISUAL") }}'
+  default: '{% env "VISUAL", "" != "" %}'
 
 # Copier metadata
 _min_copier_version: "9.0.0"
