@@ -23,7 +23,7 @@ jobs:
           - "3.12"
         os:
           - ubuntu-latest
-          # - windows-latest
+          - windows-latest
           - macOS-latest
     runs-on: ${{ matrix.os }}
     name: "Template: ${{ matrix.python-version }} - ${{ matrix.os }}"
@@ -72,22 +72,28 @@ jobs:
     name: "Generated: ${{ matrix.script.name }} ${{ matrix.extra_options.project_name }}"
     steps:
       - uses: actions/checkout@v4
+      - run: git config --global user.name github-actions[bot]
+      - run: git config --global user.email 41898282+github-actions[bot]@users.noreply.github.com
       - uses: actions/setup-python@v5
         id: setup-python
         with:
           python-version: "3.11"
+      - run: pipx install copier
+      - run: pipx inject copier jinja2-eval jinja2-env jinja2-time arrow
       - run: |
-          pipx run copier copy \
+          copier copy \
           . \
           my-project \
           --UNSAFE \
           --data 'full_name=Bruno Alla' \
-          --data 'email=test@example.com' \
-          --data 'github_username=dummy' \
+          --data 'email=41898282+github-actions[bot]@users.noreply.github.com' \
+          --data 'github_username=github-actions[bot]' \
           --data 'project_name=${{ matrix.extra_options.project_name }}' \
           --data 'project_slug=${{ matrix.extra_options.project_slug }}' \
           --data 'project_short_description=Just a great project' \
           --data 'open_source_license=MIT' \
+          --data "venv_version=3.11" \
+          --data "setup_github=no" \
           ${{ matrix.extra_options.value }} \
           --defaults
         env:
