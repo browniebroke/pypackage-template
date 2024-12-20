@@ -1,21 +1,6 @@
 [build-system]
-build-backend = "poetry.core.masonry.api"
-requires = [ "poetry-core>=1" ]
-
-[tool.poetry]
-name = "pypackage-template"
-version = "0.1.0"
-description = "A template for generating a Python package"
-authors = [ "Bruno Alla <alla.brunoo@gmail.com>" ]
-license = "MIT"
-
-[tool.poetry.dependencies]
-python = "^3.9"
-
-[tool.poetry.group.dev.dependencies]
-copier = "^9.0.0"
-pytest = "^8.0.0"
-pytest-mock = "^3.3"
+build-backend = "setuptools.build_meta"
+requires = [ "setuptools" ]
 
 [tool.ruff]
 target-version = "py39"
@@ -61,3 +46,21 @@ lint.per-file-ignores."tests/**/*" = [
 [tool.pytest.ini_options]
 addopts = "-v -Wdefault"
 testpaths = "tests/"
+
+[dependency-groups]
+dev = [
+    "copier<10.0.0,>=9.0.0",
+    "pytest<9.0.0,>=8.0.0",
+    "pytest-mock<4.0,>=3.3",
+]
+
+[project]
+authors = [
+    {name = "Bruno Alla", email = "alla.brunoo@gmail.com"},
+]
+license = {text = "MIT"}
+requires-python = ">=3.9"
+dependencies = []
+name = "pypackage-template"
+version = "0.1.0"
+description = "A template for generating a Python package"
