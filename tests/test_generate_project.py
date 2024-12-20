@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import re
-import sys
 from collections.abc import Sequence
 from pathlib import Path
 
@@ -27,7 +26,6 @@ def base_answers():
         "setup_github": False,
         "setup_pre_commit": False,
         "add_me_as_contributor": False,
-        "venv_version": f"{sys.version_info.major}.{sys.version_info.minor}",
     }
 
 

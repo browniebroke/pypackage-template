@@ -92,7 +92,6 @@ jobs:
           --data 'project_slug=${{ matrix.extra_options.project_slug }}' \
           --data 'project_short_description=Just a great project' \
           --data 'open_source_license=MIT' \
-          --data "venv_version=3.11" \
           --data "setup_github=no" \
           ${{ matrix.extra_options.value }} \
           --defaults
