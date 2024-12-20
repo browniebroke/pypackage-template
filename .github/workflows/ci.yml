@@ -44,13 +44,13 @@ jobs:
       fail-fast: false
       matrix:
         script:
-          - run: "poetry run python -m pytest tests"
+          - run: "uv run python -m pytest tests"
             dir: ""
             name: "pytest"
           - run: "git init && git add . && pipx run pre-commit run -a"
             dir: ""
             name: "pre-commit"
-          - run: "poetry run make html"
+          - run: "uv run make html"
             dir: "docs"
             name: "docs"
         extra_options:
@@ -91,7 +91,7 @@ jobs:
         working-directory: my-project
         env:
           PIPX_DEFAULT_PYTHON: ${{ steps.setup-python.outputs.python-path }}
-      - run: poetry install --with docs
+      - run: uv sync --group docs
         working-directory: my-project
       - run: ${{ matrix.script.run }}
         working-directory: my-project/${{ matrix.script.dir }}
