@@ -47,7 +47,7 @@ jobs:
           - run: "uv run python -m pytest tests"
             dir: ""
             name: "pytest"
-          - run: "git init && git add . && pipx run pre-commit run -a"
+          - run: "git init && git add . && uvx --with pre-commit-uv pre-commit run -a"
             dir: ""
             name: "pre-commit"
           - run: "uv run make html"
@@ -71,8 +71,9 @@ jobs:
         id: setup-python
         with:
           python-version: "3.11"
+      - uses: astral-sh/setup-uv@v5
       - run: |
-          pipx run copier copy \
+          uvx copier copy \
           . \
           my-project \
           --UNSAFE \
