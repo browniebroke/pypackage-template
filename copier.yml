@@ -73,9 +73,9 @@ cli_name:
   default: "{{ project_slug }}"
   when: "{{ has_cli }}"
 
-run_poetry_install:
+run_uv_sync:
   type: bool
-  help: "Run poetry install after {{ package_name }} generation?"
+  help: "Run uv sync install after {{ package_name }} generation?"
   default: no
 
 initial_commit:
@@ -102,12 +102,12 @@ add_me_as_contributor:
 _min_copier_version: "9.0.0"
 _subdirectory: "project"
 _tasks:
-  # Remove license file if no license
+  # Remove licence file if no license
   - "{% if open_source_license == 'Not open source' %}rm LICENSE{% endif %}"
   # Cleanup docs
   - "{% if not documentation %}rm -rf docs .readthedocs.yml{% endif %}"
-  # Run poetry install
-  - "{% if run_poetry_install %}poetry install{% endif %}"
+  # Run 'uv sync' to generate lockfile
+  - "{% if run_uv_sync %}uv sync{% endif %}"
   # Initial commit
   - "{% if initial_commit %}git init{% endif %}"
   - "{% if initial_commit %}git add .{% endif %}"

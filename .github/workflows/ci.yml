@@ -86,12 +86,8 @@ jobs:
           --data 'open_source_license=MIT' \
           ${{ matrix.extra_options.value }} \
           --defaults
-        env:
-          PIPX_DEFAULT_PYTHON: ${{ steps.setup-python.outputs.python-path }}
       - run: cat pyproject.toml
         working-directory: my-project
-        env:
-          PIPX_DEFAULT_PYTHON: ${{ steps.setup-python.outputs.python-path }}
       - run: uv sync --group docs
         working-directory: my-project
       - run: ${{ matrix.script.run }}

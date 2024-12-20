@@ -21,7 +21,7 @@ def base_answers():
         "version": "0.0.1",
         "open_source_license": "MIT",
         "documentation": True,
-        "run_poetry_install": False,
+        "run_uv_sync": False,
         "initial_commit": False,
         "setup_github": False,
         "setup_pre_commit": False,
@@ -340,7 +340,7 @@ def test_django_package_yes(
         expected_strs=[
             "run: tox -f py$(echo ${{ matrix.python-version }} | tr -d .)",
         ],
-        unexpect_strs=["poetry run pytest"],
+        unexpect_strs=["uv run pytest"],
     )
 
 

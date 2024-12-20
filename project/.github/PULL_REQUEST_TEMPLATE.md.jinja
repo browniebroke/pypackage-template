@@ -41,7 +41,7 @@
 - [ ] The new commits follow conventions outlined in the [conventional commit spec](https://www.conventionalcommits.org/en/v1.0.0/), such as "fix(api): prevent racing of requests".
 
 > - If pre-commit.ci is failing, try `pre-commit run -a` for further information.
-> - If CI / test is failing, try `poetry run pytest` for further information.
+> - If CI / test is failing, try `uv run pytest` for further information.
 
 <!--
   🎉 Thank you for contributing!
