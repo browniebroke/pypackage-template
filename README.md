@@ -10,7 +10,7 @@ Project template for a Python Package using Copier.
 
 - Project for Python 3.8+.
 - Testing with Pytest using GitHub actions.
-- Packaging powered by [poetry].
+- Packaging powered by [uv].
 - Optionally generates a CLI entry point powered by [Typer] and [Rich].
 - Optionally makes it a Django package.
 - Uses [Ruff] for formatting and linting.
@@ -39,19 +39,19 @@ This will prompt you for a few questions and create new directory with the name 
 
 ### Start developing
 
-The project uses [Poetry] for dependencies management and packaging. Make sure you have it installed in your development machine. To install the development dependencies in a virtual environment, type:
+The project uses [uv] for dependencies management and packaging. Make sure you have it installed in your development machine. To install the development dependencies in a virtual environment, type:
 
 ```shell
-poetry install
+uv sync
 ```
 
-This will also generate a `poetry.lock` file, you should track this file in version control. To execute the test suite, call pytest inside Poetry's virtual environment via `poetry run`:
+This will also generate a `uv.lock` file, you should track this file in version control. To execute the test suite, call pytest inside uv's virtual environment via `uv run`:
 
 ```shell
-poetry run pytest
+uv run pytest
 ```
 
-Check out the [Poetry] documentation for more information on the available commands.
+Check out the [uv] documentation for more information on the available commands.
 
 ### GitHub Actions
 
@@ -68,7 +68,7 @@ A `labels` workflow will also run and synchronise the GitHub labels based on the
 
 The workflows need [a few secrets][gh-secrets] to be setup in your GitHub repository:
 
-- `GH_PAT` a [personal access token (PAT) with the `repo` scope][create-pat] for opening pull requests and updating the repository topics. This is used by the `poetry-upgrade` and `labels` workflows.
+- `GH_PAT` a [personal access token (PAT) with the `repo` scope][create-pat] for opening pull requests and updating the repository topics. This is used by the `upgrader` and `labels` workflows.
 - `CODECOV_TOKEN` to upload coverage data to [codecov.io][codecov] in the Test workflow.
 
 If you have the GitHub CLI installed and chose to set up GitHub, they will be created with a dummy value (`changeme`).
@@ -117,7 +117,7 @@ If your package is a reusable Django app, you should answer "yes" to the questio
 
 #### Migrations
 
-You should be able to use the provided `manage.py` to create migrations for your reusable app. Create or change your models and run `poetry run python manage.py makemigrations`.
+You should be able to use the provided `manage.py` to create migrations for your reusable app. Create or change your models and run `uv run python manage.py makemigrations`.
 
 ### Pre-commit
 
@@ -133,7 +133,7 @@ To enable it, you might need to go [into your dashboard][rtd-dashboard] and impo
 
 The project dependencies are kept up to date with [Renovate] which requires [the Github app][renovate-gh-app] to be installed.
 
-The main advantage of Renovate over Dependabot is the auto-merge option, which is configured to automatically merge minor/patch updates with all the CI checks passing. It supports a variety of package managers, including Poetry, GitHub actions and pre-commit hooks which are used by default.
+The main advantage of Renovate over Dependabot is the auto-merge option, which is configured to automatically merge minor/patch updates with all the CI checks passing. It supports a variety of package managers, including uv, GitHub actions and pre-commit hooks which are used by default.
 
 ### All contributors
 
@@ -168,7 +168,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
-[poetry]: https://python-poetry.org
+[uv]: https://docs.astral.sh/uv/
 [Typer]: https://typer.tiangolo.com
 [Rich]: https://rich.readthedocs.io
 [Ruff]: https://pypi.org/project/ruff/

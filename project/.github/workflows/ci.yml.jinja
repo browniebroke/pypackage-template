@@ -48,44 +48,27 @@ jobs:
     steps:
       - uses: actions/checkout@v4{% endraw %}
 {%- if is_django_package %}{% raw %}
-      - name: Install poetry with export plugin
-        run: |
-          pipx install poetry
-          pipx inject poetry poetry-plugin-export
-          poetry config warnings.export false
-      - name: Poetry export dev deps
-        run: poetry export --without-hashes --only=dev --format=requirements.txt --output=requirements-dev.txt
-        shell: bash
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
-          cache: pip
           python-version: ${{ matrix.python-version }}
-      - name: Install test dependencies
-        run: pip install tox
+      - uses: astral-sh/setup-uv@v5
+      - run: uv pip install --system tox tox-uv
         shell: bash
-      - name: Run tests
-        run: tox -f py$(echo ${{ matrix.python-version }} | tr -d .)
+      - run: tox -f py$(echo ${{ matrix.python-version }} | tr -d .)
         shell: bash
 {% endraw %}
 {%- else %}{% raw %}
-      - name: Install poetry
-        run: pipx install poetry
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         id: setup-python
         with:
           python-version: ${{ matrix.python-version }}
-          cache: poetry
-      - name: Install Dependencies
-        run: poetry install
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --no-python-downloads
         shell: bash
-      - name: Test with Pytest
-        run: poetry run pytest
+      - run: uv run pytest
         shell: bash{% endraw %}
 {%- endif  %}{% raw %}
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
+      - uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
@@ -119,6 +102,7 @@ jobs:
         if: github.ref_name != 'main'
         with:
           root_options: --noop
+          github_token: noop
 
       # On main branch: actual PSR + upload to PyPI & GitHub
       - name: Release

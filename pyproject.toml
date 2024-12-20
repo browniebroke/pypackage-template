@@ -1,21 +1,32 @@
 [build-system]
-build-backend = "poetry.core.masonry.api"
-requires = [ "poetry-core>=1" ]
+build-backend = "setuptools.build_meta"
+requires = [ "setuptools" ]
 
-[tool.poetry]
+[project]
 name = "pypackage-template"
 version = "0.1.0"
 description = "A template for generating a Python package"
-authors = [ "Bruno Alla <alla.brunoo@gmail.com>" ]
-license = "MIT"
+license = { text = "MIT" }
+authors = [
+  { name = "Bruno Alla", email = "alla.brunoo@gmail.com" },
+]
+requires-python = ">=3.9"
+classifiers = [
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+]
+dependencies = [  ]
 
-[tool.poetry.dependencies]
-python = "^3.9"
-
-[tool.poetry.group.dev.dependencies]
-copier = "^9.0.0"
-pytest = "^8.0.0"
-pytest-mock = "^3.3"
+[dependency-groups]
+dev = [
+  "copier>=9,<10",
+  "pytest>=8,<9",
+  "pytest-mock>=3.3,<4",
+]
 
 [tool.ruff]
 target-version = "py39"

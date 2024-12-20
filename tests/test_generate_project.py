@@ -21,7 +21,7 @@ def base_answers():
         "version": "0.0.1",
         "open_source_license": "MIT",
         "documentation": True,
-        "run_poetry_install": False,
+        "run_uv_sync": False,
         "initial_commit": False,
         "setup_github": False,
         "setup_pre_commit": False,
@@ -65,10 +65,10 @@ def test_defaults_values(
         [
             'name = "snake-farm"',
             'version = "0.0.0"',
-            'license = "MIT"',
+            'license = { text = "MIT" }',
         ],
     )
-    upgrade_path = dst_path / ".github" / "workflows" / "poetry-upgrade.yml"
+    upgrade_path = dst_path / ".github" / "workflows" / "upgrader.yml"
     assert upgrade_path.exists()
     content = upgrade_path.read_text()
     found = False
@@ -161,18 +161,21 @@ def test_documentation(
         )
         _check_file_contents(
             dst_path / ".readthedocs.yml",
-            expected_strs=["configuration: docs/conf.py"],
+            expected_strs=[
+                "configuration: docs/conf.py",
+                "uv sync --only-group docs --frozen",
+            ],
         )
         _check_file_contents(
             dst_path / "pyproject.toml",
-            expected_strs=["[tool.poetry.group.docs]"],
+            expected_strs=["docs = [", "sphinx>=", "myst-parser>="],
         )
     else:
         assert not (dst_path / "docs").exists()
         assert not (dst_path / ".readthedocs.yml").exists()
         _check_file_contents(
             dst_path / "pyproject.toml",
-            unexpect_strs=["[tool.poetry.group.docs]"],
+            unexpect_strs=["docs = [", "sphinx>=", "myst-parser>="],
         )
 
 
@@ -210,14 +213,14 @@ def test_cli(
         )
         _check_file_contents(
             dst_path / "pyproject.toml",
-            expected_strs=["[tool.poetry.scripts]", 'mycli = "snake_farm.cli:app"'],
+            expected_strs=['scripts.mycli = "snake_farm.cli:app"'],
         )
     else:
         assert not (dst_path / "src" / "snake_farm" / "__main__.py").exists()
         assert not (dst_path / "src" / "snake_farm" / "cli.py").exists()
         _check_file_contents(
             dst_path / "pyproject.toml",
-            unexpect_strs=["[tool.poetry.scripts]", 'mycli = "snake_farm.cli:app"'],
+            unexpect_strs=['scripts.mycli = "snake_farm.cli:app"'],
         )
 
 
@@ -248,8 +251,8 @@ def test_django_package_yes(
         expected_strs=[
             '"Framework :: Django :: 4.2",',
             '"Framework :: Django :: 5.0",',
-            'django = ">=4.2"',
-            'pytest-django = "^4.5"',
+            '"django>=4.2"',
+            "pytest-django>=4.5,<5",
             "--ds=tests.settings",
             "django_find_project = false",
         ],
@@ -338,13 +341,9 @@ def test_django_package_yes(
     _check_file_contents(
         dst_path / ".github" / "workflows" / "ci.yml",
         expected_strs=[
-            (
-                "run: poetry export --without-hashes --only=dev "
-                "--format=requirements.txt --output=requirements-dev.txt"
-            ),
             "run: tox -f py$(echo ${{ matrix.python-version }} | tr -d .)",
         ],
-        unexpect_strs=["poetry run pytest"],
+        unexpect_strs=["uv run pytest"],
     )
 
 
@@ -376,8 +375,8 @@ def test_django_package_no(
             '"Framework :: Django :: 4.2",',
             '"Framework :: Django :: 5.0",',
             '"Framework :: Django :: 5.1",',
-            'django = ">=4.2"',
-            'pytest-django = "^4.5"',
+            '"django>=4.2"',
+            "pytest-django>=4.5,<5",
             "django_find_project = false",
         ],
     )
@@ -390,12 +389,8 @@ def test_django_package_no(
     )
     _check_file_contents(
         dst_path / ".github" / "workflows" / "ci.yml",
-        expected_strs=["poetry run pytest"],
+        expected_strs=["uv run pytest"],
         unexpect_strs=[
-            (
-                "run: poetry export --without-hashes --only=dev "
-                "--format=requirements.txt --output=requirements-dev.txt"
-            ),
             "run: tox -f py$(echo ${{ matrix.python-version }} | tr -d .)",
         ],
     )
