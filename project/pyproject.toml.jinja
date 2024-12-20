@@ -1,18 +1,17 @@
 [build-system]
-build-backend = "poetry.core.masonry.api"
-requires = [ "poetry-core>=1.0.0" ]
+build-backend = "setuptools.build_meta"
+requires = [ "setuptools" ]
 
-[tool.poetry]
+[project]
 name = "{{ project_slug }}"
 version = "0.0.0"
 description = "{{ project_short_description }}"
-authors = [ "{{ full_name }} <{{ email }}>" ]
-license = "{{ open_source_license }}"
 readme = "README.md"
-repository = "https://github.com/{{ github_username }}/{{ project_slug }}"
-{%- if documentation %}
-documentation = "https://{{ project_slug }}.readthedocs.io"
-{%- endif %}
+license = { text = "{{ open_source_license }}" }
+authors = [
+  { name = "{{ full_name }}", email = "{{ email }}" },
+]
+requires-python = ">=3.9"
 classifiers = [
   "Development Status :: 2 - Pre-Alpha",
   "Intended Audience :: Developers",
@@ -24,47 +23,48 @@ classifiers = [
   "Framework :: Django :: 5.0",
   "Framework :: Django :: 5.1",
   {%- endif  %}
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
   "Topic :: Software Development :: Libraries",
 ]
-packages = [
-  { include = "{{ package_name }}", from = "src" },
+
+dependencies = [
+  {%- if is_django_package  %}
+  "django>=4.2",
+  {%- endif %}
+  {%- if has_cli  %}
+  "rich>=10",
+  "typer>=0.15,<1",
+  {%- endif %}
 ]
-
-[tool.poetry.urls]
-"Bug Tracker" = "https://github.com/{{ github_username }}/{{ project_slug }}/issues"
-"Changelog" = "https://github.com/{{ github_username }}/{{ project_slug }}/blob/main/CHANGELOG.md"
+urls."Bug Tracker" = "https://github.com/{{ github_username }}/{{ project_slug }}/issues"
+urls.Changelog = "https://github.com/{{ github_username }}/{{ project_slug }}/blob/main/CHANGELOG.md"
+{%- if documentation %}
+urls.documentation = "https://{{ project_slug }}.readthedocs.io"
+{%- endif %}
+urls.repository = "https://github.com/{{ github_username }}/{{ project_slug }}"
 {%- if has_cli %}
-
-[tool.poetry.scripts]
-{{ cli_name }} = "{{ package_name }}.cli:app"
+scripts.{{ cli_name }} = "{{ package_name }}.cli:app"
 {%- endif  %}
 
-[tool.poetry.dependencies]
-python = "^3.9"
+[dependency-groups]
+dev = [
+  "pytest>=8,<9",
+  "pytest-cov>=6,<7",
 {%- if is_django_package  %}
-django = ">=4.2"
+  "pytest-django>=4.5,<5",
 {%- endif %}
-{%- if has_cli  %}
-rich = ">=10"
-typer = { extras = [ "all" ], version = "^0.9.0" }
-{%- endif %}
-
-[tool.poetry.group.dev.dependencies]
-pytest = "^8.0.0"
-pytest-cov = "^5.0.0"
-{%- if is_django_package  %}
-pytest-django = "^4.5"
-{%- endif %}
+]
 {%- if documentation %}
-
-[tool.poetry.group.docs]
-optional = true
-
-[tool.poetry.group.docs.dependencies]
-myst-parser = { version = ">=0.16", python = ">=3.11" }
-sphinx = { version = ">=4.0", python = ">=3.11" }
-furo = { version = ">=2023.5.20", python = ">=3.11" }
-sphinx-autobuild = { version = ">=2024.0.0", python = ">=3.11" }
+docs = [
+  "furo>=2023.5.20; python_version>='3.11'",
+  "myst-parser>=0.16; python_version>='3.11'",
+  "sphinx>=4; python_version>='3.11'",
+  "sphinx-autobuild>=2024,<2025; python_version>='3.11'",
+]
 {%- endif %}
 
 [tool.ruff]
@@ -161,14 +161,19 @@ ignore_errors = true
 {%- endif %}
 
 [tool.semantic_release]
-version_toml = [ "pyproject.toml:tool.poetry.version" ]
+version_toml = [ "pyproject.toml:project.version" ]
 version_variables = [
   "src/{{ package_name }}/__init__.py:__version__",
   {%- if documentation %}
   "docs/conf.py:release",
   {%- endif %}
 ]
-build_command = "pip install poetry && poetry build"
+build_command = """
+pip install uv
+uv lock
+git add uv.lock
+uv build
+"""
 
 [tool.semantic_release.changelog]
 exclude_commit_patterns = [
