@@ -161,7 +161,10 @@ def test_documentation(
         )
         _check_file_contents(
             dst_path / ".readthedocs.yml",
-            expected_strs=["configuration: docs/conf.py", "uv sync --only-group docs --frozen"],
+            expected_strs=[
+                "configuration: docs/conf.py",
+                "uv sync --only-group docs --frozen",
+            ],
         )
         _check_file_contents(
             dst_path / "pyproject.toml",
@@ -249,7 +252,7 @@ def test_django_package_yes(
             '"Framework :: Django :: 4.2",',
             '"Framework :: Django :: 5.0",',
             '"django>=4.2"',
-            'pytest-django>=4.5,<5',
+            "pytest-django>=4.5,<5",
             "--ds=tests.settings",
             "django_find_project = false",
         ],
@@ -373,7 +376,7 @@ def test_django_package_no(
             '"Framework :: Django :: 5.0",',
             '"Framework :: Django :: 5.1",',
             '"django>=4.2"',
-            'pytest-django>=4.5,<5',
+            "pytest-django>=4.5,<5",
             "django_find_project = false",
         ],
     )
