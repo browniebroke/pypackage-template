@@ -80,6 +80,9 @@ jobs:
           python-version: "3.11"
       - run: pipx install copier
       - run: pipx inject copier jinja2-eval jinja2-env jinja2-time arrow
+      - run: pipx install poetry # install before running copier
+        env:
+          PIPX_DEFAULT_PYTHON: ${{ steps.setup-python.outputs.python-path }}
       - run: |
           copier copy \
           . \
@@ -99,9 +102,6 @@ jobs:
           PIPX_DEFAULT_PYTHON: ${{ steps.setup-python.outputs.python-path }}
       - run: cat pyproject.toml
         working-directory: my-project
-      - run: pipx install poetry
-        env:
-          PIPX_DEFAULT_PYTHON: ${{ steps.setup-python.outputs.python-path }}
       - run: poetry install --with docs
         working-directory: my-project
       - run: ${{ matrix.script.run }}
