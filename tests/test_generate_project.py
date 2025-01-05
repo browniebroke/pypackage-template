@@ -254,7 +254,6 @@ def test_django_package_yes(
             '"django>=4.2"',
             "pytest-django>=4.5,<5",
             "--ds=tests.settings",
-            "django_find_project = false",
         ],
     )
     _check_file_contents(
@@ -377,7 +376,6 @@ def test_django_package_no(
             '"Framework :: Django :: 5.1",',
             '"django>=4.2"',
             "pytest-django>=4.5,<5",
-            "django_find_project = false",
         ],
     )
     _check_file_contents(

@@ -117,9 +117,6 @@ addopts = """\
 {%- endif  %}
     """
 pythonpath = [ "src" ]
-{%- if is_django_package  %}
-django_find_project = false
-{%- endif  %}
 
 [tool.coverage.run]
 branch = true
