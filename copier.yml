@@ -55,7 +55,7 @@ open_source_license:
 copyright_year:
   type: str
   help: "Copyright year(s)"
-  default: "2022"
+  default: "2025"
 
 documentation:
   type: bool
