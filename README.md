@@ -1,8 +1,7 @@
 # Python Package Template
 
-<a href="https://github.com/browniebroke/pypackage-template/actions/workflows/ci.yml?query=branch%3Amain">
-  <img src="https://img.shields.io/github/actions/workflow/status/browniebroke/pypackage-template/ci.yml?branch=main&label=Test&logo=github&style=flat-square" alt="CI Status" >
-</a>
+[![CI Status](https://img.shields.io/github/actions/workflow/status/browniebroke/pypackage-template/ci.yml?branch=main&label=Test&logo=github&style=flat-square)](https://github.com/browniebroke/pypackage-template/actions/workflows/ci.yml?query=branch%3Amain)
+[![Copier](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/copier-org/copier/master/img/badge/badge-grayscale-inverted-border-orange.json)](https://github.com/copier-org/copier)
 
 Project template for a Python Package using Copier.
 
