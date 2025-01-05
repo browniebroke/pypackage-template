@@ -7,7 +7,7 @@ Project template for a Python Package using Copier.
 
 ## Features
 
-- Project for Python 3.8+.
+- Project for Python 3.9+.
 - Testing with Pytest using GitHub actions.
 - Packaging powered by [uv].
 - Optionally generates a CLI entry point powered by [Typer] and [Rich].
