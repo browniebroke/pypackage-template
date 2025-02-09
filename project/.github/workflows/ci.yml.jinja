@@ -98,7 +98,7 @@ jobs:
 
       # Do a dry run of PSR
       - name: Test release
-        uses: python-semantic-release/python-semantic-release@v9.15.1
+        uses: python-semantic-release/python-semantic-release@v9
         if: github.ref_name != 'main'
         with:
           root_options: --noop
@@ -106,7 +106,7 @@ jobs:
 
       # On main branch: actual PSR + upload to PyPI & GitHub
       - name: Release
-        uses: python-semantic-release/python-semantic-release@v9.15.1
+        uses: python-semantic-release/python-semantic-release@v9
         id: release
         if: github.ref_name == 'main'
         with:
@@ -123,7 +123,7 @@ jobs:
         if: steps.release.outputs.released == 'true'
 
       - name: Publish package distributions to GitHub Releases
-        uses: python-semantic-release/publish-action@v9.15.1
+        uses: python-semantic-release/publish-action@v9
         if: steps.release.outputs.released == 'true'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
