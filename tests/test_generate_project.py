@@ -251,6 +251,8 @@ def test_django_package_yes(
         expected_strs=[
             '"Framework :: Django :: 4.2",',
             '"Framework :: Django :: 5.0",',
+            '"Framework :: Django :: 5.1",',
+            '"Framework :: Django :: 5.2",',
             '"django>=4.2"',
             "pytest-django>=4.5,<5",
             "--ds=tests.settings",
@@ -328,6 +330,7 @@ def test_django_package_yes(
             "django42: Django>=4.2,<5.0",
             "django50: Django>=5.0,<5.1",
             "django51: Django>=5.1,<5.2",
+            "django52: Django>=5.2a1,<6.0",
         ],
     )
     _check_file_contents(
@@ -374,6 +377,7 @@ def test_django_package_no(
             '"Framework :: Django :: 4.2",',
             '"Framework :: Django :: 5.0",',
             '"Framework :: Django :: 5.1",',
+            '"Framework :: Django :: 5.2",',
             '"django>=4.2"',
             "pytest-django>=4.5,<5",
         ],
