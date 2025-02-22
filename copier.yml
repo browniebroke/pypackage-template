@@ -112,12 +112,12 @@ _tasks:
   # Initial commit
   - "{% if initial_commit %}git init{% endif %}"
   - "{% if initial_commit %}git add .{% endif %}"
-  - "{% if initial_commit %}git commit -m 'chore: initial commit'{% endif %}"
+  - '{% if initial_commit %}git commit -m "chore: initial commit"{% endif %}'
   # Setup GitHub
-  - "{% if setup_github %}gh repo create {{ github_username }}/{{ project_slug }} -d '{{ project_short_description }}' --public --remote=origin --source=. --push{% endif %}"
+  - '{% if setup_github %}gh repo create {{ github_username }}/{{ project_slug }} -d "{{ project_short_description }}" --public --remote=origin --source=. --push{% endif %}'
   - "{% if setup_github %}gh repo edit --delete-branch-on-merge --enable-projects=false --enable-wiki=false{% endif %}"
-  - "{% if setup_github %}gh secret set GH_PAT -b 'changeme'{% endif %}"
-  - "{% if setup_github %}gh secret set CODECOV_TOKEN -b 'changeme'{% endif %}"
+  - '{% if setup_github %}gh secret set GH_PAT -b "changeme"{% endif %}'
+  - '{% if setup_github %}gh secret set CODECOV_TOKEN -b "changeme"{% endif %}'
   # Setup pre-commit
   - "{% if setup_pre_commit %}pre-commit install{% endif %}"
   # Add me as a contributor
