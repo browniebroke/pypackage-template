@@ -3,6 +3,7 @@ from __future__ import annotations
 import re
 from collections.abc import Sequence
 from pathlib import Path
+from sys import platform
 
 import copier
 import pytest
@@ -25,7 +26,9 @@ def base_answers():
         "initial_commit": True,
         "setup_github": False,
         "setup_pre_commit": False,
-        "add_me_as_contributor": True,
+        "add_me_as_contributor": platform == "linux",
+        # Error: API rate limit exceeded for ...
+        # if macOS, not sure for Windows
     }
 
 
