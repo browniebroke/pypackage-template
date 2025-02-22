@@ -1,5 +1,5 @@
 # questions
-full_name:
+user_name:
   type: str
   help: "What's your name?"
 

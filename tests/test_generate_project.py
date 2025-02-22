@@ -13,7 +13,7 @@ PROJECT_ROOT = Path(__file__).parent.parent
 @pytest.fixture
 def base_answers():
     return {
-        "full_name": "Jeanne Deau",
+        "user_name": "Jeanne Deau",
         "user_email": "jeanne.deau@example.fr",
         "github_user": "jdeau",
         "project_name": "Snake Farm",
