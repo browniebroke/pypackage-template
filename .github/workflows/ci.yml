@@ -30,6 +30,8 @@ jobs:
     name: "Template: ${{ matrix.python-version }} - ${{ matrix.os }}"
     steps:
       - uses: actions/checkout@v4
+      - run: git config --global user.name actions-user
+      - run: git config --global user.email action@github.com
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
@@ -68,6 +70,8 @@ jobs:
     name: "Generated: ${{ matrix.script.name }} ${{ matrix.extra_options.project_name }}"
     steps:
       - uses: actions/checkout@v4
+      - run: git config --global user.name actions-user
+      - run: git config --global user.email action@github.com
       - uses: actions/setup-python@v5
         id: setup-python
         with:
@@ -86,6 +90,8 @@ jobs:
           --data 'project_short_description=Just a great project' \
           --data 'open_source_license=MIT' \
           ${{ matrix.extra_options.value }} \
+          --data 'initial_commit=yes' \
+          --data 'setup_pre_commit=yes' \
           --defaults
       - run: cat pyproject.toml
         working-directory: my-project
