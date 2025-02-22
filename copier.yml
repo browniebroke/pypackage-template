@@ -95,8 +95,9 @@ setup_pre_commit:
 
 add_me_as_contributor:
   type: bool
-  help: "Add me as a contributor?"
+  help: "Add me as a contributor (requires npx)?"
   default: no
+  when: "{{ initial_commit }}"
 
 # Copier metadata
 _min_copier_version: "9.0.0"
