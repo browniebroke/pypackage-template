@@ -120,4 +120,4 @@ _tasks:
   # Setup pre-commit
   - "{% if setup_pre_commit %}pre-commit install{% endif %}"
   # Add me as a contributor
-  - "{% if add_me_as_contributor %}npx all-contributors-cli add {{ github_username }} code,ideas,doc{% endif %}"
+  - "{% if add_me_as_contributor %}npx --yes all-contributors-cli add {{ github_username }} code,ideas,doc{% endif %}"

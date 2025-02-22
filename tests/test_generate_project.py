@@ -14,8 +14,8 @@ PROJECT_ROOT = Path(__file__).parent.parent
 def base_answers():
     return {
         "full_name": "Jeanne Deau",
-        "email": "jeanne.deau@example.fr",
-        "github_username": "jdeau",
+        "email": "41898282+github-actions[bot]@users.noreply.github.com",
+        "github_username": "github-actions[bot]",
         "project_name": "Snake Farm",
         "project_short_description": "A sample Snake farming project.",
         "version": "0.0.1",
@@ -25,7 +25,7 @@ def base_answers():
         "initial_commit": False,
         "setup_github": False,
         "setup_pre_commit": False,
-        "add_me_as_contributor": False,
+        "add_me_as_contributor": True,
     }
 
 
