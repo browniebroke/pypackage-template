@@ -86,6 +86,8 @@ jobs:
           --data 'project_short_description=Just a great project' \
           --data 'open_source_license=MIT' \
           ${{ matrix.extra_options.value }} \
+          --data 'initial_commit=yes' \
+          --data 'add_me_as_contributor=yes' \
           --defaults
       - run: cat pyproject.toml
         working-directory: my-project
