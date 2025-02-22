@@ -36,7 +36,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - uses: astral-sh/setup-uv@v5
-      - run: uvx install pre-commit
+      - run: uv tool install pre-commit-uv
       - run: uv sync --no-python-downloads
         shell: bash
       - run: uv run pytest
@@ -78,7 +78,7 @@ jobs:
         with:
           python-version: "3.11"
       - uses: astral-sh/setup-uv@v5
-      - run: uvx install pre-commit
+      - run: uv tool install pre-commit-uv
       - run: |
           uvx copier copy \
           . \
