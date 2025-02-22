@@ -112,7 +112,6 @@ _tasks:
   - "{% if initial_commit %}git init{% endif %}"
   - "{% if initial_commit %}git add .{% endif %}"
   # Setup pre-commit
-  - "{% if setup_pre_commit %}pre-commit autoupdate{% endif %}"
   - "{% if setup_pre_commit %}pre-commit install{% endif %}"
   - "{% if setup_pre_commit %}pre-commit run -a || true{% endif %}"
   # Initial commit (2) (assuming that pre-commit will not raise an error on the second run)
