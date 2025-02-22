@@ -3,7 +3,7 @@ full_name:
   type: str
   help: "What's your name?"
 
-email:
+user_email:
   type: str
   help: "Email address"
   placeholder: "first.last@example.com"

@@ -14,7 +14,7 @@ PROJECT_ROOT = Path(__file__).parent.parent
 def base_answers():
     return {
         "full_name": "Jeanne Deau",
-        "email": "jeanne.deau@example.fr",
+        "user_email": "jeanne.deau@example.fr",
         "github_user": "jdeau",
         "project_name": "Snake Farm",
         "project_short_description": "A sample Snake farming project.",

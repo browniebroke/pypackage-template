@@ -79,7 +79,7 @@ jobs:
           my-project \
           --UNSAFE \
           --data 'full_name=Bruno Alla' \
-          --data 'email=test@example.com' \
+          --data 'user_email=test@example.com' \
           --data 'github_user=dummy' \
           --data 'project_name=${{ matrix.extra_options.project_name }}' \
           --data 'project_slug=${{ matrix.extra_options.project_slug }}' \
