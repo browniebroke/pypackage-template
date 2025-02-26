@@ -3,6 +3,7 @@ from __future__ import annotations
 import re
 from collections.abc import Sequence
 from pathlib import Path
+from sys import platform
 
 import copier
 import pytest
@@ -14,18 +15,20 @@ PROJECT_ROOT = Path(__file__).parent.parent
 def base_answers():
     return {
         "full_name": "Jeanne Deau",
-        "email": "jeanne.deau@example.fr",
-        "github_username": "jdeau",
+        "email": "action@github.com",
+        "github_username": "actions-user",
         "project_name": "Snake Farm",
         "project_short_description": "A sample Snake farming project.",
         "version": "0.0.1",
         "open_source_license": "MIT",
         "documentation": True,
         "run_uv_sync": False,
-        "initial_commit": False,
+        "initial_commit": True,
         "setup_github": False,
         "setup_pre_commit": False,
-        "add_me_as_contributor": False,
+        "add_me_as_contributor": platform == "linux",
+        # Error: API rate limit exceeded for ...
+        # if macOS, not sure for Windows
     }
 
 
