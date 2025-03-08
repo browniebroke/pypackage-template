@@ -22,9 +22,9 @@ def base_answers():
         "open_source_license": "MIT",
         "documentation": True,
         "run_uv_sync": False,
-        "initial_commit": False,
+        "initial_commit": True,
         "setup_github": False,
-        "setup_pre_commit": False,
+        "setup_pre_commit": True,
         "add_me_as_contributor": False,
     }
 
