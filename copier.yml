@@ -55,7 +55,7 @@ open_source_license:
 copyright_year:
   type: str
   help: "Copyright year(s)"
-  default: "2025"
+  default: "{% now 'utc', '%Y' %}"
 
 documentation:
   type: bool
@@ -121,3 +121,5 @@ _tasks:
   - "{% if setup_pre_commit %}pre-commit install{% endif %}"
   # Add me as a contributor
   - "{% if add_me_as_contributor %}npx all-contributors-cli add {{ github_username }} code,ideas,doc{% endif %}"
+_jinja_extensions:
+  - jinja2_time.TimeExtension
