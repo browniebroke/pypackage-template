@@ -422,6 +422,6 @@ def test_add_me_as_contributor(
         expected_strs=[f"commits?author={base_answers['github_username']}"],
     )
     _check_file_contents(
-        dst_path / "all-contributorsrc",
+        dst_path / ".all-contributorsrc",
         expected_strs=[f"https://github.com/{base_answers['github_username']}"],
     )
