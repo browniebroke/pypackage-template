@@ -13,13 +13,8 @@ PROJECT_ROOT = Path(__file__).parent.parent
 CI = environ.get("CI", "false").lower() == "true"
 
 
-@pytest.fixture(
-    params=[False, True],
-)
-def base_answers(request):
-    add_me_as_contributor = request.param
-    if add_me_as_contributor and CI and platform == "darwin":
-        pytest.skip("Skipping due to API rate limit exceeded")
+@pytest.fixture
+def base_answers():
     return {
         "full_name": "Jeanne Deau",
         "email": "action@github.com",
@@ -33,7 +28,7 @@ def base_answers(request):
         "initial_commit": True,
         "setup_github": False,
         "setup_pre_commit": False,
-        "add_me_as_contributor": add_me_as_contributor,
+        "add_me_as_contributor": False,
     }
 
 
@@ -403,4 +398,26 @@ def test_django_package_no(
         unexpect_strs=[
             "run: tox -f py$(echo ${{ matrix.python-version }} | tr -d .)",
         ],
+    )
+
+
+def test_add_me_as_contributor(
+    tmp_path: Path,
+    base_answers: dict[str, str | bool],
+):
+    if CI and platform == "darwin":
+        pytest.skip("Skipping due to APi rate limit")
+
+    dst_path = tmp_path / "snake-farm"
+    copier.run_copy(
+        src_path=str(PROJECT_ROOT),
+        dst_path=dst_path,
+        data={**base_answers, "add_me_as_contributor": True},
+        defaults=True,
+        unsafe=True,
+    )
+    assert tmp_path.exists()
+    _check_file_contents(
+        dst_path / "README.md",
+        expected_strs=["actions-user"],
     )
