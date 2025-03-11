@@ -419,5 +419,9 @@ def test_add_me_as_contributor(
     assert tmp_path.exists()
     _check_file_contents(
         dst_path / "README.md",
-        expected_strs=["actions-user"],
+        expected_strs=[f"commits?author={base_answers['github_username']}"],
+    )
+    _check_file_contents(
+        dst_path / "all-contributorsrc",
+        expected_strs=[f"https://github.com/{base_answers['github_username']}"],
     )
