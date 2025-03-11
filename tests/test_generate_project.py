@@ -423,5 +423,5 @@ def test_add_me_as_contributor(
     )
     _check_file_contents(
         dst_path / ".all-contributorsrc",
-        expected_strs=[f"https://github.com/{base_answers['github_username']}"],
+        expected_strs=[f"{base_answers['github_username']}"],
     )
