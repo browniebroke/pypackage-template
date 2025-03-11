@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import re
 from collections.abc import Sequence
+from os import environ
 from pathlib import Path
 from sys import platform
 
@@ -9,10 +10,16 @@ import copier
 import pytest
 
 PROJECT_ROOT = Path(__file__).parent.parent
+CI = environ.get("CI", "false").lower() == "true"
 
 
-@pytest.fixture
-def base_answers():
+@pytest.fixture(
+    params=[False, True],
+)
+def base_answers(request):
+    add_me_as_contributor = request.param
+    if add_me_as_contributor and CI and platform == "darwin":
+        pytest.skip("Skipping due to API rate limit exceeded")
     return {
         "full_name": "Jeanne Deau",
         "email": "action@github.com",
@@ -26,9 +33,7 @@ def base_answers():
         "initial_commit": True,
         "setup_github": False,
         "setup_pre_commit": False,
-        "add_me_as_contributor": platform == "linux",
-        # Error: API rate limit exceeded for ...
-        # if macOS, not sure for Windows
+        "add_me_as_contributor": add_me_as_contributor,
     }
 
 
