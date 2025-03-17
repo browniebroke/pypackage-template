@@ -76,7 +76,7 @@ jobs:
       - uses: actions/setup-python@v5
         id: setup-python
         with:
-          python-version: "3.11"
+          python-version: "3.13"
       - uses: astral-sh/setup-uv@v5
       - run: uv tool install --with pre-commit-uv pre-commit
       - run: |
@@ -85,8 +85,8 @@ jobs:
           my-project \
           --UNSAFE \
           --data 'full_name=Bruno Alla' \
-          --data 'email=test@example.com' \
-          --data 'github_username=dummy' \
+          --data 'email=action@github.com' \
+          --data 'github_username=actions-user' \
           --data 'project_name=${{ matrix.extra_options.project_name }}' \
           --data 'project_slug=${{ matrix.extra_options.project_slug }}' \
           --data 'project_short_description=Just a great project' \
@@ -94,6 +94,7 @@ jobs:
           ${{ matrix.extra_options.value }} \
           --data 'initial_commit=yes' \
           --data 'setup_pre_commit=yes' \
+          --data 'add_me_as_contributor=yes' \
           --defaults
       - run: cat pyproject.toml
         working-directory: my-project

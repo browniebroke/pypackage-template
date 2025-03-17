@@ -95,8 +95,9 @@ setup_pre_commit:
 
 add_me_as_contributor:
   type: bool
-  help: "Add me as a contributor?"
+  help: "Add me as a contributor (requires npx)?"
   default: no
+  when: "{{ initial_commit }}"
 
 # Copier metadata
 _min_copier_version: "9.0.0"
@@ -116,11 +117,11 @@ _tasks:
   - "{% if setup_pre_commit %}pre-commit run -a || true{% endif %}"
   # Initial commit (2) (assuming that pre-commit will not raise an error on the second run)
   - "{% if initial_commit %}git add .{% endif %}"
-  - "{% if initial_commit %}git commit -m 'chore: initial commit'{% endif %}"
+  - '{% if initial_commit %}git commit -m "chore: initial commit"{% endif %}'
   # Setup GitHub
-  - "{% if setup_github %}gh repo create {{ github_username }}/{{ project_slug }} -d '{{ project_short_description }}' --public --remote=origin --source=. --push{% endif %}"
+  - '{% if setup_github %}gh repo create {{ github_username }}/{{ project_slug }} -d "{{ project_short_description }}" --public --remote=origin --source=. --push{% endif %}'
   - "{% if setup_github %}gh repo edit --delete-branch-on-merge --enable-projects=false --enable-wiki=false{% endif %}"
-  - "{% if setup_github %}gh secret set GH_PAT -b 'changeme'{% endif %}"
-  - "{% if setup_github %}gh secret set CODECOV_TOKEN -b 'changeme'{% endif %}"
+  - '{% if setup_github %}gh secret set GH_PAT -b "changeme"{% endif %}'
+  - '{% if setup_github %}gh secret set CODECOV_TOKEN -b "changeme"{% endif %}'
   # Add me as a contributor
-  - "{% if add_me_as_contributor %}npx all-contributors-cli add {{ github_username }} code,ideas,doc{% endif %}"
+  - "{% if add_me_as_contributor %}npx --yes all-contributors-cli add {{ github_username }} code,ideas,doc{% endif %}"
