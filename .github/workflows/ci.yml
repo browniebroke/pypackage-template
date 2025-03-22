@@ -36,6 +36,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - uses: astral-sh/setup-uv@v5
+      - run: uv tool install --with pre-commit-uv pre-commit
       - run: uv sync --no-python-downloads
         shell: bash
       - run: uv run pytest
@@ -77,6 +78,7 @@ jobs:
         with:
           python-version: "3.13"
       - uses: astral-sh/setup-uv@v5
+      - run: uv tool install --with pre-commit-uv pre-commit
       - run: |
           uvx copier copy \
           . \
@@ -91,6 +93,7 @@ jobs:
           --data 'open_source_license=MIT' \
           ${{ matrix.extra_options.value }} \
           --data 'initial_commit=yes' \
+          --data 'setup_pre_commit=yes' \
           --data 'add_me_as_contributor=yes' \
           --defaults
       - run: cat pyproject.toml
