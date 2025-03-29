@@ -100,7 +100,7 @@ add_me_as_contributor:
 
 open_with_editor:
   type: bool
-  help: "Open with $VISUAL (requires environment variable VISUAL to be set to a valid command)"
+  help: "Open with code editor (requires environment variable VISUAL to be set to a valid command)"
   default: no
 
 # Copier metadata
