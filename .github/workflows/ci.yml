@@ -30,6 +30,8 @@ jobs:
     name: "Template: ${{ matrix.python-version }} - ${{ matrix.os }}"
     steps:
       - uses: actions/checkout@v4
+      - run: git config --global user.name actions-user
+      - run: git config --global user.email action@github.com
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
@@ -68,10 +70,12 @@ jobs:
     name: "Generated: ${{ matrix.script.name }} ${{ matrix.extra_options.project_name }}"
     steps:
       - uses: actions/checkout@v4
+      - run: git config --global user.name actions-user
+      - run: git config --global user.email action@github.com
       - uses: actions/setup-python@v5
         id: setup-python
         with:
-          python-version: "3.11"
+          python-version: "3.13"
       - uses: astral-sh/setup-uv@v5
       - run: |
           uvx copier copy \
@@ -79,13 +83,15 @@ jobs:
           my-project \
           --UNSAFE \
           --data 'full_name=Bruno Alla' \
-          --data 'email=test@example.com' \
-          --data 'github_username=dummy' \
+          --data 'email=action@github.com' \
+          --data 'github_username=actions-user' \
           --data 'project_name=${{ matrix.extra_options.project_name }}' \
           --data 'project_slug=${{ matrix.extra_options.project_slug }}' \
           --data 'project_short_description=Just a great project' \
           --data 'open_source_license=MIT' \
           ${{ matrix.extra_options.value }} \
+          --data 'initial_commit=yes' \
+          --data 'add_me_as_contributor=yes' \
           --defaults
       - run: cat pyproject.toml
         working-directory: my-project
