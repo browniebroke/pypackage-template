@@ -99,6 +99,11 @@ add_me_as_contributor:
   default: no
   when: "{{ initial_commit }}"
 
+open_with_editor:
+  type: bool
+  help: "Open with code editor (requires environment variable VISUAL to be set to a valid command)"
+  default: no
+
 # Copier metadata
 _min_copier_version: "9.0.0"
 _subdirectory: "project"
@@ -122,3 +127,5 @@ _tasks:
   - "{% if setup_pre_commit %}pre-commit install{% endif %}"
   # Add me as a contributor
   - "{% if add_me_as_contributor %}npx --yes all-contributors-cli add {{ github_username }} code,ideas,doc{% endif %}"
+  # Open with editor
+  - "{% if open_with_editor %}$VISUAL .{% endif %}"
