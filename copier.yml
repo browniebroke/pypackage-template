@@ -108,6 +108,8 @@ open_with_editor:
 _min_copier_version: "9.0.0"
 _subdirectory: "project"
 _tasks:
+  # Replace true with false in .copier-answers.yml for options which should not be run on `copier update`
+  - "{% if initial_commit %}uv run python -c \"from pathlib import Path; import re; p = Path('.copier-answers.yml'); p.write_text(re.sub(r'((?:run_uv_sync|initial_commit|setup_github|setup_pre_commit|add_me_as_contributor): )true', r'\\g<1>false', p.read_text()))\"{% endif %}"
   # Remove licence file if no license
   - "{% if open_source_license == 'Not open source' %}rm LICENSE{% endif %}"
   # Cleanup docs
