@@ -27,7 +27,7 @@ def base_answers():
         "run_uv_sync": False,
         "initial_commit": True,
         "setup_github": False,
-        "setup_pre_commit": False,
+        "setup_pre_commit": True,
         "add_me_as_contributor": False,
     }
 
