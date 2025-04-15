@@ -59,7 +59,7 @@ jobs:
         extra_options:
           - project_name: "Simple Package"
             project_slug: "simple-package"
-            value: ""
+            value: "--data 'add_me_as_contributor=yes'"
           - project_name: "Simple CLI"
             project_slug: "simple-cli"
             value: "--data 'has_cli=yes' --data 'cli_name=mycli'"
@@ -91,7 +91,6 @@ jobs:
           --data 'open_source_license=MIT' \
           ${{ matrix.extra_options.value }} \
           --data 'initial_commit=yes' \
-          --data 'add_me_as_contributor=yes' \
           --defaults
       - run: cat pyproject.toml
         working-directory: my-project
