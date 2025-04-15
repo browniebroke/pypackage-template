@@ -99,10 +99,17 @@ add_me_as_contributor:
   default: no
   when: "{{ initial_commit }}"
 
+open_with_editor:
+  type: bool
+  help: "Open with code editor (requires environment variable VISUAL to be set to a valid command)"
+  default: no
+
 # Copier metadata
 _min_copier_version: "9.0.0"
 _subdirectory: "project"
 _tasks:
+  # Replace true with false in .copier-answers.yml for options which should not be run on `copier update`
+  - "{% if initial_commit %}uv run python -c \"from pathlib import Path; import re; p = Path('.copier-answers.yml'); p.write_text(re.sub(r'((?:run_uv_sync|initial_commit|setup_github|setup_pre_commit|add_me_as_contributor): )true', r'\\g<1>false', p.read_text()))\"{% endif %}"
   # Remove licence file if no license
   - "{% if open_source_license == 'Not open source' %}rm LICENSE{% endif %}"
   # Cleanup docs
@@ -122,3 +129,5 @@ _tasks:
   - "{% if setup_pre_commit %}pre-commit install{% endif %}"
   # Add me as a contributor
   - "{% if add_me_as_contributor %}npx --yes all-contributors-cli add {{ github_username }} code,ideas,doc{% endif %}"
+  # Open with editor
+  - "{% if open_with_editor %}$VISUAL .{% endif %}"

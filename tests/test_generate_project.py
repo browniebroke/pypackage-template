@@ -4,7 +4,6 @@ import re
 from collections.abc import Sequence
 from os import environ
 from pathlib import Path
-from sys import platform
 
 import copier
 import pytest
@@ -401,13 +400,11 @@ def test_django_package_no(
     )
 
 
+@pytest.mark.skipif(CI, reason="GitHub API rate limit")
 def test_add_me_as_contributor(
     tmp_path: Path,
     base_answers: dict[str, str | bool],
 ):
-    if CI and platform == "darwin":
-        pytest.skip("Skipping due to APi rate limit")
-
     dst_path = tmp_path / "snake-farm"
     copier.run_copy(
         src_path=str(PROJECT_ROOT),
