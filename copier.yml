@@ -113,7 +113,7 @@ _tasks:
   # Remove licence file if no license
   - "{% if open_source_license == 'Not open source' %}rm LICENSE{% endif %}"
   # Cleanup docs
-  - "{% if not documentation %}python -c \"import os, shutil; shutil.rmtree('docs'); os.remove('.readthedocs.yml') \"{% endif %}"
+  - '{% if not documentation %}python -c "import os, shutil; shutil.rmtree(''docs''); os.remove(''.readthedocs.yml'') "{% endif %}'
   # Run 'uv sync' to generate lockfile
   - "{% if run_uv_sync %}uv sync{% endif %}"
   # Initial commit
