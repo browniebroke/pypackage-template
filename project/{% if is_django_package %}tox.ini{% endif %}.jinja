@@ -21,4 +21,5 @@ deps =
     django42: Django>=4.2,<5.0
 commands =
     python \
+      -m coverage run \
       -m pytest {posargs:tests}
