@@ -57,6 +57,10 @@ jobs:
         shell: bash
       - run: tox -f py$(echo ${{ matrix.python-version }} | tr -d .)
         shell: bash
+      - run: |
+          uv run coverage combine
+          uv run coverage xml
+        shell: bash
 {% endraw %}
 {%- else %}{% raw %}
       - uses: actions/setup-python@v5

@@ -53,10 +53,12 @@ scripts.{{ cli_name }} = "{{ package_name }}.cli:app"
 
 [dependency-groups]
 dev = [
+  "coverage",
   "pytest>=8,<9",
-  "pytest-cov>=6,<7",
 {%- if is_django_package  %}
   "pytest-django>=4.5,<5",
+{%- else  %}
+  "pytest-cov>=6,<7",
 {%- endif %}
 ]
 {%- if documentation %}
@@ -109,17 +111,28 @@ lint.isort.known-first-party = [ "{{ package_name }}", "tests" ]
 addopts = """\
     -v
     -Wdefault
+{%- if is_django_package  %}
+    --ds=tests.settings
+{%- else  %}
     --cov={{ package_name }}
     --cov-report=term
     --cov-report=xml
-{%- if is_django_package  %}
-    --ds=tests.settings
 {%- endif  %}
     """
 pythonpath = [ "src" ]
 
 [tool.coverage.run]
 branch = true
+{%- if is_django_package  %}
+parallel = true
+source = [ "{{ package_name }}" ]
+{%- endif  %}
+
+[tool.coverage.paths]
+source = [
+  "src",
+  ".tox/**/site-packages",
+]
 
 [tool.coverage.report]
 exclude_lines = [
