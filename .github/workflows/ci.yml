@@ -29,7 +29,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     name: "Template: ${{ matrix.python-version }} - ${{ matrix.os }}"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - run: git config --global user.name actions-user
       - run: git config --global user.email action@github.com
       - uses: actions/setup-python@v5
@@ -69,7 +69,7 @@ jobs:
     runs-on: ubuntu-latest
     name: "Generated: ${{ matrix.script.name }} ${{ matrix.extra_options.project_name }}"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - run: git config --global user.name actions-user
       - run: git config --global user.email action@github.com
       - uses: actions/setup-python@v5
