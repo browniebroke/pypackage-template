@@ -1,13 +1,15 @@
 [build-system]
 build-backend = "setuptools.build_meta"
-requires = [ "setuptools" ]
+requires = [ "setuptools>=77.0.3" ]
 
 [project]
 name = "{{ project_slug }}"
 version = "0.0.0"
 description = "{{ project_short_description }}"
 readme = "README.md"
-license = { text = "{{ open_source_license }}" }
+{%- if open_source_license != "Not open source" %}
+license = "{{ open_source_license }}"
+{%- endif %}
 authors = [
   { name = "{{ full_name }}", email = "{{ email }}" },
 ]
