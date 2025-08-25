@@ -103,22 +103,22 @@ jobs:
 
       # Do a dry run of PSR
       - name: Test release
-        uses: python-semantic-release/python-semantic-release@v9
+        uses: python-semantic-release/python-semantic-release@v10
         if: github.ref_name != 'main'
         with:
-          root_options: --noop
+          no_operation_mode: true
           github_token: noop
 
       # On main branch: actual PSR + upload to PyPI & GitHub
       - name: Release
-        uses: python-semantic-release/python-semantic-release@v9
-        id: release
+        uses: python-semantic-release/python-semantic-release@v10
         if: github.ref_name == 'main'
+        id: release
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Attest build provenance
-        uses: actions/attest-build-provenance@v1
+        uses: actions/attest-build-provenance@v2
         if: steps.release.outputs.released == 'true'
         with:
           subject-path: "dist/*"
@@ -128,7 +128,7 @@ jobs:
         if: steps.release.outputs.released == 'true'
 
       - name: Publish package distributions to GitHub Releases
-        uses: python-semantic-release/publish-action@v9
+        uses: python-semantic-release/publish-action@v
         if: steps.release.outputs.released == 'true'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
