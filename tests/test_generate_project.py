@@ -67,7 +67,7 @@ def test_defaults_values(
         [
             'name = "snake-farm"',
             'version = "0.0.0"',
-            'license = { text = "MIT" }',
+            'license = "MIT"',
         ],
     )
     upgrade_path = dst_path / ".github" / "workflows" / "upgrader.yml"
@@ -92,13 +92,13 @@ def test_defaults_values(
             ["Apache License", "GNU GENERAL PUBLIC LICENSE"],
         ),
         (
-            "Apache Software License 2.0",
+            "Apache-2.0",
             True,
             ["Apache License"],
             ["MIT License", "GNU GENERAL PUBLIC LICENSE"],
         ),
         (
-            "GNU General Public License v3",
+            "GPL-3.0-only",
             True,
             ["GNU GENERAL PUBLIC LICENSE"],
             ["MIT License", "Apache License"],

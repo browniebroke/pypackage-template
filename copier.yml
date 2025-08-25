@@ -47,10 +47,10 @@ open_source_license:
   type: str
   help: "The open source license to use"
   choices:
-    - "MIT"
-    - "Apache Software License 2.0"
-    - "GNU General Public License v3"
-    - "Not open source"
+    MIT: MIT
+    Apache Software License 2.0: Apache-2.0
+    GNU General Public License v3: GPL-3.0-only
+    Not open source: "Not open source"
 
 copyright_year:
   type: str
@@ -110,7 +110,7 @@ _subdirectory: "project"
 _tasks:
   # Replace true with false in .copier-answers.yml for options which should not be run on `copier update`
   - "{% if initial_commit %}uv run python -c \"from pathlib import Path; import re; p = Path('.copier-answers.yml'); p.write_text(re.sub(r'((?:run_uv_sync|initial_commit|setup_github|setup_pre_commit|add_me_as_contributor): )true', r'\\g<1>false', p.read_text()))\"{% endif %}"
-  # Remove licence file if no license
+  # Remove licence file if not open source
   - "{% if open_source_license == 'Not open source' %}rm LICENSE{% endif %}"
   # Cleanup docs
   - '{% if not documentation %}python -c "import os, shutil; shutil.rmtree(''docs''); os.remove(''.readthedocs.yml'') "{% endif %}'
