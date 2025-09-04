@@ -32,7 +32,7 @@ jobs:
       - uses: actions/checkout@v5
       - run: git config --global user.name actions-user
       - run: git config --global user.email action@github.com
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
       - uses: astral-sh/setup-uv@v6
@@ -72,7 +72,7 @@ jobs:
       - uses: actions/checkout@v5
       - run: git config --global user.name actions-user
       - run: git config --global user.email action@github.com
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         id: setup-python
         with:
           python-version: "3.13"
