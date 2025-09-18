@@ -40,6 +40,7 @@ jobs:
           - "3.11"
           - "3.12"
           - "3.13"
+          - "3.14"
         os:
           - ubuntu-latest
           - windows-latest
@@ -51,6 +52,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
+          allow-prereleases: true
       - uses: astral-sh/setup-uv@v6
       - run: uv pip install --system tox tox-uv
         shell: bash
@@ -66,6 +68,7 @@ jobs:
         id: setup-python
         with:
           python-version: ${{ matrix.python-version }}
+          allow-prereleases: true
       - uses: astral-sh/setup-uv@v6
       - run: uv sync --no-python-downloads
         shell: bash
