@@ -67,6 +67,9 @@ lint.per-file-ignores."tests/**/*" = [
   "S101",
 ]
 
+[tool.pyproject-fmt]
+max_supported_python = "3.14"
+
 [tool.pytest.ini_options]
 addopts = "-v -Wdefault"
 testpaths = "tests/"
