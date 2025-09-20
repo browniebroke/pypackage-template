@@ -123,6 +123,8 @@ addopts = """\
     --cov-report=term
     --cov-report=xml
 {%- endif  %}
+    --doctest-modules
+    --ignore=docs
     """
 pythonpath = [ "src" ]
 
