@@ -165,7 +165,7 @@ def test_documentation(
             dst_path / ".readthedocs.yml",
             expected_strs=[
                 "configuration: docs/conf.py",
-                "uv sync --only-group docs --frozen",
+                "uv sync --frozen --no-dev --group docs",
             ],
         )
         _check_file_contents(
