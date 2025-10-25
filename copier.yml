@@ -105,15 +105,27 @@ open_with_editor:
   default: no
 
 # Copier metadata
+_exclude:
+  # Cleanup docs
+  - '{% if not documentation %}docs{% endif %}'
+  - '{% if not documentation %}.readthedocs.yml{% endif %}'
+  # Remove licence file if not open source
+  - "{% if open_source_license == 'Not open source' %}LICENSE{% endif %}"
+  # Default values for exclude
+  # https://copier.readthedocs.io/en/stable/configuring/#exclude
+  - copier.yaml
+  - copier.yml
+  - '~*'
+  - '*.py[co]'
+  - __pycache__
+  - .git
+  - .DS_Store
+  - .svn
 _min_copier_version: "9.0.0"
 _subdirectory: "project"
 _tasks:
   # Replace true with false in .copier-answers.yml for options which should not be run on `copier update`
   - "{% if initial_commit %}uv run python -c \"from pathlib import Path; import re; p = Path('.copier-answers.yml'); p.write_text(re.sub(r'((?:run_uv_sync|initial_commit|setup_github|setup_pre_commit|add_me_as_contributor): )true', r'\\g<1>false', p.read_text()))\"{% endif %}"
-  # Remove licence file if not open source
-  - "{% if open_source_license == 'Not open source' %}rm LICENSE{% endif %}"
-  # Cleanup docs
-  - '{% if not documentation %}python -c "import os, shutil; shutil.rmtree(''docs''); os.remove(''.readthedocs.yml'') "{% endif %}'
   # Run 'uv sync' to generate lockfile
   - "{% if run_uv_sync %}uv sync{% endif %}"
   # Initial commit
