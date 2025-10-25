@@ -107,16 +107,16 @@ open_with_editor:
 # Copier metadata
 _exclude:
   # Cleanup docs
-  - '{% if not documentation %}docs{% endif %}'
-  - '{% if not documentation %}.readthedocs.yml{% endif %}'
+  - "{% if not documentation %}docs{% endif %}"
+  - "{% if not documentation %}.readthedocs.yml{% endif %}"
   # Remove licence file if not open source
   - "{% if open_source_license == 'Not open source' %}LICENSE{% endif %}"
   # Default values for exclude
   # https://copier.readthedocs.io/en/stable/configuring/#exclude
   - copier.yaml
   - copier.yml
-  - '~*'
-  - '*.py[co]'
+  - "~*"
+  - "*.py[co]"
   - __pycache__
   - .git
   - .DS_Store
