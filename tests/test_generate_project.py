@@ -244,9 +244,12 @@ def test_django_package_yes(
             '"Framework :: Django :: 5.0",',
             '"Framework :: Django :: 5.1",',
             '"Framework :: Django :: 5.2",',
+            '"Framework :: Django :: 6.0",',
             '"django>=4.2"',
             "pytest-django>=4.5,<5",
             "--ds=tests.settings",
+            "django60 = [ \"django>=6.0a1,<6.1; python_version>='3.12'\" ]",
+            'django42 = [ "django>=4.2a1,<5" ]',
         ],
     )
     _check_file_contents(
@@ -318,10 +321,11 @@ def test_django_package_yes(
     _check_file_contents(
         dst_path / "tox.ini",
         expected_strs=[
-            "django42: Django>=4.2,<5.0",
-            "django50: Django>=5.0,<5.1",
-            "django51: Django>=5.1,<5.2",
-            "django52: Django>=5.2a1,<6.0",
+            "django42: django42",
+            "django50: django50",
+            "django51: django51",
+            "django52: django52",
+            "django60: django60",
         ],
     )
     _check_file_contents(
