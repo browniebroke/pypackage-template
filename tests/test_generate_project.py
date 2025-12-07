@@ -244,10 +244,11 @@ def test_django_package_yes(
             '"Framework :: Django :: 5.0",',
             '"Framework :: Django :: 5.1",',
             '"Framework :: Django :: 5.2",',
+            '"Framework :: Django :: 6.0",',
             '"django>=4.2"',
             "pytest-django>=4.5,<5",
             "--ds=tests.settings",
-            'django52 = [ "django>=5.2a1,<6" ]',
+            "django60 = [ \"django>=6.0a1,<6.1; python_version>='3.12'\" ]",
             'django42 = [ "django>=4.2a1,<5" ]',
         ],
     )
@@ -324,6 +325,7 @@ def test_django_package_yes(
             "django50: django50",
             "django51: django51",
             "django52: django52",
+            "django60: django60",
         ],
     )
     _check_file_contents(
