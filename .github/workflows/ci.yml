@@ -48,10 +48,10 @@ jobs:
       fail-fast: false
       matrix:
         script:
-          - run: "uv run python -m pytest"
+          - run: "uv run python -m pytest tests"
             dir: ""
             name: "pytest"
-          - run: "git init && git add . && uvx --with pre-commit-uv pre-commit run -a --show-diff-on-failure"
+          - run: "git init && git add . && uvx --with pre-commit-uv pre-commit run -a"
             dir: ""
             name: "pre-commit"
           - run: "uv run make html"
