@@ -58,7 +58,7 @@ scripts.{{ cli_name }} = "{{ package_name }}.cli:app"
 dev = [
   "coverage",
   "pytest>=8,<9",
-  "sybil>=9",
+  "sybil[pytest]",
 {%- if is_django_package  %}
   "pytest-django>=4.5,<5",
 {%- else  %}
