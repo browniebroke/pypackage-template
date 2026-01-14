@@ -108,26 +108,20 @@ open_with_editor:
 _min_copier_version: "9.0.0"
 _subdirectory: "project"
 _tasks:
-  # Replace true with false in .copier-answers.yml for options which should not be run on `copier update`
-  - "{% if initial_commit %}uv run python -c \"from pathlib import Path; import re; p = Path('.copier-answers.yml'); p.write_text(re.sub(r'((?:run_uv_sync|initial_commit|setup_github|setup_pre_commit|add_me_as_contributor): )true', r'\\g<1>false', p.read_text()))\"{% endif %}"
-  # Remove licence file if not open source
-  - "{% if open_source_license == 'Not open source' %}rm LICENSE{% endif %}"
-  # Cleanup docs
-  - '{% if not documentation %}python -c "import os, shutil; shutil.rmtree(''docs''); os.remove(''.readthedocs.yml'') "{% endif %}'
-  # Run 'uv sync' to generate lockfile
+  # Run 'uv sync' to generate/update lockfile
   - "{% if run_uv_sync %}uv sync{% endif %}"
   # Initial commit
-  - "{% if initial_commit %}git init{% endif %}"
-  - "{% if initial_commit %}git add .{% endif %}"
-  - '{% if initial_commit %}git commit -m "chore: initial commit"{% endif %}'
+  - "{% if _copier_operation == 'copy' and initial_commit %}git init{% endif %}"
+  - "{% if _copier_operation == 'copy' and initial_commit %}git add .{% endif %}"
+  - '{% if _copier_operation == "copy" and initial_commit %}git commit -m "chore: initial commit"{% endif %}'
   # Setup GitHub
-  - '{% if setup_github %}gh repo create {{ github_username }}/{{ project_slug }} -d "{{ project_short_description }}" --public --remote=origin --source=. --push{% endif %}'
-  - "{% if setup_github %}gh repo edit --delete-branch-on-merge --enable-projects=false --enable-wiki=false{% endif %}"
-  - '{% if setup_github %}gh secret set GH_PAT -b "changeme"{% endif %}'
-  - '{% if setup_github %}gh secret set CODECOV_TOKEN -b "changeme"{% endif %}'
+  - '{% if _copier_operation == "copy" and setup_github %}gh repo create {{ github_username }}/{{ project_slug }} -d "{{ project_short_description }}" --public --remote=origin --source=. --push{% endif %}'
+  - "{% if _copier_operation == 'copy' and setup_github %}gh repo edit --delete-branch-on-merge --enable-projects=false --enable-wiki=false{% endif %}"
+  - '{% if _copier_operation == "copy" and setup_github %}gh secret set GH_PAT -b "changeme"{% endif %}'
+  - '{% if _copier_operation == "copy" and setup_github %}gh secret set CODECOV_TOKEN -b "changeme"{% endif %}'
   # Setup pre-commit
-  - "{% if setup_pre_commit %}pre-commit install{% endif %}"
+  - "{% if _copier_operation == 'copy' and setup_pre_commit %}pre-commit install{% endif %}"
   # Add me as a contributor
-  - "{% if add_me_as_contributor %}npx --yes all-contributors-cli add {{ github_username }} code,ideas,doc{% endif %}"
+  - "{% if _copier_operation == 'copy' and add_me_as_contributor %}npx --yes all-contributors-cli add {{ github_username }} code,ideas,doc{% endif %}"
   # Open with editor
   - "{% if open_with_editor %}$VISUAL .{% endif %}"
