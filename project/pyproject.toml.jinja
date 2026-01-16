@@ -58,6 +58,7 @@ scripts.{{ cli_name }} = "{{ package_name }}.cli:app"
 dev = [
   "coverage",
   "pytest>=8,<9",
+  "sybil[pytest]",
 {%- if is_django_package  %}
   "pytest-django>=4.5,<5",
 {%- else  %}
@@ -135,6 +136,7 @@ max_supported_python = "3.14"
 addopts = """\
     -v
     -Wdefault
+    -p no:doctest
 {%- if is_django_package  %}
     --ds=tests.settings
 {%- else  %}
