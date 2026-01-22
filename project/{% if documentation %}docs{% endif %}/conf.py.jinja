@@ -13,7 +13,7 @@ from sphinx.application import Sphinx
 from sphinx.ext import apidoc
 {%- if is_django_package %}
 
-settings.configure()
+settings.configure(USE_I18N=False)
 {%- endif %}
 
 # -- Project information -----------------------------------------------------

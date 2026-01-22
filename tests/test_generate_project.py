@@ -167,12 +167,13 @@ def test_documentation(
             expected_strs=[
                 textwrap.dedent(
                     """
-                from pathlib import Path
-                from typing import Any
+                    from pathlib import Path
+                    from typing import Any
 
-                from sphinx.application import Sphinx
-                from sphinx.ext import apidoc
-                """
+                    from sphinx.application import Sphinx
+                    from sphinx.ext import apidoc
+
+                    # -- Project information"""
                 )
             ],
         )
@@ -326,15 +327,16 @@ def test_django_package_yes(
         expected_strs=[
             textwrap.dedent(
                 """
-            from pathlib import Path
-            from typing import Any
+                from pathlib import Path
+                from typing import Any
 
-            from django.conf import settings
-            from sphinx.application import Sphinx
-            from sphinx.ext import apidoc
+                from django.conf import settings
+                from sphinx.application import Sphinx
+                from sphinx.ext import apidoc
 
-            settings.configure()
-            """
+                settings.configure(USE_I18N=False)
+
+                # -- Project information"""
             )
         ],
     )
