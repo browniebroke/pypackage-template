@@ -6,9 +6,9 @@
 from pathlib import Path
 from typing import Any
 
-{% if is_django_package %}
+{% if is_django_package -%}
 from django.conf import settings
-{%- endif  %}
+{% endif  -%}
 from sphinx.application import Sphinx
 from sphinx.ext import apidoc
 {%- if is_django_package %}
