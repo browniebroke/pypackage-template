@@ -159,14 +159,14 @@ def test_documentation(
         )
         _check_file_contents(
             dst_path / "pyproject.toml",
-            expected_strs=["docs = [", "sphinx>=", "myst-parser>="],
+            expected_strs=["docs = [", "sphinx==", "myst-parser"],
         )
     else:
         assert not (dst_path / "docs").exists()
         assert not (dst_path / ".readthedocs.yml").exists()
         _check_file_contents(
             dst_path / "pyproject.toml",
-            unexpect_strs=["docs = [", "sphinx>=", "myst-parser>="],
+            unexpect_strs=["docs = [", "sphinx==", "myst-parser"],
         )
 
 
@@ -246,7 +246,7 @@ def test_django_package_yes(
             '"Framework :: Django :: 5.2",',
             '"Framework :: Django :: 6.0",',
             '"django>=4.2"',
-            "pytest-django>=4.5,<5",
+            "pytest-django==",
             "--ds=tests.settings",
             "django60 = [ \"django>=6.0a1,<6.1; python_version>='3.12'\" ]",
             'django42 = [ "django>=4.2a1,<5" ]',

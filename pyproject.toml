@@ -23,9 +23,9 @@ dependencies = [  ]
 
 [dependency-groups]
 dev = [
-  "copier>=9,<10",
-  "pytest>=9,<10",
-  "pytest-mock>=3.3,<4",
+  "copier==9.*",
+  "pytest==9.*",
+  "pytest-mock",
 ]
 
 [tool.ruff]

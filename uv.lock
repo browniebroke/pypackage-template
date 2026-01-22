@@ -415,9 +415,9 @@ dev = [
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "copier", specifier = ">=9,<10" },
-    { name = "pytest", specifier = ">=9,<10" },
-    { name = "pytest-mock", specifier = ">=3.3,<4" },
+    { name = "copier", specifier = "==9.*" },
+    { name = "pytest", specifier = "==9.*" },
+    { name = "pytest-mock" },
 ]
 
 [[package]]
