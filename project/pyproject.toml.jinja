@@ -56,21 +56,21 @@ scripts.{{ cli_name }} = "{{ package_name }}.cli:app"
 
 [dependency-groups]
 dev = [
-  "coverage",
-  "pytest>=9,<10",
+  "pytest==9.*",
   "sybil[pytest]",
+  "coverage",
 {%- if is_django_package  %}
-  "pytest-django>=4.5,<5",
+  "pytest-django==4.*",
 {%- else  %}
-  "pytest-cov>=7,<8",
+  "pytest-cov==7.*",
 {%- endif %}
 ]
 {%- if documentation %}
 docs = [
-  "furo>=2025.12.19; python_version>='3.12'",
-  "myst-parser>=5; python_version>='3.12'",
-  "sphinx>=9; python_version>='3.12'",
-  "sphinx-autobuild>=2025.8.25; python_version>='3.12'",
+  "sphinx==8.*; python_version>='3.12'",
+  "furo; python_version>='3.12'",
+  "myst-parser; python_version>='3.12'",
+  "sphinx-autobuild; python_version>='3.12'",
 ]
 {%- endif %}
 {%- if is_django_package %}
