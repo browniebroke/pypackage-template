@@ -6,8 +6,15 @@
 from pathlib import Path
 from typing import Any
 
+{% if is_django_package %}
+from django.conf import settings
+{%- endif  %}
 from sphinx.application import Sphinx
 from sphinx.ext import apidoc
+{%- if is_django_package %}
+
+settings.configure()
+{%- endif %}
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
