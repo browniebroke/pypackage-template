@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import textwrap
 from collections.abc import Sequence
 from os import environ
 from pathlib import Path
@@ -161,6 +162,20 @@ def test_documentation(
             dst_path / "pyproject.toml",
             expected_strs=["docs = [", "sphinx==", "myst-parser"],
         )
+        _check_file_contents(
+            dst_path / "docs" / "conf.py",
+            expected_strs=[
+                textwrap.dedent(
+                    """
+                from pathlib import Path
+                from typing import Any
+
+                from sphinx.application import Sphinx
+                from sphinx.ext import apidoc
+                """
+                )
+            ],
+        )
     else:
         assert not (dst_path / "docs").exists()
         assert not (dst_path / ".readthedocs.yml").exists()
@@ -304,6 +319,23 @@ def test_django_package_yes(
         dst_path / "tests" / "testapp" / "models.py",
         expected_strs=[
             "class Blog(models.Model):",
+        ],
+    )
+    _check_file_contents(
+        dst_path / "docs" / "conf.py",
+        expected_strs=[
+            textwrap.dedent(
+                """
+            from pathlib import Path
+            from typing import Any
+
+            from django.conf import settings
+            from sphinx.application import Sphinx
+            from sphinx.ext import apidoc
+
+            settings.configure()
+            """
+            )
         ],
     )
     _check_file_contents(
