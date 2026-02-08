@@ -30,7 +30,6 @@ dev = [
 
 [tool.ruff]
 line-length = 88
-
 lint.select = [
   "B",   # flake8-bugbear
   "C4",  # flake8-comprehensions
@@ -71,6 +70,6 @@ lint.per-file-ignores."tests/**/*" = [
 [tool.pyproject-fmt]
 max_supported_python = "3.14"
 
-[tool.pytest.ini_options]
-addopts = "-v -Wdefault"
-testpaths = "tests/"
+[tool.pytest]
+ini_options.addopts = "-v -Wdefault"
+ini_options.testpaths = "tests/"
