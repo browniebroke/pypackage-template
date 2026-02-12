@@ -149,21 +149,17 @@ pythonpath = [ "src" ]
 DJANGO_SETTINGS_MODULE = "tests.settings"
 {%- endif  %}
 
-[tool.coverage.run]
-branch = true
+[tool.coverage]
+run.branch = true
 {%- if is_django_package  %}
-parallel = true
-source = [ "{{ package_name }}" ]
+run.parallel = true
+run.source = [ "{{ package_name }}" ]
 {%- endif  %}
-
-[tool.coverage.paths]
-source = [
+paths.source = [
   "src",
   ".tox/**/site-packages",
 ]
-
-[tool.coverage.report]
-exclude_lines = [
+report.exclude_lines = [
   "pragma: no cover",
   "@overload",
   "if TYPE_CHECKING",
