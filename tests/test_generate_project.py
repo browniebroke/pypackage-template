@@ -263,7 +263,7 @@ def test_django_package_yes(
             '"Framework :: Django :: 6.0",',
             '"django>=4.2"',
             "pytest-django==",
-            "--ds=tests.settings",
+            'DJANGO_SETTINGS_MODULE = "tests.settings"',
             "django60 = [ \"django>=6.0a1,<6.1; python_version>='3.12'\" ]",
             'django42 = [ "django>=4.2a1,<5" ]',
         ],
