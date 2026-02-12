@@ -132,20 +132,22 @@ lint.isort.known-first-party = [ "{{ package_name }}", "tests" ]
 [tool.pyproject-fmt]
 max_supported_python = "3.14"
 
-[tool.pytest.ini_options]
-addopts = """\
-    -v
-    -Wdefault
-    -p no:doctest
-{%- if is_django_package  %}
-    --ds=tests.settings
-{%- else  %}
-    --cov={{ package_name }}
-    --cov-report=term
-    --cov-report=xml
+[tool.pytest]
+minversion = "9.0"
+addopts = [
+  "-v",
+  "-Wonce",
+  "-p no:doctest",
+{%- if not is_django_package  %}
+  "--cov={{ package_name }}",
+  "--cov-report=term",
+  "--cov-report=xml"
 {%- endif  %}
-    """
+]
 pythonpath = [ "src" ]
+{%- if is_django_package  %}
+DJANGO_SETTINGS_MODULE = "tests.settings"
+{%- endif  %}
 
 [tool.coverage.run]
 branch = true
