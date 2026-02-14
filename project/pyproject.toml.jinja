@@ -1,17 +1,19 @@
 [build-system]
 build-backend = "setuptools.build_meta"
-requires = [ "setuptools" ]
+requires = [ "setuptools>=77.0.3" ]
 
 [project]
 name = "{{ project_slug }}"
 version = "0.0.0"
 description = "{{ project_short_description }}"
 readme = "README.md"
-license = { text = "{{ open_source_license }}" }
+{%- if open_source_license != "Not open source" %}
+license = "{{ open_source_license }}"
+{%- endif %}
 authors = [
   { name = "{{ full_name }}", email = "{{ email }}" },
 ]
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 classifiers = [
   "Development Status :: 2 - Pre-Alpha",
   "Intended Audience :: Developers",
@@ -23,12 +25,13 @@ classifiers = [
   "Framework :: Django :: 5.0",
   "Framework :: Django :: 5.1",
   "Framework :: Django :: 5.2",
+  "Framework :: Django :: 6.0",
   {%- endif  %}
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
   "Topic :: Software Development :: Libraries",
 ]
 
@@ -53,18 +56,39 @@ scripts.{{ cli_name }} = "{{ package_name }}.cli:app"
 
 [dependency-groups]
 dev = [
-  "pytest>=8,<9",
-  "pytest-cov>=6,<7",
+  "pytest==9.*",
+  "sybil[pytest]",
+  "coverage",
 {%- if is_django_package  %}
-  "pytest-django>=4.5,<5",
+  "pytest-django==4.*",
+{%- else  %}
+  "pytest-cov==7.*",
 {%- endif %}
 ]
 {%- if documentation %}
 docs = [
-  "furo>=2023.5.20; python_version>='3.11'",
-  "myst-parser>=0.16; python_version>='3.11'",
-  "sphinx>=4; python_version>='3.11'",
-  "sphinx-autobuild>=2024,<2025; python_version>='3.11'",
+  "sphinx==9.*; python_version>='3.12'",
+  "furo; python_version>='3.12'",
+  "myst-parser; python_version>='3.12'",
+  "sphinx-autobuild; python_version>='3.12'",
+]
+{%- endif %}
+{%- if is_django_package %}
+django60 = [ "django>=6.0a1,<6.1; python_version>='3.12'" ]
+django52 = [ "django>=5.2a1,<6" ]
+django51 = [ "django>=5.1a1,<5.2" ]
+django50 = [ "django>=5.0a1,<5.1" ]
+django42 = [ "django>=4.2a1,<5" ]
+
+[tool.uv]
+conflicts = [
+  [
+    { group = "django60" },
+    { group = "django52" },
+    { group = "django51" },
+    { group = "django50" },
+    { group = "django42" },
+  ],
 ]
 {%- endif %}
 
@@ -105,24 +129,37 @@ lint.per-file-ignores."tests/**/*" = [
 ]
 lint.isort.known-first-party = [ "{{ package_name }}", "tests" ]
 
-[tool.pytest.ini_options]
-addopts = """\
-    -v
-    -Wdefault
-    --cov={{ package_name }}
-    --cov-report=term
-    --cov-report=xml
-{%- if is_django_package  %}
-    --ds=tests.settings
+[tool.pyproject-fmt]
+max_supported_python = "3.14"
+
+[tool.pytest]
+minversion = "9.0"
+addopts = [
+  "-v",
+  "-Wonce",
+  "-p no:doctest",
+{%- if not is_django_package  %}
+  "--cov={{ package_name }}",
+  "--cov-report=term",
+  "--cov-report=xml"
 {%- endif  %}
-    """
+]
 pythonpath = [ "src" ]
+{%- if is_django_package  %}
+DJANGO_SETTINGS_MODULE = "tests.settings"
+{%- endif  %}
 
-[tool.coverage.run]
-branch = true
-
-[tool.coverage.report]
-exclude_lines = [
+[tool.coverage]
+run.branch = true
+{%- if is_django_package  %}
+run.parallel = true
+run.source = [ "{{ package_name }}" ]
+{%- endif  %}
+paths.source = [
+  "src",
+  ".tox/**/site-packages",
+]
+report.exclude_lines = [
   "pragma: no cover",
   "@overload",
   "if TYPE_CHECKING",

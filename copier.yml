@@ -47,10 +47,10 @@ open_source_license:
   type: str
   help: "The open source license to use"
   choices:
-    - "MIT"
-    - "Apache Software License 2.0"
-    - "GNU General Public License v3"
-    - "Not open source"
+    MIT: MIT
+    Apache Software License 2.0: Apache-2.0
+    GNU General Public License v3: GPL-3.0-only
+    Not open source: "Not open source"
 
 copyright_year:
   type: str
@@ -122,37 +122,31 @@ open_with_editor:
 _min_copier_version: "9.0.0"
 _subdirectory: "project"
 _tasks:
-  # Replace true with false in .copier-answers.yml for options which should not be run on `copier update`
-  - "{% if initial_commit %}uv run python -c \"from pathlib import Path; import re; p = Path('.copier-answers.yml'); p.write_text(re.sub(r'((?:run_uv_sync|initial_commit|setup_github|setup_pre_commit|add_me_as_contributor): )true', r'\\g<1>false', p.read_text()))\"{% endif %}"
-  # Remove licence file if no license
-  - "{% if open_source_license == 'Not open source' %}rm LICENSE{% endif %}"
-  # Cleanup docs
-  - "{% if not documentation %}rm -rf docs .readthedocs.yml{% endif %}"
-  # Run 'uv sync' to generate lockfile
+  # Run 'uv sync' to generate/update lockfile
   - "{% if run_uv_sync %}uv sync{% endif %}"
   # Initial commit
-  - "{% if initial_commit %}git init{% endif %}"
-  - "{% if initial_commit %}git add .{% endif %}"
-  - '{% if initial_commit %}git commit -m "chore: initial commit"{% endif %}'
+  - "{% if _copier_operation == 'copy' and initial_commit %}git init{% endif %}"
+  - "{% if _copier_operation == 'copy' and initial_commit %}git add .{% endif %}"
+  - '{% if _copier_operation == "copy" and initial_commit %}git commit -m "chore: initial commit"{% endif %}'
   # Setup GitHub
   # create repo
-  - '{% if setup_github %}gh repo create {{ github_username }}/{{ project_slug }} -d "{{ project_short_description }}" --public --remote=origin --source=. --push{% endif %}'
+  - '{% if _copier_operation == "copy" and setup_github %}gh repo create {{ github_username }}/{{ project_slug }} -d "{{ project_short_description }}" --public --remote=origin --source=. --push{% endif %}'
   # edit rules
-  - "{% if setup_github %}gh repo edit --delete-branch-on-merge --enable-projects=false --enable-wiki=false --enable-merge-commit=false --enable-squash-merge --enable-rebase-merge=false{% endif %}"
+  - "{% if _copier_operation == \"copy\" and setup_github %}gh repo edit --delete-branch-on-merge --enable-projects=false --enable-wiki=false --enable-merge-commit=false --enable-squash-merge --enable-rebase-merge=false{% endif %}"
   # set secrets
-  - '{% if setup_github %}gh secret set GH_PAT -b {% if github_token != "" %}{{ github_token }}{% else %}changeme{% endif %}{% endif %}'
-  - "{% if setup_github %}gh secret set CODECOV_TOKEN -b changeme{% endif %}"
+  - '{% if _copier_operation == "copy" and setup_github %}gh secret set GH_PAT -b {% if github_token != "" %}{{ github_token }}{% else %}changeme{% endif %}{% endif %}'
+  - "{% if _copier_operation == \"copy\" and setup_github %}gh secret set CODECOV_TOKEN -b changeme{% endif %}"
   # set workflow permissions
-  - '{% if setup_github %}gh api --method PUT -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" "repos/{{ github_username }}/{{ project_slug }}/actions/permissions/workflow" -f default_workflow_permissions="read" -F can_approve_pull_request_reviews=true{% endif %}'
+  - '{% if _copier_operation == "copy" and setup_github %}gh api --method PUT -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" "repos/{{ github_username }}/{{ project_slug }}/actions/permissions/workflow" -f default_workflow_permissions="read" -F can_approve_pull_request_reviews=true{% endif %}'
   # set branch protection
   # https://docs.github.com/ja/rest/branches/branch-protection?apiVersion=2022-11-28#update-branch-protection
-  - '{% if setup_github %}gh api --method PUT -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/{{ github_username }}/{{ project_slug }}/branches/$(git branch --show-current)/protection -F "required_status_checks=null" -F "enforce_admins=false" -F "required_pull_request_reviews=null" -F "restrictions=null" -F "required_linear_history=false" -F "allow_force_pushes=true" -F "allow_deletions=true" -F "block_creations=false" -F "required_conversation_resolution=false" -F "lock_branch=false" -F "allow_fork_syncing=true" || true{% endif %}'
+  - '{% if _copier_operation == "copy" and setup_github %}gh api --method PUT -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/{{ github_username }}/{{ project_slug }}/branches/$(git branch --show-current)/protection -F "required_status_checks=null" -F "enforce_admins=false" -F "required_pull_request_reviews=null" -F "restrictions=null" -F "required_linear_history=false" -F "allow_force_pushes=true" -F "allow_deletions=true" -F "block_creations=false" -F "required_conversation_resolution=false" -F "lock_branch=false" -F "allow_fork_syncing=true" || true{% endif %}'
   # install apps
   # https://docs.github.com/ja/rest/apps/installations?apiVersion=2022-11-28#add-a-repository-to-an-app-installation
-  - '{% if github_app_installation_ids != "" %}GITHUB_TOKEN={{ github_token }} {% for id in github_app_installation_ids.split(",") %}gh api --method PUT -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" "user/installations/{{ id }}/repositories/$(gh api "repos/{{ github_username }}/{{ project_slug }}" --jq ".id")" && {% endfor %}echo "Apps installed"{% endif %}'
+  - '{% if _copier_operation == "copy" and setup_github and github_app_installation_ids != "" %}GITHUB_TOKEN={{ github_token }} {% for id in github_app_installation_ids.split(",") %}gh api --method PUT -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" "user/installations/{{ id }}/repositories/$(gh api "repos/{{ github_username }}/{{ project_slug }}" --jq ".id")" && {% endfor %}echo "Apps installed"{% endif %}'
   # Setup pre-commit
-  - "{% if setup_pre_commit %}pre-commit install{% endif %}"
+  - "{% if _copier_operation == 'copy' and setup_pre_commit %}pre-commit install{% endif %}"
   # Add me as a contributor
-  - "{% if add_me_as_contributor %}npx --yes all-contributors-cli add {{ github_username }} code,ideas,doc{% endif %}"
+  - "{% if _copier_operation == 'copy' and add_me_as_contributor %}npx --yes all-contributors-cli add {{ github_username }} code,ideas,doc{% endif %}"
   # Open with editor
   - "{% if open_with_editor %}$VISUAL .{% endif %}"

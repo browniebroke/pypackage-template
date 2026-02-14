@@ -1,36 +1,35 @@
 [build-system]
 build-backend = "setuptools.build_meta"
-requires = [ "setuptools" ]
+requires = [ "setuptools>=77.0.3" ]
 
 [project]
 name = "pypackage-template"
 version = "0.1.0"
 description = "A template for generating a Python package"
-license = { text = "MIT" }
+license = "MIT"
 authors = [
   { name = "Bruno Alla", email = "alla.brunoo@gmail.com" },
 ]
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 classifiers = [
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
 ]
-dependencies = [  ]
+dependencies = []
 
 [dependency-groups]
 dev = [
-  "copier>=9,<10",
-  "pytest>=8,<9",
-  "pytest-mock>=3.3,<4",
+  "copier==9.*",
+  "pytest==9.*",
+  "pytest-mock",
 ]
 
 [tool.ruff]
 line-length = 88
-
 lint.select = [
   "B",   # flake8-bugbear
   "C4",  # flake8-comprehensions
@@ -68,6 +67,9 @@ lint.per-file-ignores."tests/**/*" = [
   "S101",
 ]
 
-[tool.pytest.ini_options]
-addopts = "-v -Wdefault"
-testpaths = "tests/"
+[tool.pyproject-fmt]
+max_supported_python = "3.14"
+
+[tool.pytest]
+ini_options.addopts = "-v -Wdefault"
+ini_options.testpaths = "tests/"

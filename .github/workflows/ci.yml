@@ -17,11 +17,11 @@ jobs:
       fail-fast: false
       matrix:
         python-version:
-          - "3.9"
           - "3.10"
           - "3.11"
           - "3.12"
           - "3.13"
+          # - "3.14"
         os:
           - ubuntu-latest
           - windows-latest
@@ -29,13 +29,14 @@ jobs:
     runs-on: ${{ matrix.os }}
     name: "Template: ${{ matrix.python-version }} - ${{ matrix.os }}"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - run: git config --global user.name actions-user
       - run: git config --global user.email action@github.com
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
-      - uses: astral-sh/setup-uv@v5
+          allow-prereleases: true
+      - uses: astral-sh/setup-uv@v7
       - run: uv sync --no-python-downloads
         shell: bash
       - run: uv run pytest
@@ -47,7 +48,7 @@ jobs:
       fail-fast: false
       matrix:
         script:
-          - run: "uv run python -m pytest tests"
+          - run: "uv run python -m pytest"
             dir: ""
             name: "pytest"
           - run: "git init && git add . && uvx --with pre-commit-uv pre-commit run -a"
@@ -69,14 +70,14 @@ jobs:
     runs-on: ubuntu-latest
     name: "Generated: ${{ matrix.script.name }} ${{ matrix.extra_options.project_name }}"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - run: git config --global user.name actions-user
       - run: git config --global user.email action@github.com
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         id: setup-python
         with:
-          python-version: "3.13"
-      - uses: astral-sh/setup-uv@v5
+          python-version: "3.14"
+      - uses: astral-sh/setup-uv@v7
       - run: |
           uvx copier copy \
           . \
