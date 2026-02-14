@@ -132,10 +132,10 @@ _tasks:
   # create repo
   - '{% if _copier_operation == "copy" and setup_github %}gh repo create {{ github_username }}/{{ project_slug }} -d "{{ project_short_description }}" --public --remote=origin --source=. --push{% endif %}'
   # edit rules
-  - "{% if _copier_operation == \"copy\" and setup_github %}gh repo edit --delete-branch-on-merge --enable-projects=false --enable-wiki=false --enable-merge-commit=false --enable-squash-merge --enable-rebase-merge=false{% endif %}"
+  - '{% if _copier_operation == "copy" and setup_github %}gh repo edit --delete-branch-on-merge --enable-projects=false --enable-wiki=false --enable-merge-commit=false --enable-squash-merge --enable-rebase-merge=false{% endif %}'
   # set secrets
   - '{% if _copier_operation == "copy" and setup_github %}gh secret set GH_PAT -b {% if github_token != "" %}{{ github_token }}{% else %}changeme{% endif %}{% endif %}'
-  - "{% if _copier_operation == \"copy\" and setup_github %}gh secret set CODECOV_TOKEN -b changeme{% endif %}"
+  - '{% if _copier_operation == "copy" and setup_github %}gh secret set CODECOV_TOKEN -b changeme{% endif %}'
   # set workflow permissions
   - '{% if _copier_operation == "copy" and setup_github %}gh api --method PUT -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" "repos/{{ github_username }}/{{ project_slug }}/actions/permissions/workflow" -f default_workflow_permissions="read" -F can_approve_pull_request_reviews=true{% endif %}'
   # set branch protection
