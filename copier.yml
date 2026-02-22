@@ -87,6 +87,20 @@ setup_github:
   type: bool
   help: "Setup GitHub repository (requires gh CLI)?"
   default: no
+  when: "{{ initial_commit }}"
+
+github_token:
+  type: str
+  secret: true
+  help: "GitHub Token with `repo` and `workflow` scopes (optional)"
+  when: "{{ setup_github }}"
+  default: ""
+
+github_app_installation_ids:
+  type: str
+  help: "Comma separated list of installation IDs of GitHub Apps you want to have installed (optional) (presumably Renovate and pre-commit.ci). The IDs could be found from the url of the 'Configure' buttons in https://github.com/settings/installations. e.g. https://github.com/organizations/<Organization-name>/settings/installations/<ID>. See https://stackoverflow.com/questions/74462420/where-can-we-find-github-apps-installation-id for further details."
+  when: "{{ setup_github }}"
+  default: ""
 
 setup_pre_commit:
   type: bool
@@ -115,10 +129,21 @@ _tasks:
   - "{% if _copier_operation == 'copy' and initial_commit %}git add .{% endif %}"
   - '{% if _copier_operation == "copy" and initial_commit %}git commit -m "chore: initial commit"{% endif %}'
   # Setup GitHub
+  # create repo
   - '{% if _copier_operation == "copy" and setup_github %}gh repo create {{ github_username }}/{{ project_slug }} -d "{{ project_short_description }}" --public --remote=origin --source=. --push{% endif %}'
-  - "{% if _copier_operation == 'copy' and setup_github %}gh repo edit --delete-branch-on-merge --enable-projects=false --enable-wiki=false{% endif %}"
-  - '{% if _copier_operation == "copy" and setup_github %}gh secret set GH_PAT -b "changeme"{% endif %}'
-  - '{% if _copier_operation == "copy" and setup_github %}gh secret set CODECOV_TOKEN -b "changeme"{% endif %}'
+  # edit rules
+  - '{% if _copier_operation == "copy" and setup_github %}gh repo edit --delete-branch-on-merge --enable-projects=false --enable-wiki=false --enable-merge-commit=false --enable-squash-merge --enable-rebase-merge=false{% endif %}'
+  # set secrets
+  - '{% if _copier_operation == "copy" and setup_github %}gh secret set GH_PAT -b {% if github_token != "" %}{{ github_token }}{% else %}changeme{% endif %}{% endif %}'
+  - '{% if _copier_operation == "copy" and setup_github %}gh secret set CODECOV_TOKEN -b changeme{% endif %}'
+  # set workflow permissions
+  - '{% if _copier_operation == "copy" and setup_github %}gh api --method PUT -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" "repos/{{ github_username }}/{{ project_slug }}/actions/permissions/workflow" -f default_workflow_permissions="read" -F can_approve_pull_request_reviews=true{% endif %}'
+  # set branch protection
+  # https://docs.github.com/ja/rest/branches/branch-protection?apiVersion=2022-11-28#update-branch-protection
+  - '{% if _copier_operation == "copy" and setup_github %}gh api --method PUT -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/{{ github_username }}/{{ project_slug }}/branches/$(git branch --show-current)/protection -F "required_status_checks=null" -F "enforce_admins=false" -F "required_pull_request_reviews=null" -F "restrictions=null" -F "required_linear_history=false" -F "allow_force_pushes=true" -F "allow_deletions=true" -F "block_creations=false" -F "required_conversation_resolution=false" -F "lock_branch=false" -F "allow_fork_syncing=true" || true{% endif %}'
+  # install apps
+  # https://docs.github.com/ja/rest/apps/installations?apiVersion=2022-11-28#add-a-repository-to-an-app-installation
+  - '{% if _copier_operation == "copy" and setup_github and github_app_installation_ids != "" %}GITHUB_TOKEN={{ github_token }} {% for id in github_app_installation_ids.split(",") %}gh api --method PUT -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" "user/installations/{{ id }}/repositories/$(gh api "repos/{{ github_username }}/{{ project_slug }}" --jq ".id")" && {% endfor %}echo "Apps installed"{% endif %}'
   # Setup pre-commit
   - "{% if _copier_operation == 'copy' and setup_pre_commit %}pre-commit install{% endif %}"
   # Add me as a contributor
