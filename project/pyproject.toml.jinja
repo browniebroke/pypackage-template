@@ -16,9 +16,6 @@ authors = [
 requires-python = ">=3.10"
 classifiers = [
   "Development Status :: 2 - Pre-Alpha",
-  "Intended Audience :: Developers",
-  "Natural Language :: English",
-  "Operating System :: OS Independent",
   {%- if is_django_package %}
   "Framework :: Django",
   "Framework :: Django :: 4.2",
@@ -27,6 +24,9 @@ classifiers = [
   "Framework :: Django :: 5.2",
   "Framework :: Django :: 6.0",
   {%- endif  %}
+  "Intended Audience :: Developers",
+  "Natural Language :: English",
+  "Operating System :: OS Independent",
   "Programming Language :: Python :: 3 :: Only",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
@@ -185,7 +185,6 @@ exclude = [
 {%- endif %}
   "setup.py",
 ]
-
 overrides = [
   { module = "tests.*", allow_untyped_defs = true },
 {%- if documentation %}
