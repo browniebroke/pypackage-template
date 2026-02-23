@@ -16,9 +16,6 @@ authors = [
 requires-python = ">=3.10"
 classifiers = [
   "Development Status :: 2 - Pre-Alpha",
-  "Intended Audience :: Developers",
-  "Natural Language :: English",
-  "Operating System :: OS Independent",
   {%- if is_django_package %}
   "Framework :: Django",
   "Framework :: Django :: 4.2",
@@ -27,6 +24,10 @@ classifiers = [
   "Framework :: Django :: 5.2",
   "Framework :: Django :: 6.0",
   {%- endif  %}
+  "Intended Audience :: Developers",
+  "Natural Language :: English",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3 :: Only",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
@@ -34,7 +35,7 @@ classifiers = [
   "Programming Language :: Python :: 3.14",
   "Topic :: Software Development :: Libraries",
 ]
-
+{%- if is_django_package or has_cli  %}
 dependencies = [
   {%- if is_django_package  %}
   "django>=4.2",
@@ -44,6 +45,7 @@ dependencies = [
   "typer>=0.15,<1",
   {%- endif %}
 ]
+{%- endif  %}
 urls."Bug Tracker" = "https://github.com/{{ github_username }}/{{ project_slug }}/issues"
 urls.Changelog = "https://github.com/{{ github_username }}/{{ project_slug }}/blob/main/CHANGELOG.md"
 {%- if documentation %}
@@ -56,38 +58,38 @@ scripts.{{ cli_name }} = "{{ package_name }}.cli:app"
 
 [dependency-groups]
 dev = [
-  "pytest==9.*",
-  "sybil[pytest]",
   "coverage",
+  "pytest==9.*",
 {%- if is_django_package  %}
   "pytest-django==4.*",
 {%- else  %}
   "pytest-cov==7.*",
 {%- endif %}
+  "sybil[pytest]",
 ]
 {%- if documentation %}
 docs = [
-  "sphinx==9.*; python_version>='3.12'",
   "furo; python_version>='3.12'",
   "myst-parser; python_version>='3.12'",
+  "sphinx==9.*; python_version>='3.12'",
   "sphinx-autobuild; python_version>='3.12'",
 ]
 {%- endif %}
 {%- if is_django_package %}
-django60 = [ "django>=6.0a1,<6.1; python_version>='3.12'" ]
-django52 = [ "django>=5.2a1,<6" ]
-django51 = [ "django>=5.1a1,<5.2" ]
-django50 = [ "django>=5.0a1,<5.1" ]
 django42 = [ "django>=4.2a1,<5" ]
+django50 = [ "django>=5.0a1,<5.1" ]
+django51 = [ "django>=5.1a1,<5.2" ]
+django52 = [ "django>=5.2a1,<6" ]
+django60 = [ "django>=6.0a1,<6.1; python_version>='3.12'" ]
 
 [tool.uv]
 conflicts = [
   [
-    { group = "django60" },
-    { group = "django52" },
-    { group = "django51" },
-    { group = "django50" },
     { group = "django42" },
+    { group = "django50" },
+    { group = "django51" },
+    { group = "django52" },
+    { group = "django60" },
   ],
 ]
 {%- endif %}
@@ -96,22 +98,22 @@ conflicts = [
 line-length = 88
 lint.select = [
   "B",   # flake8-bugbear
-  "D",   # flake8-docstrings
   "C4",  # flake8-comprehensions
-  "S",   # flake8-bandit
-  "F",   # pyflake
+  "D",   # flake8-docstrings
   "E",   # pycodestyle
-  "W",   # pycodestyle
-  "UP",  # pyupgrade
+  "F",   # pyflake
   "I",   # isort
   "RUF", # ruff specific
+  "S",   # flake8-bandit
+  "UP",  # pyupgrade
+  "W",   # pycodestyle
 ]
 lint.ignore = [
-  "D203", # 1 blank line required before class docstring
-  "D212", # Multi-line docstring summary should start at the first line
   "D100", # Missing docstring in public module
   "D104", # Missing docstring in public package
   "D107", # Missing docstring in `__init__`
+  "D203", # 1 blank line required before class docstring
+  "D212", # Multi-line docstring summary should start at the first line
   "D401", # First line of docstring should be in imperative mood
 ]
 lint.per-file-ignores."conftest.py" = [ "D100" ]
@@ -141,7 +143,7 @@ addopts = [
 {%- if not is_django_package  %}
   "--cov={{ package_name }}",
   "--cov-report=term",
-  "--cov-report=xml"
+  "--cov-report=xml",
 {%- endif  %}
 ]
 pythonpath = [ "src" ]
@@ -160,11 +162,11 @@ paths.source = [
   ".tox/**/site-packages",
 ]
 report.exclude_lines = [
-  "pragma: no cover",
   "@overload",
-  "if TYPE_CHECKING",
-  "raise NotImplementedError",
   'if __name__ == "__main__":',
+  "if TYPE_CHECKING",
+  "pragma: no cover",
+  "raise NotImplementedError",
 ]
 
 [tool.mypy]
@@ -179,20 +181,16 @@ warn_unreachable = true
 warn_unused_ignores = true
 exclude = [
 {%- if documentation %}
-  'docs/.*',
+  "docs/.*",
 {%- endif %}
-  'setup.py',
+  "setup.py",
 ]
-
-[[tool.mypy.overrides]]
-module = "tests.*"
-allow_untyped_defs = true
+overrides = [
+  { module = "tests.*", allow_untyped_defs = true },
 {%- if documentation %}
-
-[[tool.mypy.overrides]]
-module = "docs.*"
-ignore_errors = true
+  { module = "docs.*", ignore_errors = true },
 {%- endif %}
+]
 
 [tool.semantic_release]
 version_toml = [ "pyproject.toml:project.version" ]
@@ -208,25 +206,17 @@ uv lock
 git add uv.lock
 uv build
 """
-
-[tool.semantic_release.changelog]
-exclude_commit_patterns = [
-  '''chore(?:\([^)]*?\))?: .+''',
-  '''ci(?:\([^)]*?\))?: .+''',
-  '''refactor(?:\([^)]*?\))?: .+''',
-  '''style(?:\([^)]*?\))?: .+''',
-  '''test(?:\([^)]*?\))?: .+''',
-  '''build\((?!deps\): .+)''',
-  '''Merged? .*''',
-  '''Initial [Cc]ommit.*''', # codespell:ignore
+branches.main.match = "main"
+branches.noop.match = "(?!main$)"
+branches.noop.prerelease = true
+changelog.exclude_commit_patterns = [
+  "chore(?:\\([^)]*?\\))?: .+",
+  "ci(?:\\([^)]*?\\))?: .+",
+  "refactor(?:\\([^)]*?\\))?: .+",
+  "style(?:\\([^)]*?\\))?: .+",
+  "test(?:\\([^)]*?\\))?: .+",
+  "build\\((?!deps\\): .+)",
+  "Merged? .*",
+  "Initial [Cc]ommit.*",         # codespell:ignore
 ]
-
-[tool.semantic_release.changelog.environment]
-keep_trailing_newline = true
-
-[tool.semantic_release.branches.main]
-match = "main"
-
-[tool.semantic_release.branches.noop]
-match = "(?!main$)"
-prerelease = true
+changelog.environment.keep_trailing_newline = true
