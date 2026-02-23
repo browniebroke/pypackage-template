@@ -107,6 +107,10 @@ open_with_editor:
 # Copier metadata
 _min_copier_version: "9.0.0"
 _subdirectory: "project"
+_skip_if_exists:
+  - CHANGELOG.md
+  - src
+  - tests
 _tasks:
   # Run 'uv sync' to generate/update lockfile
   - "{% if run_uv_sync %}uv sync{% endif %}"
