@@ -363,9 +363,6 @@ def test_django_package_yes(
         ],
     )
     _check_file_contents(
-        dst_path / ".gitignore", expected_strs=["requirements-dev.txt"]
-    )
-    _check_file_contents(
         dst_path / ".github" / "ISSUE_TEMPLATE" / "1-bug-report.yml",
         expected_strs=["id: django_version"],
     )

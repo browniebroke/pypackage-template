@@ -214,8 +214,3 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
-
-{%- if is_django_package  %}
-# Generated file
-requirements-dev.txt
-{%- endif  %}
