@@ -22,7 +22,7 @@ wheels = [
 
 [[package]]
 name = "copier"
-version = "9.11.3"
+version = "9.12.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "colorama" },
@@ -40,21 +40,21 @@ dependencies = [
     { name = "questionary" },
     { name = "typing-extensions", marker = "python_full_version < '3.11'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/40/be/35bb44c0c7c278bd9144f5934aa10a2d532cedea4e16494c6552aa7132e1/copier-9.11.3.tar.gz", hash = "sha256:f4da98c7f3dd2243480433541b3b4d9daa788bce13b7b6d43c0c6d84bd50e889", size = 610458, upload-time = "2026-01-23T17:19:11.561Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/6b/e0/5187c63a9020e84cfbb3cc52b52d7fc15aab73fd1e9106ae33167116a3f9/copier-9.12.0.tar.gz", hash = "sha256:87986637205a0443dbf7e5946502e5c71962a559c25f436642a08203cf61ef54", size = 611292, upload-time = "2026-02-21T13:32:40.37Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b8/01/74922a1c552137c05a41fee0c61153753dddc9117d19c7c5902c146c25ab/copier-9.11.3-py3-none-any.whl", hash = "sha256:ab4bc7e2944edc030b4c14ec84fffd6bf810b9b8fd56938e8ccbab1b169ea6ca", size = 56905, upload-time = "2026-01-23T17:19:09.999Z" },
+    { url = "https://files.pythonhosted.org/packages/9c/22/6d9cfea622a064d17f406bbea1dd37f95ac75094d44e23447df934661add/copier-9.12.0-py3-none-any.whl", hash = "sha256:a1bc84dfd2a4b85dbe034999026c0e24ca02a6bc1574f45df07fd76d935c2ea9", size = 58805, upload-time = "2026-02-21T13:32:38.767Z" },
 ]
 
 [[package]]
 name = "dunamai"
-version = "1.25.0"
+version = "1.26.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "packaging" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/f1/2f/194d9a34c4d831c6563d2d990720850f0baef9ab60cb4ad8ae0eff6acd34/dunamai-1.25.0.tar.gz", hash = "sha256:a7f8360ea286d3dbaf0b6a1473f9253280ac93d619836ad4514facb70c0719d1", size = 46155, upload-time = "2025-07-04T19:25:56.082Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/1c/c4/346cef905782df6152f29f02d9c8ed4acf7ae66b0e66210b7156c5575ccb/dunamai-1.26.0.tar.gz", hash = "sha256:5396ac43aa20ed059040034e9f9798c7464cf4334c6fc3da3732e29273a2f97d", size = 45500, upload-time = "2026-02-15T02:58:55.534Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/36/41/04e2a649058b0713b00d6c9bd22da35618bb157289e05d068e51fddf8d7e/dunamai-1.25.0-py3-none-any.whl", hash = "sha256:7f9dc687dd3256e613b6cc978d9daabfd2bb5deb8adc541fc135ee423ffa98ab", size = 27022, upload-time = "2025-07-04T19:25:54.863Z" },
+    { url = "https://files.pythonhosted.org/packages/87/10/2c7edbf230e5c507d38367af498fa94258ed97205d9b4b6f63a921fe9c49/dunamai-1.26.0-py3-none-any.whl", hash = "sha256:f584edf0fda0d308cce0961f807bc90a8fe3d9ff4d62f94e72eca7b43f0ed5f6", size = 27322, upload-time = "2026-02-15T02:58:54.143Z" },
 ]
 
 [[package]]
@@ -217,11 +217,11 @@ wheels = [
 
 [[package]]
 name = "platformdirs"
-version = "4.5.1"
+version = "4.9.2"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/cf/86/0248f086a84f01b37aaec0fa567b397df1a119f73c16f6c7a9aac73ea309/platformdirs-4.5.1.tar.gz", hash = "sha256:61d5cdcc6065745cdd94f0f878977f8de9437be93de97c1c12f853c9c0cdcbda", size = 21715, upload-time = "2025-12-05T13:52:58.638Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/1b/04/fea538adf7dbbd6d186f551d595961e564a3b6715bdf276b477460858672/platformdirs-4.9.2.tar.gz", hash = "sha256:9a33809944b9db043ad67ca0db94b14bf452cc6aeaac46a88ea55b26e2e9d291", size = 28394, upload-time = "2026-02-16T03:56:10.574Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/cb/28/3bfe2fa5a7b9c46fe7e13c97bda14c895fb10fa2ebf1d0abb90e0cea7ee1/platformdirs-4.5.1-py3-none-any.whl", hash = "sha256:d03afa3963c806a9bed9d5125c8f4cb2fdaf74a55ab60e5d59b3fde758104d31", size = 18731, upload-time = "2025-12-05T13:52:56.823Z" },
+    { url = "https://files.pythonhosted.org/packages/48/31/05e764397056194206169869b50cf2fee4dbbbc71b344705b9c0d878d4d8/platformdirs-4.9.2-py3-none-any.whl", hash = "sha256:9170634f126f8efdae22fb58ae8a0eaa86f38365bc57897a6c4f781d1f5875bd", size = 21168, upload-time = "2026-02-16T03:56:08.891Z" },
 ]
 
 [[package]]
