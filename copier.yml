@@ -119,9 +119,9 @@ _tasks:
   - "{% if _copier_operation == 'copy' and setup_github %}gh repo edit --delete-branch-on-merge --enable-projects=false --enable-wiki=false{% endif %}"
   - '{% if _copier_operation == "copy" and setup_github %}gh secret set GH_PAT -b "changeme"{% endif %}'
   - '{% if _copier_operation == "copy" and setup_github %}gh secret set CODECOV_TOKEN -b "changeme"{% endif %}'
-  # Setup pre-commit
-  - "{% if _copier_operation == 'copy' and setup_pre_commit %}pre-commit install{% endif %}"
   # Add me as a contributor
   - "{% if _copier_operation == 'copy' and add_me_as_contributor %}npx --yes all-contributors-cli add {{ github_username }} code,ideas,doc{% endif %}"
+  # Setup pre-commit
+  - "{% if _copier_operation == 'copy' and setup_pre_commit %}pre-commit install{% endif %}"
   # Open with editor
   - "{% if open_with_editor %}$VISUAL .{% endif %}"
