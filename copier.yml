@@ -101,7 +101,7 @@ add_me_as_contributor:
 
 open_with_editor:
   type: bool
-  help: "Open with code editor (requires environment variable VISUAL to be set to a valid command)"
+  help: "Open with code editor (requires environment variable EDITOR to be set to a valid command)"
   default: no
 
 # Copier metadata
@@ -124,4 +124,4 @@ _tasks:
   # Setup pre-commit
   - "{% if _copier_operation == 'copy' and setup_pre_commit %}pre-commit install{% endif %}"
   # Open with editor
-  - "{% if open_with_editor %}$VISUAL .{% endif %}"
+  - "{% if open_with_editor %}$EDITOR .{% endif %}"
