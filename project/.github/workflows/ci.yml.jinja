@@ -47,14 +47,12 @@ jobs:
           - macOS-latest
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v6{% endraw %}
-{%- if is_django_package %}{% raw %}
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@v7
         with:
-          python-version: ${{ matrix.python-version }}
-          allow-prereleases: true
-      - uses: astral-sh/setup-uv@v6
-      - run: uv pip install --system tox tox-uv
+          python-version: ${{ matrix.python-version }}{% endraw %}
+{%- if is_django_package %}{% raw %}
+      - run: uv tool install tox --with tox-uv
         shell: bash
       - run: tox -f py$(echo ${{ matrix.python-version }} | tr -d .)
         shell: bash
@@ -64,12 +62,6 @@ jobs:
         shell: bash
 {% endraw %}
 {%- else %}{% raw %}
-      - uses: actions/setup-python@v5
-        id: setup-python
-        with:
-          python-version: ${{ matrix.python-version }}
-          allow-prereleases: true
-      - uses: astral-sh/setup-uv@v6
       - run: uv sync --no-python-downloads
         shell: bash
       - run: uv run pytest
