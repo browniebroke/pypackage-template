@@ -193,6 +193,7 @@ overrides = [
 ]
 
 [tool.semantic_release]
+allow_zero_version = true
 version_toml = [ "pyproject.toml:project.version" ]
 version_variables = [
   "src/{{ package_name }}/__init__.py:__version__",
