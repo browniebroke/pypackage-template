@@ -67,7 +67,7 @@ jobs:
       - run: uv run pytest
         shell: bash{% endraw %}
 {%- endif  %}{% raw %}
-      - uses: codecov/codecov-action@v5
+      - uses: codecov/codecov-action@v5.5.4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
