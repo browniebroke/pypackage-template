@@ -112,7 +112,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Attest build provenance
-        uses: actions/attest@v4
+        uses: actions/attest@v4.1.0
         if: steps.release.outputs.released == 'true'
         with:
           subject-path: "dist/*"
