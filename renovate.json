@@ -1,10 +1,10 @@
 {
   "extends": ["github>browniebroke/renovate-configs:python"],
   "pre-commit": {
-    "fileMatch": ["^project/\\.pre-commit-config\\.yaml$"]
+    "managerFilePatterns": ["/^project/.pre-commit-config.yaml$/"]
   },
   "github-actions": {
-    "fileMatch": ["^project/\\.github/workflows/[^/]+\\.ya?ml$"]
+    "managerFilePatterns": ["/^project/.github/workflows/[^/]+.ya?ml$/"]
   },
   "customManagers": [
     {
