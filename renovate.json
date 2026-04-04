@@ -3,10 +3,6 @@
   "pre-commit": {
     "managerFilePatterns": ["/^project/.pre-commit-config.yaml$/"]
   },
-  "github-actions": {
-    "managerFilePatterns": ["/^project/.github/workflows/[^/]+.ya?ml$/"],
-    "extractVersion": "^(?<version>v?\\d+)"
-  },
   "customManagers": [
     {
       "customType": "regex",
