@@ -6,5 +6,15 @@
   "github-actions": {
     "managerFilePatterns": ["/^project/.github/workflows/[^/]+.ya?ml$/"],
     "extractVersion": "^(?<version>v?\\d+)"
-  }
+  },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/\\.jinja$/"],
+      "matchStrings": [
+        "uses:\\s+(?<depName>[\\w-]+/[\\w.-]+)@(?<currentValue>[^\\s\"']+)"
+      ],
+      "datasourceTemplate": "github-tags"
+    }
+  ]
 }
