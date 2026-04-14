@@ -266,7 +266,14 @@ def test_django_package_yes(
             'DJANGO_SETTINGS_MODULE = "tests.settings"',
             "django60 = [ \"django>=6.0a1,<6.1; python_version>='3.12'\" ]",
             'django42 = [ "django>=4.2a1,<5" ]',
+            "[tool.mypy]",
         ],
+        unexpect_strs=["[tool.ty]"],
+    )
+    _check_file_contents(
+        dst_path / ".pre-commit-config.yaml",
+        expected_strs=["https://github.com/pre-commit/mirrors-mypy"],
+        unexpect_strs=["uv run ty check"],
     )
     _check_file_contents(
         dst_path / "manage.py",
@@ -399,6 +406,7 @@ def test_django_package_no(
     assert not (dst_path / "docs" / "configuration.rst").exists()
     _check_file_contents(
         dst_path / "pyproject.toml",
+        expected_strs=["[tool.ty]"],
         unexpect_strs=[
             '"Framework :: Django :: 4.2",',
             '"Framework :: Django :: 5.0",',
@@ -406,10 +414,13 @@ def test_django_package_no(
             '"Framework :: Django :: 5.2",',
             '"django>=4.2"',
             "pytest-django>=4.5,<5",
+            "[tool.mypy]",
         ],
     )
     _check_file_contents(
-        dst_path / ".gitignore", unexpect_strs=["requirements-dev.txt"]
+        dst_path / ".pre-commit-config.yaml",
+        expected_strs=["uv run ty check"],
+        unexpect_strs=["https://github.com/pre-commit/mirrors-mypy"],
     )
     _check_file_contents(
         dst_path / ".github" / "ISSUE_TEMPLATE" / "1-bug-report.yml",

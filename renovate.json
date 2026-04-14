@@ -8,6 +8,14 @@
         "uses:\\s+(?<depName>[\\w-]+/[\\w.-]+)@(?<currentValue>[^\\s\"']+)"
       ],
       "datasourceTemplate": "github-tags"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/\\.pre-commit-config\\.yaml\\.jinja$/"],
+      "matchStrings": [
+        "repo:\\s+https://github\\.com/(?<depName>[\\w-]+/[\\w.-]+)\\s+rev:\\s+\"?(?<currentValue>[^\\s\"]+)\"?"
+      ],
+      "datasourceTemplate": "github-tags"
     }
   ]
 }
