@@ -2,7 +2,6 @@
 # See https://pre-commit.com/hooks.html for more hooks
 exclude: "CHANGELOG.md|.copier-answers.yml|.all-contributorsrc"
 default_stages: [pre-commit]
-orphan: true
 
 ci:
   autofix_commit_msg: "chore(pre-commit.ci): auto fixes"
