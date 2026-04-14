@@ -1,8 +1,5 @@
 {
   "extends": ["github>browniebroke/renovate-configs:python"],
-  "pre-commit": {
-    "managerFilePatterns": ["/^project/.pre-commit-config.yaml$/"]
-  },
   "customManagers": [
     {
       "customType": "regex",
