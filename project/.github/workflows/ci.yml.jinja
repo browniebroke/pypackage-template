@@ -15,10 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6.0.2
-      - uses: actions/setup-python@v6.2.0
-        with:
-          python-version: 3.x
-      - uses: pre-commit/action@v3.0.1
+      - uses: astral-sh/setup-uv@v8.0.0
+      - uses: j178/prek-action@v2.0.2
 
   # Make sure commit messages follow the conventional commits convention:
   # https://www.conventionalcommits.org

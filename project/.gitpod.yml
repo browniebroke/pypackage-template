@@ -3,6 +3,5 @@ tasks:
       pip install uv
       PIP_USER=false uv sync
   - command: |
-      pip install pre-commit
-      pre-commit install
-      PIP_USER=false pre-commit install-hooks
+      pip install prek
+      prek install -f

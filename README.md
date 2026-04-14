@@ -13,7 +13,7 @@ Project template for a Python Package using Copier.
 - Optionally generates a CLI entry point powered by [Typer] and [Rich].
 - Optionally makes it a Django package.
 - Uses [Ruff] for formatting and linting.
-- Comes with [pre-commit] hook config for [Ruff].
+- Comes with [prek] hook config for [Ruff].
 - Style guide enforced on CI.
 - Dependencies kept up to date by [Renovate].
 - Follow the [all-contributors] specification.
@@ -118,9 +118,9 @@ If your package is a reusable Django app, you should answer "yes" to the questio
 
 You should be able to use the provided `manage.py` to create migrations for your reusable app. Create or change your models and run `uv run python manage.py makemigrations`.
 
-### Pre-commit
+### Prek
 
-The project comes with the config for [pre-commit]. If you're not familiar with it, follow their documentation on how to install it and set it up.
+The project comes with the config for [prek]. If you're not familiar with it, follow their documentation on how to install it and set it up.
 
 ### Documentation
 
@@ -132,7 +132,7 @@ To enable it, you might need to go [into your dashboard][rtd-dashboard] and impo
 
 The project dependencies are kept up to date with [Renovate] which requires [the Github app][renovate-gh-app] to be installed.
 
-The main advantage of Renovate over Dependabot is the auto-merge option, which is configured to automatically merge minor/patch updates with all the CI checks passing. It supports a variety of package managers, including uv, GitHub actions and pre-commit hooks which are used by default.
+The main advantage of Renovate over Dependabot is the auto-merge option, which is configured to automatically merge minor/patch updates with all the CI checks passing. It supports a variety of package managers, including uv, GitHub actions and pre-commit hooks (used by prek) which are used by default.
 
 ### All contributors
 
@@ -171,7 +171,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 [Typer]: https://typer.tiangolo.com
 [Rich]: https://rich.readthedocs.io
 [Ruff]: https://pypi.org/project/ruff/
-[pre-commit]: https://pre-commit.com/
+[prek]: https://prek.j178.dev/
 [renovate]: https://docs.renovatebot.com/
 [renovate-gh-app]: https://github.com/apps/renovate
 [all-contributors]: https://github.com/all-contributors/all-contributors
