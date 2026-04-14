@@ -11,6 +11,13 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6.0.2
+      - uses: astral-sh/setup-uv@v8.0.0
+      - uses: j178/prek-action@v2.0.2
+
   # Tests for the template
   test:
     strategy:
@@ -51,9 +58,9 @@ jobs:
           - run: "uv run python -m pytest"
             dir: ""
             name: "pytest"
-          - run: "git init && git add . && uvx --with pre-commit-uv pre-commit run -a"
+          - run: "git init && git add . && uvx prek run -a"
             dir: ""
-            name: "pre-commit"
+            name: "prek"
           - run: "uv run make html"
             dir: "docs"
             name: "docs"

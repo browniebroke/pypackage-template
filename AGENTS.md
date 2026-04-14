@@ -18,10 +18,10 @@ uv run pytest
 # Run a single test
 uv run pytest tests/test_generate_project.py::test_defaults_values
 
-# Run pre-commit hooks
-pre-commit run -a
+# Run prek hooks
+prek run -a
 
-# Format/lint (via pre-commit)
+# Format/lint (via prek)
 ruff check --fix .
 ruff format .
 ```
@@ -52,7 +52,7 @@ Tests use `copier.run_copy()` to generate projects in temp directories, then ver
 
 - Expected files exist with correct content
 - Conditional files are included/excluded properly based on options
-- Generated projects are valid (CI also runs pytest/pre-commit/docs on generated output)
+- Generated projects are valid (CI also runs pytest/prek/docs on generated output)
 
 ## Conventions
 
