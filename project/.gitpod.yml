@@ -1,7 +1,0 @@
-tasks:
-  - command: |
-      pip install uv
-      PIP_USER=false uv sync
-  - command: |
-      pip install prek
-      prek install -f
