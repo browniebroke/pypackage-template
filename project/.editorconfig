@@ -10,7 +10,7 @@ insert_final_newline = true
 charset = utf-8
 end_of_line = lf
 
-[*.json]
+[*.{json,js,mjs}]
 indent_size = 2
 
 [*.bat]
