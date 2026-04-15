@@ -70,6 +70,36 @@ def test_defaults_values(
             'license = "MIT"',
         ],
     )
+    _check_file_contents(
+        dst_path / "renovate.json",
+        expected_strs=['"config:best-practices"'],
+        unexpect_strs=['"github>browniebroke/renovate-configs:python"'],
+    )
+
+
+def test_author_customisation(
+    tmp_path: Path,
+    base_answers: dict[str, str | bool],
+):
+    answers = {
+        **base_answers,
+        "github_username": "browniebroke",
+    }
+    dst_path = tmp_path / "snake-farm"
+    worker = copier.run_copy(
+        src_path=str(PROJECT_ROOT),
+        dst_path=dst_path,
+        data=answers,
+        defaults=True,
+        unsafe=True,
+    )
+    assert worker is not None
+    assert tmp_path.exists()
+    _check_file_contents(
+        dst_path / "renovate.json",
+        expected_strs=['"github>browniebroke/renovate-configs:python"'],
+        unexpect_strs=['"config:best-practices"'],
+    )
 
 
 @pytest.mark.parametrize(
