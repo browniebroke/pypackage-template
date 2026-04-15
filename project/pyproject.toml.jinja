@@ -66,6 +66,9 @@ dev = [
   "pytest-cov==7.*",
 {%- endif %}
   "sybil[pytest]",
+{%- if not is_django_package  %}
+  "ty",
+{%- endif %}
 ]
 {%- if documentation %}
 docs = [
@@ -133,6 +136,7 @@ lint.isort.known-first-party = [ "{{ package_name }}", "tests" ]
 
 [tool.pyproject-fmt]
 max_supported_python = "3.14"
+{%- if is_django_package  %}
 
 [tool.mypy]
 check_untyped_defs = true
@@ -156,6 +160,11 @@ overrides = [
   { module = "docs.*", ignore_errors = true },
 {%- endif %}
 ]
+{%- else  %}
+
+[tool.ty]
+terminal.error-on-warning = true
+{%-endif %}
 
 [tool.pytest]
 minversion = "9.0"
