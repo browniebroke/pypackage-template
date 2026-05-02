@@ -194,8 +194,7 @@ def test_documentation(
                 "docs = [",
                 "sphinx==",
                 "myst-parser",
-                '[tool.ty.src]',
-                'exclude = [ "docs/" ]',
+                'src.exclude = [ "docs/" ]',
             ],
         )
         _check_file_contents(
@@ -222,8 +221,7 @@ def test_documentation(
                 "docs = [",
                 "sphinx==",
                 "myst-parser",
-                "[tool.ty.src]",
-                'exclude = [ "docs/" ]',
+                'src.exclude = [ "docs/" ]',
             ],
         )
 
@@ -448,7 +446,7 @@ def test_django_package_no(
     assert not (dst_path / "docs" / "configuration.rst").exists()
     _check_file_contents(
         dst_path / "pyproject.toml",
-        expected_strs=["[tool.ty]", '[tool.ty.src]', 'exclude = [ "docs/" ]'],
+        expected_strs=["[tool.ty]", 'src.exclude = [ "docs/" ]'],
         unexpect_strs=[
             '"Framework :: Django :: 4.2",',
             '"Framework :: Django :: 5.0",',
