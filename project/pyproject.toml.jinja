@@ -164,6 +164,11 @@ overrides = [
 
 [tool.ty]
 terminal.error-on-warning = true
+{%- if documentation %}
+
+[tool.ty.src]
+exclude = [ "docs/" ]
+{%- endif %}
 {%-endif %}
 
 [tool.pytest]
