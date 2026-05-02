@@ -164,7 +164,10 @@ overrides = [
 
 [tool.ty]
 terminal.error-on-warning = true
-{%-endif %}
+{%- if documentation %}
+src.exclude = [ "docs/" ]
+{%- endif %}
+{%- endif %}
 
 [tool.pytest]
 minversion = "9.0"
