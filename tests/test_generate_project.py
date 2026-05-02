@@ -223,6 +223,7 @@ def test_documentation(
                 "sphinx==",
                 "myst-parser",
                 "[tool.ty.src]",
+                'exclude = [ "docs/" ]',
             ],
         )
 
