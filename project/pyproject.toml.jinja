@@ -139,27 +139,27 @@ max_supported_python = "3.14"
 {%- if is_django_package  %}
 
 [tool.mypy]
-check_untyped_defs = true
-disallow_any_generics = true
-disallow_incomplete_defs = true
-disallow_untyped_defs = true
 mypy_path = "src/"
-no_implicit_optional = true
-show_error_codes = true
-warn_unreachable = true
-warn_unused_ignores = true
 exclude = [
 {%- if documentation %}
   "docs/.*",
 {%- endif %}
   "setup.py",
 ]
+disallow_any_generics = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+warn_unused_ignores = true
+warn_unreachable = true
 overrides = [
   { module = "tests.*", allow_untyped_defs = true },
 {%- if documentation %}
   { module = "docs.*", ignore_errors = true },
 {%- endif %}
 ]
+no_implicit_optional = true
+show_error_codes = true
 {%- else  %}
 
 [tool.ty]
@@ -180,11 +180,11 @@ addopts = [
   "--cov-report=xml",
 {%- endif  %}
 ]
-minversion = "9.0"
-pythonpath = [ "src" ]
 {%- if is_django_package  %}
 DJANGO_SETTINGS_MODULE = "tests.settings"
 {%- endif  %}
+minversion = "9.0"
+pythonpath = [ "src" ]
 
 [tool.coverage]
 run.branch = true
