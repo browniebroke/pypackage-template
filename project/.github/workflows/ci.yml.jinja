@@ -13,10 +13,18 @@ concurrency:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v6.0.2
+        with:
+          ref: ${{ github.head_ref || github.ref }}
       - uses: astral-sh/setup-uv@v8.1.0
       - uses: j178/prek-action@v2.0.4
+        continue-on-error: true
+      - uses: pre-commit-ci/lite-action@v1.1.0
+        with:
+          msg: "chore: auto-fix from pre-commit hooks"
 
   # Make sure commit messages follow the conventional commits convention:
   # https://www.conventionalcommits.org

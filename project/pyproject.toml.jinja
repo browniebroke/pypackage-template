@@ -139,38 +139,37 @@ max_supported_python = "3.14"
 {%- if is_django_package  %}
 
 [tool.mypy]
-check_untyped_defs = true
-disallow_any_generics = true
-disallow_incomplete_defs = true
-disallow_untyped_defs = true
 mypy_path = "src/"
-no_implicit_optional = true
-show_error_codes = true
-warn_unreachable = true
-warn_unused_ignores = true
 exclude = [
 {%- if documentation %}
   "docs/.*",
 {%- endif %}
   "setup.py",
 ]
+disallow_any_generics = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+warn_unused_ignores = true
+warn_unreachable = true
 overrides = [
   { module = "tests.*", allow_untyped_defs = true },
 {%- if documentation %}
   { module = "docs.*", ignore_errors = true },
 {%- endif %}
 ]
+no_implicit_optional = true
+show_error_codes = true
 {%- else  %}
 
 [tool.ty]
-terminal.error-on-warning = true
 {%- if documentation %}
 src.exclude = [ "docs/" ]
 {%- endif %}
+terminal.error-on-warning = true
 {%- endif %}
 
 [tool.pytest]
-minversion = "9.0"
 addopts = [
   "-v",
   "-Wonce",
@@ -181,10 +180,11 @@ addopts = [
   "--cov-report=xml",
 {%- endif  %}
 ]
-pythonpath = [ "src" ]
 {%- if is_django_package  %}
 DJANGO_SETTINGS_MODULE = "tests.settings"
 {%- endif  %}
+minversion = "9.0"
+pythonpath = [ "src" ]
 
 [tool.coverage]
 run.branch = true
@@ -206,13 +206,13 @@ report.exclude_lines = [
 
 [tool.semantic_release]
 allow_zero_version = true
-version_toml = [ "pyproject.toml:project.version" ]
 version_variables = [
-  "src/{{ package_name }}/__init__.py:__version__",
   {%- if documentation %}
   "docs/conf.py:release",
   {%- endif %}
+  "src/{{ package_name }}/__init__.py:__version__",
 ]
+version_toml = [ "pyproject.toml:project.version" ]
 build_command = """
 pip install uv
 uv lock
@@ -222,6 +222,7 @@ uv build
 branches.main.match = "main"
 branches.noop.match = "(?!main$)"
 branches.noop.prerelease = true
+changelog.environment.keep_trailing_newline = true
 changelog.exclude_commit_patterns = [
   "chore(?:\\([^)]*?\\))?: .+",
   "ci(?:\\([^)]*?\\))?: .+",
@@ -232,4 +233,3 @@ changelog.exclude_commit_patterns = [
   "Merged? .*",
   "Initial [Cc]ommit.*",         # codespell:ignore
 ]
-changelog.environment.keep_trailing_newline = true
