@@ -71,5 +71,6 @@ lint.per-file-ignores."tests/**/*" = [
 max_supported_python = "3.14"
 
 [tool.pytest]
-ini_options.testpaths = "tests/"
-ini_options.addopts = "-v -Wdefault"
+addopts = [ "-v", "-Wdefault" ]
+minversion = "9.0"
+testpaths = [ "tests/" ]
