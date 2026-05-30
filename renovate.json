@@ -5,7 +5,8 @@
       "customType": "regex",
       "managerFilePatterns": ["/\\.jinja$/"],
       "matchStrings": [
-        "uses:\\s+(?<depName>[\\w-]+/[\\w.-]+)@(?<currentValue>[^\\s\"']+)"
+        "uses:\\s+(?<depName>[\\w-]+/[\\w.-]+)@(?<currentDigest>[a-f0-9]{40})(?:\\s+#\\s+(?<currentValue>[^\\s]+))?",
+        "uses:\\s+(?<depName>[\\w-]+/[\\w.-]+)@(?<currentValue>[^\\s\"'#]+)"
       ],
       "datasourceTemplate": "github-tags"
     },
@@ -16,6 +17,12 @@
         "repo:\\s+https://github\\.com/(?<depName>[\\w-]+/[\\w.-]+)\\s+rev:\\s+\"?(?<currentValue>[^\\s\"]+)\"?"
       ],
       "datasourceTemplate": "github-tags"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchFileNames": ["**/.github/workflows/**"],
+      "pinDigests": true
     }
   ]
 }
