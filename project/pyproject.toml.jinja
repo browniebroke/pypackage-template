@@ -163,14 +163,13 @@ overrides = [
 {%- else  %}
 
 [tool.ty]
-terminal.error-on-warning = true
 {%- if documentation %}
 src.exclude = [ "docs/" ]
 {%- endif %}
+terminal.error-on-warning = true
 {%- endif %}
 
 [tool.pytest]
-minversion = "9.0"
 addopts = [
   "-v",
   "-Wonce",
@@ -181,6 +180,7 @@ addopts = [
   "--cov-report=xml",
 {%- endif  %}
 ]
+minversion = "9.0"
 pythonpath = [ "src" ]
 {%- if is_django_package  %}
 DJANGO_SETTINGS_MODULE = "tests.settings"
@@ -206,13 +206,13 @@ report.exclude_lines = [
 
 [tool.semantic_release]
 allow_zero_version = true
-version_toml = [ "pyproject.toml:project.version" ]
 version_variables = [
-  "src/{{ package_name }}/__init__.py:__version__",
   {%- if documentation %}
   "docs/conf.py:release",
   {%- endif %}
+  "src/{{ package_name }}/__init__.py:__version__",
 ]
+version_toml = [ "pyproject.toml:project.version" ]
 build_command = """
 pip install uv
 uv lock
@@ -222,6 +222,7 @@ uv build
 branches.main.match = "main"
 branches.noop.match = "(?!main$)"
 branches.noop.prerelease = true
+changelog.environment.keep_trailing_newline = true
 changelog.exclude_commit_patterns = [
   "chore(?:\\([^)]*?\\))?: .+",
   "ci(?:\\([^)]*?\\))?: .+",
@@ -232,4 +233,3 @@ changelog.exclude_commit_patterns = [
   "Merged? .*",
   "Initial [Cc]ommit.*",         # codespell:ignore
 ]
-changelog.environment.keep_trailing_newline = true
