@@ -46,7 +46,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     name: "Template: ${{ matrix.python-version }} - ${{ matrix.os }}"
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
       - run: git config --global user.name actions-user
       - run: git config --global user.email action@github.com
       - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
@@ -87,7 +87,7 @@ jobs:
     runs-on: ubuntu-latest
     name: "Generated: ${{ matrix.script.name }} ${{ matrix.extra_options.project_name }}"
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
       - run: git config --global user.name actions-user
       - run: git config --global user.email action@github.com
       - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
