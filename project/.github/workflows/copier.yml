@@ -1,0 +1,49 @@
+name: Copier
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/copier.yml
+  schedule:
+    - cron: "3 16 * * *"
+
+jobs:
+  update:
+    name: Update
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+      - uses: astral-sh/setup-uv@v7
+      - name: Run copier update
+        # exclude src and tests as usually they contain user modifications that should not be overridden by copier updates
+        # use defaults to avoid asking for user input
+        run: uvx copier@latest update --trust --vcs-ref main --exclude src --exclude tests --defaults || true
+      - name: Accept both changes for all merge conflicts
+        # there is no single command to accept both changes for all merge conflicts
+        run: |
+          tmp_dir="$(mktemp -d)"
+          trap 'rm -rf "$tmp_dir"' EXIT
+          git diff --name-only --diff-filter=U -z | while IFS= read -r -d '' file; do
+            git show ":1:$file" > "$tmp_dir/base"
+            git show ":2:$file" > "$tmp_dir/ours"
+            git show ":3:$file" > "$tmp_dir/theirs"
+            git merge-file --union "$tmp_dir/ours" "$tmp_dir/base" "$tmp_dir/theirs"
+            cat "$tmp_dir/ours" > "$file"
+          done
+          git add -A
+      - uses: peter-evans/create-pull-request@v8
+        with:
+          branch: chore/copier-update
+          title: "chore: run `copier update`"
+          commit-message: "chore: run `copier update`"
+          # may contain modifications to workflow files
+          token: ${{ secrets.GH_PAT }}
