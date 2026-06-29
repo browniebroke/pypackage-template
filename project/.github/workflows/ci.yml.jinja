@@ -20,7 +20,7 @@ jobs:
         with:
           ref: ${{ github.head_ref || github.ref }}
       - uses: astral-sh/setup-uv@v8.2.0
-      - uses: j178/prek-action@v2.0.4
+      - uses: j178/prek-action@v2.0.5
         continue-on-error: true
       - uses: pre-commit-ci/lite-action@v1.1.0
         with:
