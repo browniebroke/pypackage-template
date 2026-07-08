@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v7
         with:
           ref: ${{ github.head_ref || github.ref }}
-      - uses: astral-sh/setup-uv@v8.3.1
+      - uses: astral-sh/setup-uv@v8.3.2
       - uses: j178/prek-action@v2.0.5
         continue-on-error: true
       - uses: pre-commit-ci/lite-action@v1.1.0
@@ -54,7 +54,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v8.3.1
+      - uses: astral-sh/setup-uv@v8.3.2
         with:
           python-version: ${{ matrix.python-version }}{% endraw %}
 {%- if is_django_package %}{% raw %}
