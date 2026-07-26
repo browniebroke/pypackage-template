@@ -298,11 +298,13 @@ def test_django_package_yes(
         expected_strs=[
             '"Framework :: Django :: 5.2",',
             '"Framework :: Django :: 6.0",',
+            '"Framework :: Django :: 6.1",',
             '"django>=5.2"',
             "pytest-django==",
             'DJANGO_SETTINGS_MODULE = "tests.settings"',
-            "django60 = [ \"django>=6.0a1,<6.1; python_version>='3.12'\" ]",
-            'django52 = [ "django>=5.2a1,<6" ]',
+            "django61 = [",
+            "django60 = [",
+            "django52 = [",
             "[tool.mypy]",
         ],
         unexpect_strs=["[tool.ty]"],
@@ -401,6 +403,7 @@ def test_django_package_yes(
         expected_strs=[
             "django52: django52",
             "django60: django60",
+            "django61: django61",
         ],
     )
     _check_file_contents(
@@ -444,8 +447,9 @@ def test_django_package_no(
         unexpect_strs=[
             '"Framework :: Django :: 5.2",',
             '"Framework :: Django :: 6.0",',
+            '"Framework :: Django :: 6.1",',
             '"django>=5.2"',
-            "pytest-django>=4.5,<5",
+            "pytest-django",
             "[tool.mypy]",
         ],
     )
