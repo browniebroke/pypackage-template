@@ -74,7 +74,7 @@ jobs:
         shell: bash
 {% endraw %}
 {%- else %}{% raw %}
-      - run: uv sync --no-python-downloads
+      - run: uv sync
         shell: bash
       - run: uv run pytest
         shell: bash{% endraw %}
