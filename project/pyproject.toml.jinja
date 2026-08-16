@@ -57,6 +57,8 @@ scripts.{{ cli_name }} = "{{ package_name }}.cli:app"
 
 [dependency-groups]
 dev = [
+  "django-stubs>=6.0.9",
+  "mypy>=2.3",
   "coverage",
   "pytest==9.*",
 {%- if is_django_package  %}
@@ -134,6 +136,7 @@ max_supported_python = "3.15"
 {%- if is_django_package  %}
 
 [tool.mypy]
+plugins = [ "mypy_django_plugin.main" ]
 mypy_path = "src/"
 exclude = [
 {%- if documentation %}
@@ -163,6 +166,9 @@ src.exclude = [ "docs/" ]
 {%- endif %}
 terminal.error-on-warning = true
 {%- endif %}
+
+[tool.django-stubs]
+django_settings_module = "tests.settings"
 
 [tool.pytest]
 addopts = [
