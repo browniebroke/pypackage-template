@@ -24,9 +24,9 @@ dependencies = []
 
 [dependency-groups]
 dev = [
+  "copier==9.*",
   "django-stubs>=6.0.9",
   "mypy>=2.3",
-  "copier==9.*",
   "pytest==9.*",
   "pytest-mock",
 ]
