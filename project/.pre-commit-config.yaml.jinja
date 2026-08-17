@@ -50,11 +50,14 @@ repos:
     hooks:
       - id: codespell
 {%- if is_django_package  %}
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v2.3.1
+  - repo: local
     hooks:
-      - id: mypy
-        additional_dependencies: []
+      - id: local-mypy
+        name: mypy check
+        entry: uv run mypy src
+        require_serial: true
+        language: system
+        pass_filenames: false
 {%- else  %}
   - repo: local
     hooks:

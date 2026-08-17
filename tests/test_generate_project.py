@@ -306,12 +306,13 @@ def test_django_package_yes(
             "django60 = [",
             "django52 = [",
             "[tool.mypy]",
+            'plugins = [ "mypy_django_plugin.main" ]',
         ],
         unexpect_strs=["[tool.ty]"],
     )
     _check_file_contents(
         dst_path / ".pre-commit-config.yaml",
-        expected_strs=["https://github.com/pre-commit/mirrors-mypy"],
+        expected_strs=["uv run mypy src"],
         unexpect_strs=["uv run ty check"],
     )
     _check_file_contents(
@@ -456,7 +457,7 @@ def test_django_package_no(
     _check_file_contents(
         dst_path / ".pre-commit-config.yaml",
         expected_strs=["uv run ty check"],
-        unexpect_strs=["https://github.com/pre-commit/mirrors-mypy"],
+        unexpect_strs=["uv run mypy src"],
     )
     _check_file_contents(
         dst_path / ".github" / "ISSUE_TEMPLATE" / "1-bug-report.yml",

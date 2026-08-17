@@ -58,6 +58,10 @@ scripts.{{ cli_name }} = "{{ package_name }}.cli:app"
 [dependency-groups]
 dev = [
   "coverage",
+{%- if is_django_package  %}
+  "django-stubs>=6.0.9",
+  "mypy>=2.3",
+{%- endif %}
   "pytest==9.*",
 {%- if is_django_package  %}
   "pytest-django==4.*",
@@ -147,6 +151,7 @@ disallow_incomplete_defs = true
 check_untyped_defs = true
 warn_unused_ignores = true
 warn_unreachable = true
+plugins = [ "mypy_django_plugin.main" ]
 overrides = [
   { module = "tests.*", allow_untyped_defs = true },
 {%- if documentation %}
@@ -155,6 +160,9 @@ overrides = [
 ]
 no_implicit_optional = true
 show_error_codes = true
+
+[tool.django-stubs]
+django_settings_module = "tests.settings"
 {%- else  %}
 
 [tool.ty]
