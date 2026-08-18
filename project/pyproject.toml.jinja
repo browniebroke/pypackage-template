@@ -190,10 +190,12 @@ minversion = "9.0"
 pythonpath = [ "src" ]
 
 [tool.coverage]
+{%- if is_django_package  %}
+run.source = [ "{{ package_name }}" ]
+{%- endif  %}
 run.branch = true
 {%- if is_django_package  %}
 run.parallel = true
-run.source = [ "{{ package_name }}" ]
 {%- endif  %}
 paths.source = [
   "src",
