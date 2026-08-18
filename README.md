@@ -65,9 +65,8 @@ A `labels` workflow will also run and synchronise the GitHub labels based on the
 
 ### Secrets
 
-The workflows need [a few secrets][gh-secrets] to be setup in your GitHub repository:
+The workflows need [a secret][gh-secrets] to be setup in your GitHub repository:
 
-- `GH_PAT` a [personal access token (PAT) with the `repo` scope][create-pat] for opening pull requests and updating the repository topics. This is used by the `upgrader` and `labels` workflows.
 - `CODECOV_TOKEN` to upload coverage data to [codecov.io][codecov] in the Test workflow.
 
 If you have the GitHub CLI installed and chose to set up GitHub, they will be created with a dummy value (`changeme`).
