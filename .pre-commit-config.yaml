@@ -23,16 +23,16 @@ repos:
     hooks:
       - id: pyproject-fmt
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.12.3
+    rev: 0.12.5
     hooks:
       - id: uv-lock
   - repo: https://github.com/oxc-project/mirrors-oxfmt
-    rev: v0.63.0
+    rev: v0.64.0
     hooks:
       - id: oxfmt
         exclude: LICENSE
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.16.2
+    rev: v0.16.3
     hooks:
       - id: ruff-check
         args: [--fix, --exit-non-zero-on-fix]
