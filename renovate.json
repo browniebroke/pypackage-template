@@ -23,6 +23,18 @@
     {
       "matchFileNames": ["**/.github/workflows/**"],
       "pinDigests": true
+    },
+    {
+      "matchManagers": ["custom.regex"],
+      "matchFileNames": ["**/.github/workflows/**"],
+      "groupName": "templated GitHub Actions",
+      "schedule": ["before 9am on tuesday"]
+    },
+    {
+      "matchManagers": ["custom.regex"],
+      "matchFileNames": ["**/.pre-commit-config.yaml.jinja"],
+      "groupName": "templated pre-commit hooks",
+      "schedule": ["before 9am on thursday"]
     }
   ]
 }
