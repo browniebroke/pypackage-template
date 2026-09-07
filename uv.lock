@@ -22,7 +22,7 @@ wheels = [
 
 [[package]]
 name = "copier"
-version = "9.17.2"
+version = "9.18.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "colorama" },
@@ -40,9 +40,9 @@ dependencies = [
     { name = "questionary" },
     { name = "typing-extensions", marker = "python_full_version < '3.11'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/2e/4c/2e593d85827c49f478ea4925d1008a144bb8ff2189c6e9f405c37bb56edb/copier-9.17.2.tar.gz", hash = "sha256:02e9c0d05281603c06d52f48350e48ffca0b4283d9f025664fbce4befabaa555", size = 650501, upload-time = "2026-08-19T13:49:17.456Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/a8/48/8bec3ab9ffb8937f8231a638968b6ff302f80d984aae53d120a0645bb9be/copier-9.18.1.tar.gz", hash = "sha256:79ca8ff91d5749652f9b3ed8e7651545c0b611ee9277f4550737078a30ef29fc", size = 666917, upload-time = "2026-09-01T15:46:49.72Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ec/ec/466bbf501af8e9f718b3f4875cb32fe75a1f17538c2fba507f64a32c2b0f/copier-9.17.2-py3-none-any.whl", hash = "sha256:24757d8875cdf4e076ff338e5ea984e85f5d5da9afcecea8a9dde0f151310b19", size = 67003, upload-time = "2026-08-19T13:49:15.987Z" },
+    { url = "https://files.pythonhosted.org/packages/5f/42/be9bca82bc7f683a79f88c837f0075364c2cedb5c754bf63b02a89b7ff63/copier-9.18.1-py3-none-any.whl", hash = "sha256:e7598078010a40641a5abe4397fce8c1ea8311fa3e6c650406f1cc885cbf0131", size = 67459, upload-time = "2026-09-01T15:46:48.273Z" },
 ]
 
 [[package]]
@@ -217,11 +217,11 @@ wheels = [
 
 [[package]]
 name = "platformdirs"
-version = "4.11.5"
+version = "4.11.7"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/ea/06/cf1564dcc2e2261c8c8c6c05628dc8b418943bdae2a4e58640ceb2f770fa/platformdirs-4.11.5.tar.gz", hash = "sha256:e8b31f4f8bcbbedef91a6b57a706255e4f148d2a4e01648382a0a47342539173", size = 34823, upload-time = "2026-08-27T21:36:37.46Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/69/b7/802a56eca9f2fac455b8bab5375a2647b0f0e14a2cd63ef077de3c4a7658/platformdirs-4.11.7.tar.gz", hash = "sha256:4f41487eeeeeb07f3a6625e61d9bc0ae6809f92d3386dbd74392fbb76108104d", size = 35127, upload-time = "2026-09-01T13:35:10.502Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/c7/12/6f3fcd5067a9cbf4f8664b32957973498da8b083455203c8d9cab83a725c/platformdirs-4.11.5-py3-none-any.whl", hash = "sha256:89f8d42695853b89c7170bd49bc3dc593f98a71e695ede88e06a3b247bc4563b", size = 23900, upload-time = "2026-08-27T21:36:36.227Z" },
+    { url = "https://files.pythonhosted.org/packages/27/6e/80993e10a0482f630cef528635789233224f36b1ffd11592aa15d13ff9ce/platformdirs-4.11.7-py3-none-any.whl", hash = "sha256:8a02cb259042c79d1cd0450facc2fe6dc9d303ae7901afbe33bf8ea0b188cef6", size = 23938, upload-time = "2026-09-01T13:35:09.02Z" },
 ]
 
 [[package]]
