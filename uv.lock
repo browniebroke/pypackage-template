@@ -26,7 +26,7 @@ wheels = [
 
 [[package]]
 name = "copier"
-version = "9.18.2"
+version = "9.19.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "colorama" },
@@ -37,7 +37,7 @@ dependencies = [
     { name = "packaging" },
     { name = "pathspec" },
     { name = "platformdirs", version = "4.12.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
-    { name = "platformdirs", version = "4.13.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
+    { name = "platformdirs", version = "4.13.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "plumbum" },
     { name = "pydantic" },
     { name = "pygments" },
@@ -45,21 +45,21 @@ dependencies = [
     { name = "questionary" },
     { name = "typing-extensions", marker = "python_full_version < '3.11'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/f9/60/2fe1777b27f489450ed8ac5c75390caf91a175d647be05b4284bf515b413/copier-9.18.2.tar.gz", hash = "sha256:0f97902fee79374551c9391fb1132f5a038079f3b497f4dad673295489fc032e", size = 669824, upload-time = "2026-09-07T13:14:38.435Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/fb/16/c299f48d12a97c1fc51294cbb7874ad1ba701e8383559c85c7c0edfe7a28/copier-9.19.1.tar.gz", hash = "sha256:3fe48c38a290c90dfa67cfc7811bc3f576c03f59d3a1e6a09a8d46c2f0403988", size = 679744, upload-time = "2026-10-13T15:04:17.725Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/8d/2a/854d86eb28ced1c4ade3d8c83bdc7ba529ac5df6c80b5d5202a090244d7a/copier-9.18.2-py3-none-any.whl", hash = "sha256:ef0e1b09dece031b09085f2aa637bdc3d5952b98d96b986feaa45a8f3a00d2c6", size = 68113, upload-time = "2026-09-07T13:14:36.934Z" },
+    { url = "https://files.pythonhosted.org/packages/2c/d7/8b9d508dda3b1ca828fb7e5ad26ca1bcb18b0b440f56c73625891ceedc7b/copier-9.19.1-py3-none-any.whl", hash = "sha256:1779270f5082b168982a4ec356afbca24545b3cf1ebb587d1dff843bb5bc9858", size = 68906, upload-time = "2026-10-13T15:04:16.074Z" },
 ]
 
 [[package]]
 name = "dunamai"
-version = "1.26.2"
+version = "1.26.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "packaging" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/12/18/020d3b27a10450ddb11429f637404e8ea67ecf4d9fd999d4f1d553f25506/dunamai-1.26.2.tar.gz", hash = "sha256:84ea45eddf9bb4b40df7610b1b22a03137365e6257dbf9d7b72128fdccca564c", size = 46536, upload-time = "2026-08-02T03:32:50.276Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/c5/62/edf5352d8ce1371129ccfe971e6de3a1ce4dc7f9bdc80390fb79856b78d4/dunamai-1.26.3.tar.gz", hash = "sha256:fe2f732186710ee5048044fdbef6c76c6afbb9ee7de4f6d00cf34256e9ec2e7f", size = 46820, upload-time = "2026-10-14T20:13:30.921Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/f0/31/2aaabe7d03f395c7b6d955f09a4d1440a2c49920abea42fde88cacc2ef97/dunamai-1.26.2-py3-none-any.whl", hash = "sha256:4234be3a90c3ec13ecf75d94a2248068e5a3018e8112892fcd9f3a1f287c9c32", size = 27478, upload-time = "2026-08-02T03:32:49.348Z" },
+    { url = "https://files.pythonhosted.org/packages/cc/f4/e3be26f6301535ab4a3a940b09e55615c6286195b07fec9aa2cf8b842563/dunamai-1.26.3-py3-none-any.whl", hash = "sha256:cc486963f21ad5b5b20d95424909ff5029990241eea3e2272865e1542c5fd19f", size = 27628, upload-time = "2026-10-14T20:13:29.974Z" },
 ]
 
 [[package]]
@@ -292,23 +292,23 @@ wheels = [
 
 [[package]]
 name = "platformdirs"
-version = "4.13.0"
+version = "4.13.5"
 source = { registry = "https://pypi.org/simple" }
 resolution-markers = [
     "python_full_version >= '3.11'",
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/80/a8/66d45abadff219e36e2a824181b8f6a67e7ed4572934d6252c71c29d5731/platformdirs-4.13.0.tar.gz", hash = "sha256:1aa0b0d3f224c1f07c295121e312a5a24a180d6ae5a8425ea1784b3e3863e9c0", size = 61094, upload-time = "2026-10-11T02:05:24.109Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/58/e6/d0abbb256b44e6a05748c6942511ff67db8dbb068de0c35b24bf1b395b09/platformdirs-4.13.5.tar.gz", hash = "sha256:05831adf87d392760f4b5c3a0a95579ab5a10b18b9b9bd43680dcb47544788a0", size = 62362, upload-time = "2026-10-19T01:02:11.778Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/8d/15/1633010b26e88e872c93b67c0b6c5e174fb74cb6fb5c1472b4d51d4a8f22/platformdirs-4.13.0-py3-none-any.whl", hash = "sha256:3dbcf4cd708f21cf876c4eaa90e58412bc4f033d87143f41b1493ff77c25b7e1", size = 32724, upload-time = "2026-10-11T02:05:22.776Z" },
+    { url = "https://files.pythonhosted.org/packages/6c/8a/1d8cb3842909dc193a73835adedf412e32e18f8ffd59f43983949622fe6f/platformdirs-4.13.5-py3-none-any.whl", hash = "sha256:53d3ec4280b815c1e0b02edad7f9ee8fda1ba9c0865dd9c2e6e63849ce82fc1e", size = 32779, upload-time = "2026-10-19T01:02:10.17Z" },
 ]
 
 [[package]]
 name = "pluggy"
-version = "1.6.0"
+version = "1.7.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/f9/e2/3e91f31a7d2b083fe6ef3fa267035b518369d9511ffab804f839851d2779/pluggy-1.6.0.tar.gz", hash = "sha256:7dcc130b76258d33b90f61b658791dede3486c3e6bfb003ee5c9bfb396dd22f3", size = 69412, upload-time = "2025-05-15T12:30:07.975Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/bf/db/7fc19e6f2dc92a966727031389fc2e08b558f0f25eb7403c1119ad4713cd/pluggy-1.7.0.tar.gz", hash = "sha256:d1eaa46ebb595891b860ab086b4d09c8588af65ebd4361b8e8f4bb8920b90ba8", size = 123304, upload-time = "2026-10-15T09:50:58.343Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/54/20/4d324d65cc6d9205fabedc306948156824eb9f0ee1633355a8f7ec5c66bf/pluggy-1.6.0-py3-none-any.whl", hash = "sha256:e920276dd6813095e9377c0bc5566d94c932c33b27a3e3945d8389c374dd4746", size = 20538, upload-time = "2025-05-15T12:30:06.134Z" },
+    { url = "https://files.pythonhosted.org/packages/40/9e/2b38731e0fc536806f16490e1a12d7f0dc2a1235aa8cc07bcc75416a7daa/pluggy-1.7.0-py3-none-any.whl", hash = "sha256:7dd7b0d8832ba3cb632c306926ded123429211b83641b35dc5c41ad2d34f9bec", size = 27082, upload-time = "2026-10-15T09:50:56.808Z" },
 ]
 
 [[package]]
@@ -547,14 +547,14 @@ wheels = [
 
 [[package]]
 name = "pytest-mock"
-version = "3.16.0"
+version = "3.17.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "pytest" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/7a/7f/6ed29931d5c8cd396e7c0a55412e6cc88020373365c8685985dea53d26d7/pytest_mock-3.16.0.tar.gz", hash = "sha256:5a8395528b8f498205f3718f575228d0edaed7425fff638f87d1a6c3e0383636", size = 35362, upload-time = "2026-09-27T14:57:55.46Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/97/c2/28b9f5b955ff2bcd4727a6f768e2ca9b586cd7c37b95ea5f7b9b873ac7b3/pytest_mock-3.17.0.tar.gz", hash = "sha256:e36576e0985e01027e999891e7a966c67822d40c89ef1b4c8b6e22737e3590b4", size = 43064, upload-time = "2026-10-17T16:21:42.435Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/db/5b/b83a9bf1a3b4ec222f9fa083147ff6816245223da0ab92370e7e056f113f/pytest_mock-3.16.0-py3-none-any.whl", hash = "sha256:007cfeb257801d88d9c0b2a7b5a15a15e73b71968dfd72e7bf8c4a2f8393aec8", size = 10016, upload-time = "2026-09-27T14:57:54.283Z" },
+    { url = "https://files.pythonhosted.org/packages/e8/ea/47fbdc8f37410956fd445720e927589b1e2a47772c5f28109f0ce2fa26d9/pytest_mock-3.17.0-py3-none-any.whl", hash = "sha256:1b82aa4b37137248bd687055e109723debeb07b489de1565297dc9589c5f2d6b", size = 11248, upload-time = "2026-10-17T16:21:41.265Z" },
 ]
 
 [[package]]
