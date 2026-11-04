@@ -119,7 +119,7 @@ _tasks:
   - "{% if _copier_operation == 'copy' and setup_github %}gh repo edit --delete-branch-on-merge --enable-projects=false --enable-wiki=false{% endif %}"
   - '{% if _copier_operation == "copy" and setup_github %}gh secret set CODECOV_TOKEN -b "changeme"{% endif %}'
   # Add me as a contributor
-  - "{% if _copier_operation == 'copy' and add_me_as_contributor %}npx --yes all-contributors-cli add {{ github_username }} code,ideas,doc{% endif %}"
+  - "{% if _copier_operation == 'copy' and add_me_as_contributor %}npx --yes all-contributors-cli@6.26.1 add {{ github_username }} code,ideas,doc{% endif %}"
   # Setup pre-commit hooks using prek
   - "{% if _copier_operation == 'copy' and setup_pre_commit %}prek install -f{% endif %}"
   # Open with editor
