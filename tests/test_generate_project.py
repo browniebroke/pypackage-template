@@ -185,7 +185,7 @@ def test_documentation(
             dst_path / ".readthedocs.yml",
             expected_strs=[
                 "configuration: docs/conf.py",
-                "uv sync --frozen --no-dev --group docs",
+                "method: uv",
             ],
         )
         _check_file_contents(
